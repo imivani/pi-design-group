@@ -68,6 +68,21 @@ Remove-Item Env:SITE_BASE
 
 Rebuild without SITE_BASE for a site hosted at the domain root. Publishing this repository does not deploy the website. The pages retain their local-review **noindex** setting; review that before a public website launch.
 
+## Vercel
+
+The Vercel project is **pi-design-group** in **business-1426s-projects**. `vercel.json` selects Astro, `npm ci`, `npm run build` and the `dist` output directory; Node 24 is pinned in `package.json`. Leave `SITE_BASE` unset for Vercel.
+
+To publish from an authenticated local checkout:
+
+```sh
+vercel link --yes --scope business-1426s-projects --project pi-design-group
+vercel deploy --prod --yes --archive=tgz --scope business-1426s-projects
+```
+
+The private GitHub repository is not yet connected to Vercel, so a GitHub push alone does not publish an update. `.vercelignore` keeps local review material out of deployment uploads while retaining every file in `src/scripts`. Account settings and environment files remain excluded from Git.
+
+Verify the public deployment with `node scripts/verify-live.mjs https://your-vercel-address/`. This checks real pages, assets, video delivery, featured motion, search and desktop/phone navigation.
+
 ## Project guide
 
 - **src/data/projects.ts** supplies the project archive and verified credits.
