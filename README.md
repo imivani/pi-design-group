@@ -2,6 +2,8 @@
 
 A landscape architecture portfolio with a video homepage and 27 individual project pages. Built with Astro, TypeScript, native CSS and Lucide icons.
 
+**Live website:** https://pi-design-group.vercel.app/
+
 ## Run locally
 
 Install Node.js 24 LTS and Git, then run:
@@ -81,7 +83,9 @@ vercel deploy --prod --yes --archive=tgz --scope business-1426s-projects
 
 The private GitHub repository is not yet connected to Vercel, so a GitHub push alone does not publish an update. `.vercelignore` keeps local review material out of deployment uploads while retaining every file in `src/scripts`. Account settings and environment files remain excluded from Git.
 
-Verify the public deployment with `node scripts/verify-live.mjs https://your-vercel-address/`. This checks real pages, assets, video delivery, featured motion, search and desktop/phone navigation.
+Verify the public deployment with `node scripts/verify-live.mjs https://pi-design-group.vercel.app/`. This checks real pages, assets, video delivery, featured motion, search and desktop/phone navigation.
+
+The first successful production deployment is `dpl_6W1b3ZuLw5fcUebmtJHJNXaNRzLo`, built from commit `48885ea` on September 14, 2026. The public alias serves the actual website without Vercel sign-in.
 
 ## Project guide
 
