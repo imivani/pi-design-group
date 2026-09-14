@@ -1,0 +1,148 @@
+---
+import { Search, ChevronDown, ArrowLeft, ArrowRight, Menu, X } from '@lucide/astro';
+import { projects, media, projectPath } from '../data/projects';
+import '../styles/header.css';
+
+const asset = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`;
+const { homepage = false } = Astro.props;
+const homeLink = (id: string) => `${homepage ? '' : import.meta.env.BASE_URL}#${id}`;
+const categoryLink = (id: string) => homepage ? '#projects' : `${import.meta.env.BASE_URL}${id === 'all' ? '' : '?category=' + id}#projects`;
+const projectPreviews = ['darcy', 'redstone', 'seton-crossing'].map((id) =>
+  projects.find((project) => project.id === id),
+).filter(Boolean);
+const categories = [
+  { id: 'all', label: 'Project Archive' },
+  { id: 'multifamily', label: 'Multifamily' },
+  { id: 'commercial', label: 'Commercial' },
+  { id: 'single-homes', label: 'Single Homes' },
+];
+const catalogue = [...projects].sort((a, b) => a.name.localeCompare(b.name));
+const initialPreview = projects.find((project) => project.id === 'crestmont-west')!;
+const services = [
+  { id: 'multifamily', name: 'Multifamily Communities', copy: 'Shared gardens. Everyday connections.', image: media.services.multifamily, alt: 'Planting and pedestrian spaces in a residential community.' },
+  { id: 'commercial', name: 'Commercial Plazas', copy: 'Welcoming landscapes for work and daily life.', image: media.services.commercial, alt: 'Planting and outdoor seating within a commercial plaza.' },
+  { id: 'parks', name: 'Public Parks', copy: 'Room to gather, explore and play.', image: media.services.parks, alt: 'A play space detail at Crestmont West.' },
+];
+---
+
+<span class="header-scroll-sentinel" aria-hidden="true"></span>
+<header class="site-header" id="site-header" data-theme={homepage ? 'dark' : 'light'} data-scrolled="false">
+  <div class="frame site-header__inner">
+    <a class="site-wordmark" href={homeLink('hero')} aria-label="Pi Design Group, home">Pi Design Group</a>
+    <nav class="desktop-nav" aria-label="Main navigation">
+      <a class="nav-link" href={homeLink('why')}>Design</a>
+      <button class="nav-link nav-trigger" type="button" data-menu-trigger="projects" aria-expanded="false" aria-controls="projects-navigation">
+        Projects <ChevronDown size={13} stroke-width={1.5} aria-hidden="true" />
+      </button>
+      <button class="nav-link nav-trigger" type="button" data-menu-trigger="services" aria-expanded="false" aria-controls="services-navigation">
+        Services <ChevronDown size={13} stroke-width={1.5} aria-hidden="true" />
+      </button>
+      <a class="nav-link" href={homeLink('contact')}>Contact</a>
+    </nav>
+    <div class="site-header__utilities">
+      <a class="header-search icon-button" href={homeLink('projects')} data-project-search aria-label="Search projects">
+        <Search size={20} stroke-width={1.5} aria-hidden="true" />
+      </a>
+      <button class="mobile-menu-button icon-button" type="button" aria-haspopup="dialog" aria-controls="mobile-navigation" aria-expanded="false">
+        <span>Menu</span><Menu size={22} stroke-width={1.5} aria-hidden="true" />
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="nav-surface" id="desktop-navigation" data-open="false" data-menu="projects" aria-hidden="true" inert>
+  <div class="nav-pane nav-pane--projects" id="projects-navigation" data-menu-pane="projects" data-catalogue-open="false" role="region" aria-label="Projects" aria-hidden="true" inert>
+   <div class="project-menu-overview" id="project-menu-overview">
+    <nav class="project-menu-rail" aria-label="Project categories">
+      <button class="project-menu-category project-menu-category--all" type="button" data-catalogue-open aria-expanded="false" aria-controls="project-menu-catalogue"><span>All Projects <small>{projects.length}</small></span><ArrowRight size={16} stroke-width={1.25} aria-hidden="true" /></button>
+      {categories.map((category) => (
+        <a class="project-menu-category" href={categoryLink(category.id)} data-project-category={category.id}>
+          <span>{category.label}</span>{category.id === 'all' && <ArrowRight size={16} stroke-width={1.25} aria-hidden="true" />}
+        </a>
+      ))}
+    </nav>
+    <div class="project-menu-previews">
+      {projectPreviews.map((project) => project && (
+        <a class="project-menu-preview" href={projectPath(project, import.meta.env.BASE_URL)}>
+          <img src={asset(project.image)} alt={project.alt} width="500" height="400" loading="lazy" decoding="async" />
+          <div class="project-menu-preview__caption">
+            <div><span class="project-menu-preview__name">{project.name}</span>{project.location && <span class="project-menu-preview__place">{project.location}</span>}</div>
+            <ArrowRight size={16} stroke-width={1.25} aria-hidden="true" />
+          </div>
+        </a>
+      ))}
+    </div>
+   </div>
+   <div class="project-menu-catalogue" id="project-menu-catalogue" aria-hidden="true" inert>
+     <div class="catalogue-heading">
+       <button class="catalogue-back" type="button" data-catalogue-back><ArrowLeft size={17} stroke-width={1.5} aria-hidden="true" /><span>Overview</span></button>
+       <h2>All Projects <span>{projects.length}</span></h2>
+       <a href={categoryLink('all')} data-project-category="all">View the Archive <ArrowRight size={16} stroke-width={1.5} aria-hidden="true" /></a>
+     </div>
+     <div class="catalogue-layout">
+       <nav class="catalogue-links" aria-label="All projects">
+         {catalogue.map((project) => <a href={projectPath(project, import.meta.env.BASE_URL)} data-catalogue-project={project.id} data-preview-src={asset(project.image)} data-preview-alt={project.alt} data-preview-place={project.location || project.type} data-preview-kind={project.imageKind} data-active={project.id === initialPreview.id ? 'true' : 'false'}><span>{project.name}</span><ArrowRight size={14} stroke-width={1.5} aria-hidden="true" /></a>)}
+       </nav>
+       <a class="catalogue-preview" href={projectPath(initialPreview, import.meta.env.BASE_URL)} data-catalogue-preview-link>
+         <div class="catalogue-preview__image"><img src={asset(initialPreview.image)} alt={initialPreview.alt} width="640" height="540" loading="lazy" decoding="async" data-catalogue-preview-image /><span data-catalogue-preview-kind hidden></span></div>
+         <div class="catalogue-preview__caption"><span data-catalogue-preview-name>{initialPreview.name}</span><ArrowRight size={18} stroke-width={1.5} aria-hidden="true" /></div>
+         <p data-catalogue-preview-place>{initialPreview.location}</p>
+       </a>
+     </div>
+   </div>
+  </div>
+  <div class="nav-pane nav-pane--services" id="services-navigation" data-menu-pane="services" role="region" aria-label="Services" aria-hidden="true" inert>
+    <nav class="service-menu-list" aria-label="Landscape design services">
+      {services.map((service, index) => (
+        <a class="service-menu-link" href={homepage ? '#services' : `${import.meta.env.BASE_URL}?service=${service.id}#services`} data-service-link={service.id} data-active={index === 0 ? 'true' : 'false'}>
+          <span class="service-menu-link__name">{service.name}</span>
+          <span class="service-menu-link__copy">{service.copy}</span>
+          <ArrowRight size={17} stroke-width={1.25} aria-hidden="true" />
+        </a>
+      ))}
+    </nav>
+    <div class="service-menu-images" aria-hidden="true">
+      {services.map((service, index) => (
+        <img src={asset(service.image)} alt="" width="760" height="620" decoding="async" loading="lazy" data-service-image={service.id} data-active={index === 0 ? 'true' : 'false'} />
+      ))}
+    </div>
+  </div>
+</div>
+
+<dialog class="mobile-navigation" id="mobile-navigation" aria-label="Main navigation">
+  <div class="mobile-navigation__header">
+    <a class="site-wordmark" href={homeLink('hero')}>Pi Design Group</a>
+    <button class="icon-button" type="button" data-mobile-close aria-label="Close navigation"><X size={23} stroke-width={1.5} aria-hidden="true" /></button>
+  </div>
+  <nav class="mobile-navigation__links" aria-label="Main navigation">
+    <a class="mobile-direct-link" href={homeLink('why')}>Design</a>
+    <div class="mobile-disclosure">
+      <button class="mobile-direct-link" type="button" data-mobile-disclosure="mobile-project-links" aria-controls="mobile-project-links" aria-expanded="false">Projects <ChevronDown size={19} stroke-width={1.5} aria-hidden="true" /></button>
+      <div class="mobile-disclosure__body" id="mobile-project-links" inert aria-hidden="true">
+        <div class="mobile-disclosure__content">
+          <button class="mobile-catalogue-toggle" type="button" data-mobile-disclosure="mobile-project-catalogue" aria-controls="mobile-project-catalogue" aria-expanded="false">All Projects <span>{projects.length}</span><ChevronDown size={17} stroke-width={1.5} aria-hidden="true" /></button>
+          <div class="mobile-disclosure__body" id="mobile-project-catalogue" inert aria-hidden="true"><nav class="mobile-catalogue-links" aria-label="All projects">{catalogue.map((project) => <a href={projectPath(project, import.meta.env.BASE_URL)}>{project.name}<ArrowRight size={16} stroke-width={1.25} aria-hidden="true" /></a>)}</nav></div>
+          {categories.map((category) => <a href={categoryLink(category.id)} data-project-category={category.id}>{category.label}<ArrowRight size={16} stroke-width={1.25} aria-hidden="true" /></a>)}
+        </div>
+      </div>
+    </div>
+    <div class="mobile-disclosure">
+      <button class="mobile-direct-link" type="button" data-mobile-disclosure="mobile-service-links" aria-controls="mobile-service-links" aria-expanded="false">Services <ChevronDown size={19} stroke-width={1.5} aria-hidden="true" /></button>
+      <div class="mobile-disclosure__body" id="mobile-service-links" inert aria-hidden="true">
+        <div class="mobile-disclosure__content">
+          {services.map((service) => <a href={homepage ? '#services' : `${import.meta.env.BASE_URL}?service=${service.id}#services`} data-mobile-service={service.id}>{service.name}<ArrowRight size={16} stroke-width={1.25} aria-hidden="true" /></a>)}
+        </div>
+      </div>
+    </div>
+    <a class="mobile-direct-link" href={homeLink('contact')}>Contact</a>
+    <a class="mobile-direct-link mobile-navigation__search" href={homeLink('projects')} data-project-search>Search Projects <Search size={21} stroke-width={1.5} aria-hidden="true" /></a>
+  </nav>
+  <div class="mobile-navigation__contact">
+    <a href="mailto:peter@pidesigngroup.ca">peter@pidesigngroup.ca</a>
+    <a href="tel:+14035104071">403-510-4071</a>
+  </div>
+</dialog>
+
+<script>
+  import '../scripts/header';
+</script>

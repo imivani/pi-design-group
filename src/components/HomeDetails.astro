@@ -1,0 +1,67 @@
+---
+import { ArrowRight, ArrowUpRight, Expand, Minus, Plus, X } from '@lucide/astro';
+import { media, projects, projectPath } from '../data/projects';
+import '../styles/home-details.css';
+
+const base = import.meta.env.BASE_URL;
+const asset = (path: string) => base + path.replace(/^\//, '');
+const crestmont = projects.find(project => project.name === 'Crestmont West')!;
+const evanston = projects.find(project => project.name === 'Evanston')!;
+const details = [
+  { id: 'paths', title: 'Paths & Connections', project: evanston.name, href: projectPath(evanston, base), photo: asset(media.pathDetail), alt: 'A pedestrian path between planted front entrances at Evanston', drawing: asset('/media/gallery/evanston/3.webp'), drawingAlt: 'Complete Evanston landscape plan showing pedestrian paths, planting and shared spaces', copy: 'The overall plan brings the paths, planting and shared outdoor areas together. At Evanston, pedestrian routes run between the homes and planted front entrances.' },
+  { id: 'materials', title: 'Materials & Edges', project: crestmont.name, href: projectPath(crestmont, base), photo: asset(media.detail), alt: 'Natural stone edging alongside a gravel play area at Crestmont West', drawing: asset(media.drawing), drawingAlt: 'Complete Crestmont West landscape site plan showing planting, paths and shared outdoor areas', copy: 'The overall plan places shared green spaces and a play area among the homes. In the built landscape, natural stone defines the edge of the gravel play space.' },
+];
+const selected = details[1];
+---
+<section id="why" class="design-details detail-section" aria-labelledby="details-title" tabindex="-1" data-detail-active={selected.id}>
+  <div class="frame">
+    <div class="detail-heading" data-reveal>
+      <h2 id="details-title">Design in the Details</h2>
+      <p>Explore the drawings behind two built landscapes.</p>
+    </div>
+    <div class="detail-workspace" data-reveal>
+      <div class="detail-desk">
+        <div class="detail-desk-heading"><span>Landscape Site Plan</span><span class="detail-project-name" data-detail-project>{selected.project}</span></div>
+        <a class="detail-plan-link" href={selected.href + '#drawings-title'} data-open-drawing aria-label={'Open ' + selected.project + ' drawing'}>
+          <img id="detail-plan-image" src={selected.drawing} alt={selected.drawingAlt} width="1920" height="1280" loading="lazy" decoding="async" />
+          <span class="detail-plan-action" aria-hidden="true"><Expand size={19} stroke-width={1.4} /> Explore Drawing</span>
+        </a>
+        <div class="detail-desk-caption">
+          <p id="detail-plan-copy">{selected.copy}</p>
+          <div class="detail-desk-links">
+            <a class="text-link" href={selected.href + '#drawings-title'} data-open-drawing>Open Drawing <Expand size={18} stroke-width={1.4} /></a>
+            <a class="text-link" id="detail-project-link" href={selected.href}>View Project <ArrowRight size={18} stroke-width={1.4} /></a>
+          </div>
+        </div>
+        <p id="detail-plan-status" class="detail-load-status" role="status" aria-live="polite"></p>
+      </div>
+      <div class="detail-built" role="group" aria-label="Explore built details">
+        <p class="detail-selection-hint js-only">Select a detail to explore its plan <ArrowUpRight size={16} stroke-width={1.3} /></p>
+        {details.map(detail => (
+          <button type="button" class="detail-choice" data-detail-select={detail.id} aria-pressed={detail.id === selected.id} aria-controls="detail-plan-image detail-plan-copy" disabled>
+            <span class="detail-choice-image"><img src={detail.photo} alt={detail.alt} width="1920" height="1280" loading="lazy" decoding="async" /><span class="detail-choice-arrow" aria-hidden="true"><ArrowUpRight size={22} stroke-width={1.4} /></span></span>
+            <span class="detail-choice-caption"><span><span class="detail-choice-title">{detail.title}</span><span class="detail-choice-project">{detail.project}</span></span><span class="detail-selection-mark" aria-hidden="true"></span></span>
+          </button>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<dialog id="detail-drawing-viewer" class="detail-viewer" aria-labelledby="detail-viewer-title" aria-describedby="detail-viewer-description">
+  <div class="detail-viewer-bar">
+    <div><h2 id="detail-viewer-title">{selected.project}</h2><p id="detail-viewer-description">Landscape Site Plan</p></div>
+    <div class="detail-viewer-tools">
+      <button id="detail-viewer-zoom" type="button" aria-label="Zoom into drawing" aria-pressed="false"><Plus class="detail-zoom-in" size={19} stroke-width={1.4} /><Minus class="detail-zoom-out" size={19} stroke-width={1.4} /><span>Zoom In</span></button>
+      <button id="detail-viewer-close" type="button">Close <X size={21} stroke-width={1.4} /></button>
+    </div>
+  </div>
+  <div class="detail-viewer-stage" id="detail-viewer-stage" tabindex="0" role="region" aria-label="Landscape drawing; use the zoom control for a closer view">
+    <img id="detail-viewer-image" alt="" width="1920" height="1280" draggable="false" />
+  </div>
+  <div class="detail-viewer-foot"><p id="detail-viewer-caption"></p><p id="detail-viewer-status" role="status" aria-live="polite"></p></div>
+</dialog>
+<script is:inline id="home-details-data" type="application/json" set:html={JSON.stringify(details).replace(/</g, '\\u003c')} />
+<script>
+  import '../scripts/home-details';
+</script>

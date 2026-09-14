@@ -1,0 +1,891 @@
+/* PI Design Group, visual starter, version 1.0.
+   Read DESIGN.md before integration.
+   Static geometry and states only. MOTION.md owns animation.
+   No font files, routing, focus controller, or video controller are included. */
+
+:root {
+  --pi-font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --pi-page: #ffffff;
+  --pi-soft: #f7f8f8;
+  --pi-ink: #141719;
+  --pi-secondary: #62686f;
+  --pi-rule: #e2e5e7;
+  --pi-rule-strong: #cbd0d4;
+  --pi-control-edge: #737a80;
+  --pi-inverse: #ffffff;
+  --pi-inverse-secondary: #d5dadf;
+  --pi-dark-solid: #192126;
+  --pi-error: #a12622;
+  --pi-success: #24583b;
+
+  --pi-space-1: 0.25rem;
+  --pi-space-2: 0.5rem;
+  --pi-space-3: 0.75rem;
+  --pi-space-4: 1rem;
+  --pi-space-5: 1.25rem;
+  --pi-space-6: 1.5rem;
+  --pi-space-8: 2rem;
+  --pi-space-10: 2.5rem;
+  --pi-space-12: 3rem;
+  --pi-space-16: 4rem;
+  --pi-space-20: 5rem;
+  --pi-space-24: 6rem;
+  --pi-space-32: 8rem;
+
+  --pi-frame-max: 90rem;
+  --pi-gutter: 1.25rem;
+  --pi-cell-inset: 1.25rem;
+  --pi-panel-inset: 1.25rem;
+  --pi-header-height: 4rem;
+  --pi-target-min: 2.75rem;
+  --pi-button-height: 3rem;
+  --pi-reading-width: 65ch;
+
+  --pi-type-hero: clamp(2.625rem, 1.125rem + 5vw, 6rem);
+  --pi-type-page: clamp(2.375rem, 1.5rem + 3.5vw, 5rem);
+  --pi-type-cta: clamp(2rem, 1.25rem + 2.5vw, 3.5rem);
+  --pi-type-section: clamp(1.625rem, 1.25rem + 0.8vw, 2rem);
+  --pi-type-panel: clamp(1.4375rem, 1.125rem + 0.8vw, 2rem);
+  --pi-type-card: clamp(1.375rem, 1.25rem + 0.2vw, 1.5rem);
+  --pi-type-body: 1rem;
+  --pi-type-meta: 0.875rem;
+  --pi-type-label: 0.8125rem;
+
+  --pi-radius-button: 0.125rem;
+  --pi-radius-preview: 0.375rem;
+  --pi-radius-menu: 0.875rem;
+  --pi-menu-shadow: 0 1rem 2.75rem rgb(0 0 0 / 20%);
+
+  --pi-z-content: 0;
+  --pi-z-header: 100;
+  --pi-z-navigation: 110;
+  --pi-z-modal: 200;
+}
+
+.pi-site,
+.pi-site *,
+.pi-site *::before,
+.pi-site *::after {
+  box-sizing: border-box;
+}
+
+.pi-site {
+  margin: 0;
+  color: var(--pi-ink);
+  background: var(--pi-page);
+  font-family: var(--pi-font-sans);
+  font-size: var(--pi-type-body);
+  line-height: 1.55;
+  font-synthesis: none;
+}
+
+.pi-site :where(button, input, select, textarea) {
+  font: inherit;
+}
+
+.pi-site :where(button, a, input, select, textarea):focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+.pi-site [hidden] {
+  display: none !important;
+}
+
+.pi-site :where(h1, h2, h3, h4, p) {
+  margin-block: 0;
+}
+
+.pi-site img {
+  display: block;
+  max-inline-size: 100%;
+}
+
+.pi-site :where(a, button) {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.pi-frame {
+  inline-size: calc(100% - var(--pi-gutter) - var(--pi-gutter));
+  max-inline-size: var(--pi-frame-max);
+  margin-inline: auto;
+  border-inline: 1px solid var(--pi-rule);
+}
+
+.pi-internal-main {
+  padding-block-start: var(--pi-header-height);
+}
+
+.pi-anchor {
+  scroll-margin-block-start: calc(var(--pi-header-height) + 1.5rem);
+}
+
+.pi-hero-title,
+.pi-page-title,
+.pi-cta-title {
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  overflow-wrap: break-word;
+}
+
+.pi-hero-title {
+  font-size: var(--pi-type-hero);
+  line-height: 1.04;
+}
+
+.pi-page-title {
+  font-size: var(--pi-type-page);
+  line-height: 1.06;
+}
+
+.pi-cta-title {
+  font-size: var(--pi-type-cta);
+  line-height: 1.08;
+}
+
+.pi-section-title {
+  font-size: var(--pi-type-section);
+  line-height: 1.15;
+  font-weight: 400;
+  letter-spacing: -0.025em;
+}
+
+.pi-panel-title {
+  font-size: var(--pi-type-panel);
+  line-height: 1.18;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+.pi-card-title {
+  font-size: var(--pi-type-card);
+  line-height: 1.2;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+.pi-body {
+  max-inline-size: var(--pi-reading-width);
+  color: var(--pi-secondary);
+  line-height: 1.55;
+}
+
+.pi-label {
+  color: var(--pi-secondary);
+  font-size: var(--pi-type-label);
+  line-height: 1.4;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.pi-meta {
+  color: var(--pi-secondary);
+  font-size: var(--pi-type-meta);
+  line-height: 1.4;
+}
+
+.pi-wordmark {
+  color: inherit;
+  font-size: 1.0625rem;
+  line-height: 1;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.pi-band {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem 2rem;
+  padding: 1.5rem var(--pi-cell-inset);
+  border-block: 1px solid var(--pi-rule);
+}
+
+.pi-band__support {
+  max-inline-size: 44ch;
+  color: var(--pi-secondary);
+  font-size: var(--pi-type-meta);
+}
+
+/* Do not wrap every child in another fully bordered card. */
+.pi-project-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.pi-project-card {
+  display: flex;
+  min-inline-size: 0;
+  flex-direction: column;
+  padding: var(--pi-cell-inset);
+  color: var(--pi-ink);
+  text-decoration: none;
+  background: var(--pi-page);
+}
+
+.pi-project-grid > * + * {
+  border-block-start: 1px solid var(--pi-rule);
+}
+
+.pi-project-card:focus-visible {
+  outline-offset: -3px;
+}
+
+.pi-project-card__media {
+  overflow: hidden;
+  aspect-ratio: 3 / 2;
+  background: var(--pi-soft);
+}
+
+.pi-project-card__media img {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+  object-position: var(--pi-focal-point, 50% 50%);
+}
+
+.pi-project-card__metadata {
+  display: grid;
+  gap: 0.5rem;
+  margin-block-start: 1rem;
+}
+
+.pi-project-card__title-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.pi-project-card__arrow {
+  flex: 0 0 auto;
+}
+
+.pi-panel-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.pi-panel-grid > * {
+  min-inline-size: 0;
+  padding: 2rem var(--pi-panel-inset);
+}
+
+.pi-panel-grid > * + * {
+  border-block-start: 1px solid var(--pi-rule);
+}
+
+.pi-panel-copy > * + * {
+  margin-block-start: 1rem;
+}
+
+.pi-panel-copy > .pi-button,
+.pi-panel-copy > .pi-text-link {
+  margin-block-start: 1.5rem;
+}
+
+.pi-editorial-media {
+  display: flex;
+  padding: var(--pi-cell-inset);
+}
+
+.pi-editorial-media img {
+  inline-size: 100%;
+  block-size: auto;
+  align-self: stretch;
+  object-fit: cover;
+}
+
+.pi-button {
+  display: inline-flex;
+  min-block-size: var(--pi-button-height);
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid var(--pi-ink);
+  border-radius: var(--pi-radius-button);
+  background: var(--pi-ink);
+  color: var(--pi-inverse);
+  font-size: 1rem;
+  line-height: 1.25;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.pi-button--outline {
+  background: var(--pi-page);
+  color: var(--pi-ink);
+  border-color: var(--pi-control-edge);
+}
+
+.pi-button--inverse {
+  background: rgb(0 0 0 / 18%);
+  color: var(--pi-inverse);
+  border-color: rgb(255 255 255 / 85%);
+}
+
+.pi-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.pi-text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-block-size: var(--pi-target-min);
+  color: inherit;
+  font-size: 1rem;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25em;
+}
+
+.pi-icon-control {
+  display: inline-flex;
+  min-inline-size: var(--pi-target-min);
+  min-block-size: var(--pi-target-min);
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+  background: transparent;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.pi-header {
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline: 0;
+  z-index: var(--pi-z-header);
+  block-size: var(--pi-header-height);
+  background: var(--pi-page);
+  color: var(--pi-ink);
+  border-block-end: 1px solid var(--pi-rule);
+}
+
+.pi-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  block-size: 100%;
+  padding-inline: var(--pi-cell-inset);
+}
+
+.pi-header[data-theme="hero"] {
+  --pi-rule: rgb(255 255 255 / 18%);
+  color: var(--pi-inverse);
+  background: var(--pi-dark-solid);
+}
+
+.pi-desktop-nav {
+  display: none;
+}
+
+.pi-nav-list {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.pi-nav-item {
+  display: inline-flex;
+  min-block-size: var(--pi-target-min);
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-size: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.pi-nav-item[aria-expanded="true"],
+.pi-nav-item[aria-current="page"] {
+  text-decoration: underline;
+  text-underline-offset: 0.65em;
+  text-decoration-thickness: 1px;
+}
+
+/* The component controls state and focus. Render this in a root overlay layer,
+   outside the backdrop-filtered header, and adapt placement on collisions. */
+.pi-navigation-surface {
+  position: fixed;
+  z-index: var(--pi-z-navigation);
+  inset-block-start: calc(var(--pi-header-height) + 0.5rem);
+  inset-inline-end: max(var(--pi-gutter), calc((100vw - var(--pi-frame-max)) / 2));
+  inline-size: min(64rem, calc(100vw - var(--pi-gutter) - var(--pi-gutter)));
+  max-block-size: calc(100svh - var(--pi-header-height) - 1.5rem);
+  overflow: auto;
+  padding: 1.5rem;
+  background: var(--pi-dark-solid);
+  color: var(--pi-inverse);
+  border: 1px solid rgb(255 255 255 / 16%);
+  border-radius: var(--pi-radius-menu);
+  box-shadow: var(--pi-menu-shadow);
+}
+
+.pi-projects-menu {
+  display: grid;
+  grid-template-columns: 11.875rem minmax(0, 1fr);
+  gap: 1.5rem;
+}
+
+.pi-menu-previews {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.pi-menu-preview img {
+  inline-size: 100%;
+  aspect-ratio: 5 / 4;
+  object-fit: cover;
+  border-radius: var(--pi-radius-preview);
+}
+
+.pi-menu-preview {
+  display: grid;
+  align-content: start;
+  gap: 0.75rem;
+  min-inline-size: 0;
+  color: inherit;
+  text-decoration: none;
+}
+
+.pi-menu-secondary {
+  color: var(--pi-inverse-secondary);
+  font-size: var(--pi-type-meta);
+}
+
+.pi-hero {
+  --pi-rule: rgb(255 255 255 / 18%);
+  position: relative;
+  isolation: isolate;
+  color: var(--pi-inverse);
+  background: var(--pi-dark-solid);
+}
+
+.pi-hero__media,
+.pi-hero__scrim {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.pi-hero__media {
+  z-index: -2;
+  overflow: hidden;
+}
+
+.pi-hero__media :where(video, img) {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+  object-position: var(--pi-hero-focal, 50% 50%);
+}
+
+.pi-hero__scrim {
+  z-index: -1;
+  background:
+    linear-gradient(90deg, rgb(0 0 0 / 44%) 0%, rgb(0 0 0 / 18%) 58%, rgb(0 0 0 / 6%) 100%),
+    linear-gradient(0deg, rgb(0 0 0 / 60%) 0%, rgb(0 0 0 / 22%) 55%, rgb(0 0 0 / 26%) 100%);
+}
+
+.pi-hero__frame {
+  display: flex;
+  align-items: flex-end;
+  min-block-size: 36rem;
+  padding: calc(var(--pi-header-height) + 3.5rem) var(--pi-cell-inset) 2.5rem;
+}
+
+.pi-hero__copy {
+  max-inline-size: 46.25rem;
+}
+
+.pi-hero__copy > * + * {
+  margin-block-start: 1.5rem;
+}
+
+.pi-hero__support {
+  max-inline-size: 35rem;
+  color: var(--pi-inverse-secondary);
+  font-size: 1.125rem;
+  line-height: 1.5;
+}
+
+.pi-hero__rail {
+  position: relative;
+  border-block-start: 1px solid var(--pi-rule);
+}
+
+.pi-hero__rail-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-block-size: 4.5rem;
+  padding: 1rem var(--pi-cell-inset);
+  font-size: var(--pi-type-meta);
+}
+
+.pi-filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem var(--pi-cell-inset);
+  border-block-end: 1px solid var(--pi-rule);
+}
+
+.pi-filter {
+  min-block-size: var(--pi-target-min);
+  padding: 0.5rem 0;
+  border: 0;
+  background: transparent;
+  color: var(--pi-secondary);
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.pi-filter[aria-pressed="true"] {
+  color: var(--pi-ink);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.5em;
+}
+
+.pi-field {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.pi-field :where(input, select, textarea) {
+  inline-size: 100%;
+  min-inline-size: 0;
+  min-block-size: 3rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--pi-control-edge);
+  border-radius: var(--pi-radius-button);
+  background: var(--pi-page);
+  color: var(--pi-ink);
+  font-size: 1rem;
+}
+
+.pi-field textarea {
+  min-block-size: 10rem;
+  resize: vertical;
+}
+
+.pi-field [aria-invalid="true"] {
+  border-color: var(--pi-error);
+}
+
+.pi-field__error {
+  color: var(--pi-error);
+  font-size: var(--pi-type-meta);
+}
+
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+  .pi-header[data-theme="hero"] {
+    background: rgb(22 30 35 / 68%);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+
+  .pi-navigation-surface {
+    background: rgb(22 29 33 / 94%);
+    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px);
+  }
+}
+
+/* Also expose an application-controlled fallback for unsupported preferences. */
+[data-transparency="reduced"] :where(.pi-header[data-theme="hero"], .pi-navigation-surface) {
+  background: var(--pi-dark-solid);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  :where(.pi-header[data-theme="hero"], .pi-navigation-surface) {
+    background: var(--pi-dark-solid);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .pi-project-card:hover {
+    background: var(--pi-soft);
+  }
+
+  .pi-nav-item:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.65em;
+  }
+
+  .pi-button--outline:hover {
+    background: var(--pi-soft);
+  }
+
+  .pi-button--inverse:hover {
+    background: rgb(255 255 255 / 12%);
+  }
+}
+
+@media (min-width: 48rem) {
+  :root {
+    --pi-gutter: 2.5rem;
+    --pi-cell-inset: 1.5rem;
+    --pi-panel-inset: 1.5rem;
+    --pi-type-body: 1.0625rem;
+    --pi-header-height: 5rem;
+  }
+
+  .pi-wordmark {
+    font-size: 1.25rem;
+    letter-spacing: 0.12em;
+  }
+
+  .pi-project-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .pi-project-grid > * {
+    border-block-start: 0;
+    border-inline-end: 1px solid var(--pi-rule);
+  }
+
+  .pi-project-grid > :nth-child(2n) {
+    border-inline-end: 0;
+  }
+
+  .pi-project-grid > :nth-child(n + 3) {
+    border-block-start: 1px solid var(--pi-rule);
+  }
+
+  .pi-approach-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .pi-approach-grid > * {
+    border-block-start: 0;
+    border-inline-end: 1px solid var(--pi-rule);
+  }
+
+  .pi-approach-grid > :nth-child(2n) {
+    border-inline-end: 0;
+  }
+
+  .pi-approach-grid > :nth-child(n + 3) {
+    border-block-start: 1px solid var(--pi-rule);
+  }
+
+  .pi-hero {
+    min-block-size: clamp(44rem, 92svh, 62rem);
+  }
+
+  .pi-hero__frame {
+    min-block-size: inherit;
+    padding-block: calc(var(--pi-header-height) + 4rem) 9rem;
+  }
+
+  .pi-hero__support {
+    font-size: 1.25rem;
+  }
+
+  .pi-hero__rail {
+    position: absolute;
+    inset-inline: 0;
+    inset-block-end: 0;
+  }
+}
+
+@media (min-width: 64rem) {
+  .pi-services-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .pi-services-grid > * {
+    border-block-start: 0;
+    border-inline-end: 1px solid var(--pi-rule);
+  }
+
+  .pi-services-grid > :last-child {
+    border-inline-end: 0;
+  }
+
+  .pi-split--studio,
+  .pi-split--contact {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  }
+
+  .pi-split--featured {
+    grid-template-columns: minmax(0, 8fr) minmax(0, 4fr);
+  }
+
+  .pi-split > * + * {
+    border-block-start: 0;
+    border-inline-start: 1px solid var(--pi-rule);
+  }
+}
+
+@media (min-width: 75rem) {
+  :root {
+    --pi-gutter: 4rem;
+    --pi-panel-inset: 2.5rem;
+  }
+
+  .pi-band {
+    padding-block: 1.75rem;
+  }
+
+  .pi-panel-grid > * {
+    padding-block: 3rem;
+  }
+
+  .pi-panel-grid > .pi-editorial-media {
+    padding: var(--pi-cell-inset);
+  }
+
+  .pi-desktop-nav {
+    display: block;
+  }
+
+  .pi-compact-nav {
+    display: none;
+  }
+
+  .pi-project-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .pi-project-grid > :nth-child(2n) {
+    border-inline-end: 1px solid var(--pi-rule);
+  }
+
+  .pi-project-grid > :nth-child(3n) {
+    border-inline-end: 0;
+  }
+
+  .pi-project-grid > :nth-child(n + 3) {
+    border-block-start: 0;
+  }
+
+  .pi-project-grid > :nth-child(n + 4) {
+    border-block-start: 1px solid var(--pi-rule);
+  }
+
+  .pi-approach-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .pi-approach-grid > :nth-child(2n) {
+    border-inline-end: 1px solid var(--pi-rule);
+  }
+
+  .pi-approach-grid > :nth-child(4n) {
+    border-inline-end: 0;
+  }
+
+  .pi-approach-grid > :nth-child(n + 3) {
+    border-block-start: 0;
+  }
+
+  .pi-approach-grid > :nth-child(n + 5) {
+    border-block-start: 1px solid var(--pi-rule);
+  }
+}
+
+@media (max-width: 22.49rem) {
+  :root {
+    --pi-gutter: 1rem;
+    --pi-cell-inset: 1rem;
+    --pi-panel-inset: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* The motion layer must also stop JS effects and discretionary video playback. */
+  .pi-site {
+    scroll-behavior: auto;
+  }
+}
+
+@media (forced-colors: active) {
+  .pi-site :where(.pi-button, .pi-icon-control, input, select, textarea) {
+    border: 1px solid ButtonText;
+  }
+
+  .pi-navigation-surface {
+    background: Canvas;
+    color: CanvasText;
+    box-shadow: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+@media print {
+  .pi-header,
+  .pi-navigation-surface,
+  .pi-icon-control {
+    display: none;
+  }
+
+  .pi-internal-main {
+    padding-block-start: 0;
+  }
+
+  .pi-frame {
+    inline-size: 100%;
+    max-inline-size: none;
+  }
+
+  .pi-hero {
+    color: #000;
+    background: #fff;
+    min-block-size: 0;
+  }
+
+  .pi-hero__frame {
+    min-block-size: 0;
+    padding-block: 2rem;
+  }
+
+  .pi-hero__media,
+  .pi-hero__scrim,
+  .pi-hero__rail {
+    display: none;
+  }
+
+  .pi-hero__support {
+    color: #000;
+  }
+
+  .pi-button--inverse {
+    color: #000;
+    background: #fff;
+    border-color: #000;
+  }
+
+  /* Production print views may add an ordinary in-flow poster image. */
+}

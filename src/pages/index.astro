@@ -1,0 +1,144 @@
+---
+import Header from '../components/Header.astro';
+import FeaturedProject from '../components/FeaturedProject.astro';
+import HomeDetails from '../components/HomeDetails.astro';
+import { ArrowRight, ArrowDown, Search, Play, Pause } from '@lucide/astro';
+import { projects, media, projectPath } from '../data/projects';
+import Footer from '../components/Footer.astro';
+import MotionSetup from '../components/MotionSetup.astro';
+import '../styles/global.css';
+
+const base = import.meta.env.BASE_URL;
+const asset = (path: string) => base + path.replace(/^\//, '');
+const services = [
+  { id: 'multifamily', title: 'Multifamily Communities', copy: 'Landscape design for multifamily communities. Planting, pedestrian routes and shared outdoor spaces, considered together.', image: media.services.multifamily, alt: 'A planted courtyard framed by residences at Crestmont West', caption: 'Courtyard at Crestmont West' },
+  { id: 'commercial', title: 'Commercial Plazas', copy: 'Landscape design for commercial plazas. Planting, seating and pedestrian connections around shops and building entrances.', image: media.services.commercial, alt: 'Outdoor seating and landscaped pedestrian areas at Seton Crossing', caption: 'Seton Crossing, Calgary' },
+  { id: 'parks', title: 'Public Parks', copy: 'Landscape design for public outdoor spaces. Places to walk, play and spend time outside.', image: media.services.parks, alt: 'A play space and planted pedestrian path at Crestmont West', caption: 'Play space detail at Crestmont West' },
+];
+---
+<!doctype html>
+<html lang="en" data-motion="full">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Pi Design Group. Landscape design for multifamily communities, commercial plazas and public parks. Explore our complete project collection." />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#262b2d" />
+    <link rel="icon" href={asset('/favicon.svg')} type="image/svg+xml" />
+    <link rel="preload" as="image" href={asset(media.heroPoster)} fetchpriority="high" />
+    <title>Pi Design Group | Landscape architecture</title>
+    <MotionSetup />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <Header homepage />
+    <main id="main">
+      <section class="hero" id="hero" aria-labelledby="hero-title">
+        <div class="hero-media" aria-hidden="true">
+          <img class="hero-poster" src={asset(media.heroPoster)} alt="" width="1920" height="1080" fetchpriority="high" />
+          <video id="hero-video" data-src={asset(media.heroVideo)} poster={asset(media.heroPoster)} muted loop playsinline preload="none" tabindex="-1"></video>
+          <div class="hero-scrim"></div>
+        </div>
+        <div class="hero-rails frame" aria-hidden="true"></div>
+        <div class="hero-main frame">
+          <div class="hero-copy">
+            <div class="hero-discipline"><span></span>Landscape Architecture</div>
+            <h1 id="hero-title"><span>Shaping Places</span><span>People Belong.</span></h1>
+            <p>Landscape design for multifamily communities,<br class="desktop-break" /> commercial plazas, and public parks.</p>
+            <a class="outline-button" href="#projects">Explore Our Work <ArrowRight size={19} stroke-width={1.4} /></a>
+          </div>
+          <div class="hero-media-control js-only">
+            <button id="video-toggle" class="video-toggle" type="button" aria-label="Play background video" aria-controls="hero-video">
+              <Play size={19} stroke-width={1.5} class="play-icon" fill="currentColor" />
+              <Pause size={19} stroke-width={1.5} class="pause-icon" />
+            </button>
+            <div class="hero-caption">
+              <span data-poster-caption>D’Arcy<small>Okotoks, Alberta</small></span>
+              <span data-video-caption hidden>Pi Design Group</span>
+              <span id="video-status" class="sr-only" role="status"></span>
+            </div>
+          </div>
+        </div>
+        <a href="#services" class="scroll-link" aria-label="Scroll to services"><ArrowDown size={21} stroke-width={1.3} /></a>
+      </section>
+
+      <section id="services" class="services frame" aria-labelledby="services-title" tabindex="-1">
+        <h2 id="services-title" data-reveal>What We Do</h2>
+        <div class="service-gallery" data-active="multifamily" data-reveal>
+          {services.map((service, i) => (
+            <article class="service-panel" data-service-panel={service.id} data-active={String(i === 0)}>
+              <img class="service-photo" src={asset(service.image)} alt={service.alt} width="1600" height="1067" loading="lazy" decoding="async" />
+              <div class="service-shade" aria-hidden="true"></div>
+              <div class="service-information">
+                <h3><button type="button" id={'tab-' + service.id} class="service-selector" aria-expanded="true" aria-controls={'service-' + service.id} data-service={service.id}>
+                  <span>{service.title}</span><ArrowRight size={24} stroke-width={1.3} aria-hidden="true" />
+                </button></h3>
+                <div class="service-description" id={'service-' + service.id} role="region" aria-labelledby={'tab-' + service.id}>
+                  <div><p>{service.copy}</p><span class="service-caption">{service.caption}</span><span class="service-error" role="status"></span></div>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <FeaturedProject />
+
+      <HomeDetails />
+
+      <section id="projects" class="projects frame" aria-labelledby="projects-title" tabindex="-1">
+        <div class="projects-heading" data-reveal><h2 id="projects-title">All Projects</h2><p id="project-count" role="status" aria-live="polite">{projects.length} entries</p></div>
+        <div class="project-controls js-only">
+          <div class="project-filters" role="group" aria-label="Filter projects">
+            {[['all','All'],['multifamily','Multifamily'],['commercial','Commercial'],['single-homes','Single Homes']].map(([id,label]) => <button type="button" data-filter={id} aria-pressed={id === 'all' ? 'true' : 'false'}>{label}</button>)}
+            <span class="filter-indicator" aria-hidden="true"></span>
+          </div>
+          <div class="project-tools">
+            <div class="project-search">
+              <label class="sr-only" for="project-search">Search projects</label>
+              <input id="project-search" type="search" placeholder="Search projects" autocomplete="off" spellcheck="false" />
+              <Search size={18} stroke-width={1.6} aria-hidden="true" />
+            </div>
+            <div class="project-views" role="group" aria-label="Project view">
+              <button type="button" data-view="grid" aria-pressed="true">Grid</button><span aria-hidden="true">/</span><button type="button" data-view="index" aria-pressed="false">Index</button>
+            </div>
+          </div>
+        </div>
+        <div class="index-head" hidden aria-hidden="true"><span>Project</span><span>Type</span><span>Location</span></div>
+        <div id="project-collection" class="project-collection" data-view="grid">
+          {projects.map(project => (
+            <article class="project-entry" data-project={project.id} data-category={project.category} data-search={[project.name,project.type,project.location || ''].join(' ').toLocaleLowerCase()}>
+              <a class="project-link" href={projectPath(project, base)} data-project-card={project.id}>
+                <div class="project-image"><img src={asset(project.image)} alt={project.alt} width="1200" height="675" loading="lazy" decoding="async" /></div>
+                <div class="project-information">
+                  <h3>{project.name}</h3>
+                  <div class="project-facts"><span class="project-type">{project.type}</span>{project.location && <span class="project-location">{project.location}</span>}</div>
+                  {project.imageKind !== 'photograph' && <span class="project-medium">{project.imageKind === 'drawing' ? 'Drawing' : 'Rendering'}</span>}
+                </div>
+                <ArrowRight class="project-arrow" size={22} stroke-width={1.4} aria-hidden="true" />
+              </a>
+            </article>
+          ))}
+        </div>
+        <div id="project-empty" class="project-empty" hidden>
+          <h3>No Projects Found</h3>
+          <p>Try another project name or reset the filters.</p>
+          <button class="text-link" id="reset-projects" type="button">Show All Projects <ArrowRight size={20} stroke-width={1.4} /></button>
+        </div>
+      </section>
+
+      <section id="contact" class="contact" aria-labelledby="contact-title" tabindex="-1">
+        <img class="contact-photo" src={asset(media.contact)} alt="" width="1600" height="1067" loading="lazy" decoding="async" />
+        <div class="contact-shade" aria-hidden="true"></div>
+        <div class="frame contact-inner" data-reveal>
+          <h2 id="contact-title">Discuss Your<br />Next Project.</h2>
+          <div class="contact-details"><a class="outline-button" href="mailto:peter@pidesigngroup.ca">Get in Touch <ArrowRight size={20} stroke-width={1.3} /></a><a href="tel:+14035104071">403-510-4071</a><a href="mailto:peter@pidesigngroup.ca">peter@pidesigngroup.ca</a></div>
+        </div>
+      </section>
+    </main>
+    <Footer homepage />
+    <script>
+      import '../scripts/site';
+    </script>
+  </body>
+</html>

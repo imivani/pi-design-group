@@ -1,0 +1,13 @@
+---
+const { homepage = false } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const link = (id: string) => `${homepage ? '' : base}#${id}`;
+---
+<footer class="footer frame">
+  <a href={link('hero')} class="footer-wordmark" aria-label="Pi Design Group, home">Pi Design Group</a>
+  <nav aria-label="Footer"><a href={link('why')}>Design</a><a href={link('projects')}>Projects</a><a href={link('services')}>Services</a><a href={link('contact')}>Contact</a></nav>
+  <div class="footer-meta">
+    <label class="motion-setting js-only" for="motion-choice"><span>Motion</span><select id="motion-choice"><option value="system">System</option><option value="reduced">Reduced</option><option value="off">Off</option></select></label>
+    <small>© {new Date().getFullYear()} Pi Design Group.</small>
+  </div>
+</footer>

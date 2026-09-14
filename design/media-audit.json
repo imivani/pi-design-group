@@ -1,0 +1,464 @@
+{
+  "notes": [
+    "All production portfolio images are sourced from the public PI site.",
+    "Public parks service photograph is a Crestmont landscape detail, not a verified public-park commission.",
+    "No generated mockup photography is used.",
+    "Image dimensions preserve aspect ratio and never upscale the source."
+  ],
+  "images": [
+    {
+      "path": "/media/hero-poster.webp",
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/7dc36799-da70-4bac-80ee-3845678d3b63/New-Banner-Image-2.jpg",
+      "originalDimensions": [
+        2500,
+        1449
+      ],
+      "dimensions": [
+        1920,
+        1113
+      ],
+      "bytes": 267194
+    },
+    {
+      "path": "/media/service-multifamily.webp",
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/b2759ab6-9bda-487e-9907-9a04a881afce/IMG_2315.JPG",
+      "originalDimensions": [
+        2400,
+        1600
+      ],
+      "dimensions": [
+        1600,
+        1067
+      ],
+      "bytes": 385288
+    },
+    {
+      "path": "/media/service-commercial.webp",
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/b7302689-80db-4680-8d63-b776ae065a18/1.jpg",
+      "originalDimensions": [
+        2500,
+        1875
+      ],
+      "dimensions": [
+        1600,
+        1200
+      ],
+      "bytes": 219498
+    },
+    {
+      "path": "/media/service-parks.webp",
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/64a0f113-e3f2-4620-bc7c-4a9e46a15474/IMG_2290.JPG",
+      "originalDimensions": [
+        2400,
+        1600
+      ],
+      "dimensions": [
+        1600,
+        1067
+      ],
+      "bytes": 631000
+    },
+    {
+      "path": "/media/featured-crestmont.webp",
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/48e967b2-715e-442f-883c-ebe6ff82c419/IMG_2286.JPG",
+      "originalDimensions": [
+        2400,
+        1600
+      ],
+      "dimensions": [
+        1920,
+        1280
+      ],
+      "bytes": 705930
+    },
+    {
+      "path": "/media/material-detail.webp",
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/4932b6db-15d0-4490-8f33-b157ec628fd8/IMG_2287.JPG",
+      "originalDimensions": [
+        2400,
+        1600
+      ],
+      "dimensions": [
+        1000,
+        667
+      ],
+      "bytes": 148176
+    },
+    {
+      "path": "/media/projects/darcy.webp",
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/7dc36799-da70-4bac-80ee-3845678d3b63/New-Banner-Image-2.jpg",
+      "originalDimensions": [
+        2500,
+        1449
+      ],
+      "dimensions": [
+        1200,
+        696
+      ],
+      "bytes": 104306
+    },
+    {
+      "path": "/media/projects/redstone.webp",
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/53855714-5d77-4f94-956f-9df66a419cdc/2020-Web-0002.jpg",
+      "originalDimensions": [
+        2048,
+        1365
+      ],
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 233522
+    },
+    {
+      "path": "/media/projects/seton-crossing.webp",
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/b7302689-80db-4680-8d63-b776ae065a18/1.jpg",
+      "originalDimensions": [
+        2500,
+        1875
+      ],
+      "dimensions": [
+        1200,
+        900
+      ],
+      "bytes": 111408
+    },
+    {
+      "path": "/media/projects/crestmont-west.webp",
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/656225ae-b823-4290-ab47-e71a1268ae12/2021%2B08%2B18%2B-%2BCrestmont%2BVJ7G0151.jpg",
+      "originalDimensions": [
+        2500,
+        1383
+      ],
+      "dimensions": [
+        1200,
+        664
+      ],
+      "bytes": 98956
+    },
+    {
+      "path": "/media/projects/arbour-lake.webp",
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/5d6d88bd-3698-4bd2-b57a-d1c72bdcda02/1.png",
+      "originalDimensions": [
+        2500,
+        1463
+      ],
+      "dimensions": [
+        1200,
+        702
+      ],
+      "bytes": 94764
+    },
+    {
+      "path": "/media/projects/central.webp",
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/91673103-bec8-474f-bee1-cf71d85b06e6/9.JPG",
+      "originalDimensions": [
+        2400,
+        1600
+      ],
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 180404
+    },
+    {
+      "path": "/media/projects/crimson-ridge-zen.webp",
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/6c6caeba-6c8b-405f-b063-7a96140a02cb/1.png",
+      "originalDimensions": [
+        1252,
+        703
+      ],
+      "dimensions": [
+        1200,
+        674
+      ],
+      "bytes": 98276
+    },
+    {
+      "path": "/media/projects/arrive-at-darcy-ii.webp",
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/56285c18-fa86-4141-8bfa-2aba977d4fb4/1.png",
+      "originalDimensions": [
+        768,
+        471
+      ],
+      "dimensions": [
+        768,
+        471
+      ],
+      "bytes": 65732
+    },
+    {
+      "path": "/media/projects/drake-towns.webp",
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/618279cc-b66e-49f1-ba54-89752040da7d/1.JPG",
+      "originalDimensions": [
+        2400,
+        1600
+      ],
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 151358
+    },
+    {
+      "path": "/media/projects/evanston.webp",
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/3de84d35-8d40-49f5-9b30-34b1c9e50fd5/2020-Web-0023+%281%29.jpg",
+      "originalDimensions": [
+        2048,
+        1365
+      ],
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 113030
+    },
+    {
+      "path": "/media/projects/journey.webp",
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/8ab74987-7746-4034-98e2-d1b91b7c1f1c/IMG_2416.JPG",
+      "originalDimensions": [
+        2400,
+        1600
+      ],
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 131636
+    },
+    {
+      "path": "/media/projects/lawrie-park.webp",
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/900465d8-12eb-4305-a2ee-b96910ecbc2e/1.png",
+      "originalDimensions": [
+        2008,
+        981
+      ],
+      "dimensions": [
+        1200,
+        586
+      ],
+      "bytes": 95858
+    },
+    {
+      "path": "/media/projects/rona.webp",
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/510d83bf-5552-4db7-81d5-343a3d0b7f08/33.png",
+      "originalDimensions": [
+        1815,
+        1200
+      ],
+      "dimensions": [
+        1200,
+        793
+      ],
+      "bytes": 80380
+    },
+    {
+      "path": "/media/projects/seton-mixed-use.webp",
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/945ec1e6-02c3-4170-b92b-0656608c105f/1.jpeg",
+      "originalDimensions": [
+        2500,
+        2000
+      ],
+      "dimensions": [
+        1200,
+        960
+      ],
+      "bytes": 173560
+    },
+    {
+      "path": "/media/projects/sirocco-rowtowns.webp",
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/a682679a-d419-4f33-b311-1b75a717ccab/Screenshot+2024-10-20+114259.png",
+      "originalDimensions": [
+        2500,
+        1516
+      ],
+      "dimensions": [
+        1200,
+        728
+      ],
+      "bytes": 77640
+    },
+    {
+      "path": "/media/projects/skyview.webp",
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/b1934efb-d093-4f0b-acf9-7fc0bbcc6423/2020-Web-0014.jpg",
+      "originalDimensions": [
+        2048,
+        1365
+      ],
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 176912
+    },
+    {
+      "path": "/media/projects/mahogany-townhomes.webp",
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/2043f8e4-1a1e-4cbd-b8da-298cbe161e1b/1.png",
+      "originalDimensions": [
+        2500,
+        1727
+      ],
+      "dimensions": [
+        1200,
+        829
+      ],
+      "bytes": 216900
+    },
+    {
+      "path": "/media/projects/summit-77-apartments.webp",
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/1034bac4-c53a-4b63-9982-606c1b45a7cf/1.png",
+      "originalDimensions": [
+        2001,
+        889
+      ],
+      "dimensions": [
+        1200,
+        533
+      ],
+      "bytes": 77618
+    },
+    {
+      "path": "/media/projects/summit-77-rowhomes.webp",
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/d2859b55-7a7e-4eab-9254-c62721c21114/3.png",
+      "originalDimensions": [
+        2221,
+        1281
+      ],
+      "dimensions": [
+        1200,
+        692
+      ],
+      "bytes": 76844
+    },
+    {
+      "path": "/media/projects/symon.webp",
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/c86af7ac-a0a0-4a47-88cb-b3e2d11c8b55/Image+1.jpg",
+      "originalDimensions": [
+        1200,
+        675
+      ],
+      "dimensions": [
+        1200,
+        675
+      ],
+      "bytes": 134086
+    },
+    {
+      "path": "/media/projects/thrive-by-partners.webp",
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/05c85884-453e-44b3-8c10-0c31012e1b17/2.png",
+      "originalDimensions": [
+        936,
+        663
+      ],
+      "dimensions": [
+        936,
+        663
+      ],
+      "bytes": 141122
+    },
+    {
+      "path": "/media/projects/wedderburn-22-rowgalows.webp",
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/41f5e68a-373c-4c28-bd25-433db79564c9/2.png",
+      "originalDimensions": [
+        821,
+        611
+      ],
+      "dimensions": [
+        821,
+        611
+      ],
+      "bytes": 101882
+    },
+    {
+      "path": "/media/projects/zen-belmont.webp",
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/56ccf817-4b45-4347-92f7-c8cf8648aca2/1.jpg",
+      "originalDimensions": [
+        1360,
+        765
+      ],
+      "dimensions": [
+        1200,
+        675
+      ],
+      "bytes": 120784
+    },
+    {
+      "path": "/media/projects/zen-livingston.webp",
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/2a613b97-2141-444a-909e-3a8a5f3f6ad9/ZEN-Livingston-Architecture+by+FARMOR.jpg",
+      "originalDimensions": [
+        1920,
+        1080
+      ],
+      "dimensions": [
+        1200,
+        675
+      ],
+      "bytes": 123426
+    },
+    {
+      "path": "/media/projects/zen-mahogany.webp",
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/1df37948-43d4-4024-97d4-dd376eb8bdbf/1.png",
+      "originalDimensions": [
+        1176,
+        706
+      ],
+      "dimensions": [
+        1176,
+        706
+      ],
+      "bytes": 57690
+    },
+    {
+      "path": "/media/projects/single-homes.webp",
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/ec9a6230-8825-435e-9200-92d1c6e3209d/2-4-scaled.jpg",
+      "originalDimensions": [
+        2500,
+        1883
+      ],
+      "dimensions": [
+        1200,
+        904
+      ],
+      "bytes": 143472
+    },
+    {
+      "path": "/media/projects/misc-residential.webp",
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/635ff089-fd1d-41bc-8187-c906bb5be7ae/11.jpg",
+      "originalDimensions": [
+        2400,
+        1600
+      ],
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 71410
+    },
+    {
+      "path": "/media/why-evening.webp",
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/3de84d35-8d40-49f5-9b30-34b1c9e50fd5/2020-Web-0023+%281%29.jpg",
+      "originalDimensions": [
+        2048,
+        1365
+      ],
+      "dimensions": [
+        1600,
+        1066
+      ],
+      "bytes": 215040
+    }
+  ],
+  "videoSource": "https://video.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/c0296420-4bbf-4142-be95-3cb9027ca001/playlist.m3u8",
+  "video": {
+    "path": "/media/hero.mp4",
+    "bytes": 6265328,
+    "dimensions": [
+      1920,
+      1080
+    ],
+    "durationSeconds": 9.56,
+    "format": "H.264 MP4, muted, faststart",
+    "note": "Existing homepage clip. The specific filmed project is unverified."
+  }
+}

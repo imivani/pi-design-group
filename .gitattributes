@@ -1,0 +1,9 @@
+* text=auto
+*.sh text eol=lf
+*.webp binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.mp4 binary
+*.webm binary
+*.pdf binary

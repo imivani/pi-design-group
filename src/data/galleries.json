@@ -1,0 +1,1504 @@
+{
+  "seton-crossing": [
+    {
+      "src": "/media/gallery/seton-crossing/1.webp",
+      "width": 1662,
+      "height": 1275,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/eff3cbf2-9e0a-456a-9efe-02d530ba0072/Seton-2-2.jpg",
+      "medium": "photograph",
+      "caption": "Landscape and building context at Seton Crossing"
+    },
+    {
+      "src": "/media/gallery/seton-crossing/2.webp",
+      "width": 1920,
+      "height": 1440,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/b7302689-80db-4680-8d63-b776ae065a18/1.jpg",
+      "medium": "image",
+      "caption": "Seton Crossing, project view 2"
+    },
+    {
+      "src": "/media/gallery/seton-crossing/3.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/37126e9b-3a12-4cd7-bf42-8912fd29ac6f/1.pdf+%281%29.jpg",
+      "medium": "image",
+      "caption": "Seton Crossing, project view 3"
+    },
+    {
+      "src": "/media/gallery/seton-crossing/4.webp",
+      "width": 1920,
+      "height": 1440,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/2fb9572f-15c7-462d-a74c-1aab5036d177/2.jpg",
+      "medium": "image",
+      "caption": "Seton Crossing, project view 4"
+    },
+    {
+      "src": "/media/gallery/seton-crossing/5.webp",
+      "width": 1920,
+      "height": 1440,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/870ffebc-f6df-4af0-9d4c-d9de44edae1e/3.jpg",
+      "medium": "image",
+      "caption": "Seton Crossing, project view 5"
+    },
+    {
+      "src": "/media/gallery/seton-crossing/6.webp",
+      "width": 1920,
+      "height": 1440,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/b4a24fda-c5a2-4723-bbfe-85d250f6e4a9/7.jpg",
+      "medium": "image",
+      "caption": "Seton Crossing, project view 6"
+    },
+    {
+      "src": "/media/gallery/seton-crossing/7.webp",
+      "width": 1920,
+      "height": 1440,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/66d271c9-d967-4b40-b8c6-c83902edf334/8.jpg",
+      "medium": "image",
+      "caption": "Seton Crossing, project view 7"
+    },
+    {
+      "src": "/media/gallery/seton-crossing/8.webp",
+      "width": 1920,
+      "height": 1440,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/5796f176-76b9-45cc-8c67-dfd39fbd54ad/9.jpg",
+      "medium": "image",
+      "caption": "Seton Crossing, project view 8"
+    }
+  ],
+  "redstone": [
+    {
+      "src": "/media/gallery/redstone/1.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/53855714-5d77-4f94-956f-9df66a419cdc/2020-Web-0002.jpg",
+      "medium": "photograph",
+      "caption": "Landscape and building context at Redstone"
+    },
+    {
+      "src": "/media/gallery/redstone/2.webp",
+      "width": 1920,
+      "height": 1277,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/e801830a-3fd8-4586-ac05-51e935f2b620/2020-Web-0003.jpg",
+      "medium": "image",
+      "caption": "Redstone, project view 2"
+    },
+    {
+      "src": "/media/gallery/redstone/3.webp",
+      "width": 1920,
+      "height": 1243,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/7c378e88-c938-4d32-95dd-211f5169db4a/Combined+with+Watermarks+1.jpg",
+      "medium": "image",
+      "caption": "Redstone, project view 3"
+    },
+    {
+      "src": "/media/gallery/redstone/4.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/3085107d-32d4-469f-928b-b7dd75121069/2020-Web-0005.jpg",
+      "medium": "image",
+      "caption": "Redstone, project view 4"
+    },
+    {
+      "src": "/media/gallery/redstone/5.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/5e2db37a-2477-4116-aa87-07bd04474b43/2020-Web-0006.jpg",
+      "medium": "image",
+      "caption": "Redstone, project view 5"
+    },
+    {
+      "src": "/media/gallery/redstone/6.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/8da22773-15fe-48fb-8d19-5185813e5ff0/2020-Web-0008.jpg",
+      "medium": "image",
+      "caption": "Redstone, project view 6"
+    },
+    {
+      "src": "/media/gallery/redstone/7.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/7580a3f6-fe7c-41a0-89df-22791e5ca1c5/Redstone-2.jpg",
+      "medium": "image",
+      "caption": "Redstone, project view 7"
+    },
+    {
+      "src": "/media/gallery/redstone/8.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/863a6b82-ce74-441b-b0b5-144179a75552/Peter+Imshenetski-09.jpg",
+      "medium": "image",
+      "caption": "Redstone, project view 8"
+    }
+  ],
+  "darcy": [
+    {
+      "src": "/media/gallery/darcy/1.webp",
+      "width": 1920,
+      "height": 1113,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/7dc36799-da70-4bac-80ee-3845678d3b63/New-Banner-Image-2.jpg",
+      "medium": "photograph",
+      "caption": "Landscape and building context at D’Arcy"
+    },
+    {
+      "src": "/media/gallery/darcy/2.webp",
+      "width": 1600,
+      "height": 1068,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/6e31301c-801e-4553-88a3-64f618d6b787/DArcy-Partners-2019-1.jpg",
+      "medium": "image",
+      "caption": "D’Arcy, project view 2"
+    },
+    {
+      "src": "/media/gallery/darcy/3.webp",
+      "width": 1621,
+      "height": 1084,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/e5a97a72-7227-4376-990d-1ef565eb0587/D%27Arcy.png",
+      "medium": "image",
+      "caption": "D’Arcy, project view 3"
+    },
+    {
+      "src": "/media/gallery/darcy/4.webp",
+      "width": 1620,
+      "height": 1080,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/95ad8194-2493-4ec0-a93a-8ccb6e84243a/2022_09_16_11_41_58_17-050__s3l0145_2+%281%29.png",
+      "medium": "image",
+      "caption": "D’Arcy, project view 4"
+    },
+    {
+      "src": "/media/gallery/darcy/5.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/2f55d8d9-e97a-4f17-bf53-4f2b86a40ff3/19.JPG",
+      "medium": "image",
+      "caption": "D’Arcy, project view 5"
+    },
+    {
+      "src": "/media/gallery/darcy/6.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/73d7c5a0-268b-4efb-93cc-b339a2f41930/6.JPG",
+      "medium": "image",
+      "caption": "D’Arcy, project view 6"
+    },
+    {
+      "src": "/media/gallery/darcy/7.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/13015fea-8af7-478c-b6b9-9989a7a7826a/11.JPG",
+      "medium": "image",
+      "caption": "D’Arcy, project view 7"
+    },
+    {
+      "src": "/media/gallery/darcy/8.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/3dba496f-1fc7-4842-9068-3700d58b9cbf/14.JPG",
+      "medium": "image",
+      "caption": "D’Arcy, project view 8"
+    }
+  ],
+  "crestmont-west": [
+    {
+      "src": "/media/gallery/crestmont-west/1.webp",
+      "width": 1920,
+      "height": 1062,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/656225ae-b823-4290-ab47-e71a1268ae12/2021%2B08%2B18%2B-%2BCrestmont%2BVJ7G0151.jpg",
+      "medium": "photograph",
+      "caption": "Landscape and building context at Crestmont West"
+    },
+    {
+      "src": "/media/gallery/crestmont-west/2.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/48e967b2-715e-442f-883c-ebe6ff82c419/IMG_2286.JPG",
+      "medium": "image",
+      "caption": "Crestmont West, project view 2"
+    },
+    {
+      "src": "/media/gallery/crestmont-west/3.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/03cdbd96-43fb-40e3-8291-5e4833c2e7ae/1.pdf+%281%29.jpg",
+      "medium": "image",
+      "caption": "Crestmont West, project view 3"
+    },
+    {
+      "src": "/media/gallery/crestmont-west/4.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/4932b6db-15d0-4490-8f33-b157ec628fd8/IMG_2287.JPG",
+      "medium": "image",
+      "caption": "Crestmont West, project view 4"
+    },
+    {
+      "src": "/media/gallery/crestmont-west/5.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/64a0f113-e3f2-4620-bc7c-4a9e46a15474/IMG_2290.JPG",
+      "medium": "image",
+      "caption": "Crestmont West, project view 5"
+    },
+    {
+      "src": "/media/gallery/crestmont-west/6.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/6ce7f95e-3fb4-4eeb-aa13-411936c1211d/IMG_2294.JPG",
+      "medium": "image",
+      "caption": "Crestmont West, project view 6"
+    },
+    {
+      "src": "/media/gallery/crestmont-west/7.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/18b9434a-a424-4712-a051-5331fd01aef8/IMG_2301.JPG",
+      "medium": "image",
+      "caption": "Crestmont West, project view 7"
+    },
+    {
+      "src": "/media/gallery/crestmont-west/8.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/c8a05268-5e19-4e7b-b836-e98ecc29afa4/IMG_2304.JPG",
+      "medium": "image",
+      "caption": "Crestmont West, project view 8"
+    }
+  ],
+  "crimson-ridge-zen": [
+    {
+      "src": "/media/gallery/crimson-ridge-zen/1.webp",
+      "width": 1252,
+      "height": 703,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/6c6caeba-6c8b-405f-b063-7a96140a02cb/1.png",
+      "medium": "rendering",
+      "caption": "Architectural rendering of Crimson Ridge - Zen"
+    },
+    {
+      "src": "/media/gallery/crimson-ridge-zen/2.webp",
+      "width": 1252,
+      "height": 703,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/a48500e0-3443-4f55-8845-b022e74d9ecf/1.png",
+      "medium": "image",
+      "caption": "Crimson Ridge - Zen, project view 2"
+    },
+    {
+      "src": "/media/gallery/crimson-ridge-zen/3.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/ae57f723-4da0-4b6e-8e8c-8c00436998f2/2023.05-2022.11+%E2%80%9CCrimson+Ridge+-+Zen%E2%80%9D+%28Avalon+-DM%29+L1.1-DTR2+%28Response_2025.01.20%29_page-0001.jpg",
+      "medium": "image",
+      "caption": "Crimson Ridge - Zen, project view 3"
+    },
+    {
+      "src": "/media/gallery/crimson-ridge-zen/4.webp",
+      "width": 396,
+      "height": 65,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/248e5a10-de31-4173-9476-a84c5610e1af/400-89-White.png",
+      "medium": "image",
+      "caption": "Crimson Ridge - Zen, project view 4"
+    }
+  ],
+  "central": [
+    {
+      "src": "/media/gallery/central/1.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/91673103-bec8-474f-bee1-cf71d85b06e6/9.JPG",
+      "medium": "photograph",
+      "caption": "Landscape and building context at Central (Skyview II)"
+    },
+    {
+      "src": "/media/gallery/central/2.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/e5e02224-7241-4980-881a-53d67ac69711/3.JPG",
+      "medium": "image",
+      "caption": "Central (Skyview II), project view 2"
+    },
+    {
+      "src": "/media/gallery/central/3.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/8b571267-b023-4bce-ad14-177d6e43ffd8/1.pdf+%282%29.jpg",
+      "medium": "image",
+      "caption": "Central (Skyview II), project view 3"
+    },
+    {
+      "src": "/media/gallery/central/4.webp",
+      "width": 1201,
+      "height": 676,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/f6d549ae-04e2-46fe-ac43-2f81c628d716/2.jpg",
+      "medium": "image",
+      "caption": "Central (Skyview II), project view 4"
+    },
+    {
+      "src": "/media/gallery/central/5.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/4cfb9fd8-f111-4821-a493-266a3bd45a57/4.JPG",
+      "medium": "image",
+      "caption": "Central (Skyview II), project view 5"
+    },
+    {
+      "src": "/media/gallery/central/6.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/f875c71c-ee2b-4f1f-b533-74533441a8b6/6.JPG",
+      "medium": "image",
+      "caption": "Central (Skyview II), project view 6"
+    },
+    {
+      "src": "/media/gallery/central/7.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/072428d0-0674-4a1e-aa90-7f03369b26dc/8.JPG",
+      "medium": "image",
+      "caption": "Central (Skyview II), project view 7"
+    },
+    {
+      "src": "/media/gallery/central/8.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/7b155d04-7d40-4863-96f8-382f03d1c11e/9.JPG",
+      "medium": "image",
+      "caption": "Central (Skyview II), project view 8"
+    }
+  ],
+  "arrive-at-darcy-ii": [
+    {
+      "src": "/media/gallery/arrive-at-darcy-ii/1.webp",
+      "width": 768,
+      "height": 471,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/56285c18-fa86-4141-8bfa-2aba977d4fb4/1.png",
+      "medium": "photograph",
+      "caption": "Landscape and building context at Arrive at D’Arcy II"
+    },
+    {
+      "src": "/media/gallery/arrive-at-darcy-ii/2.webp",
+      "width": 768,
+      "height": 471,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/70512438-0789-478a-9fe2-e613b4a7f4d5/1.png",
+      "medium": "image",
+      "caption": "Arrive at D’Arcy II, project view 2"
+    },
+    {
+      "src": "/media/gallery/arrive-at-darcy-ii/3.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/07588c1e-a37f-49e9-ab01-87d782257372/2021.10+D%27Arcy+II+by+Partners_Revised+DP_Combined_%282022.02.07%29-images-0.jpg",
+      "medium": "image",
+      "caption": "Arrive at D’Arcy II, project view 3"
+    },
+    {
+      "src": "/media/gallery/arrive-at-darcy-ii/4.webp",
+      "width": 1459,
+      "height": 915,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/c6f9c504-0498-4716-a426-7e209e94c541/2.png",
+      "medium": "image",
+      "caption": "Arrive at D’Arcy II, project view 4"
+    },
+    {
+      "src": "/media/gallery/arrive-at-darcy-ii/5.webp",
+      "width": 1299,
+      "height": 863,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/9dc3d06b-9379-43f2-8ba4-20058ffb4178/3.png",
+      "medium": "image",
+      "caption": "Arrive at D’Arcy II, project view 5"
+    },
+    {
+      "src": "/media/gallery/arrive-at-darcy-ii/6.webp",
+      "width": 1273,
+      "height": 846,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/7eedbd64-e047-4cd1-aa7d-2019e7fab761/4.png",
+      "medium": "image",
+      "caption": "Arrive at D’Arcy II, project view 6"
+    },
+    {
+      "src": "/media/gallery/arrive-at-darcy-ii/7.webp",
+      "width": 1197,
+      "height": 800,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/001956da-4efd-443c-9249-944d83e04a6a/6.png",
+      "medium": "image",
+      "caption": "Arrive at D’Arcy II, project view 7"
+    },
+    {
+      "src": "/media/gallery/arrive-at-darcy-ii/8.webp",
+      "width": 396,
+      "height": 65,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/248e5a10-de31-4173-9476-a84c5610e1af/400-89-White.png",
+      "medium": "image",
+      "caption": "Arrive at D’Arcy II, project view 8"
+    }
+  ],
+  "arbour-lake": [
+    {
+      "src": "/media/gallery/arbour-lake/1.webp",
+      "width": 1920,
+      "height": 1124,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/5d6d88bd-3698-4bd2-b57a-d1c72bdcda02/1.png",
+      "medium": "rendering",
+      "caption": "Architectural rendering of Arbour Lake"
+    },
+    {
+      "src": "/media/gallery/arbour-lake/2.webp",
+      "width": 1920,
+      "height": 1057,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/ceeb5ecf-adf6-4472-ae41-4bea575614d6/2.png",
+      "medium": "image",
+      "caption": "Arbour Lake, project view 2"
+    },
+    {
+      "src": "/media/gallery/arbour-lake/3.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/81c71642-c37e-44ab-ad74-b9431729fa06/21-053_2022-07+Avalon+Arbour+Landscape_Combined_%282022.05.10%29+1.pdf.jpg",
+      "medium": "image",
+      "caption": "Arbour Lake, project view 3"
+    },
+    {
+      "src": "/media/gallery/arbour-lake/4.webp",
+      "width": 1920,
+      "height": 1078,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/3a160d3d-d41e-42bc-8bed-d39907df3a97/3.png",
+      "medium": "image",
+      "caption": "Arbour Lake, project view 4"
+    },
+    {
+      "src": "/media/gallery/arbour-lake/5.webp",
+      "width": 1920,
+      "height": 1100,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/857db994-e2a2-4d43-87f4-941754d58b94/4.png",
+      "medium": "image",
+      "caption": "Arbour Lake, project view 5"
+    },
+    {
+      "src": "/media/gallery/arbour-lake/6.webp",
+      "width": 1920,
+      "height": 1124,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/6827f7db-1c7e-4467-a6c8-80f5b30e63cc/1.png",
+      "medium": "image",
+      "caption": "Arbour Lake, project view 6"
+    },
+    {
+      "src": "/media/gallery/arbour-lake/7.webp",
+      "width": 396,
+      "height": 65,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/248e5a10-de31-4173-9476-a84c5610e1af/400-89-White.png",
+      "medium": "image",
+      "caption": "Arbour Lake, project view 7"
+    }
+  ],
+  "evanston": [
+    {
+      "src": "/media/gallery/evanston/1.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/3de84d35-8d40-49f5-9b30-34b1c9e50fd5/2020-Web-0023+%281%29.jpg",
+      "medium": "photograph",
+      "caption": "Landscape and building context at Evanston"
+    },
+    {
+      "src": "/media/gallery/evanston/2.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/410c439a-f39a-440e-866b-e8f41fa121ad/2020-Web-0022.jpg",
+      "medium": "image",
+      "caption": "Evanston, project view 2"
+    },
+    {
+      "src": "/media/gallery/evanston/3.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/a0f479e0-e4bf-4b73-8766-11b2a45b8938/Binder+1.pdf.jpg",
+      "medium": "image",
+      "caption": "Evanston, project view 3"
+    },
+    {
+      "src": "/media/gallery/evanston/4.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/8f3e0996-9719-462a-b288-2c2ecc37ff42/2020-Web-0021.jpg",
+      "medium": "image",
+      "caption": "Evanston, project view 4"
+    },
+    {
+      "src": "/media/gallery/evanston/5.webp",
+      "width": 1920,
+      "height": 1440,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/31ed08d3-645e-4c03-b7ad-13c9d7e67e2a/Evanston11.JPG",
+      "medium": "image",
+      "caption": "Evanston, project view 5"
+    },
+    {
+      "src": "/media/gallery/evanston/6.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/59640a17-bffe-458e-9ea2-a6d56e3e983b/IMG_2349.JPG",
+      "medium": "image",
+      "caption": "Evanston, project view 6"
+    },
+    {
+      "src": "/media/gallery/evanston/7.webp",
+      "width": 1920,
+      "height": 1440,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/977fa4b3-a69a-47db-95ea-350ca28541b6/Evanston4.JPG",
+      "medium": "image",
+      "caption": "Evanston, project view 7"
+    },
+    {
+      "src": "/media/gallery/evanston/8.webp",
+      "width": 960,
+      "height": 579,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/022b3cf8-6a1b-4866-bdac-63be5f6610e2/Evanston14.jpg",
+      "medium": "image",
+      "caption": "Evanston, project view 8"
+    }
+  ],
+  "drake-towns": [
+    {
+      "src": "/media/gallery/drake-towns/1.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/618279cc-b66e-49f1-ba54-89752040da7d/1.JPG",
+      "medium": "photograph",
+      "caption": "Landscape and building context at Drake Towns"
+    },
+    {
+      "src": "/media/gallery/drake-towns/2.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/7aa374c7-43f3-438a-a736-6a18d6a800b2/1.JPG",
+      "medium": "image",
+      "caption": "Drake Towns, project view 2"
+    },
+    {
+      "src": "/media/gallery/drake-towns/3.webp",
+      "width": 1643,
+      "height": 1092,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/5fd29b66-6e01-4064-8c92-e9cdca9e5686/Drake.png",
+      "medium": "image",
+      "caption": "Drake Towns, project view 3"
+    },
+    {
+      "src": "/media/gallery/drake-towns/4.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/df4cfc79-1085-4db2-88ec-44e240c8f31c/8.JPG",
+      "medium": "image",
+      "caption": "Drake Towns, project view 4"
+    },
+    {
+      "src": "/media/gallery/drake-towns/5.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/8f0cd992-2865-460e-94af-4f5aede7feda/2.JPG",
+      "medium": "image",
+      "caption": "Drake Towns, project view 5"
+    },
+    {
+      "src": "/media/gallery/drake-towns/6.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/a39f63b5-bc8e-4a52-b3af-5fac6a056353/13.JPG",
+      "medium": "image",
+      "caption": "Drake Towns, project view 6"
+    },
+    {
+      "src": "/media/gallery/drake-towns/7.webp",
+      "width": 1920,
+      "height": 1480,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/d8a09736-00bf-46c9-a108-9d3e45ce4b0c/3.jpg",
+      "medium": "image",
+      "caption": "Drake Towns, project view 7"
+    },
+    {
+      "src": "/media/gallery/drake-towns/8.webp",
+      "width": 1500,
+      "height": 1156,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/fa1274bd-7e04-4d23-8fb2-bf953b2f5924/4.jpg",
+      "medium": "image",
+      "caption": "Drake Towns, project view 8"
+    }
+  ],
+  "rona": [
+    {
+      "src": "/media/gallery/rona/1.webp",
+      "width": 1815,
+      "height": 1200,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/510d83bf-5552-4db7-81d5-343a3d0b7f08/33.png",
+      "medium": "drawing",
+      "caption": "Landscape plan for Rona Replacement Warehouse"
+    },
+    {
+      "src": "/media/gallery/rona/2.webp",
+      "width": 1700,
+      "height": 1128,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/7c660d06-00f7-45d5-8cf8-953d669eae5a/Screenshot+2024-10-21+205201.png",
+      "medium": "image",
+      "caption": "Rona Replacement Warehouse, project view 2"
+    },
+    {
+      "src": "/media/gallery/rona/3.webp",
+      "width": 1813,
+      "height": 1206,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/bcc17bf5-0b1b-46f2-bb65-31de9965ca4d/32.png",
+      "medium": "image",
+      "caption": "Rona Replacement Warehouse, project view 3"
+    },
+    {
+      "src": "/media/gallery/rona/4.webp",
+      "width": 1815,
+      "height": 1200,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/0bc606aa-e2c5-459d-b687-c7ca07e4d980/33.png",
+      "medium": "image",
+      "caption": "Rona Replacement Warehouse, project view 4"
+    },
+    {
+      "src": "/media/gallery/rona/5.webp",
+      "width": 396,
+      "height": 65,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/248e5a10-de31-4173-9476-a84c5610e1af/400-89-White.png",
+      "medium": "image",
+      "caption": "Rona Replacement Warehouse, project view 5"
+    }
+  ],
+  "journey": [
+    {
+      "src": "/media/gallery/journey/1.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/8ab74987-7746-4034-98e2-d1b91b7c1f1c/IMG_2416.JPG",
+      "medium": "photograph",
+      "caption": "Landscape and building context at Journey"
+    },
+    {
+      "src": "/media/gallery/journey/2.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/5d8f79e1-5f49-48ac-b84f-ea2c8b689f6b/IMG_2408.JPG",
+      "medium": "image",
+      "caption": "Journey, project view 2"
+    },
+    {
+      "src": "/media/gallery/journey/3.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/7afa7d9d-4a48-48a7-ae1b-4ccc5b51cbad/1.pdf.jpg",
+      "medium": "image",
+      "caption": "Journey, project view 3"
+    },
+    {
+      "src": "/media/gallery/journey/4.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/3dbd7a2e-3ba1-44bf-bd2a-c9a88812d369/IMG_2409.JPG",
+      "medium": "image",
+      "caption": "Journey, project view 4"
+    },
+    {
+      "src": "/media/gallery/journey/5.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/397a620d-c578-4c91-a027-b72bbe552eca/IMG_2410.JPG",
+      "medium": "image",
+      "caption": "Journey, project view 5"
+    },
+    {
+      "src": "/media/gallery/journey/6.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/20070d2c-54c2-419c-9452-3bdb6c2350be/IMG_2412.JPG",
+      "medium": "image",
+      "caption": "Journey, project view 6"
+    },
+    {
+      "src": "/media/gallery/journey/7.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/521d6946-9d34-4394-bbaf-2cd50d7126ee/IMG_2415.JPG",
+      "medium": "image",
+      "caption": "Journey, project view 7"
+    },
+    {
+      "src": "/media/gallery/journey/8.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/05451b1f-1a71-4e94-bd19-9746a869dcdb/IMG_2416.JPG",
+      "medium": "image",
+      "caption": "Journey, project view 8"
+    }
+  ],
+  "lawrie-park": [
+    {
+      "src": "/media/gallery/lawrie-park/1.webp",
+      "width": 1920,
+      "height": 938,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/900465d8-12eb-4305-a2ee-b96910ecbc2e/1.png",
+      "medium": "rendering",
+      "caption": "Architectural rendering of Lawrie Park"
+    },
+    {
+      "src": "/media/gallery/lawrie-park/2.webp",
+      "width": 1920,
+      "height": 938,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/4f0b3fc9-f6cb-4d91-9332-955073c9c38a/1.png",
+      "medium": "image",
+      "caption": "Lawrie Park, project view 2"
+    },
+    {
+      "src": "/media/gallery/lawrie-park/3.webp",
+      "width": 1920,
+      "height": 1359,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/b2e60d64-cb9e-40f8-880d-7d5fffd24703/22.024-2023.04+Lawrie+Park+Apartments+Landscape_L1.1_%28Updated_IFC_2024.09.03%29_page-0001.jpg",
+      "medium": "image",
+      "caption": "Lawrie Park, project view 3"
+    },
+    {
+      "src": "/media/gallery/lawrie-park/4.webp",
+      "width": 1920,
+      "height": 939,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/a7345215-7bb4-4611-a33d-976d4ef64717/2.png",
+      "medium": "image",
+      "caption": "Lawrie Park, project view 4"
+    },
+    {
+      "src": "/media/gallery/lawrie-park/5.webp",
+      "width": 1920,
+      "height": 1072,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/85abbf9a-f4e5-4d92-a402-71fc28bd5b7f/3.png",
+      "medium": "image",
+      "caption": "Lawrie Park, project view 5"
+    },
+    {
+      "src": "/media/gallery/lawrie-park/6.webp",
+      "width": 396,
+      "height": 65,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/248e5a10-de31-4173-9476-a84c5610e1af/400-89-White.png",
+      "medium": "image",
+      "caption": "Lawrie Park, project view 6"
+    }
+  ],
+  "seton-mixed-use": [
+    {
+      "src": "/media/gallery/seton-mixed-use/1.webp",
+      "width": 1920,
+      "height": 1536,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/945ec1e6-02c3-4170-b92b-0656608c105f/1.jpeg",
+      "medium": "rendering",
+      "caption": "Architectural rendering of Seton Mixed Use"
+    },
+    {
+      "src": "/media/gallery/seton-mixed-use/2.webp",
+      "width": 1920,
+      "height": 1536,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/2edd2f3d-832b-49b6-9ec8-37cc3a45226d/1.jpeg",
+      "medium": "image",
+      "caption": "Seton Mixed Use, project view 2"
+    },
+    {
+      "src": "/media/gallery/seton-mixed-use/3.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/e79048bc-6e93-4d6c-b5e0-3e961b07c1e7/2023.10_22.034_Seaton+Mixed+Use+DTR2+Response_L1.1_+%28Revised+as+per+DSSP+2024.05.23%29_page-0001.jpg",
+      "medium": "image",
+      "caption": "Seton Mixed Use, project view 3"
+    },
+    {
+      "src": "/media/gallery/seton-mixed-use/4.webp",
+      "width": 1000,
+      "height": 667,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/748b9f09-1555-4ae5-a5af-9f0784558dd1/2.jpg",
+      "medium": "image",
+      "caption": "Seton Mixed Use, project view 4"
+    },
+    {
+      "src": "/media/gallery/seton-mixed-use/5.webp",
+      "width": 750,
+      "height": 750,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/7e051673-f8d4-4014-b1ea-97073b5ff2d8/3.jpg",
+      "medium": "image",
+      "caption": "Seton Mixed Use, project view 5"
+    },
+    {
+      "src": "/media/gallery/seton-mixed-use/6.webp",
+      "width": 396,
+      "height": 65,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/248e5a10-de31-4173-9476-a84c5610e1af/400-89-White.png",
+      "medium": "image",
+      "caption": "Seton Mixed Use, project view 6"
+    }
+  ],
+  "sirocco-rowtowns": [
+    {
+      "src": "/media/gallery/sirocco-rowtowns/1.webp",
+      "width": 1920,
+      "height": 1164,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/a682679a-d419-4f33-b311-1b75a717ccab/Screenshot+2024-10-20+114259.png",
+      "medium": "rendering",
+      "caption": "Architectural rendering of Sirocco Rowtowns"
+    },
+    {
+      "src": "/media/gallery/sirocco-rowtowns/2.webp",
+      "width": 1920,
+      "height": 1164,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/db6d92b5-6c7d-4f5f-988c-7aeb0bd7352d/Screenshot+2024-10-20+114259.png",
+      "medium": "image",
+      "caption": "Sirocco Rowtowns, project view 2"
+    },
+    {
+      "src": "/media/gallery/sirocco-rowtowns/3.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/f0d9bfc9-632e-43ac-9e26-618f0913d4c7/2022.12-21-053_Sirocco_+Landsc_%28Revised-Combined+2023.05.23%29+1_page-0001.jpg",
+      "medium": "image",
+      "caption": "Sirocco Rowtowns, project view 3"
+    },
+    {
+      "src": "/media/gallery/sirocco-rowtowns/4.webp",
+      "width": 396,
+      "height": 65,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/248e5a10-de31-4173-9476-a84c5610e1af/400-89-White.png",
+      "medium": "image",
+      "caption": "Sirocco Rowtowns, project view 4"
+    }
+  ],
+  "skyview": [
+    {
+      "src": "/media/gallery/skyview/1.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/b1934efb-d093-4f0b-acf9-7fc0bbcc6423/2020-Web-0014.jpg",
+      "medium": "photograph",
+      "caption": "Landscape and building context at Skyview"
+    },
+    {
+      "src": "/media/gallery/skyview/2.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/7e7caa43-1d9d-4201-89d9-167f20dd55cc/2020-Web-0015.jpg",
+      "medium": "image",
+      "caption": "Skyview, project view 2"
+    },
+    {
+      "src": "/media/gallery/skyview/3.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/7a8058f8-b3c9-47ff-8812-cc136e6a7428/1.pdf.jpg",
+      "medium": "image",
+      "caption": "Skyview, project view 3"
+    },
+    {
+      "src": "/media/gallery/skyview/4.webp",
+      "width": 1620,
+      "height": 1080,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/95ad8194-2493-4ec0-a93a-8ccb6e84243a/2022_09_16_11_41_58_17-050__s3l0145_2+%281%29.png",
+      "medium": "image",
+      "caption": "Skyview, project view 4"
+    },
+    {
+      "src": "/media/gallery/skyview/5.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/51b28ae2-4617-4ea6-a4f7-e6fd69b34b3f/2020-Web-0013.jpg",
+      "medium": "image",
+      "caption": "Skyview, project view 5"
+    },
+    {
+      "src": "/media/gallery/skyview/6.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/7cfeea94-9743-449d-9aea-0b37d84758f5/2020-Web-0020.jpg",
+      "medium": "image",
+      "caption": "Skyview, project view 6"
+    },
+    {
+      "src": "/media/gallery/skyview/7.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/93a112e1-3066-4795-9c25-a531b72597db/28.JPG",
+      "medium": "image",
+      "caption": "Skyview, project view 7"
+    },
+    {
+      "src": "/media/gallery/skyview/8.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/b4ae2e36-e358-4a61-8b1b-b145cd073e03/9.jpg",
+      "medium": "image",
+      "caption": "Skyview, project view 8"
+    }
+  ],
+  "summit-77-apartments": [
+    {
+      "src": "/media/gallery/summit-77-apartments/1.webp",
+      "width": 1920,
+      "height": 853,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/1034bac4-c53a-4b63-9982-606c1b45a7cf/1.png",
+      "medium": "rendering",
+      "caption": "Architectural rendering of Summit 77 Apartments"
+    },
+    {
+      "src": "/media/gallery/summit-77-apartments/2.webp",
+      "width": 1920,
+      "height": 853,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/ef0045ff-41d5-4629-8b40-ed9a3100784c/1.png",
+      "medium": "image",
+      "caption": "Summit 77 Apartments, project view 2"
+    },
+    {
+      "src": "/media/gallery/summit-77-apartments/3.webp",
+      "width": 1920,
+      "height": 1359,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/05330133-837f-4c90-8f9f-77b400617cfd/2022-016-DP2023-01893_Summit+77_DTR1+-+L1.1+%282023.07.12%29_page-0001.jpg",
+      "medium": "image",
+      "caption": "Summit 77 Apartments, project view 3"
+    },
+    {
+      "src": "/media/gallery/summit-77-apartments/4.webp",
+      "width": 1450,
+      "height": 483,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/4436cd7d-2cce-48b1-b3ca-6b4579bb1485/2.png",
+      "medium": "image",
+      "caption": "Summit 77 Apartments, project view 4"
+    },
+    {
+      "src": "/media/gallery/summit-77-apartments/5.webp",
+      "width": 396,
+      "height": 65,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/248e5a10-de31-4173-9476-a84c5610e1af/400-89-White.png",
+      "medium": "image",
+      "caption": "Summit 77 Apartments, project view 5"
+    }
+  ],
+  "mahogany-townhomes": [
+    {
+      "src": "/media/gallery/mahogany-townhomes/1.webp",
+      "width": 1920,
+      "height": 1326,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/2043f8e4-1a1e-4cbd-b8da-298cbe161e1b/1.png",
+      "medium": "rendering",
+      "caption": "Architectural rendering of Mahogany Townhomes"
+    },
+    {
+      "src": "/media/gallery/mahogany-townhomes/2.webp",
+      "width": 756,
+      "height": 514,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/4f84fe20-505a-4691-9e16-04307c1f28ee/2.png",
+      "medium": "image",
+      "caption": "Mahogany Townhomes, project view 2"
+    },
+    {
+      "src": "/media/gallery/mahogany-townhomes/3.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/0b4b07fa-8100-41e9-b338-39c7495c2fbe/4.jpg",
+      "medium": "image",
+      "caption": "Mahogany Townhomes, project view 3"
+    },
+    {
+      "src": "/media/gallery/mahogany-townhomes/4.webp",
+      "width": 766,
+      "height": 562,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/453fbc3b-78eb-45d3-8671-f97fc2e36a96/3.png",
+      "medium": "image",
+      "caption": "Mahogany Townhomes, project view 4"
+    },
+    {
+      "src": "/media/gallery/mahogany-townhomes/5.webp",
+      "width": 1920,
+      "height": 1326,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/3f8543c7-0753-4ed3-b38c-4887c8374de3/1.png",
+      "medium": "image",
+      "caption": "Mahogany Townhomes, project view 5"
+    },
+    {
+      "src": "/media/gallery/mahogany-townhomes/6.webp",
+      "width": 396,
+      "height": 65,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/248e5a10-de31-4173-9476-a84c5610e1af/400-89-White.png",
+      "medium": "image",
+      "caption": "Mahogany Townhomes, project view 6"
+    }
+  ],
+  "summit-77-rowhomes": [
+    {
+      "src": "/media/gallery/summit-77-rowhomes/1.webp",
+      "width": 1920,
+      "height": 1107,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/d2859b55-7a7e-4eab-9254-c62721c21114/3.png",
+      "medium": "rendering",
+      "caption": "Architectural rendering of Summit 77 Rowhomes"
+    },
+    {
+      "src": "/media/gallery/summit-77-rowhomes/2.webp",
+      "width": 1920,
+      "height": 1080,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/c497fbf7-0e73-4869-a815-044b7ffa8993/7.jpg",
+      "medium": "image",
+      "caption": "Summit 77 Rowhomes, project view 2"
+    },
+    {
+      "src": "/media/gallery/summit-77-rowhomes/3.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/9d2a7c43-c789-4a4a-82ff-d01dff302354/Summit+77.1.pdf.jpg",
+      "medium": "image",
+      "caption": "Summit 77 Rowhomes, project view 3"
+    },
+    {
+      "src": "/media/gallery/summit-77-rowhomes/4.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/b6f954e8-9b1f-4b2c-8d35-474e93bf850b/8.JPG",
+      "medium": "image",
+      "caption": "Summit 77 Rowhomes, project view 4"
+    },
+    {
+      "src": "/media/gallery/summit-77-rowhomes/5.webp",
+      "width": 1024,
+      "height": 576,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/034daef0-7fe7-4add-bdf4-bcf461f11cd9/5.jpg",
+      "medium": "image",
+      "caption": "Summit 77 Rowhomes, project view 5"
+    },
+    {
+      "src": "/media/gallery/summit-77-rowhomes/6.webp",
+      "width": 1366,
+      "height": 485,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/e1deb5a5-f571-4490-8135-c2a133e6768f/3.jpg",
+      "medium": "image",
+      "caption": "Summit 77 Rowhomes, project view 6"
+    },
+    {
+      "src": "/media/gallery/summit-77-rowhomes/7.webp",
+      "width": 1920,
+      "height": 1080,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/053e7543-d9e1-4685-bf38-9f2221d71d2e/6.jpg",
+      "medium": "image",
+      "caption": "Summit 77 Rowhomes, project view 7"
+    },
+    {
+      "src": "/media/gallery/summit-77-rowhomes/8.webp",
+      "width": 396,
+      "height": 65,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/248e5a10-de31-4173-9476-a84c5610e1af/400-89-White.png",
+      "medium": "image",
+      "caption": "Summit 77 Rowhomes, project view 8"
+    }
+  ],
+  "symon": [
+    {
+      "src": "/media/gallery/symon/1.webp",
+      "width": 1200,
+      "height": 675,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/c86af7ac-a0a0-4a47-88cb-b3e2d11c8b55/Image+1.jpg",
+      "medium": "rendering",
+      "caption": "Architectural rendering of Symon"
+    },
+    {
+      "src": "/media/gallery/symon/2.webp",
+      "width": 1360,
+      "height": 971,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/fd040ea3-4890-4071-85eb-f456f59c7e8d/ac5bc966-cccb-4275-b8ae-3f211b6bc59e_Front%2Bexterior.jpg",
+      "medium": "image",
+      "caption": "Symon, project view 2"
+    },
+    {
+      "src": "/media/gallery/symon/3.webp",
+      "width": 1920,
+      "height": 1104,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/be1a3b7d-3327-492e-a4f8-58f63b2a5c64/symon.jpg",
+      "medium": "image",
+      "caption": "Symon, project view 3"
+    },
+    {
+      "src": "/media/gallery/symon/4.webp",
+      "width": 1200,
+      "height": 675,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/656ed41b-9351-4d3a-a07d-674bdee0256f/Image-1-1.jpg",
+      "medium": "image",
+      "caption": "Symon, project view 4"
+    },
+    {
+      "src": "/media/gallery/symon/5.webp",
+      "width": 1920,
+      "height": 1279,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/caf39224-dfa9-4763-bfc8-d82c50f4fef2/L1.1.jpg",
+      "medium": "image",
+      "caption": "Symon, project view 5"
+    },
+    {
+      "src": "/media/gallery/symon/6.webp",
+      "width": 1920,
+      "height": 1276,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/5897cdf8-a6e3-4d16-a125-b86cbb36bae2/L1.2.jpg",
+      "medium": "image",
+      "caption": "Symon, project view 6"
+    },
+    {
+      "src": "/media/gallery/symon/7.webp",
+      "width": 1182,
+      "height": 825,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/72c63a99-cc0e-4b21-b373-1dfa66e02468/Screenshot+2024-10-19+213840.png",
+      "medium": "image",
+      "caption": "Symon, project view 7"
+    },
+    {
+      "src": "/media/gallery/symon/8.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/e69a97be-8f15-4b3a-a82b-626ece8518a8/IMG_2342.JPG",
+      "medium": "image",
+      "caption": "Symon, project view 8"
+    }
+  ],
+  "wedderburn-22-rowgalows": [
+    {
+      "src": "/media/gallery/wedderburn-22-rowgalows/1.webp",
+      "width": 821,
+      "height": 611,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/41f5e68a-373c-4c28-bd25-433db79564c9/2.png",
+      "medium": "photograph",
+      "caption": "Landscape and building context at Wedderburn-22 Rowgalows"
+    },
+    {
+      "src": "/media/gallery/wedderburn-22-rowgalows/2.webp",
+      "width": 821,
+      "height": 611,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/bcdf7b16-3e0d-4523-823f-357b738c1458/2.png",
+      "medium": "image",
+      "caption": "Wedderburn-22 Rowgalows, project view 2"
+    },
+    {
+      "src": "/media/gallery/wedderburn-22-rowgalows/3.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/0cddae73-4187-4899-960e-c93214b5c828/22-025_2022.13+Wedderburn-22+Rowgalows+L1.1+%28DTR1+Response+2023.01.12%29_page-0001.jpg",
+      "medium": "image",
+      "caption": "Wedderburn-22 Rowgalows, project view 3"
+    },
+    {
+      "src": "/media/gallery/wedderburn-22-rowgalows/4.webp",
+      "width": 1096,
+      "height": 831,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/f0c7db04-3ec9-4192-bed6-1898dec88ddf/1.png",
+      "medium": "image",
+      "caption": "Wedderburn-22 Rowgalows, project view 4"
+    },
+    {
+      "src": "/media/gallery/wedderburn-22-rowgalows/5.webp",
+      "width": 396,
+      "height": 65,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/248e5a10-de31-4173-9476-a84c5610e1af/400-89-White.png",
+      "medium": "image",
+      "caption": "Wedderburn-22 Rowgalows, project view 5"
+    }
+  ],
+  "thrive-by-partners": [
+    {
+      "src": "/media/gallery/thrive-by-partners/1.webp",
+      "width": 936,
+      "height": 663,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/05c85884-453e-44b3-8c10-0c31012e1b17/2.png",
+      "medium": "rendering",
+      "caption": "Architectural rendering of Thrive by Partners"
+    },
+    {
+      "src": "/media/gallery/thrive-by-partners/2.webp",
+      "width": 936,
+      "height": 663,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/4e2f3931-8375-4e2e-976b-d17381b7ef01/2.png",
+      "medium": "image",
+      "caption": "Thrive by Partners, project view 2"
+    },
+    {
+      "src": "/media/gallery/thrive-by-partners/3.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/244c61bd-3085-4137-b95f-baf7f216dd2e/DP120-23+DTR1_Landscape_Updated+Plans_L1.1+%282024.09.04%29_page-0001.jpg",
+      "medium": "image",
+      "caption": "Thrive by Partners, project view 3"
+    },
+    {
+      "src": "/media/gallery/thrive-by-partners/4.webp",
+      "width": 1920,
+      "height": 1357,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/8e6b1024-46eb-4af8-a6b2-7a4497d147ee/1.png",
+      "medium": "image",
+      "caption": "Thrive by Partners, project view 4"
+    },
+    {
+      "src": "/media/gallery/thrive-by-partners/5.webp",
+      "width": 396,
+      "height": 65,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/248e5a10-de31-4173-9476-a84c5610e1af/400-89-White.png",
+      "medium": "image",
+      "caption": "Thrive by Partners, project view 5"
+    }
+  ],
+  "zen-livingston": [
+    {
+      "src": "/media/gallery/zen-livingston/1.webp",
+      "width": 1920,
+      "height": 1080,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/2a613b97-2141-444a-909e-3a8a5f3f6ad9/ZEN-Livingston-Architecture+by+FARMOR.jpg",
+      "medium": "rendering",
+      "caption": "Architectural rendering of Zen Livingston"
+    },
+    {
+      "src": "/media/gallery/zen-livingston/2.webp",
+      "width": 1920,
+      "height": 1080,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/a57cb5bf-caee-40f9-ab0f-65c44743e755/ZEN-Livingston-Architecture+by+FARMOR.jpg",
+      "medium": "image",
+      "caption": "Zen Livingston, project view 2"
+    },
+    {
+      "src": "/media/gallery/zen-livingston/3.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/6b5e4783-aca4-4be9-83fe-5992f4caa584/2023.07+%E2%80%9CZen+Livingston%E2%80%9D+Landscape_PTR1_L1.1_%282023.10.24%29_page-0001.jpg",
+      "medium": "image",
+      "caption": "Zen Livingston, project view 3"
+    },
+    {
+      "src": "/media/gallery/zen-livingston/4.webp",
+      "width": 396,
+      "height": 65,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/248e5a10-de31-4173-9476-a84c5610e1af/400-89-White.png",
+      "medium": "image",
+      "caption": "Zen Livingston, project view 4"
+    }
+  ],
+  "zen-belmont": [
+    {
+      "src": "/media/gallery/zen-belmont/1.webp",
+      "width": 1360,
+      "height": 765,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/56ccf817-4b45-4347-92f7-c8cf8648aca2/1.jpg",
+      "medium": "rendering",
+      "caption": "Architectural rendering of Zen Belmont"
+    },
+    {
+      "src": "/media/gallery/zen-belmont/2.webp",
+      "width": 1360,
+      "height": 765,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/804f9339-59d2-48e8-a5ce-b5cff3300831/1.jpg",
+      "medium": "image",
+      "caption": "Zen Belmont, project view 2"
+    },
+    {
+      "src": "/media/gallery/zen-belmont/3.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/fb11ec2f-84e6-4eb9-ac5b-20b252497e62/2024.01-2024.01_Zen+Belmont+%28Avalon-DM%29+DTR1+Response+L1.1+%282024.11.14%29_page-0001.jpg",
+      "medium": "image",
+      "caption": "Zen Belmont, project view 3"
+    },
+    {
+      "src": "/media/gallery/zen-belmont/4.webp",
+      "width": 1400,
+      "height": 700,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/03d96ace-6c5b-4d38-96c7-2eac1a46ee12/2.jpg",
+      "medium": "image",
+      "caption": "Zen Belmont, project view 4"
+    },
+    {
+      "src": "/media/gallery/zen-belmont/5.webp",
+      "width": 1920,
+      "height": 620,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/0c89d7ad-d378-48b0-9f69-62a1f0918fed/4.jpg",
+      "medium": "image",
+      "caption": "Zen Belmont, project view 5"
+    },
+    {
+      "src": "/media/gallery/zen-belmont/6.webp",
+      "width": 1920,
+      "height": 620,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/324ff2b3-b5ab-41b2-9d64-6373d410acb9/3.jpg",
+      "medium": "image",
+      "caption": "Zen Belmont, project view 6"
+    },
+    {
+      "src": "/media/gallery/zen-belmont/7.webp",
+      "width": 396,
+      "height": 65,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/248e5a10-de31-4173-9476-a84c5610e1af/400-89-White.png",
+      "medium": "image",
+      "caption": "Zen Belmont, project view 7"
+    }
+  ],
+  "zen-mahogany": [
+    {
+      "src": "/media/gallery/zen-mahogany/1.webp",
+      "width": 1176,
+      "height": 706,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/1df37948-43d4-4024-97d4-dd376eb8bdbf/1.png",
+      "medium": "rendering",
+      "caption": "Architectural rendering of Zen Mahogany"
+    },
+    {
+      "src": "/media/gallery/zen-mahogany/2.webp",
+      "width": 1168,
+      "height": 711,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/36e4a114-a900-42d0-9001-2d825c5d5c96/2.png",
+      "medium": "image",
+      "caption": "Zen Mahogany, project view 2"
+    },
+    {
+      "src": "/media/gallery/zen-mahogany/3.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/b7205ee2-e48c-4cf9-93f8-5ae2ec52e4bc/2023.06+-22-047_Zen+Mahogany_Landscape+DTR1_L1.1+%282023.11.14%29_page-0001.jpg",
+      "medium": "image",
+      "caption": "Zen Mahogany, project view 3"
+    },
+    {
+      "src": "/media/gallery/zen-mahogany/4.webp",
+      "width": 1176,
+      "height": 706,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/d319d964-a9da-4ebd-9022-b1d87a3bfa06/1.png",
+      "medium": "image",
+      "caption": "Zen Mahogany, project view 4"
+    },
+    {
+      "src": "/media/gallery/zen-mahogany/5.webp",
+      "width": 396,
+      "height": 65,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/248e5a10-de31-4173-9476-a84c5610e1af/400-89-White.png",
+      "medium": "image",
+      "caption": "Zen Mahogany, project view 5"
+    }
+  ],
+  "misc-residential": [
+    {
+      "src": "/media/gallery/misc-residential/1.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/635ff089-fd1d-41bc-8187-c906bb5be7ae/11.jpg",
+      "medium": "photograph",
+      "caption": "Landscape and building context at Misc. Residential Single Family"
+    },
+    {
+      "src": "/media/gallery/misc-residential/2.webp",
+      "width": 1920,
+      "height": 1445,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/ceda1000-fcf4-47d0-9e52-54de225b0fcd/1.jpg",
+      "medium": "image",
+      "caption": "Misc. Residential Single Family, project view 2"
+    },
+    {
+      "src": "/media/gallery/misc-residential/3.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/e84b2428-c0c8-49b1-b3fe-ebf53717f538/5.jpg",
+      "medium": "image",
+      "caption": "Misc. Residential Single Family, project view 3"
+    },
+    {
+      "src": "/media/gallery/misc-residential/4.webp",
+      "width": 1920,
+      "height": 1445,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/e2643263-d246-4a0c-865e-614a98750dfd/2.jpg",
+      "medium": "image",
+      "caption": "Misc. Residential Single Family, project view 4"
+    },
+    {
+      "src": "/media/gallery/misc-residential/5.webp",
+      "width": 1024,
+      "height": 768,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/806893b1-d2e6-41f7-a58a-019d76e96d3f/6.jpg",
+      "medium": "image",
+      "caption": "Misc. Residential Single Family, project view 5"
+    },
+    {
+      "src": "/media/gallery/misc-residential/6.webp",
+      "width": 1024,
+      "height": 768,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/cacb173d-5a47-487b-98ef-1833961981d6/7.jpg",
+      "medium": "image",
+      "caption": "Misc. Residential Single Family, project view 6"
+    },
+    {
+      "src": "/media/gallery/misc-residential/7.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/899d4572-a2cc-4ccc-bb7c-203b2bace69a/8.JPG",
+      "medium": "image",
+      "caption": "Misc. Residential Single Family, project view 7"
+    },
+    {
+      "src": "/media/gallery/misc-residential/8.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/3749c935-6965-4168-8e65-e07b1aa7c7a9/12.JPG",
+      "medium": "image",
+      "caption": "Misc. Residential Single Family, project view 8"
+    }
+  ],
+  "single-homes": [
+    {
+      "src": "/media/gallery/single-homes/1.webp",
+      "width": 1920,
+      "height": 1446,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/ec9a6230-8825-435e-9200-92d1c6e3209d/2-4-scaled.jpg",
+      "medium": "photograph",
+      "caption": "Landscape and building context at Single Homes"
+    },
+    {
+      "src": "/media/gallery/single-homes/2.webp",
+      "width": 1920,
+      "height": 1446,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/783e2eea-e4c7-4b08-af7d-97c35d830348/1-3-scaled.jpg",
+      "medium": "image",
+      "caption": "Single Homes, project view 2"
+    },
+    {
+      "src": "/media/gallery/single-homes/3.webp",
+      "width": 1920,
+      "height": 1445,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/1885510b-ef7a-477e-ac65-d9041d387edf/2.jpg",
+      "medium": "image",
+      "caption": "Single Homes, project view 3"
+    },
+    {
+      "src": "/media/gallery/single-homes/4.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/e5762872-27fc-46f2-a011-503ea0c641ff/3.jpg",
+      "medium": "image",
+      "caption": "Single Homes, project view 4"
+    },
+    {
+      "src": "/media/gallery/single-homes/5.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/c63c0fde-2e54-4dc2-b396-77cc52aebc66/8.jpg",
+      "medium": "image",
+      "caption": "Single Homes, project view 5"
+    },
+    {
+      "src": "/media/gallery/single-homes/6.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/7669f3c3-e34c-4065-b4f6-57dd92af87c7/13.jpg",
+      "medium": "image",
+      "caption": "Single Homes, project view 6"
+    },
+    {
+      "src": "/media/gallery/single-homes/7.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/d92ff06e-1d9f-4d4a-a1e3-0339f42754bc/14.JPG",
+      "medium": "image",
+      "caption": "Single Homes, project view 7"
+    },
+    {
+      "src": "/media/gallery/single-homes/8.webp",
+      "width": 1920,
+      "height": 1280,
+      "source": "https://images.squarespace-cdn.com/content/v1/66b23eada2c9fc0f4959b860/fe646ca4-b2b0-4daa-aa80-dfd8aa930682/15.JPG",
+      "medium": "image",
+      "caption": "Single Homes, project view 8"
+    }
+  ]
+}

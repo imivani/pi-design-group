@@ -1,0 +1,55 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import http from 'node:http';
+import assert from 'node:assert/strict';
+import {chromium, expect} from '@playwright/test';
+const base=process.argv[2] || '/';
+const root=path.resolve('dist');
+const types={'.html':'text/html','.js':'text/javascript','.css':'text/css','.svg':'image/svg+xml','.webp':'image/webp','.mp4':'video/mp4','.json':'application/json'};
+const server=http.createServer(async(request,response)=>{
+  try{
+    const pathname=new URL(request.url,'http://localhost').pathname;
+    if(!pathname.startsWith(base))throw new Error('Outside base');
+    let file=path.resolve(root,decodeURIComponent(pathname.slice(base.length)));
+    if(file!==root&&!file.startsWith(root+path.sep))throw new Error('Outside output');
+    if((await fs.stat(file)).isDirectory())file=path.join(file,'index.html');
+    response.setHeader('Content-Type',types[path.extname(file)]||'application/octet-stream');response.end(await fs.readFile(file));
+  }catch{response.writeHead(404);response.end('Not found');}
+});
+await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
+const address=`http://127.0.0.1:${server.address().port}`;
+const browser=await chromium.launch({channel:'chrome'});
+try{
+  const page=await browser.newPage();const errors=[];
+  page.on('pageerror',error=>errors.push(error.message));
+  page.on('response',response=>{if(response.status()>=400)errors.push(response.status()+' '+response.url());});
+  await page.addInitScript(()=>localStorage.setItem('pi-motion','off'));
+  await page.goto(address+base);await page.waitForSelector('html[data-enhanced]');
+  const links=await page.locator('.project-link').evaluateAll(els=>els.map(el=>el.getAttribute('href')));
+  assert.equal(links.length,27);assert(links.every(href=>href.startsWith(base)));
+  for(const href of links){const response=await page.request.get(address+href);assert.equal(response.status(),200,href);}
+  await page.locator('[data-featured-view="planting"]').click();
+  await expect(page.locator('[data-featured-image]')).toHaveAttribute('src',base+'media/gallery/crestmont-west/8.webp');
+  await page.locator('[data-detail-select="paths"]').click();
+  await expect(page.locator('#detail-plan-image')).toHaveAttribute('src',base+'media/gallery/evanston/3.webp');
+  await expect(page.locator('#detail-project-link')).toHaveAttribute('href',base+'evanston');
+  await page.locator('.detail-desk-links [data-open-drawing]').click();
+  await expect(page.locator('#detail-viewer-image')).toHaveAttribute('src',base+'media/gallery/evanston/3.webp');
+  await page.locator('#detail-viewer-zoom').click();
+  await expect(page.locator('#detail-drawing-viewer')).toHaveAttribute('data-zoom','true');
+  await page.keyboard.press('Escape');
+  await page.locator('[data-menu-trigger="projects"]').click();
+  await page.locator('button[data-catalogue-open]').click();
+  const catalogueLinks=await page.locator('[data-catalogue-project]').evaluateAll(els=>els.map(el=>el.getAttribute('href')));
+  assert.equal(catalogueLinks.length,27);assert(catalogueLinks.every(href=>href.startsWith(base)));
+  await page.keyboard.press('Escape');await page.keyboard.press('Escape');
+  await page.locator('[data-project="seton-crossing"] a').click();await page.waitForSelector('[data-primary-project]');
+  assert.equal(new URL(page.url()).pathname,base+'seton');
+  await page.locator('[data-gallery-index="0"]').click();await page.waitForFunction(()=>document.querySelector('#viewer-count').textContent==='1 / 6');
+  await page.keyboard.press('Escape');
+  await page.locator('[data-menu-trigger="services"]').click();await page.locator('[data-service-link="commercial"]').click();
+  await page.waitForSelector('#tab-commercial[aria-expanded="true"]');
+  assert.equal(new URL(page.url()).pathname,base);
+  assert.deepEqual(errors,[]);
+  console.log(JSON.stringify({base,pages:28,links:27,featuredViews:true,drawingViewer:true,navigationCatalogue:true,errors,passed:true}));
+}finally{await browser.close();await new Promise(resolve=>server.close(resolve));}

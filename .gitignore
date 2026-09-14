@@ -1,0 +1,27 @@
+node_modules/
+dist/
+.astro/
+.logs/
+playwright-report/
+test-results/
+.env*
+!.env.example
+
+# Generated review captures and downloaded source pages
+design/review/
+design/source/*.html
+design/media-audit*.jpg
+
+# Local tools, credentials and operating-system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.log
+*.pem
+*.key
+*.pfx
+*.p12
+__pycache__/
+*.pyc

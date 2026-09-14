@@ -1,0 +1,148 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import MotionSetup from '../components/MotionSetup.astro';
+import ProjectFigure from '../components/ProjectFigure.astro';
+import { ArrowLeft, ArrowRight, X, ZoomIn, ZoomOut } from '@lucide/astro';
+import { projects, projectPath, type Project } from '../data/projects';
+import { projectDetails } from '../data/project-details';
+import '../styles/global.css';
+import '../styles/project.css';
+
+export function getStaticPaths() {
+  return projects.map((project,index) => ({ params:{ slug:new URL(project.url).pathname.slice(1) }, props:{ project, next:projects[(index + 1) % projects.length] } }));
+}
+const { project, next } = Astro.props as {project:Project;next:Project};
+const { gallery, collection, description, editorial } = projectDetails(project);
+const base = import.meta.env.BASE_URL;
+const asset = (src:string) => base + src.replace(/^\//, '');
+const openingNote = editorial?.openingNote || (collection ? 'Residential landscape design, across a collection of homes.' : project.category === 'commercial' ? 'Landscape design for commercial spaces.' : 'Landscape design for multifamily living.');
+const introduction = editorial?.introduction || description;
+const images = gallery.map((image,index)=>({image,index}));
+const hasMixedMedia = gallery.some(image=>image.medium==='drawing') && gallery.some(image=>image.medium!=='drawing');
+const imageAt = (index:number | undefined) => index !== undefined && index > 0 ? images[index] : undefined;
+const detail = editorial?.detail;
+const detailDrawing = imageAt(detail?.drawingIndex);
+const detailPhoto = imageAt(detail?.photoIndex);
+const quiet = imageAt(editorial?.quietIndex);
+const closing = imageAt(editorial?.closingIndex);
+const overall = imageAt(editorial?.overallIndex);
+const reserved = new Set([0,detailDrawing?.index,detailPhoto?.index,quiet?.index,closing?.index,overall?.index]);
+const drawings = images.filter(({image,index})=>image.medium==='drawing' && !reserved.has(index));
+const photographs = images.filter(({image,index})=>image.medium!=='drawing' && !reserved.has(index));
+const chosenPair = (editorial?.pairIndices || []).map(imageAt).filter((item):item is typeof images[number]=>!!item);
+const remaining = photographs.filter(item=>!chosenPair.some(chosen=>chosen.index===item.index));
+const rows: typeof images[] = chosenPair.length ? [chosenPair] : [];
+for(let i=0;i<remaining.length;i+=2) rows.push(remaining.slice(i,i+2));
+const facts = [
+  ['Project type',project.type],
+  ...(project.location ? [['Location',project.location]] : []),
+  ['Landscape design','Pi Design Group'],
+  ...(project.credit ? [['Architecture',project.credit.replace(/^Architecture by /,'')]] : []),
+];
+---
+<!doctype html>
+<html lang="en" data-motion="full">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={project.name + '. ' + project.type + (project.location ? ' in ' + project.location : '') + '. Photographs and drawings from the Pi Design Group portfolio.'} />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="icon" href={asset('/favicon.svg')} type="image/svg+xml" />
+    <title>{project.name} | Pi Design Group</title>
+    <MotionSetup />
+  </head>
+  <body class="project-page page-framed">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <Header />
+    <main id="main" data-project-id={project.id}>
+      <section class="project-opening frame" aria-labelledby="project-title">
+        <div class="project-breadcrumb">
+          <a href={base+'#projects'} class="text-link" data-back-projects><ArrowLeft size={17} />Back to projects</a>
+          <a class="text-link" href="#gallery">View gallery <ArrowRight size={18} /></a>
+        </div>
+        <div class="project-title-row" data-title-long={String(project.name.length>24)}>
+          <div>
+            <h1 id="project-title">{project.name}</h1>
+            <dl class="project-opening-facts">
+              {project.location && <div><dt>Location</dt><dd>{project.location}</dd></div>}
+              <div><dt>{collection ? 'Collection' : 'Project type'}</dt><dd>{project.type}</dd></div>
+            </dl>
+          </div>
+          <p class="project-opening-note">{openingNote}</p>
+        </div>
+        <div class="project-hero-gallery">
+          <ProjectFigure image={gallery[0]} index={0} primary={project.id} />
+          <div class="project-hero-controls js-only" role="group" aria-label="Opening image controls">
+            <span id="project-hero-count" aria-live="polite">01 / {String(gallery.length).padStart(2,'0')}</span>
+            <button id="project-hero-previous" type="button" aria-label="Previous opening image"><ArrowLeft size={20} stroke-width={1.3}/></button>
+            <button id="project-hero-next" type="button" aria-label="Next opening image"><ArrowRight size={20} stroke-width={1.3}/></button>
+          </div>
+          <p id="project-hero-status" class="project-hero-status" role="status"></p>
+        </div>
+      </section>
+
+      <section class="project-gallery frame" id="gallery" tabindex="-1" aria-label="Project gallery">
+        <div class:list={['gallery-introduction',{'gallery-introduction-compact':!introduction}]}>
+          <h2>{collection ? 'The collection' : introduction ? 'The project' : 'Project gallery'}</h2>
+          <div>
+            {introduction && <p>{introduction}</p>}
+            <button class="text-link js-only" type="button" data-open-gallery>Open full-screen gallery <ArrowRight size={18} /></button>
+          </div>
+        </div>
+        {overall && <div class="gallery-overall" data-reveal><ProjectFigure image={overall.image} index={overall.index}/></div>}
+        {rows.map((row,rowIndex)=><div class:list={['gallery-row',{'gallery-row-pair':row.length>1,'gallery-row-reversed':row.length>1 && rowIndex%2===1}]} data-reveal>
+          {row.map(({image,index})=><ProjectFigure image={image} index={index}/>)}
+        </div>)}
+        {quiet && <div class="gallery-quiet" data-reveal>
+          <div class="quiet-caption"><p>{quiet.image.caption}</p><a class="text-link" href={asset(quiet.image.src)} data-gallery-index={quiet.index}>View detail <ArrowRight size={18}/></a></div>
+          <ProjectFigure image={quiet.image} index={quiet.index}/>
+        </div>}
+        {(detailDrawing || drawings.length>0) && <section class="project-drawings" aria-labelledby="drawings-title">
+          <div class="drawing-heading"><h2 id="drawings-title">Design details</h2><p>{detail?.title || (gallery.every(image=>image.medium==='drawing') ? 'Site layout, planting and detail drawings.' : 'The landscape, set out in plan.')}</p></div>
+          {detailDrawing && <div class:list={['drawing-story',{'drawing-story-with-photo':!!detailPhoto}]} data-reveal>
+            <div class="drawing-plan">
+              <ProjectFigure image={detailDrawing.image} index={detailDrawing.index}/>
+              <a class="text-link open-drawing-link" href={asset(detailDrawing.image.src)} data-gallery-index={detailDrawing.index}>Open drawing <ArrowRight size={18}/></a>
+            </div>
+            <div class="drawing-response">
+              {detail?.copy && <p>{detail.copy}</p>}
+              {detailPhoto && <ProjectFigure image={detailPhoto.image} index={detailPhoto.index}/>}
+            </div>
+          </div>}
+          {drawings.length>0 && <div class:list={['drawing-grid',{'drawing-grid-single':drawings.length===1}]} data-reveal>
+            {drawings.map(({image,index})=><div class="drawing-plan"><ProjectFigure image={image} index={index}/><a class="text-link open-drawing-link" href={asset(image.src)} data-gallery-index={index}>Open drawing <ArrowRight size={18}/></a></div>)}
+          </div>}
+        </section>}
+        {closing && <div class="gallery-closing" data-reveal><ProjectFigure image={closing.image} index={closing.index}/></div>}
+      </section>
+
+      <section class="project-specification frame" aria-labelledby="information-title">
+        <h2 id="information-title">{collection ? 'Collection information' : 'Project information'}</h2>
+        <dl>{facts.map(([label,value])=><div><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
+      </section>
+      <section class="next-project frame" aria-labelledby="next-title">
+        <div class="next-project-navigation"><span>Continue exploring</span><a href={base+'#projects'} class="text-link" data-back-projects><ArrowLeft size={16}/>Back to projects</a></div>
+        <a class="next-project-link" href={projectPath(next,base)} data-project-card={next.id} data-reveal>
+          <div><span class="next-label">Next project <ArrowRight size={20}/></span><h2 id="next-title">{next.name}</h2><p>{next.type}{next.location ? ' · ' + next.location : ''}</p></div>
+          <figure><img src={asset(next.image)} alt={next.alt} width="1200" height="675" loading="lazy" decoding="async"/>{next.imageKind!=='photograph'&&<figcaption>{next.imageKind==='drawing'?'Drawing':'Rendering'}</figcaption>}</figure>
+        </a>
+      </section>
+      <section id="contact" class="project-contact frame"><h2>Discuss a similar project.</h2><a class="text-link" href="mailto:peter@pidesigngroup.ca">Get in touch <ArrowRight size={23} stroke-width={1.4}/></a></section>
+    </main>
+    <Footer />
+    <dialog class="image-viewer" id="image-viewer" aria-label="Project image gallery" data-has-media-nav={hasMixedMedia || undefined}>
+      <div class="viewer-toolbar">
+        <div class="viewer-identity"><span id="viewer-count" aria-live="polite"></span>{hasMixedMedia && <div class="viewer-media-navigation" role="group" aria-label="Gallery media"><button type="button" data-viewer-media="images" aria-pressed="false">Images</button><button type="button" data-viewer-media="drawings" aria-pressed="false">Drawings</button></div>}</div>
+        <div><button type="button" id="viewer-zoom" aria-label="Zoom in" aria-pressed="false"><ZoomIn class="zoom-in" size={21}/><ZoomOut class="zoom-out" size={21}/></button><button id="viewer-close" type="button" autofocus>Close <X size={20}/></button></div>
+      </div>
+      <div class="viewer-stage" id="viewer-stage"><img id="viewer-image" alt="" draggable="false"/></div>
+      <button class="viewer-arrow viewer-previous" id="viewer-previous" type="button" aria-label="Previous image"><ArrowLeft size={25} stroke-width={1.3}/></button>
+      <button class="viewer-arrow viewer-next" id="viewer-next" type="button" aria-label="Next image"><ArrowRight size={25} stroke-width={1.3}/></button>
+      <div class="viewer-caption"><p id="viewer-caption"></p><span id="viewer-medium"></span></div><p class="viewer-status" id="viewer-status" role="status"></p>
+    </dialog>
+    <script is:inline type="application/json" id="project-gallery-data" set:html={JSON.stringify(gallery.map(image=>({...image,src:asset(image.src)}))).replace(/</g,'\\u003c')}/>
+    <script>import '../scripts/project';</script>
+  </body>
+</html>
