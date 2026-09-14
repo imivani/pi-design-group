@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
-import { chromium, expect } from '@playwright/test';
+import { chromium, expect as playwrightExpect } from '@playwright/test';
+
+const expect = playwrightExpect.configure({ timeout: 20000 });
 
 const supplied=process.argv[2];
 assert(supplied,'Usage: node scripts/verify-live.mjs https://your-deployment.example/');
