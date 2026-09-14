@@ -96,6 +96,25 @@ test.describe('Reference navigation', () => {
     await expect(surface(page)).toHaveCSS('pointer-events', 'none');
   });
 
+  test('hovering between sections and project names keeps the navigation frame steady', async ({ page }) => {
+    await openProjects(page).hover();
+    await expect(surface(page)).toHaveCSS('opacity', '1');
+    const overview = await surface(page).boundingBox();
+    for (const selector of ['[data-menu-trigger="services"]', '[data-service-link="commercial"]', '[data-service-link="parks"]', '[data-menu-trigger="projects"]']) {
+      await page.locator(selector).hover();
+      await page.waitForTimeout(220);
+      const current = await surface(page).boundingBox();
+      expect(current!.x).toBeCloseTo(overview!.x, 1); expect(current!.width).toBeCloseTo(overview!.width, 1); expect(current!.height).toBeCloseTo(overview!.height, 1);
+    }
+    await page.locator('button[data-catalogue-open]').click();
+    const catalogue = await surface(page).boundingBox();
+    for (const id of ['rona', 'crestmont-west', 'seton-crossing']) {
+      await page.locator(`[data-catalogue-project="${id}"]`).focus(); await page.waitForTimeout(300);
+      const current = await surface(page).boundingBox();
+      expect(current!.width).toBeCloseTo(catalogue!.width, 1); expect(current!.height).toBeCloseTo(catalogue!.height, 1);
+    }
+  });
+
   test('open-close-open resolves to the newest state at several interruption points', async ({ page }) => {
     for (const interruption of [50, 130, 210]) {
       await openProjects(page).evaluate((button) => (button as HTMLButtonElement).click());
@@ -125,8 +144,8 @@ test.describe('Reference navigation', () => {
     await page.locator('[data-service-link="parks"]').click();
     await expect.poll(() => page.evaluate(() => (window as unknown as { navEvents: unknown[] }).navEvents)).toContainEqual({ name: 'pi:service', detail: { id: 'parks' } });
     await page.locator('.header-search').click();
-    await expect(page.locator('#project-search')).toBeFocused();
-    await expect(page).toHaveURL(/#projects$/);
+    await expect(page.locator('#site-search-input')).toBeFocused();
+    await expect(page.locator('#site-search-dialog')).toBeVisible();
     await expect(surface(page)).toHaveAttribute('inert', '');
   });
 
@@ -185,7 +204,7 @@ test.describe('Reference navigation', () => {
     await toggle.click();
     await dialog.locator('[data-project-search]').click();
     await expect(dialog).not.toBeVisible();
-    await expect(page.locator('#project-search')).toBeFocused();
+    await expect(page.locator('#site-search-input')).toBeFocused();
   });
 
   test('switching between compact and desktop while open keeps focus on a visible control', async ({ page }) => {
@@ -200,6 +219,24 @@ test.describe('Reference navigation', () => {
     await expect(page.locator('#mobile-navigation')).not.toBeVisible();
     await expect(page.locator('#site-header .site-wordmark')).toBeFocused();
     await expect(page.locator('html')).not.toHaveCSS('overflow', 'hidden');
+  });
+
+  test('resizing does not reclaim focus after navigation was deliberately dismissed', async ({ page }) => {
+    const heroLink = page.locator('#hero .outline-button');
+    await openProjects(page).focus();
+    await page.keyboard.press('ArrowDown');
+    await heroLink.focus();
+    await expect(surface(page)).toHaveAttribute('inert', '');
+    await page.setViewportSize({ width: 390, height: 844 });
+    await expect(heroLink).toBeFocused();
+
+    await page.setViewportSize({ width: 1440, height: 960 });
+    await openProjects(page).focus();
+    await page.keyboard.press('ArrowDown');
+    await page.mouse.click(5, 460);
+    await expect(surface(page)).toHaveAttribute('inert', '');
+    await page.setViewportSize({ width: 390, height: 844 });
+    await expect(page.locator('.mobile-menu-button')).not.toBeFocused();
   });
 
   test('320px navigation keeps its full name and controls readable with doubled text', async ({ page }) => {

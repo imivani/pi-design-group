@@ -322,7 +322,7 @@ export const media = {
   "featuredDetail": "/media/img_2304.webp",
   "pathDetail": "/media/gallery/evanston/6.webp",
   "drawing": "/media/gallery/crestmont-west/3.webp",
-  "contact": "/media/why-evening.webp"
+  "contact": "/media/gallery/darcy/5.webp"
 } as const;
 
 export const projectPath = (project: Project, base = '/') => base + new URL(project.url).pathname.replace(/^\//, '');

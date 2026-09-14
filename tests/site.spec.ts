@@ -8,14 +8,26 @@ test.beforeEach(async ({ page }) => {
 });
 
 test('complete catalogue and correct project destinations are rendered before filtering', async ({ page, request }) => {
+  test.setTimeout(60000);
   await expect(page.locator('.project-entry')).toHaveCount(27);
   expect(new Set(projects.map(project => project.url)).size).toBe(27);
-  for (const project of projects) {
-    await expect(page.locator('[data-project="' + project.id + '"] a')).toHaveAttribute('href', projectPath(project));
-    expect((await request.get(projectPath(project))).ok(),project.name+' page').toBeTruthy();
-    const response = await request.get(project.image);
-    expect(response.ok(), project.image).toBeTruthy();
-    expect(response.headers()['content-type']).toContain('image/webp');
+  const links = await page.locator('.project-entry').evaluateAll(entries => entries.map(entry => ({
+    id: (entry as HTMLElement).dataset.project,
+    href: entry.querySelector('a')?.getAttribute('href'),
+  })));
+  expect(links).toEqual(projects.map(project => ({ id: project.id, href: projectPath(project) })));
+  // Verify every page and cover in small independent batches. This catalogue
+  // check should not time out merely from 54 sequential development requests.
+  for (let offset = 0; offset < projects.length; offset += 3) {
+    const results = await Promise.all(projects.slice(offset, offset + 3).map(async project => {
+      const [destination, cover] = await Promise.all([request.get(projectPath(project)), request.get(project.image)]);
+      return { project, destination, cover };
+    }));
+    for (const { project, destination, cover } of results) {
+      expect(destination.ok(), project.name + ' page').toBeTruthy();
+      expect(cover.ok(), project.image).toBeTruthy();
+      expect(cover.headers()['content-type']).toContain('image/webp');
+    }
   }
   await expect(page.locator('.project-link').filter({ hasText: 'Summit 77 Apartments' })).toHaveAttribute('href', '/summit77apartments');
   await expect(page.locator('a[href="mailto:peter@pidesigngroup.ca"]')).toHaveCount(3);
@@ -84,20 +96,17 @@ test('service image failure preserves readable content and other photographs', a
   await expect(page.locator('[data-service-panel="multifamily"] img')).toBeVisible();
 });
 
-test('video autoplay reflects actual state, manual pause survives leaving and returning', async ({ page }) => {
-  await page.evaluate(() => sessionStorage.removeItem('pi-video-paused'));
-  await page.reload();
+test('hero has no playback button and background video follows visibility and saved motion preference', async ({ page }) => {
   await expect.poll(() => page.locator('#hero-video').evaluate((video: HTMLVideoElement) => !video.paused)).toBe(true);
-  await expect(page.locator('#video-toggle')).toHaveAttribute('aria-label', 'Pause background video');
-  await page.locator('#video-toggle').click();
-  await expect(page.locator('#hero-video')).toHaveJSProperty('paused', true);
+  await expect(page.locator('#video-toggle')).toHaveCount(0);
   await page.locator('#projects').scrollIntoViewIfNeeded();
-  await page.locator('#hero').scrollIntoViewIfNeeded();
-  await page.waitForTimeout(400);
   await expect(page.locator('#hero-video')).toHaveJSProperty('paused', true);
-  await page.locator('#video-toggle').click();
+  await page.locator('#hero').scrollIntoViewIfNeeded();
   await expect(page.locator('#hero-video')).toHaveJSProperty('paused', false);
-  await page.locator('#why').scrollIntoViewIfNeeded();
+  await page.locator('#motion-choice').selectOption('off');
+  await page.locator('#hero').scrollIntoViewIfNeeded();
+  await page.reload();
+  await expect(page.locator('html')).toHaveAttribute('data-motion','off');
   await expect(page.locator('#hero-video')).toHaveJSProperty('paused', true);
 });
 
@@ -115,13 +124,13 @@ test('reduced motion stops video live; off settles animations and still permits 
   await expect(page.locator('#hero-video')).toHaveJSProperty('paused', true);
 });
 
-test('blocked media keeps a readable poster and useful play control', async ({ page }) => {
+test('blocked media keeps a readable poster without a nonfunctional playback button', async ({ page }) => {
   await page.route('**/hero.mp4', route => route.abort());
   await page.reload();
   await expect(page.locator('.hero-poster')).toBeVisible();
   await expect(page.locator('#video-status')).toContainText('unavailable');
-  await expect(page.locator('#video-toggle')).toHaveAttribute('aria-label', 'Play background video');
-  await expect(page.locator('[data-poster-caption]')).toBeVisible();
+  await expect(page.locator('#video-toggle')).toHaveCount(0);
+  await expect(page.locator('#hero')).not.toHaveAttribute('data-video-ready','');
 });
 
 test('blocked browser storage cannot prevent the page controls from starting', async ({ page }) => {

@@ -2,11 +2,16 @@
 import Header from '../components/Header.astro';
 import FeaturedProject from '../components/FeaturedProject.astro';
 import HomeDetails from '../components/HomeDetails.astro';
-import { ArrowRight, ArrowDown, Search, Play, Pause } from '@lucide/astro';
-import { projects, media, projectPath } from '../data/projects';
+import ContactPanel from '../components/ContactPanel.astro';
+import PracticeIntro from '../components/PracticeIntro.astro';
+import ProjectArchive from '../components/ProjectArchive.astro';
+import { ArrowRight, ArrowDown } from '@lucide/astro';
+import { media } from '../data/projects';
 import Footer from '../components/Footer.astro';
 import MotionSetup from '../components/MotionSetup.astro';
 import '../styles/global.css';
+import '../styles/home-return.css';
+
 
 const base = import.meta.env.BASE_URL;
 const asset = (path: string) => base + path.replace(/^\//, '');
@@ -47,23 +52,15 @@ const services = [
             <p>Landscape design for multifamily communities,<br class="desktop-break" /> commercial plazas, and public parks.</p>
             <a class="outline-button" href="#projects">Explore Our Work <ArrowRight size={19} stroke-width={1.4} /></a>
           </div>
-          <div class="hero-media-control js-only">
-            <button id="video-toggle" class="video-toggle" type="button" aria-label="Play background video" aria-controls="hero-video">
-              <Play size={19} stroke-width={1.5} class="play-icon" fill="currentColor" />
-              <Pause size={19} stroke-width={1.5} class="pause-icon" />
-            </button>
-            <div class="hero-caption">
-              <span data-poster-caption>D’Arcy<small>Okotoks, Alberta</small></span>
-              <span data-video-caption hidden>Pi Design Group</span>
-              <span id="video-status" class="sr-only" role="status"></span>
-            </div>
-          </div>
+          <span id="video-status" class="sr-only" role="status"></span>
         </div>
-        <a href="#services" class="scroll-link" aria-label="Scroll to services"><ArrowDown size={21} stroke-width={1.3} /></a>
+        <a href="#about" class="scroll-link" aria-label="Meet Pi Design Group"><ArrowDown size={21} stroke-width={1.3} /></a>
       </section>
 
+      <PracticeIntro />
+
       <section id="services" class="services frame" aria-labelledby="services-title" tabindex="-1">
-        <h2 id="services-title" data-reveal>What We Do</h2>
+        <h2 id="services-title" data-reveal>Our Expertise in Three Areas.</h2>
         <div class="service-gallery" data-active="multifamily" data-reveal>
           {services.map((service, i) => (
             <article class="service-panel" data-service-panel={service.id} data-active={String(i === 0)}>
@@ -86,58 +83,13 @@ const services = [
 
       <HomeDetails />
 
-      <section id="projects" class="projects frame" aria-labelledby="projects-title" tabindex="-1">
-        <div class="projects-heading" data-reveal><h2 id="projects-title">All Projects</h2><p id="project-count" role="status" aria-live="polite">{projects.length} entries</p></div>
-        <div class="project-controls js-only">
-          <div class="project-filters" role="group" aria-label="Filter projects">
-            {[['all','All'],['multifamily','Multifamily'],['commercial','Commercial'],['single-homes','Single Homes']].map(([id,label]) => <button type="button" data-filter={id} aria-pressed={id === 'all' ? 'true' : 'false'}>{label}</button>)}
-            <span class="filter-indicator" aria-hidden="true"></span>
-          </div>
-          <div class="project-tools">
-            <div class="project-search">
-              <label class="sr-only" for="project-search">Search projects</label>
-              <input id="project-search" type="search" placeholder="Search projects" autocomplete="off" spellcheck="false" />
-              <Search size={18} stroke-width={1.6} aria-hidden="true" />
-            </div>
-            <div class="project-views" role="group" aria-label="Project view">
-              <button type="button" data-view="grid" aria-pressed="true">Grid</button><span aria-hidden="true">/</span><button type="button" data-view="index" aria-pressed="false">Index</button>
-            </div>
-          </div>
-        </div>
-        <div class="index-head" hidden aria-hidden="true"><span>Project</span><span>Type</span><span>Location</span></div>
-        <div id="project-collection" class="project-collection" data-view="grid">
-          {projects.map(project => (
-            <article class="project-entry" data-project={project.id} data-category={project.category} data-search={[project.name,project.type,project.location || ''].join(' ').toLocaleLowerCase()}>
-              <a class="project-link" href={projectPath(project, base)} data-project-card={project.id}>
-                <div class="project-image"><img src={asset(project.image)} alt={project.alt} width="1200" height="675" loading="lazy" decoding="async" /></div>
-                <div class="project-information">
-                  <h3>{project.name}</h3>
-                  <div class="project-facts"><span class="project-type">{project.type}</span>{project.location && <span class="project-location">{project.location}</span>}</div>
-                  {project.imageKind !== 'photograph' && <span class="project-medium">{project.imageKind === 'drawing' ? 'Drawing' : 'Rendering'}</span>}
-                </div>
-                <ArrowRight class="project-arrow" size={22} stroke-width={1.4} aria-hidden="true" />
-              </a>
-            </article>
-          ))}
-        </div>
-        <div id="project-empty" class="project-empty" hidden>
-          <h3>No Projects Found</h3>
-          <p>Try another project name or reset the filters.</p>
-          <button class="text-link" id="reset-projects" type="button">Show All Projects <ArrowRight size={20} stroke-width={1.4} /></button>
-        </div>
-      </section>
+      <ProjectArchive />
 
-      <section id="contact" class="contact" aria-labelledby="contact-title" tabindex="-1">
-        <img class="contact-photo" src={asset(media.contact)} alt="" width="1600" height="1067" loading="lazy" decoding="async" />
-        <div class="contact-shade" aria-hidden="true"></div>
-        <div class="frame contact-inner" data-reveal>
-          <h2 id="contact-title">Discuss Your<br />Next Project.</h2>
-          <div class="contact-details"><a class="outline-button" href="mailto:peter@pidesigngroup.ca">Get in Touch <ArrowRight size={20} stroke-width={1.3} /></a><a href="tel:+14035104071">403-510-4071</a><a href="mailto:peter@pidesigngroup.ca">peter@pidesigngroup.ca</a></div>
-        </div>
-      </section>
+      <ContactPanel />
     </main>
     <Footer homepage />
     <script>
+      import '../scripts/home-return';
       import '../scripts/site';
     </script>
   </body>

@@ -1,0 +1,47 @@
+@layer reset, base, components, responsive;
+@layer components {
+  #contact.contact-section{padding-block:0 64px;background:#fff;border:0;overflow:visible;color:#fff}
+  .contact-panel{position:relative;isolation:isolate;overflow:hidden;border-radius:var(--panel-radius,24px);background:#202a25}
+  .contact-panel-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 64%;z-index:-2;transform-origin:60% 55%}
+  .contact-panel-shade{position:absolute;inset:0;background:linear-gradient(105deg,rgb(12 23 16 / 86%) 0%,rgb(12 23 16 / 48%) 57%,rgb(12 23 16 / 24%) 100%),linear-gradient(0deg,rgb(12 23 16 / 76%),transparent 58%);z-index:-1}
+  .contact-panel-content{display:flex;justify-content:space-between;gap:56px;align-items:flex-end;min-height:560px;padding:56px}
+  #contact .contact-invitation h2{font-size:var(--section-title-size);line-height:1.06;letter-spacing:-.035em;max-width:590px;margin-bottom:24px}
+  .contact-invitation>p{font-size:18px;line-height:1.5;color:#e5ebe5;max-width:330px;margin-bottom:32px}
+  .contact-start{display:flex;align-items:center;justify-content:space-between;gap:42px;width:fit-content;min-width:215px;min-height:60px;padding:16px 21px;background:#fff;color:#17221c;border-radius:6px;font-size:16px;transition:background 180ms,color 180ms}
+  .contact-start svg{transition:transform 320ms var(--ease-arrive)}
+  .contact-start:is(:hover,:focus-visible){background:#dfe8df}.contact-start:is(:hover,:focus-visible) svg{transform:translate(3px,-3px)}
+  .contact-direct{width:310px;flex-shrink:0;margin-bottom:3px}
+  .contact-direct>a{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:22px 0;border-top:1px solid rgb(255 255 255 / 38%);min-height:96px;font-size:18px;line-height:1.4}
+  .contact-direct>a>span{display:grid;gap:7px}.contact-direct small{font-size:13px;color:#e1e6e2}
+  .contact-direct svg{flex-shrink:0;transition:transform 280ms var(--ease-arrive)}
+  .contact-direct>a:is(:hover,:focus-visible) svg{transform:translateX(5px)}
+  .contact-direct>a:is(:hover,:focus-visible)>span>span{text-decoration:underline;text-underline-offset:5px}
+  .footer.site-footer{display:block;padding-block:52px 28px;min-height:0;border-top:1px solid var(--line)}
+  .site-footer .footer-top{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(280px,1fr) auto;gap:64px;align-items:start;padding-bottom:54px}
+  .site-footer .footer-wordmark{display:inline-block;font-size:clamp(25px,2.4vw,35px);line-height:1.15;letter-spacing:-.04em;white-space:normal}
+  .footer-identity>p{font-size:15px;line-height:1.5;margin-top:21px;color:var(--muted)}
+  .footer.site-footer nav{display:grid;grid-template-columns:1fr 1fr;gap:6px 32px;font-size:16px;width:auto}
+  .site-footer nav>a{display:flex;gap:24px;justify-content:space-between;align-items:center;min-height:44px;padding:9px 0}
+  .site-footer nav svg{opacity:.4;transition:opacity 180ms,transform 240ms var(--ease-arrive);flex-shrink:0}
+  .site-footer nav>a:is(:hover,:focus-visible) svg{opacity:1;transform:translate(2px,-2px)}
+  .footer-return{display:flex;align-items:center;gap:12px;font-size:13px;min-height:44px;white-space:nowrap}
+  .footer-return>svg{width:44px;height:44px;padding:12px;border:1px solid #bac3bd;border-radius:50%;transition:background 180ms,transform 300ms var(--ease-arrive)}
+  .footer-return:is(:hover,:focus-visible)>svg{background:#e8eee9;transform:translateY(-3px)}
+  .footer-bottom{display:flex;align-items:center;justify-content:space-between;gap:24px;border-top:1px solid var(--line);padding-top:23px;color:var(--muted);font-size:12px}
+  .footer-bottom>small{font-size:12px}.footer-bottom .motion-setting{font-size:13px;gap:12px}.footer-bottom select{min-height:40px}
+}
+@layer responsive {
+  @media(max-width:1199px){.contact-panel-content{padding:40px;min-height:540px;gap:32px}.contact-direct{width:260px}.contact-direct>a{font-size:16px}.site-footer .footer-top{grid-template-columns:1.15fr 1fr auto;gap:32px}.footer-return>span{display:none}.footer.site-footer nav{gap:6px 24px}}
+  @media(max-width:767px){
+    #contact.contact-section{padding-bottom:36px}.contact-panel-content{min-height:660px;padding:32px 24px;display:flex;flex-direction:column;align-items:stretch;justify-content:space-between;gap:54px}
+    .contact-panel-image{object-position:58% center}.contact-panel-shade{background:linear-gradient(110deg,rgb(12 23 16 / 78%),rgb(12 23 16 / 30%)),linear-gradient(0deg,rgb(12 23 16 / 90%),transparent 90%)}
+    #contact .contact-invitation h2{font-size:var(--section-title-size);max-width:420px;margin-bottom:23px}.contact-invitation>p{font-size:16px;margin-bottom:26px;max-width:240px}.contact-start{min-width:194px;min-height:56px;font-size:15px}
+    .contact-direct{width:100%;margin:0}.contact-direct>a{padding:17px 0;min-height:83px;font-size:16px}.contact-direct small{font-size:12px}.contact-direct>a:last-child{padding-bottom:0;min-height:66px}.contact-direct>a>span>span{overflow-wrap:anywhere}
+    .footer.site-footer{padding-block:30px 18px}.site-footer .footer-top{grid-template-columns:1fr auto;gap:30px 18px;padding-bottom:30px}.site-footer .footer-identity{grid-column:1}.site-footer .footer-wordmark{font-size:27px}.footer-identity>p{font-size:14px;margin-top:14px}
+    .footer.site-footer nav{grid-row:2;grid-column:1/-1;gap:4px 30px;font-size:15px;justify-content:stretch}.footer-return{grid-column:2;grid-row:1}.footer-bottom{align-items:flex-start;gap:14px;padding-top:18px}.footer-bottom>small{font-size:11px;max-width:145px;padding-top:10px}.footer-bottom .motion-setting{font-size:12px;gap:8px}
+  }
+  @media(max-width:359px){.contact-panel-content{padding-inline:20px}#contact .contact-invitation h2{font-size:36px}.contact-direct>a{font-size:14px}.site-footer .footer-wordmark{font-size:25px}.footer-bottom>small{max-width:128px}.footer.site-footer nav{gap:4px 20px}}
+  html[data-motion='reduced'] :is(.contact-panel-image,.contact-start svg,.contact-direct svg,.footer-return>svg,.site-footer nav svg),html[data-motion='off'] :is(.contact-panel-image,.contact-start svg,.contact-direct svg,.footer-return>svg,.site-footer nav svg){transform:none!important;transition:none!important}
+  @media(prefers-reduced-motion:reduce){.contact-panel-image{transform:none!important;transition:none!important}}
+  @media print{#contact.contact-section{display:none}.footer.site-footer{display:block;padding-block:20px}.footer-return,.footer.site-footer nav,.footer-identity>p{display:none}.site-footer .footer-top{display:block;padding:0}.footer-bottom{border:0;padding-top:10px}}
+}

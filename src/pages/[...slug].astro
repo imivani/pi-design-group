@@ -8,6 +8,7 @@ import { projects, projectPath, type Project } from '../data/projects';
 import { projectDetails } from '../data/project-details';
 import '../styles/global.css';
 import '../styles/project.css';
+import '../styles/project-arrival.css';
 
 export function getStaticPaths() {
   return projects.map((project,index) => ({ params:{ slug:new URL(project.url).pathname.slice(1) }, props:{ project, next:projects[(index + 1) % projects.length] } }));
@@ -50,6 +51,8 @@ const facts = [
     <meta name="robots" content="noindex, nofollow" />
     <meta name="theme-color" content="#ffffff" />
     <link rel="icon" href={asset('/favicon.svg')} type="image/svg+xml" />
+    <!-- Match the opening photograph before the browser captures its arrival. -->
+    <link rel="expect" blocking="render" href="#project-opening-image" />
     <title>{project.name} | Pi Design Group</title>
     <MotionSetup />
   </head>
@@ -81,6 +84,13 @@ const facts = [
           </div>
           <p id="project-hero-status" class="project-hero-status" role="status"></p>
         </div>
+      </section>
+
+      <section class="project-specification frame" aria-labelledby="information-title">
+        <h2 id="information-title">{collection ? 'Collection information' : 'Project information'}</h2>
+        <dl style={`--fact-columns:${facts.length}`}>
+          {facts.map(([label,value])=><div><dt>{label}</dt><dd>{value}</dd></div>)}
+        </dl>
       </section>
 
       <section class="project-gallery frame" id="gallery" tabindex="-1" aria-label="Project gallery">
@@ -118,16 +128,14 @@ const facts = [
         {closing && <div class="gallery-closing" data-reveal><ProjectFigure image={closing.image} index={closing.index}/></div>}
       </section>
 
-      <section class="project-specification frame" aria-labelledby="information-title">
-        <h2 id="information-title">{collection ? 'Collection information' : 'Project information'}</h2>
-        <dl>{facts.map(([label,value])=><div><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
-      </section>
-      <section class="next-project frame" aria-labelledby="next-title">
-        <div class="next-project-navigation"><span>Continue exploring</span><a href={base+'#projects'} class="text-link" data-back-projects><ArrowLeft size={16}/>Back to projects</a></div>
-        <a class="next-project-link" href={projectPath(next,base)} data-project-card={next.id} data-reveal>
-          <div><span class="next-label">Next project <ArrowRight size={20}/></span><h2 id="next-title">{next.name}</h2><p>{next.type}{next.location ? ' · ' + next.location : ''}</p></div>
-          <figure><img src={asset(next.image)} alt={next.alt} width="1200" height="675" loading="lazy" decoding="async"/>{next.imageKind!=='photograph'&&<figcaption>{next.imageKind==='drawing'?'Drawing':'Rendering'}</figcaption>}</figure>
-        </a>
+      <section class="next-project" aria-labelledby="next-title">
+        <div class="frame next-project-inner">
+          <div class="next-project-navigation"><span>Continue exploring</span><a href={base+'#projects'} class="text-link" data-back-projects><ArrowLeft size={16}/>Back to projects</a></div>
+          <a class="next-project-link" href={projectPath(next,base)} data-project-card={next.id} data-reveal>
+            <div><span class="next-label">Next project <ArrowRight size={20}/></span><h2 id="next-title">{next.name}</h2><p>{next.type}{next.location ? ' · ' + next.location : ''}</p></div>
+            <figure><img src={asset(next.image)} alt={next.alt} width="1200" height="675" loading="lazy" decoding="async"/>{next.imageKind!=='photograph'&&<figcaption>{next.imageKind==='drawing'?'Drawing':'Rendering'}</figcaption>}</figure>
+          </a>
+        </div>
       </section>
       <section id="contact" class="project-contact frame"><h2>Discuss a similar project.</h2><a class="text-link" href="mailto:peter@pidesigngroup.ca">Get in touch <ArrowRight size={23} stroke-width={1.4}/></a></section>
     </main>
@@ -143,6 +151,6 @@ const facts = [
       <div class="viewer-caption"><p id="viewer-caption"></p><span id="viewer-medium"></span></div><p class="viewer-status" id="viewer-status" role="status"></p>
     </dialog>
     <script is:inline type="application/json" id="project-gallery-data" set:html={JSON.stringify(gallery.map(image=>({...image,src:asset(image.src)}))).replace(/</g,'\\u003c')}/>
-    <script>import '../scripts/project';</script>
+    <script>import '../scripts/project-arrival';import '../scripts/project';</script>
   </body>
 </html>

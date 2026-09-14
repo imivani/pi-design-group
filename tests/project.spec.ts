@@ -47,6 +47,30 @@ test('back to projects retains search, view and selected project position',async
   expect(await page.locator('[data-project="seton-crossing"] a').evaluate(el=>{const b=el.getBoundingClientRect();return b.top>=0&&b.bottom<innerHeight;})).toBe(true);
 });
 
+test('back to projects keeps archive state before the project enhancement finishes loading',async({page})=>{
+  let releaseProject:()=>void=()=>{};
+  let projectRequested:()=>void=()=>{};
+  const held=new Promise<void>(resolve=>{releaseProject=resolve;});
+  const requested=new Promise<void>(resolve=>{projectRequested=resolve;});
+  await page.route('**/src/scripts/project.ts*',async route=>{
+    projectRequested();
+    await held;
+    await route.continue().catch(()=>{});
+  });
+  try {
+    await page.goto('/?category=commercial&q=seton&view=index#projects');
+    await page.locator('[data-project="seton-crossing"] a').click();
+    await expect(page).toHaveURL(/\/seton\/?$/);
+    await requested;
+    await page.locator('[data-back-projects]').last().click();
+    releaseProject();
+    await expect(page.locator('#project-search')).toHaveValue('seton');
+    await expect(page.locator('#project-collection')).toHaveAttribute('data-view','index');
+    await expect(page.locator('.project-entry:visible')).toHaveCount(2);
+    await expect(page.locator('[data-project="seton-crossing"] a')).toBeFocused();
+  } finally { releaseProject(); }
+});
+
 test('direct project entry supports home navigation, next project and static fallback',async({page,browser})=>{
   await page.goto('/crestmontwest');await page.locator('.next-project-link').click();await expect(page.locator('h1')).toHaveText('Arbour Lake');
   await page.locator('[data-back-projects]').first().click();await expect(page.locator('#project-collection')).toBeVisible();
@@ -99,8 +123,10 @@ test('mobile service photographs expand on touch and a collapsed choice restores
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
 });
 
-test('search from a project page reaches and focuses the home search field',async({page})=>{
+test('project search opens over the current project and finds another project directly',async({page})=>{
   await page.goto('/crestmontwest');await page.locator('.site-header__utilities [data-project-search]').click();
-  await expect(page.locator('#project-search')).toBeFocused();await page.locator('#project-search').fill('Evanston');
-  await expect(page.locator('.project-entry:visible')).toHaveCount(1);
+  await expect(page).toHaveURL(/\/crestmontwest$/);
+  await expect(page.locator('#site-search-input')).toBeFocused();await page.locator('#site-search-input').fill('Evanston');
+  await expect(page.locator('[data-search-project]:visible')).toHaveCount(1);
+  await page.locator('[data-search-project="evanston"]').click();await expect(page).toHaveURL(/\/evanston$/);
 });

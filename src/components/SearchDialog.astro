@@ -1,0 +1,37 @@
+---
+import { Search, X, ArrowUpRight } from '@lucide/astro';
+import { projects, projectPath } from '../data/projects';
+import '../styles/search.css';
+
+const base = import.meta.env.BASE_URL;
+const suggested = ['crestmont-west', 'darcy', 'evanston'];
+const ordered = [...projects].sort((a, b) => {
+  const aIndex = suggested.indexOf(a.id), bIndex = suggested.indexOf(b.id);
+  return (aIndex < 0 ? 99 : aIndex) - (bIndex < 0 ? 99 : bIndex) || a.name.localeCompare(b.name);
+});
+---
+<dialog id="site-search-dialog" class="site-search-dialog" aria-labelledby="site-search-title">
+  <div class="site-search-heading">
+    <h2 id="site-search-title">Find a Project</h2>
+    <button id="site-search-close" type="button" aria-label="Close project search"><X size={22} stroke-width={1.5} aria-hidden="true" /></button>
+  </div>
+  <form class="site-search-form" role="search">
+    <label for="site-search-input" class="sr-only">Search projects by name, type or location</label>
+    <Search size={25} stroke-width={1.5} aria-hidden="true" />
+    <input id="site-search-input" type="search" placeholder="Search projects" autocomplete="off" spellcheck="false" aria-controls="site-search-results" aria-describedby="site-search-hint" />
+    <button id="site-search-clear" type="button" hidden>Clear</button>
+  </form>
+  <p id="site-search-hint" class="site-search-hint">Find a place by name, project type or location.</p>
+  <div class="site-search-results-heading"><h3 id="site-search-results-title">A Few Places to Start</h3><span id="site-search-count">3 Projects</span></div>
+  <nav id="site-search-results" class="site-search-results" aria-label="Matching projects">
+    {ordered.map(project => <a class="site-search-result" id={'search-result-' + project.id} href={projectPath(project, base)} data-search-project={project.id} data-project-card={project.id} data-search-name={project.name} data-search-terms={[project.name, project.type, project.location || '', project.category === 'multifamily' ? 'communities residential' : project.category === 'commercial' ? 'plazas' : 'residential houses'].join(' ')} data-suggested={suggested.includes(project.id)} hidden={!suggested.includes(project.id)}>
+      <span class="site-search-thumbnail"><img src={base + project.image.replace(/^\//, '')} alt={project.alt} width="144" height="104" loading="lazy" decoding="async" data-kind={project.imageKind} /><span class="site-search-photo-error" hidden>Image unavailable</span></span>
+      <span class="site-search-result-copy"><span class="site-search-result-name">{project.name}</span><span class="site-search-result-context">{project.type}{project.location && ` · ${project.location}`}{project.imageKind !== 'photograph' && ` · ${project.imageKind === 'drawing' ? 'Drawing' : 'Rendering'}`}</span></span>
+      <ArrowUpRight size={19} stroke-width={1.5} aria-hidden="true" />
+    </a>)}
+  </nav>
+  <div id="site-search-empty" class="site-search-empty" hidden><h3>No Projects Found</h3><p>Try another name, project type or location.</p><button id="site-search-reset" type="button">Show All Projects</button></div>
+  <div class="site-search-footer"><button id="site-search-all" type="button">Browse All {projects.length} Projects <ArrowUpRight size={16} stroke-width={1.5} aria-hidden="true" /></button><p class="site-search-keys"><span>↑ ↓ Choose</span><span>Enter Open</span><span>Esc Close</span></p></div>
+  <p class="sr-only" id="site-search-announcement" role="status" aria-live="polite" aria-atomic="true"></p>
+</dialog>
+<script>import '../scripts/search';</script>

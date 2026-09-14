@@ -11,6 +11,7 @@ if (header && surface && mobile) {
   const desktop = matchMedia('(min-width: 1100px)');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   let openMenu: MenuName | null = null;
+  let desktopOwnsFocus = false;
   let openingTimer: ReturnType<typeof setTimeout> | undefined;
   let closingTimer: ReturnType<typeof setTimeout> | undefined;
   let incomingPane: Animation | undefined;
@@ -35,10 +36,6 @@ if (header && surface && mobile) {
   const clearTimers = () => { clearTimeout(openingTimer); clearTimeout(closingTimer); clearTimeout(catalogueTimer); };
   const activePane = () => panes.find((pane) => pane.dataset.menuPane === openMenu);
   const paneControls = () => Array.from(activePane()?.querySelectorAll<HTMLAnchorElement | HTMLButtonElement>('a,button') || []).filter((element) => !element.closest('[inert]') && element.getClientRects().length > 0);
-  const fitSurface = () => {
-    const pane = activePane();
-    if (pane) surface.style.height = `${pane.scrollHeight + 2}px`;
-  };
   const setMenu = (menu: MenuName | null, returnFocus = false) => {
     clearTimers();
     if (!desktop.matches) menu = null;
@@ -59,7 +56,6 @@ if (header && surface && mobile) {
         pane.setAttribute('aria-hidden', String(!selected));
         pane.inert = !selected;
       }
-      fitSurface();
       if (changing && motionMode() !== 'off') incomingPane = activePane()?.animate([{ opacity: .35 }, { opacity: 1 }], { duration: motionMode() === 'reduced' ? 100 : 180, easing: 'ease-out' });
     } else {
       for (const pane of panes) pane.inert = true;
@@ -77,7 +73,6 @@ if (header && surface && mobile) {
     overview.setAttribute('aria-hidden', String(opening));
     catalogue.inert = !opening;
     catalogue.setAttribute('aria-hidden', String(!opening));
-    fitSurface();
     if (moveFocus) (opening ? catalogueBack : catalogueButton).focus({ preventScroll: true });
     if (changed && motionMode() !== 'off') catalogueAnimation = (opening ? catalogue : overview).animate(
       [{ opacity: .2 }, { opacity: 1 }], { duration: motionMode() === 'full' ? 200 : 100, easing: 'ease-out' },
@@ -120,11 +115,15 @@ if (header && surface && mobile) {
   surface.addEventListener('pointerenter', clearTimers);
   surface.addEventListener('pointerleave', (event) => { if (event.pointerType === 'mouse') scheduleClose(); });
   document.addEventListener('pointerdown', (event) => {
-    if (!surface.contains(event.target as Node) && !triggers.some((trigger) => trigger.contains(event.target as Node))) setMenu(null);
+    if (!surface.contains(event.target as Node) && !triggers.some((trigger) => trigger.contains(event.target as Node))) {
+      desktopOwnsFocus = false;
+      setMenu(null);
+    }
   });
   document.addEventListener('focusin', (event) => {
     const target = event.target as Node;
-    if (!surface.contains(target) && !triggers.some((trigger) => trigger.contains(target))) setMenu(null);
+    desktopOwnsFocus = surface.contains(target) || triggers.some((trigger) => trigger.contains(target));
+    if (!desktopOwnsFocus) setMenu(null);
   });
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape' && openMenu) {
@@ -190,6 +189,7 @@ if (header && surface && mobile) {
     current.dataset.kind = link.dataset.previewKind!;
     current.style.position = 'relative';
     destination.href = link.href;
+    destination.dataset.projectCard = link.dataset.catalogueProject!;
     surface.querySelector('[data-catalogue-preview-name]')!.textContent = name;
     surface.querySelector('[data-catalogue-preview-place]')!.textContent = link.dataset.previewPlace!;
     kind.hidden = link.dataset.previewKind === 'photograph';
@@ -230,7 +230,7 @@ if (header && surface && mobile) {
   mobile.addEventListener('cancel', (event) => { event.preventDefault(); closeMobile(); });
   mobile.addEventListener('click', (event) => {
     const link = (event.target as HTMLElement).closest<HTMLAnchorElement>('a');
-    if (link) closeMobile(false);
+    if (link && !link.matches('[data-project-search]')) closeMobile(false);
   });
 
   mobile.querySelectorAll<HTMLButtonElement>('[data-mobile-disclosure]').forEach((button) => {
@@ -259,14 +259,10 @@ if (header && surface && mobile) {
     document.dispatchEvent(new CustomEvent('pi:service', { detail: { id: link.dataset.serviceLink || link.dataset.mobileService } }));
     setMenu(null);
   }));
-  document.querySelectorAll<HTMLAnchorElement>('[data-project-search]').forEach((link) => link.addEventListener('click', () => {
+  document.addEventListener('pi:search-open', () => {
     setMenu(null);
-    if (!document.querySelector('#project-search')) {
-      try { sessionStorage.setItem('pi-focus-project-search','true'); } catch {}
-    }
-    // Run after the modal's click dismissal so focus moves to the real catalogue field.
-    requestAnimationFrame(() => document.querySelector<HTMLInputElement>('#project-search')?.focus({ preventScroll: true }));
-  }));
+    if (mobile.open) closeMobile(false);
+  });
 
   const hero = document.querySelector('#hero');
   const scrollSentinel = document.querySelector('.header-scroll-sentinel');
@@ -282,27 +278,27 @@ if (header && surface && mobile) {
   };
   watchHero();
   new ResizeObserver(watchHero).observe(header);
-  const paneResize = new ResizeObserver(fitSurface);
-  panes.forEach((pane) => paneResize.observe(pane));
   const resize = () => {
     if (!desktop.matches) {
-      const hadDesktopFocus = surface.contains(document.activeElement) || triggers.some((trigger) => trigger === document.activeElement);
+      // CSS can hide desktop controls and blur them to body before this media-query
+      // event runs. Retain their focus ownership, but clear it on an outside click
+      // or a deliberate focus change so resizing never steals focus from the page.
+      const hadDesktopFocus = surface.contains(document.activeElement) || triggers.some((trigger) => trigger === document.activeElement) || (desktopOwnsFocus && document.activeElement === document.body);
+      desktopOwnsFocus = false;
       setMenu(null);
       if (hadDesktopFocus) mobileButton.focus({ preventScroll: true });
     } else if (mobile.open) {
       closeMobile(false);
       header.querySelector<HTMLAnchorElement>('.site-wordmark')?.focus({ preventScroll: true });
     }
-    fitSurface(); watchHero();
+    watchHero();
   };
   desktop.addEventListener('change', resize);
-  window.addEventListener('resize', fitSurface, { passive: true });
   const resolveMotion = () => {
     if (motionMode() === 'full') return;
     incomingPane?.cancel(); mobileAnimation?.cancel(); catalogueAnimation?.cancel(); previewAnimation?.cancel();
     for (const animation of disclosureAnimations.values()) animation.cancel();
     disclosureAnimations.clear();
-    fitSurface();
   };
   reduced.addEventListener('change', resolveMotion);
   new MutationObserver(resolveMotion).observe(document.documentElement, { attributes: true, attributeFilter: ['data-motion'] });

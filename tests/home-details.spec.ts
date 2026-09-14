@@ -87,3 +87,70 @@ test('mobile drawing selection and viewer remain usable with motion switched off
   await expect(page.locator('#detail-drawing-viewer')).not.toBeVisible();
   expect(await page.locator('[data-detail-select="paths"]').evaluate(button => button.getBoundingClientRect().height)).toBeGreaterThanOrEqual(44);
 });
+
+test('three built details support keyboard selection with truthful drawing context', async ({ page }) => {
+  await page.goto('/');
+  const planting = page.locator('[data-detail-select="planting"]');
+  await planting.focus();
+  await expect(page.locator('#why')).toHaveAttribute('data-detail-active', 'planting');
+  await expect(planting.locator('img')).toHaveAttribute('src', /\/crestmont-west\/8.webp$/);
+  await expect(page.locator('#detail-plan-image')).toHaveAttribute('src', /\/crestmont-west\/3.webp$/);
+  await expect(page.locator('#detail-plan-title')).toHaveText('Planting Layout');
+  await expect(page.locator('#detail-plan-counter')).toHaveAttribute('aria-label', 'Detail 1 of 3');
+  await page.keyboard.press('ArrowDown');
+  await expect(page.locator('[data-detail-select="paths"]')).toBeFocused();
+  await expect(page.locator('#why')).toHaveAttribute('data-detail-active', 'paths');
+  await expect(page.locator('#detail-project-link')).toHaveAttribute('href', '/evanston');
+  await page.keyboard.press('End');
+  await expect(page.locator('[data-detail-select="materials"]')).toBeFocused();
+  await expect(page.locator('#detail-plan-title')).toHaveText('Materials & Edges');
+  await expect(page.locator('#detail-plan-counter')).toHaveAttribute('aria-label', 'Detail 3 of 3');
+  await page.keyboard.press('Home');
+  await expect(planting).toBeFocused();
+  await expect(page.locator('#why')).toHaveAttribute('data-detail-active', 'planting');
+  await page.locator('.detail-desk-links [data-open-drawing]').click();
+  await expect(page.locator('#detail-viewer-caption')).toContainText('flowering plants');
+  await expect(page.locator('#detail-viewer-title')).toHaveText('Crestmont West');
+});
+
+test('details remain readable at narrow widths and keep all three choices available', async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem('pi-motion', 'off'));
+  for (const width of [320, 390, 768, 1440]) {
+    await page.setViewportSize({ width, height: 1000 });
+    await page.goto('/');
+    const choices = page.locator('[data-detail-select]');
+    await expect(choices).toHaveCount(3);
+    for (const choice of await choices.all()) {
+      await choice.click();
+      await expect(choice).toHaveAttribute('aria-pressed', 'true');
+      expect(await choice.evaluate(element => {
+        const row = element.getBoundingClientRect();
+        const title = element.querySelector('.detail-choice-title')!.getBoundingClientRect();
+        const summary = element.querySelector('.detail-choice-summary')!.getBoundingClientRect();
+        const footer = element.querySelector('.detail-choice-footer')!.getBoundingClientRect();
+        return row.width >= 44 && row.height >= 44 && title.left >= row.left && title.right <= row.right + 1 && summary.bottom <= footer.top + 1;
+      })).toBe(true);
+    }
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    expect(await page.locator('#detail-plan-image').evaluate(image => getComputedStyle(image).objectFit)).toBe('contain');
+  }
+  const results = await new AxeBuilder({ page }).include('#why').analyze();
+  expect(results.violations).toEqual([]);
+});
+
+test('hover opens the photograph aperture while reduced motion keeps it still', async ({ page }) => {
+  await page.goto('/');
+  const row = page.locator('[data-detail-select="planting"]');
+  await row.scrollIntoViewIfNeeded();
+  const photo = row.locator('.detail-choice-image');
+  const initialWidth = (await photo.boundingBox())!.width;
+  await row.hover();
+  await expect(page.locator('#why')).toHaveAttribute('data-detail-active', 'planting');
+  await expect.poll(async () => (await photo.boundingBox())!.width).toBeGreaterThan(initialWidth + 10);
+  await page.locator('#motion-choice').selectOption('reduced');
+  await row.hover();
+  expect(await row.evaluate(element => element.getAnimations({ subtree: true }).length)).toBe(0);
+  expect(await row.locator('img').evaluate(image => getComputedStyle(image).transform)).toBe('none');
+  await page.locator('[data-detail-select="materials"]').click();
+  await expect(page.locator('#detail-plan-title')).toHaveText('Materials & Edges');
+});

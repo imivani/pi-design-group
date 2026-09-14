@@ -19,15 +19,19 @@ On Windows, after installing dependencies, **Open PI Design.vbs** starts the pre
 
 ## Included
 
-- The original Pi video hero, real project photography and continuous page framing.
-- Photographic Projects and Services menus, including all 27 projects and mobile navigation.
+- The original Pi video hero, real project photography and continuous page framing, with quieter borders over the video.
+- A Calgary-based practice introduction followed by Our Expertise in Three Areas.
+- Photographic Projects and Services menus with a stable shared frame, all 27 projects and mobile navigation.
+- A dedicated photographic search menu with name, project-type and location matching, keyboard navigation and phone layouts.
 - Three expanding service photographs: Multifamily Communities, Commercial Plazas and Public Parks.
-- Three interactive Crestmont West views with matching photographs and text.
-- Design in the Details: built photographs connected to their real landscape drawings, with a drawing viewer and zoom.
-- A complete searchable project archive with category filters and Grid/Index views.
+- A deep charcoal Featured Project section: oversized Crestmont West title, dominant photograph, overlapping detail photograph and three paired views that advance smoothly, with pause/resume and manual controls.
+- Our Design Comes in the Details: a neutral drawing explorer with three photographic choices, a complete landscape plan and zoom.
+- A complete searchable project archive with smooth category/view changes and photographs that expand across rounded cards to reveal shaded project information.
 - Local project pages with varied galleries, drawings, project information and next-project navigation.
 - Full-screen image viewers, keyboard controls, touch interaction and Reduced/Off motion settings.
-- Working email and telephone links, automated browser checks and asset source records.
+- Animated project openings and smooth logo returns to the homepage, with fallbacks when shared-image transitions are unavailable.
+- Project facts directly below the opening photograph, a distinct dark Next Project section, and a frosted light-page header.
+- A rounded contact panel with a slow photographic camera move, spacious footer, working contact links, automated browser checks and asset source records.
 
 All website photographs, drawings and video needed for the build are included in **public/**. Generated concepts in **design/references/** are design references only and are not shown as completed Pi work. Unknown project facts are omitted.
 
@@ -69,7 +73,7 @@ Rebuild without SITE_BASE for a site hosted at the domain root. Publishing this 
 - **src/data/projects.ts** supplies the project archive and verified credits.
 - **src/data/project-details.ts** supplies reviewed project-page content and image selections.
 - **design/BUILD_NOTES.md** documents the current implementation and motion.
-- **design/PREMIUM_AUDIT.md** records the latest presentation audit: 59 browser checks passed.
+- **design/SLIDESHOW_REFINEMENT.md** records the featured slideshow and darker project sections; **design/PROJECT_NAVIGATION_REFINEMENT.md**, **design/CINEMATIC_REFINEMENT.md**, **design/CALM_REFINEMENT.md**, **design/ROUNDED_REFINEMENT.md** and **design/PREMIUM_AUDIT.md** preserve earlier refinements and audits.
 - **design/NEXT_PAGES.md** contains the plan for remaining company, service and contact pages.
 - **DESIGN.md**, **MOTION.md** and **CODEX_START.md** preserve the visual direction and development guidance.
 

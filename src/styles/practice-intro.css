@@ -1,0 +1,14 @@
+@layer reset, base, components, responsive;
+@layer components {
+  #about.practice-intro{display:grid;grid-template-columns:1.35fr 1fr;gap:72px;align-items:end;padding-block:104px 92px;border-bottom:1px solid var(--line)}
+  .practice-label{font-size:15px;line-height:1.4;color:var(--muted);margin-bottom:28px}
+  #practice-title{font-size:var(--section-title-size);line-height:1.1;letter-spacing:-.035em;max-width:680px}
+  .practice-copy{max-width:440px;padding-bottom:3px}
+  .practice-copy>p:first-child{font-size:22px;line-height:1.45;letter-spacing:-.015em;color:var(--ink)}
+  .practice-copy>p+p{font-size:16px;line-height:1.65;color:var(--muted);margin-top:22px}
+}
+@layer responsive {
+  @media(max-width:1199px){#about.practice-intro{gap:40px;padding-block:84px 76px}.practice-copy>p:first-child{font-size:20px}}
+  @media(max-width:767px){#about.practice-intro{grid-template-columns:1fr;gap:32px;padding-block:64px 60px}.practice-label{margin-bottom:22px;font-size:14px}.practice-copy{max-width:510px}.practice-copy>p:first-child{font-size:20px}.practice-copy>p+p{font-size:16px;margin-top:18px}}
+  @media print{#about.practice-intro{padding-block:40px;gap:30px}}
+}

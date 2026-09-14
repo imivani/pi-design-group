@@ -17,6 +17,8 @@ if (section && data) {
   const plan = section.querySelector<HTMLImageElement>('#detail-plan-image')!;
   const planLink = section.querySelector<HTMLAnchorElement>('.detail-plan-link')!;
   const copy = section.querySelector<HTMLElement>('#detail-plan-copy')!;
+  const detailTitle = section.querySelector<HTMLElement>('#detail-plan-title')!;
+  const detailCounter = section.querySelector<HTMLElement>('#detail-plan-counter')!;
   const projectName = section.querySelector<HTMLElement>('[data-detail-project]')!;
   const projectLink = section.querySelector<HTMLAnchorElement>('#detail-project-link')!;
   const status = section.querySelector<HTMLElement>('#detail-plan-status')!;
@@ -73,7 +75,7 @@ if (section && data) {
     }
     if (token !== request) return;
     clearDrawingTransition();
-    if (mode() !== 'off' && plan.naturalWidth) {
+    if (mode() !== 'off' && plan.naturalWidth && detail.drawing !== selected.drawing) {
       outgoing = plan.cloneNode(false) as HTMLImageElement;
       outgoing.removeAttribute('id'); outgoing.alt = ''; outgoing.setAttribute('aria-hidden', 'true');
       Object.assign(outgoing.style, { position: 'absolute', inset: '0', pointerEvents: 'none' });
@@ -83,6 +85,10 @@ if (section && data) {
     plan.src = detail.drawing; plan.alt = detail.drawingAlt; plan.style.removeProperty('opacity');
     planLink.classList.remove('media-unavailable');
     copy.textContent = detail.copy;
+    detailTitle.textContent = detail.title;
+    const detailNumber = details.indexOf(detail) + 1;
+    detailCounter.textContent = String(detailNumber).padStart(2, '0') + ' / ' + String(details.length).padStart(2, '0');
+    detailCounter.setAttribute('aria-label', `Detail ${detailNumber} of ${details.length}`);
     projectName.textContent = detail.project;
     projectLink.href = detail.href;
     drawingLinks.forEach(link => { link.href = detail.href + '#drawings-title'; });
@@ -109,6 +115,14 @@ if (section && data) {
     button.addEventListener('pointerleave', () => clearTimeout(hoverTimer));
     button.addEventListener('focus', () => void selectDetail(button.dataset.detailSelect!));
     button.addEventListener('click', () => void selectDetail(button.dataset.detailSelect!));
+    button.addEventListener('keydown', event => {
+      const current = selectors.indexOf(button);
+      const next = event.key === 'ArrowDown' || event.key === 'ArrowRight' ? (current + 1) % selectors.length
+        : event.key === 'ArrowUp' || event.key === 'ArrowLeft' ? (current + selectors.length - 1) % selectors.length
+        : event.key === 'Home' ? 0 : event.key === 'End' ? selectors.length - 1 : -1;
+      if (next < 0) return;
+      event.preventDefault(); selectors[next].focus({ preventScroll: true });
+    });
   }
 
   function setZoom(zoomed: boolean) {
@@ -149,6 +163,7 @@ if (section && data) {
     viewerCaption.textContent = detail.copy;
     viewerStatus.textContent = 'Loading drawing…';
     viewerImage.hidden = true;
+    zoomButton.disabled = true;
     viewerImage.alt = detail.drawingAlt;
     setZoom(false);
     viewer.showModal(); closeButton.focus({ preventScroll: true });

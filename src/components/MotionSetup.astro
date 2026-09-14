@@ -1,37 +1,174 @@
-<script is:inline>
+---
+import { projects, projectPath } from '../data/projects';
+import { projectDetails } from '../data/project-details';
+const base = import.meta.env.BASE_URL;
+const asset = (path:string) => base + path.replace(/^\//, '');
+const transitionProjects = projects.map(project => {
+  const opening = projectDetails(project).gallery[0];
+  return { id:project.id, path:projectPath(project,base).replace(/\/$/,''), card:asset(project.image), opening:asset(opening.src), photograph:project.imageKind==='photograph' && opening.medium==='photograph' };
+});
+const isHomepage = Astro.url.pathname.replace(/\/$/,'') === base.replace(/\/$/,'');
+---
+<!-- The navigation opt-in must exist before an early destination reveal,
+     including a cold production stylesheet load. -->
+<style is:inline>@view-transition{navigation:auto}</style>
+{isHomepage && <link rel="expect" blocking="render" href="#hero-title" />}
+<script is:inline define:vars={{ transitionProjects, base }}>
   (() => {
     const root = document.documentElement;
+    const normalizedPath = path => path.replace(/\/$/, '') || '/';
+    const currentProject = transitionProjects.find(project => project.path === normalizedPath(location.pathname));
+    const navigation = performance.getEntriesByType('navigation')[0];
+    const returning = navigation?.type === 'back_forward';
     let choice = 'system';
     try { choice = localStorage.getItem('pi-motion') || 'system'; } catch {}
     root.dataset.motion = choice === 'off' ? 'off' : choice === 'reduced' || matchMedia('(prefers-reduced-motion: reduce)').matches ? 'reduced' : 'full';
+    const fresh = !!currentProject && root.dataset.motion === 'full' && !returning && (!location.hash || location.hash === '#main');
+    window.__piProjectArrival = { fresh, native:null };
+    const homePath = normalizedPath(base);
+    const home = normalizedPath(location.pathname) === homePath;
+    let homeEntry;
+    let projectReferrer = false;
+    if (home) {
+      try {
+        homeEntry = JSON.parse(sessionStorage.getItem('pi-home-return') || 'null');
+        sessionStorage.removeItem('pi-home-return');
+      } catch {}
+      try {
+        const previous = new URL(document.referrer);
+        projectReferrer = previous.origin === location.origin && transitionProjects.some(project => project.path === normalizedPath(previous.pathname));
+      } catch {}
+    }
+    // The same-origin referrer preserves this enhancement when storage is
+    // unavailable. Back, reload and unrelated homepage visits stay immediate.
+    const matchingHomeEntry = homeEntry?.path === homePath && Date.now()-homeEntry.at < 15000 && transitionProjects.some(project => project.path === homeEntry.from);
+    const freshHome = home && root.dataset.motion === 'full' && !returning && navigation?.type !== 'reload' && location.hash === '#hero' && (matchingHomeEntry || projectReferrer);
+    window.__piHomeReturn = { fresh:!!freshHome, native:null };
+    let homeRevealHandled = false;
+    if (home) {
+      root.dataset.homeReturn = freshHome ? 'pending' : 'skipped';
+      setTimeout(() => {
+        if (root.dataset.homeReturn === 'pending') root.dataset.homeReturn = 'skipped';
+      }, 1200);
+    }
+    if (currentProject) {
+      root.dataset.projectArrival = fresh ? 'pending' : 'skipped';
+      root.dataset.projectPhotoArrival = fresh ? 'pending' : 'visible';
+      // The page remains usable if an optional enhancement module fails to load.
+      setTimeout(() => {
+        if (root.dataset.projectArrival === 'pending') {
+          root.dataset.projectArrival = 'skipped';
+          root.dataset.projectPhotoArrival = 'visible';
+        }
+      }, 1500);
+    }
+    const clearNames = () => document.querySelectorAll('[data-pi-transition]').forEach(element => {
+      element.style.removeProperty('view-transition-name');
+      element.removeAttribute('data-pi-transition');
+    });
+    const name = (element, identity) => {
+      element.style.viewTransitionName = identity;
+      element.setAttribute('data-pi-transition', '');
+    };
+    const visibleImage = image => {
+      if (!image || !image.complete || !image.naturalWidth || image.closest('[inert],[hidden]')) return false;
+      const box = image.getBoundingClientRect();
+      return box.width > 24 && box.height > 24 && box.bottom > 0 && box.top < innerHeight && getComputedStyle(image).visibility !== 'hidden';
+    };
     document.addEventListener('click', event => {
-      if (event.button || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || root.dataset.motion !== 'full') return;
-      const link = event.target.closest('a[data-project-card]');
-      const img = link?.querySelector('img');
-      if (!img) return;
-      img.style.viewTransitionName = 'project-photo';
-      try { sessionStorage.setItem('pi-photo-transition', JSON.stringify({ path: new URL(link.href).pathname.replace(/\/$/, ''), id: link.dataset.projectCard })); } catch {}
+      if (event.defaultPrevented || event.button || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      const back = event.target.closest?.('a[data-back-projects]');
+      if (back && currentProject && (!back.target || back.target === '_self') && !back.hasAttribute('download')) {
+        // The link can be used before the gallery module loads. Preserve the
+        // catalogue destination at click time without delaying navigation.
+        try {
+          const saved = JSON.parse(sessionStorage.getItem('pi-project-return') || 'null');
+          const destination = saved && new URL(saved.url, location.origin);
+          const homepage = new URL(back.href);
+          if (destination && destination.origin === location.origin && homepage.origin === location.origin && normalizedPath(destination.pathname) === homePath && normalizedPath(homepage.pathname) === homePath) {
+            back.href = destination.href;
+            sessionStorage.setItem('pi-project-resume', 'true');
+          }
+        } catch {}
+        return;
+      }
+      const logo = event.target.closest?.('a.site-wordmark');
+      if (logo && currentProject && (!logo.target || logo.target === '_self') && !logo.hasAttribute('download')) {
+        const destination = new URL(logo.href);
+        if (destination.origin === location.origin && normalizedPath(destination.pathname) === homePath && destination.hash === '#hero') {
+          clearNames();
+          try {
+            sessionStorage.removeItem('pi-photo-transition');
+            sessionStorage.removeItem('pi-home-return');
+            if (root.dataset.motion === 'full') sessionStorage.setItem('pi-home-return',JSON.stringify({path:homePath,from:currentProject.path,at:Date.now()}));
+          } catch {}
+        }
+        return;
+      }
+      const link = event.target.closest?.('a[data-project-card]');
+      if (!link || link.target && link.target !== '_self' || link.hasAttribute('download')) return;
+      const url = new URL(link.href);
+      if (url.origin !== location.origin) return;
+      clearNames();
+      try { sessionStorage.removeItem('pi-photo-transition'); sessionStorage.removeItem('pi-home-return'); } catch {}
+      const project = transitionProjects.find(project => project.id === link.dataset.projectCard && project.path === normalizedPath(url.pathname));
+      if (root.dataset.motion !== 'full' || !project?.photograph || url.hash) return;
+      let image = link.querySelector('img:not([data-preview-outgoing])');
+      // Text-only catalogue choices may use the adjacent preview, but only if
+      // that preview is already showing this exact project's opening scene.
+      if (!image && link.matches('[data-catalogue-project]')) {
+        const preview = document.querySelector('[data-catalogue-preview-link]');
+        if (preview && new URL(preview.href).pathname === url.pathname) image = preview.querySelector('img:not([data-preview-outgoing])');
+      }
+      if (!visibleImage(image)) return;
+      const source = new URL(image.currentSrc || image.src).pathname;
+      if (source !== project.card && source !== project.opening) return;
+      name(image, 'project-photo');
+      try { sessionStorage.setItem('pi-photo-transition', JSON.stringify({ path:project.path, id:project.id, source, at:Date.now() })); } catch {}
     });
     window.addEventListener('pagereveal', event => {
       let entry;
       try {
-        const stored = sessionStorage.getItem('pi-photo-transition');
+        entry = JSON.parse(sessionStorage.getItem('pi-photo-transition') || 'null');
         sessionStorage.removeItem('pi-photo-transition');
-        entry = JSON.parse(stored || 'null');
       } catch {}
-      if (!event.viewTransition) return;
-      if (root.dataset.motion !== 'full') { event.viewTransition.skipTransition(); return; }
-      const img = document.querySelector('[data-primary-project]');
-      // A restored page may show a later carousel image. Only its original
-      // opening image represents the photograph used by the project card.
-      const isOpeningImage = img?.closest('[data-gallery-index]')?.dataset.galleryIndex === '0';
-      if (entry && img && isOpeningImage && entry.path === location.pathname.replace(/\/$/, '') && entry.id === img.dataset.primaryProject) img.style.viewTransitionName = 'project-photo';
-      event.viewTransition.finished.finally(() => document.querySelectorAll('[style*="view-transition-name"]').forEach(el => el.style.removeProperty('view-transition-name')));
+      const transition = event.viewTransition;
+      const firstHomeReveal = freshHome && !homeRevealHandled;
+      homeRevealHandled = true;
+      if (!transition) return;
+      // Readiness can reject before the optional page module loads, or when
+      // navigation cancels capture. The page module still awaits the original
+      // promise to choose its visible fallback; observe cancellation now.
+      transition.ready?.catch(() => {});
+      if (firstHomeReveal && root.dataset.motion === 'full') {
+        root.dataset.homeReturn = 'native';
+        const copy = document.querySelector('.hero-copy');
+        if (copy) name(copy,'home-intro');
+        window.__piHomeReturn.native = transition;
+        transition.finished.finally(clearNames).catch(() => {});
+        return;
+      }
+      const image = document.querySelector('[data-primary-project]');
+      const isOpeningImage = image?.closest('[data-gallery-index]')?.dataset.galleryIndex === '0';
+      const matching = fresh && currentProject?.photograph && entry && Date.now()-entry.at<15000 && entry.path===currentProject.path && entry.id===currentProject.id && (entry.source===currentProject.card || entry.source===currentProject.opening) && isOpeningImage && image.dataset.primaryProject===currentProject.id && new URL(image.src).pathname===currentProject.opening;
+      if (root.dataset.motion !== 'full' || !matching) {
+        transition.skipTransition();
+        window.__piProjectArrival.native = null;
+        return;
+      }
+      name(image, 'project-photo');
+      const title = document.querySelector('.project-title-row');
+      if (title) name(title, 'project-intro');
+      root.dataset.projectArrival = 'native';
+      root.dataset.projectPhotoArrival = 'native';
+      window.__piProjectArrival.native = transition;
+      transition.finished.finally(clearNames).catch(() => {});
     });
     window.addEventListener('pageswap', event => {
       if (!event.viewTransition) return;
+      event.viewTransition.ready?.catch(() => {});
       if (root.dataset.motion !== 'full') event.viewTransition.skipTransition();
-      event.viewTransition.finished.finally(() => document.querySelectorAll('[style*="view-transition-name"]').forEach(el => el.style.removeProperty('view-transition-name')));
+      event.viewTransition.finished.finally(clearNames).catch(() => {});
     });
   })();
 </script>

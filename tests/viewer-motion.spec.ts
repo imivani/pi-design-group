@@ -99,6 +99,7 @@ test('a late image decode cannot overwrite a reopened gallery',async({page})=>{
 
 test('hero controls retain the frame, show drawings in full and open the selected image',async({page})=>{
   await page.goto('/crestmontwest');
+  await expect(page.locator('html')).toHaveAttribute('data-project-arrival', /^(done|skipped)$/);
   const link=page.locator('.primary-figure .gallery-link');
   const image=page.locator('.primary-figure img[data-primary-project]');
   const firstFrame=await link.boundingBox();

@@ -1,0 +1,14 @@
+/* Only an intentional return through the wordmark prepares this entrance.
+   The document, header and hero background always remain usable and visible. */
+html[data-motion='full'][data-home-return='pending'] :is(.hero-media,.hero-copy){opacity:0}
+html[data-motion='full'][data-home-return='native']::view-transition-group(root){animation-duration:480ms}
+html[data-motion='full'][data-home-return='native']::view-transition-old(root){animation:pi-home-dissolve 480ms linear both}
+html[data-motion='full'][data-home-return='native']::view-transition-new(root){animation:pi-home-return 480ms linear both}
+::view-transition-group(home-intro){animation:none}
+::view-transition-new(home-intro){animation:pi-home-copy 480ms cubic-bezier(.22,1,.36,1) both}
+::view-transition-old(home-intro){display:none}
+@keyframes pi-home-dissolve{from{opacity:1}to{opacity:0}}
+@keyframes pi-home-return{from{opacity:0}to{opacity:1}}
+@keyframes pi-home-copy{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+html[data-motion='off']::view-transition-new(home-intro),html[data-motion='reduced']::view-transition-new(home-intro){animation:none}
+@media(prefers-reduced-motion:reduce){html :is(.hero-media,.hero-copy){opacity:1!important}::view-transition-new(home-intro){animation:none!important}}

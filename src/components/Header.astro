@@ -1,6 +1,7 @@
 ---
 import { Search, ChevronDown, ArrowLeft, ArrowRight, Menu, X } from '@lucide/astro';
 import { projects, media, projectPath } from '../data/projects';
+import SearchDialog from './SearchDialog.astro';
 import '../styles/header.css';
 
 const asset = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`;
@@ -63,7 +64,7 @@ const services = [
     </nav>
     <div class="project-menu-previews">
       {projectPreviews.map((project) => project && (
-        <a class="project-menu-preview" href={projectPath(project, import.meta.env.BASE_URL)}>
+        <a class="project-menu-preview" href={projectPath(project, import.meta.env.BASE_URL)} data-project-card={project.id}>
           <img src={asset(project.image)} alt={project.alt} width="500" height="400" loading="lazy" decoding="async" />
           <div class="project-menu-preview__caption">
             <div><span class="project-menu-preview__name">{project.name}</span>{project.location && <span class="project-menu-preview__place">{project.location}</span>}</div>
@@ -81,9 +82,9 @@ const services = [
      </div>
      <div class="catalogue-layout">
        <nav class="catalogue-links" aria-label="All projects">
-         {catalogue.map((project) => <a href={projectPath(project, import.meta.env.BASE_URL)} data-catalogue-project={project.id} data-preview-src={asset(project.image)} data-preview-alt={project.alt} data-preview-place={project.location || project.type} data-preview-kind={project.imageKind} data-active={project.id === initialPreview.id ? 'true' : 'false'}><span>{project.name}</span><ArrowRight size={14} stroke-width={1.5} aria-hidden="true" /></a>)}
+         {catalogue.map((project) => <a href={projectPath(project, import.meta.env.BASE_URL)} data-project-card={project.id} data-catalogue-project={project.id} data-preview-src={asset(project.image)} data-preview-alt={project.alt} data-preview-place={project.location || project.type} data-preview-kind={project.imageKind} data-active={project.id === initialPreview.id ? 'true' : 'false'}><span>{project.name}</span><ArrowRight size={14} stroke-width={1.5} aria-hidden="true" /></a>)}
        </nav>
-       <a class="catalogue-preview" href={projectPath(initialPreview, import.meta.env.BASE_URL)} data-catalogue-preview-link>
+       <a class="catalogue-preview" href={projectPath(initialPreview, import.meta.env.BASE_URL)} data-project-card={initialPreview.id} data-catalogue-preview-link>
          <div class="catalogue-preview__image"><img src={asset(initialPreview.image)} alt={initialPreview.alt} width="640" height="540" loading="lazy" decoding="async" data-catalogue-preview-image /><span data-catalogue-preview-kind hidden></span></div>
          <div class="catalogue-preview__caption"><span data-catalogue-preview-name>{initialPreview.name}</span><ArrowRight size={18} stroke-width={1.5} aria-hidden="true" /></div>
          <p data-catalogue-preview-place>{initialPreview.location}</p>
@@ -121,7 +122,7 @@ const services = [
       <div class="mobile-disclosure__body" id="mobile-project-links" inert aria-hidden="true">
         <div class="mobile-disclosure__content">
           <button class="mobile-catalogue-toggle" type="button" data-mobile-disclosure="mobile-project-catalogue" aria-controls="mobile-project-catalogue" aria-expanded="false">All Projects <span>{projects.length}</span><ChevronDown size={17} stroke-width={1.5} aria-hidden="true" /></button>
-          <div class="mobile-disclosure__body" id="mobile-project-catalogue" inert aria-hidden="true"><nav class="mobile-catalogue-links" aria-label="All projects">{catalogue.map((project) => <a href={projectPath(project, import.meta.env.BASE_URL)}>{project.name}<ArrowRight size={16} stroke-width={1.25} aria-hidden="true" /></a>)}</nav></div>
+          <div class="mobile-disclosure__body" id="mobile-project-catalogue" inert aria-hidden="true"><nav class="mobile-catalogue-links" aria-label="All projects">{catalogue.map((project) => <a href={projectPath(project, import.meta.env.BASE_URL)} data-project-card={project.id}>{project.name}<ArrowRight size={16} stroke-width={1.25} aria-hidden="true" /></a>)}</nav></div>
           {categories.map((category) => <a href={categoryLink(category.id)} data-project-category={category.id}>{category.label}<ArrowRight size={16} stroke-width={1.25} aria-hidden="true" /></a>)}
         </div>
       </div>
@@ -142,6 +143,8 @@ const services = [
     <a href="tel:+14035104071">403-510-4071</a>
   </div>
 </dialog>
+
+<SearchDialog />
 
 <script>
   import '../scripts/header';

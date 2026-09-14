@@ -66,10 +66,18 @@ const normalize = (value: string) => value.toLocaleLowerCase().normalize('NFD').
 function positionFilterIndicator() {
   const button = filters.find(item => item.dataset.filter === category)!;
   filterIndicator.style.width = button.offsetWidth + 'px';
+  filterIndicator.style.top = button.offsetTop + button.offsetHeight - 1 + 'px';
+  filterIndicator.style.bottom = 'auto';
   filterIndicator.style.transform = 'translateX(' + button.offsetLeft + 'px)';
   filterIndicator.style.opacity = '1';
 }
-function updateProjects(save = true) {
+let resultsAnimation: Animation | null = null;
+function updateProjects(save = true, withMotion = false) {
+  const previousTarget = (resultsAnimation?.effect as KeyframeEffect | null)?.target as HTMLElement | null;
+  const currentOpacity = resultsAnimation?.playState === 'running' && previousTarget ? getComputedStyle(previousTarget).opacity : '.16';
+  if (previousTarget) previousTarget.dataset.filterTransition = 'done';
+  resultsAnimation?.cancel();
+  resultsAnimation = null;
   const terms = normalize(search.value).split(/\s+/).filter(Boolean);
   let matches = 0;
   entries.forEach(entry => {
@@ -86,6 +94,14 @@ function updateProjects(save = true) {
   count.textContent = matches === entries.length ? entries.length + ' entries' : matches + ' of ' + entries.length + ' entries';
   positionFilterIndicator();
   reveals?.refreshRows(collection, entries);
+  if (withMotion) {
+    const target = matches ? collection : empty;
+    target.dataset.filterTransition = 'running';
+    resultsAnimation = animate(target, [{ opacity: currentOpacity, transform: 'translateY(14px)' }, { opacity: 1, transform: 'translateY(0)' }], 560);
+    const current = resultsAnimation;
+    if (current) void current.finished.then(() => { if (resultsAnimation === current) { target.dataset.filterTransition = 'done'; resultsAnimation = null; } }).catch(() => {});
+    else target.dataset.filterTransition = 'done';
+  }
   if (save) {
     const url = new URL(location.href);
     if (category === 'all') url.searchParams.delete('category'); else url.searchParams.set('category', category);
@@ -102,84 +118,55 @@ function restoreProjectState() {
   search.value = params.get('q') || '';
   updateProjects(false);
 }
-filters.forEach(button => button.addEventListener('click', () => { category = button.dataset.filter!; updateProjects(); }));
+filters.forEach(button => button.addEventListener('click', () => { if(category === button.dataset.filter) return; category = button.dataset.filter!; updateProjects(true, true); }));
 views.forEach(button => button.addEventListener('click', () => {
   const next = button.dataset.view!;
   if (next === view) return;
   view = next;
-  const opacity = collection.getAnimations().length ? getComputedStyle(collection).opacity : '.72';
-  collection.getAnimations().forEach(animation => animation.cancel());
-  updateProjects();
-  animate(collection, [{ opacity }, { opacity: 1 }], 180);
+  updateProjects(true, true);
 }));
-search.addEventListener('input', () => updateProjects());
-document.querySelector('#reset-projects')!.addEventListener('click', () => { category = 'all'; search.value = ''; updateProjects(); search.focus({ preventScroll: true }); });
+search.addEventListener('input', () => updateProjects(true, true));
+document.querySelector('#reset-projects')!.addEventListener('click', () => { category = 'all'; search.value = ''; updateProjects(true, true); search.focus({ preventScroll: true }); });
 document.addEventListener('pi:filter', ((event: CustomEvent<{ category: string }>) => {
   if (!filters.some(button => button.dataset.filter === event.detail.category)) return;
   category = event.detail.category;
   search.value = '';
-  updateProjects();
+  updateProjects(true, true);
 }) as EventListener);
 window.addEventListener('popstate', restoreProjectState);
 new ResizeObserver(positionFilterIndicator).observe(document.querySelector('.project-filters')!);
 restoreProjectState();
 
-// P065 / P066 / P109 / P113: actual media state, manual pause and visibility.
+// P065 / P066 / P109 / P113: background footage follows visibility and the
+// shared motion preference. The hero intentionally has no playback controls.
 const video = document.querySelector<HTMLVideoElement>('#hero-video')!;
-const videoButton = document.querySelector<HTMLButtonElement>('#video-toggle')!;
 const hero = document.querySelector<HTMLElement>('#hero')!;
 const videoStatus = document.querySelector<HTMLElement>('#video-status')!;
 let heroVisible = true;
-let manualPause = read('pi-video-paused', 'session') === 'true';
-let explicitPlayback = false;
 let playRequest = 0;
-const wantsVideo = () => !document.hidden && heroVisible && !manualPause && (mode() === 'full' || explicitPlayback);
-function syncVideoButton() {
-  const playing = !video.paused && !video.ended;
-  videoButton.toggleAttribute('data-playing', playing);
-  videoButton.setAttribute('aria-label', playing ? 'Pause background video' : 'Play background video');
-}
+const wantsVideo = () => !document.hidden && heroVisible && mode() === 'full';
 function loadVideo() { if (!video.getAttribute('src')) { video.src = video.dataset.src!; video.load(); } }
-async function playVideo(explicit = false) {
+async function playVideo() {
   const request = ++playRequest;
-  if (explicit) { explicitPlayback = true; manualPause = false; write('pi-video-paused', 'false', 'session'); }
   if (!wantsVideo()) return;
   loadVideo();
-  if (video.error) video.load();
-  video.loop = mode() === 'full';
+  if (video.error) return;
   try {
     await video.play();
     if (!wantsVideo()) video.pause();
   } catch {
     if (request !== playRequest) return;
-    videoStatus.textContent = video.error ? 'The video is unavailable. The project photograph is displayed.' : 'Video is paused. Use the play control to start it.';
-    syncVideoButton();
+    videoStatus.textContent = video.error ? 'The video is unavailable. The project photograph is displayed.' : 'The project photograph is displayed.';
   }
 }
 function suspendVideo() { ++playRequest; video.pause(); }
-videoButton.addEventListener('click', () => {
-  if (!video.paused) {
-    manualPause = true; explicitPlayback = false;
-    write('pi-video-paused', 'true', 'session');
-    suspendVideo();
-  } else void playVideo(true);
-});
-video.addEventListener('play', syncVideoButton);
-video.addEventListener('pause', syncVideoButton);
-video.addEventListener('ended', syncVideoButton);
 video.addEventListener('playing', () => {
   hero.setAttribute('data-video-ready', '');
-  document.querySelector<HTMLElement>('[data-poster-caption]')!.hidden = true;
-  document.querySelector<HTMLElement>('[data-video-caption]')!.hidden = false;
   videoStatus.textContent = '';
-  syncVideoButton();
 });
 video.addEventListener('error', () => {
   hero.removeAttribute('data-video-ready');
-  document.querySelector<HTMLElement>('[data-poster-caption]')!.hidden = false;
-  document.querySelector<HTMLElement>('[data-video-caption]')!.hidden = true;
   videoStatus.textContent = 'The video is unavailable. The project photograph is displayed.';
-  syncVideoButton();
 });
 const heroObserver = new IntersectionObserver(([entry]) => {
   heroVisible = entry.isIntersecting;
@@ -188,12 +175,11 @@ const heroObserver = new IntersectionObserver(([entry]) => {
 heroObserver.observe(hero);
 document.addEventListener('visibilitychange', () => { if (document.hidden) suspendVideo(); else void playVideo(); });
 document.addEventListener('pi:motion', () => {
-  if (mode() !== 'full') { explicitPlayback = false; suspendVideo(); }
+  if (mode() !== 'full') suspendVideo();
   else void playVideo();
 });
 window.addEventListener('pagehide', suspendVideo);
-window.addEventListener('pageshow', () => { syncVideoButton(); if (!manualPause) void playVideo(); });
-syncVideoButton();
+window.addEventListener('pageshow', () => { void playVideo(); });
 
 root.dataset.enhanced = 'true';
 setupImageErrors();
@@ -220,9 +206,7 @@ if (read('pi-project-resume','session') === 'true') {
     }
   } catch {}
 }
-document.querySelectorAll<HTMLAnchorElement>('[data-project-card]').forEach(anchor => anchor.addEventListener('click', event => {
+document.querySelectorAll<HTMLAnchorElement>('#project-collection [data-project-card]').forEach(anchor => anchor.addEventListener('click', event => {
   if (event.button || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
   write('pi-project-return', JSON.stringify({ url: location.pathname + location.search + '#projects', scroll: scrollY, id: anchor.dataset.projectCard }), 'session');
-  const img = anchor.querySelector<HTMLImageElement>('img');
-  if (img && mode() === 'full') img.style.viewTransitionName = 'project-photo';
 }));

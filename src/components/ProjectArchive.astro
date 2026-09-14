@@ -1,0 +1,67 @@
+---
+import { ArrowRight, ArrowUpRight, Search } from '@lucide/astro';
+import { projects, projectPath } from '../data/projects';
+import { projectDetails } from '../data/project-details';
+import '../styles/archive-interactions.css';
+
+const base = import.meta.env.BASE_URL;
+const asset = (path: string) => base + path.replace(/^\//, '');
+const archive = projects.map(project => {
+  const detail = projectDetails(project);
+  const brief = detail.editorial?.openingNote || detail.description?.split(/(?<=\.)\s+/)[0] || detail.gallery[0].caption;
+  const kinds = new Set(detail.gallery.map(image => image.medium));
+  const media = kinds.has('photograph')
+    ? kinds.has('rendering') ? kinds.has('drawing') ? 'Photos, Renderings & Drawings' : 'Photography & Renderings' : kinds.has('drawing') ? 'Photography & Drawings' : 'Photography'
+    : kinds.has('rendering') ? kinds.has('drawing') ? 'Renderings & Drawings' : 'Renderings' : 'Landscape Drawings';
+  return { ...project, brief, media, viewCount: detail.gallery.length };
+});
+---
+<section id="projects" class="projects frame" aria-labelledby="projects-title" tabindex="-1">
+  <div class="projects-heading" data-reveal><h2 id="projects-title">All Projects</h2><p id="project-count" role="status" aria-live="polite">{projects.length} entries</p></div>
+  <div class="project-controls js-only">
+    <div class="project-filters" role="group" aria-label="Filter projects">
+      {[['all','All'],['multifamily','Multifamily'],['commercial','Commercial'],['single-homes','Single Homes']].map(([id,label]) => <button type="button" data-filter={id} aria-pressed={id === 'all' ? 'true' : 'false'}>{label}</button>)}
+      <span class="filter-indicator" aria-hidden="true"></span>
+    </div>
+    <div class="project-tools">
+      <div class="project-search">
+        <label class="sr-only" for="project-search">Search projects</label>
+        <input id="project-search" type="search" placeholder="Search projects" autocomplete="off" spellcheck="false" />
+        <Search size={18} stroke-width={1.6} aria-hidden="true" />
+      </div>
+      <div class="project-views" role="group" aria-label="Project view">
+        <button type="button" data-view="grid" aria-pressed="true">Grid</button><span aria-hidden="true">/</span><button type="button" data-view="index" aria-pressed="false">Index</button>
+      </div>
+    </div>
+  </div>
+  <div class="index-head" hidden aria-hidden="true"><span>Project</span><span>Type</span><span>Location</span></div>
+  <div id="project-collection" class="project-collection" data-view="grid">
+    {archive.map(project => (
+      <article class="project-entry" data-project={project.id} data-category={project.category} data-search={[project.name,project.type,project.location || ''].join(' ').toLocaleLowerCase()}>
+        <a class="project-link" href={projectPath(project, base)} data-project-card={project.id}>
+          <div class="project-image">
+            <img src={asset(project.image)} alt={project.alt} width="1200" height="675" loading="lazy" decoding="async" />
+            <span class="project-image-shade" aria-hidden="true"></span>
+            <span class="project-open" aria-hidden="true"><ArrowUpRight size={21} stroke-width={1.4} /></span>
+          </div>
+          <div class="project-information">
+            <h3>{project.name}</h3>
+            <div class="project-facts"><span class="project-type">{project.type}</span>{project.location && <span class="project-location">{project.location}</span>}</div>
+            {project.imageKind !== 'photograph' && <span class="project-medium">{project.imageKind === 'drawing' ? 'Drawing' : 'Rendering'}</span>}
+            <div class="project-more">
+              <p class="project-brief">{project.brief}</p>
+              <div class="project-media-details"><span>{project.viewCount} Views</span><span>{project.media}</span></div>
+            </div>
+          </div>
+          <ArrowRight class="project-arrow" size={22} stroke-width={1.4} aria-hidden="true" />
+        </a>
+      </article>
+    ))}
+  </div>
+  <div id="project-empty" class="project-empty" hidden>
+    <h3>No Projects Found</h3>
+    <p>Try another project name or reset the filters.</p>
+    <button class="text-link" id="reset-projects" type="button">Show All Projects <ArrowRight size={20} stroke-width={1.4} /></button>
+  </div>
+</section>
+<script>import '../scripts/archive-interactions';</script>

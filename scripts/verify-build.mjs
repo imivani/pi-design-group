@@ -30,6 +30,7 @@ try{
   for(const href of links){const response=await page.request.get(address+href);assert.equal(response.status(),200,href);}
   await page.locator('[data-featured-view="planting"]').click();
   await expect(page.locator('[data-featured-image]')).toHaveAttribute('src',base+'media/gallery/crestmont-west/8.webp');
+  await expect(page.locator('[data-featured-detail]')).toHaveAttribute('src',base+'media/gallery/crestmont-west/5.webp');
   await page.locator('[data-detail-select="paths"]').click();
   await expect(page.locator('#detail-plan-image')).toHaveAttribute('src',base+'media/gallery/evanston/3.webp');
   await expect(page.locator('#detail-project-link')).toHaveAttribute('href',base+'evanston');
@@ -44,12 +45,45 @@ try{
   assert.equal(catalogueLinks.length,27);assert(catalogueLinks.every(href=>href.startsWith(base)));
   await page.keyboard.press('Escape');await page.keyboard.press('Escape');
   await page.locator('[data-project="seton-crossing"] a').click();await page.waitForSelector('[data-primary-project]');
+  await page.waitForLoadState('domcontentloaded');
   assert.equal(new URL(page.url()).pathname,base+'seton');
-  await page.locator('[data-gallery-index="0"]').click();await page.waitForFunction(()=>document.querySelector('#viewer-count').textContent==='1 / 6');
+  assert.equal(await page.locator('.project-specification').evaluate(element=>element.previousElementSibling?.classList.contains('project-opening')),true);
+  await expect(page.locator('.project-specification')).toHaveCount(1);
+  await expect(page.locator('.next-project')).toHaveCSS('background-color','rgb(27, 28, 29)');
+  await page.locator('[data-project-search]').first().click();
+  await expect(page.locator('#site-search-dialog')).toBeVisible();
+  await page.locator('#site-search-input').fill('D’Arcy');
+  await expect(page.locator('[data-search-project]:visible')).toHaveCount(2);
+  await expect(page.locator('[data-search-project="darcy"]')).toHaveAttribute('href',base+'darcy');
+  const searchLinks=await page.locator('[data-search-project]').evaluateAll(els=>els.map(el=>el.getAttribute('href')));
+  assert.equal(searchLinks.length,27);assert(searchLinks.every(href=>href.startsWith(base)));
+  await page.keyboard.press('Escape');
+  await expect(page.locator('#site-search-dialog')).not.toBeVisible();
+  await page.locator('[data-gallery-index="0"]').click();await expect(page.locator('#viewer-count')).toHaveText('1 / 6');
   await page.keyboard.press('Escape');
   await page.locator('[data-menu-trigger="services"]').click();await page.locator('[data-service-link="commercial"]').click();
   await page.waitForSelector('#tab-commercial[aria-expanded="true"]');
   assert.equal(new URL(page.url()).pathname,base);
+  await page.goto(address+base+'darcy');
+  await page.locator('#site-header .site-wordmark').click();
+  await expect(page).toHaveURL(address+base+'#hero');
+  await expect(page.locator('#hero-title')).toBeVisible();
+  const motionContext=await browser.newContext({reducedMotion:'no-preference'});
+  const motionPage=await motionContext.newPage();
+  motionPage.on('pageerror',error=>errors.push(error.message));
+  await motionPage.addInitScript(()=>{
+    localStorage.setItem('pi-motion','system');
+    window.homeEntrances=[];
+    document.addEventListener('pi:home-return',event=>window.homeEntrances.push(event.detail.phase));
+  });
+  await motionPage.goto(address+base+'darcy');
+  await motionPage.locator('#site-header .site-wordmark').click();
+  await expect(motionPage).toHaveURL(address+base+'#hero');
+  await expect(motionPage.locator('html')).toHaveAttribute('data-home-return','done');
+  const entrances=await motionPage.evaluate(()=>window.homeEntrances);
+  assert.equal(entrances.length,1);assert(['native','fallback'].includes(entrances[0]));
+  await expect(motionPage.locator('.hero-copy')).toHaveCSS('opacity','1');
+  await motionContext.close();
   assert.deepEqual(errors,[]);
-  console.log(JSON.stringify({base,pages:28,links:27,featuredViews:true,drawingViewer:true,navigationCatalogue:true,errors,passed:true}));
+  console.log(JSON.stringify({base,pages:28,links:27,pairedFeaturedViews:true,drawingViewer:true,navigationCatalogue:true,projectSearch:true,earlyProjectInformation:true,logoReturn:true,errors,passed:true}));
 }finally{await browser.close();await new Promise(resolve=>server.close(resolve));}
