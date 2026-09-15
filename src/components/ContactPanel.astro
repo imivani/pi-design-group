@@ -4,11 +4,11 @@ import { media } from '../data/projects';
 import '../styles/contact-footer.css';
 const asset = (path:string) => import.meta.env.BASE_URL + path.replace(/^\//, '');
 ---
-<section id="contact" class="contact contact-section frame" aria-labelledby="contact-title" tabindex="-1">
+<section id="contact" class="contact contact-section" aria-labelledby="contact-title" tabindex="-1">
   <div class="contact-panel" data-reveal>
     <img class="contact-panel-image" src={asset(media.contact)} alt="" width="1920" height="1280" loading="lazy" decoding="async" />
     <div class="contact-panel-shade" aria-hidden="true"></div>
-    <div class="contact-panel-content">
+    <div class="contact-panel-content frame">
       <div class="contact-invitation">
         <h2 id="contact-title">Discuss Your<br />Next Project.</h2>
         <p>Tell us about the place you’re planning.</p>

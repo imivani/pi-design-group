@@ -139,3 +139,8 @@ The form validates name, email, location and message, then prepares a mailto dra
 Navigation, footer, homepage contact CTA and project-page CTA now link to /contact. The current contact link is marked as the current page. Keyboard traversal between navigation menus was updated to the new destination.
 
 Validation: five contact checks cover image preview, inline form, preserved input, email preparation and validation, keyboard/accessibility, responsive layout, no-script operation and image-error recovery. Existing rounded-home checks passed. Header/home regression checks passed after correcting one stale single-home count left over from the USB import. Reviewed actual 320, 390, 768, 1024 and 1440px layouts; no horizontal overflow or heading/photo collision. Type check passes with no diagnostics. Production verification now includes /contact alongside the existing 30 project destinations; build contains 32 pages.
+
+## September 15 — Full-width homepage contact
+- Extended the homepage contact photograph to both page edges, removed rounded corners and the gap above the footer, and kept text on the shared content rails.
+- Preserved the moving photograph and contact links. Verified desktop and mobile layouts, contact accessibility, and the production build.
+

@@ -67,7 +67,7 @@ test('archive drawing facts stay truthful, reduced motion settles, and touch ope
   }finally{await touchContext.close();}
 });
 
-test('rounded contact and footer fit small screens and keep the real contact links',async({page})=>{
+test('full-width contact and footer fit small screens and keep the real contact links',async({page})=>{
   for(const width of [320,390,768,1440]){
     await page.setViewportSize({width,height:1000});
     await page.goto('/');
@@ -88,7 +88,7 @@ test('rounded contact and footer fit small screens and keep the real contact lin
     const indicator=await filters.locator('.filter-indicator').boundingBox();
     expect(indicator!.y).toBeCloseTo(selected!.y+selected!.height-1,0);
     await page.locator('#contact').scrollIntoViewIfNeeded();
-    expect(await page.locator('.contact-panel').evaluate(element=>parseFloat(getComputedStyle(element).borderRadius))).toBeGreaterThanOrEqual(18);
+    expect(await page.locator('.contact-panel').evaluate(element=>parseFloat(getComputedStyle(element).borderRadius))).toBe(0);
     const contact=await page.locator('.contact-panel').boundingBox();
     for(const link of await page.locator('#contact a').all()){
       const box=await link.boundingBox();
