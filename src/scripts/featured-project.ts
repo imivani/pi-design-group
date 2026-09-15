@@ -16,7 +16,7 @@ if (section) {
   const status = section.querySelector<HTMLElement>('.featured-status')!;
   const toggle = section.querySelector<HTMLButtonElement>('[data-featured-autoplay-toggle]')!;
   const cache = new Map<string, Promise<void>>(), animations = new Set<Animation>();
-  const dwell = 7000;
+  const dwell = 5000;
   let request = 0, selected = 0, intended = 0;
   let hoverTimer: number | undefined, autoplayTimer: number | undefined, loadingTimer: number | undefined;
   let visible = false, hovered = false, focused = section.contains(document.activeElement), paused = false, away = false;

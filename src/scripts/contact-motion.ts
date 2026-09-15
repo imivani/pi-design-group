@@ -10,12 +10,12 @@ if (panel && photograph) {
     if (mode() !== 'full' || !photograph.complete || !photograph.naturalWidth) { settle(); return; }
     if (!visible || document.hidden) { movement?.pause(); panel.dataset.cameraMotion = 'paused'; return; }
     if (!movement) {
-      // A slow camera move through one real photograph. Only this image moves;
+      // A visible, unhurried camera move through one real photograph. Only this image moves;
       // contact text and links remain steady and immediately usable.
       movement = photograph.animate([
-        { transform: 'scale(1.075) translate(-1%, -.5%)' },
-        { transform: 'scale(1.015) translate(0%, 0%)' },
-      ], { duration: 16000, iterations: Infinity, direction: 'alternate', easing: 'cubic-bezier(.37,0,.63,1)' });
+        { transform: 'scale(1.18) translate(-2%, -1%)' },
+        { transform: 'scale(1.04) translate(1%, .4%)' },
+      ], { duration: 12000, iterations: Infinity, direction: 'alternate', easing: 'cubic-bezier(.37,0,.63,1)' });
     }
     movement.play();
     panel.dataset.cameraMotion = 'moving';

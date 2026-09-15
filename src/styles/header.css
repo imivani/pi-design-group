@@ -22,9 +22,9 @@
 /* A web glass approximation: a frosted layer and fine edge reflections. */
 @supports ((backdrop-filter: blur(24px)) or (-webkit-backdrop-filter: blur(24px))) {
   .site-header[data-theme='light'] {
-    background: linear-gradient(180deg, rgb(255 255 255 / 94%) 0%, rgb(248 250 252 / 72%) 42%, rgb(233 239 243 / 82%) 100%);
-    backdrop-filter: blur(24px) saturate(1.2);
-    -webkit-backdrop-filter: blur(24px) saturate(1.2);
+    background: linear-gradient(180deg, rgb(255 255 255 / 94%) 0%, rgb(248 250 252 / 84%) 42%, rgb(233 239 243 / 90%) 100%);
+    backdrop-filter: blur(48px) saturate(1.15);
+    -webkit-backdrop-filter: blur(48px) saturate(1.15);
   }
 }
 .site-header__inner { height: 100%; display: flex; align-items: center; justify-content: space-between; border-inline: 1px solid var(--header-line); padding-inline: 24px; gap: 32px; }

@@ -72,7 +72,18 @@ function positionFilterIndicator() {
   filterIndicator.style.opacity = '1';
 }
 let resultsAnimation: Animation | null = null;
+let cardAnimations: Animation[] = [];
+let filterRevision = 0;
 function updateProjects(save = true, withMotion = false) {
+  const revision = ++filterRevision;
+  // Read the currently displayed positions before cancelling an interrupted transition.
+  const before = new Map<HTMLElement, DOMRect>();
+  if (withMotion && mode() === 'full') for (const entry of entries) {
+    if (entry.hidden) continue;
+    const rect = entry.getBoundingClientRect();
+    if (rect.bottom > 80 && rect.top < innerHeight) before.set(entry, rect);
+  }
+  cardAnimations.forEach(animation => animation.cancel()); cardAnimations = [];
   const previousTarget = (resultsAnimation?.effect as KeyframeEffect | null)?.target as HTMLElement | null;
   const currentOpacity = resultsAnimation?.playState === 'running' && previousTarget ? getComputedStyle(previousTarget).opacity : '.16';
   if (previousTarget) previousTarget.dataset.filterTransition = 'done';
@@ -97,10 +108,30 @@ function updateProjects(save = true, withMotion = false) {
   if (withMotion) {
     const target = matches ? collection : empty;
     target.dataset.filterTransition = 'running';
-    resultsAnimation = animate(target, [{ opacity: currentOpacity, transform: 'translateY(14px)' }, { opacity: 1, transform: 'translateY(0)' }], 560);
-    const current = resultsAnimation;
-    if (current) void current.finished.then(() => { if (resultsAnimation === current) { target.dataset.filterTransition = 'done'; resultsAnimation = null; } }).catch(() => {});
-    else target.dataset.filterTransition = 'done';
+    resultsAnimation = animate(target, [{ opacity: matches ? .7 : currentOpacity }, { opacity: 1 }], 380);
+    if (matches && mode() === 'full') {
+      // Batch layout reads, then animate individual cards on the compositor.
+      const arriving = entries.filter(entry => !entry.hidden).map(entry => ({ entry, rect: entry.getBoundingClientRect() }))
+        .filter(({ rect }) => rect.bottom > 80 && rect.top < innerHeight + 80);
+      arriving.forEach(({ entry, rect }, index) => {
+        const previous = before.get(entry);
+        const dx = previous ? Math.max(-220, Math.min(220, previous.left - rect.left)) : 0;
+        const dy = previous ? Math.max(-160, Math.min(160, previous.top - rect.top)) : 32;
+        const animation = animate(entry, [
+          { opacity: previous ? .85 : 0, transform: `translate(${dx}px, ${dy}px) scale(${previous ? 1 : .975})` },
+          { opacity: 1, transform: 'translate(0px, 0px) scale(1)' },
+        ], 760);
+        if (animation) {
+          animation.effect?.updateTiming({ delay: Math.min(index * 45, 180), fill: 'backwards' });
+          cardAnimations.push(animation);
+        }
+      });
+    }
+    const running = [...cardAnimations, ...(resultsAnimation ? [resultsAnimation] : [])];
+    void Promise.allSettled(running.map(animation => animation.finished)).then(() => {
+      if (revision !== filterRevision) return;
+      target.dataset.filterTransition = 'done'; resultsAnimation = null; cardAnimations = [];
+    });
   }
   if (save) {
     const url = new URL(location.href);

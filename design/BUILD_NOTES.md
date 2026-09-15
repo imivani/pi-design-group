@@ -114,3 +114,14 @@ Validation: the 17 existing focused browser checks passed (16 initially; the nar
 Owner correction: archive project names retain their original weight; gallery counts use the label “Photos” beside the image icon.
 
 Owner correction across the whole interface: reverted every font-weight increase from this polish pass, including expertise titles, design-detail choices, featured labels, search results, contact actions, archive filters and photo counts. Retained the new icons, Photos wording, rounded card surfaces and three-project slideshow.
+
+## September 15: More expressive motion
+
+- All Projects uses individual card transitions: retained cards glide from their previous visible positions, and incoming cards rise with a short 45ms stagger (capped at 180ms). Rapid changes cancel the old transition. Grid/Index, search and empty results continue to work immediately. Reduced motion keeps a brief fade; Off settles immediately.
+- The light navigation bar uses 48px backdrop blur, up from 24px, with a slightly more opaque frosted surface. The hero header is unchanged.
+- The contact photograph now makes a more visible 12-second alternating pan/zoom, while the text and controls remain still. It pauses offscreen and in hidden tabs; reduced/off preferences stop it.
+- Featured projects now wait five seconds between the existing paired-photo transitions, retaining hover/focus pause and manual controls. Typography weights remain unchanged.
+
+Motion skill best practices were applied to native browser animations. Mobbin still references reviewed: Lightship https://mobbin.com/sites/sections/0791334e-985a-4902-b866-3be56684576c and Zipline https://mobbin.com/sites/sections/db606a06-580c-4a2a-b326-96df0ce8b3e1. These informed photographic clarity, not measured motion timing; the animation treatment is original.
+
+Validation: nine focused browser checks passed, covering rapid filtering, reduced motion, contact visibility, five-second autoplay, interruption and unavailable images. Desktop 1440px and phone 390px browser captures showed no horizontal overflow; contact start/end frames confirm the moving image and stable text. Type checking passed without errors, warnings or hints. The 31-page production build and all 30 project destinations passed the build verifier, with no browser errors.

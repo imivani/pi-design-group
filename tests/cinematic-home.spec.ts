@@ -6,10 +6,10 @@ test('filter changes visibly animate, latest input wins, and reduced mode settle
   await expect(page.locator('.project-entry:visible')).toHaveCount(3);
   const incoming=await page.locator('#project-collection').evaluate(element=>({
     opacity:Number(getComputedStyle(element).opacity),
-    frames:element.getAnimations().filter(animation=>animation.playState==='running').map(animation=>(animation.effect as KeyframeEffect).getKeyframes()),
+    frames:element.getAnimations({subtree:true}).filter(animation=>animation.playState==='running').map(animation=>(animation.effect as KeyframeEffect).getKeyframes()),
   }));
   expect(incoming.opacity).toBeLessThan(1);
-  expect(incoming.frames.some(frames=>frames.some(frame=>String(frame.transform).includes('14px')))).toBe(true);
+  expect(incoming.frames.some(frames=>frames.some(frame=>String(frame.transform).includes('translate(')))).toBe(true);
   for(const category of ['multifamily','single-homes','commercial']){
     await page.locator(`[data-filter="${category}"]`).dispatchEvent('click');
     await page.waitForTimeout(50);
@@ -22,7 +22,7 @@ test('filter changes visibly animate, latest input wins, and reduced mode settle
   await page.emulateMedia({reducedMotion:'reduce'});
   await page.locator('#reset-projects').click();
   await expect(page.locator('.project-entry:visible')).toHaveCount(30);
-  await expect.poll(()=>page.locator('#project-collection').evaluate(element=>element.getAnimations().filter(animation=>animation.playState==='running').length)).toBe(0);
+  await expect.poll(()=>page.locator('#project-collection').evaluate(element=>element.getAnimations({subtree:true}).filter(animation=>animation.playState==='running').length)).toBe(0);
 });
 
 test('contact photograph moves only while visible and full motion is enabled',async({page})=>{
