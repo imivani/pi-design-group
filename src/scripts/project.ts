@@ -1,4 +1,5 @@
 import { animate, mode, read, root, setupImageErrors, setupReveals, write } from './motion';
+import { imageLabel } from '../data/image-credit';
 import type { ProjectImage } from '../data/project-details';
 
 root.dataset.enhanced = 'true';
@@ -224,7 +225,7 @@ const show = async (next:number, origin?:HTMLElement) => {
     dialog.dataset.medium = item.medium;
     surface.style.background=surfaceColor(item);
     caption.textContent = item.caption;
-    medium.textContent = item.medium === 'rendering' ? 'Rendering' : item.medium === 'drawing' ? 'Drawing' : '';
+    medium.textContent = imageLabel(item);
     counter.textContent = `${selected+1} / ${gallery.length}`;
     const mediaKind=item.medium==='drawing'?'drawings':'images';
     lastMediaIndex[mediaKind]=selected;
@@ -272,7 +273,7 @@ const measureHeroCaption=()=>{
   let height=0;
   for(const item of gallery){
     text.textContent=item.caption;
-    label.textContent=item.medium==='drawing'?'Drawing':item.medium==='rendering'?'Rendering':'';
+    label.textContent=imageLabel(item);
     height=Math.max(height,measuring.getBoundingClientRect().height);
   }
   measuring.remove();
@@ -321,7 +322,7 @@ const changeHero=async(next:number)=>{
     const heroCaption=heroFigure.querySelector<HTMLElement>('[data-figure-caption]');
     if(heroCaption) heroCaption.textContent=item.caption;
     const heroMedium=heroFigure.querySelector<HTMLElement>('.image-medium');
-    if(heroMedium) heroMedium.textContent=item.medium==='drawing'?'Drawing':item.medium==='rendering'?'Rendering':'';
+    if(heroMedium) heroMedium.textContent=imageLabel(item);
     heroCount.textContent=`${String(nextIndex+1).padStart(2,'0')} / ${String(gallery.length).padStart(2,'0')}`;
     heroStatus.textContent='';
     const incoming=animate(heroImage,[{opacity:0},{opacity:1}],240);

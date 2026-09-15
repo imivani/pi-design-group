@@ -27,7 +27,7 @@ test('all project routes show their verified facts once, directly after the open
     expect(information.count, project.name).toBe(1);
     expect(information.previous).toBe('project-opening frame');
     expect(information.next).toBe('gallery');
-    expect(information.title).toBe(project.category === 'single-homes' ? 'Collection information' : 'Project information');
+    expect(information.title).toBe(project.type === 'Residential collection' ? 'Collection information' : 'Project information');
     expect(information.facts, project.name).toEqual([
       ['Project type', project.type],
       ...(project.location ? [['Location', project.location]] : []),
@@ -69,7 +69,7 @@ test('compact facts and the dark next-project section stay aligned and readable 
     expect(layout).toMatchObject({ factRows: width === 1440 ? 1 : 2, directlyBelow: true, aligned: true, fullWidth: true, background: 'rgb(27, 28, 29)', overflow: false });
     expect(layout.factsHeight).toBeLessThan(width === 1440 ? 200 : 250);
     await expect(next.getByRole('heading', { name: 'Arbour Lake' })).toBeAttached();
-    await expect(next.locator('figcaption')).toHaveText('Rendering');
+    await expect(next.locator('figcaption')).toHaveText('Rendering by project architect');
     const audit = await new AxeBuilder({ page }).include('.project-specification').include('.next-project').withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze();
     expect(audit.violations.map(issue => ({ id: issue.id, nodes: issue.nodes.map(node => node.target) }))).toEqual([]);
   }

@@ -21,7 +21,7 @@ test('filter changes visibly animate, latest input wins, and reduced mode settle
   await expect(page.locator('#project-empty')).toBeVisible();
   await page.emulateMedia({reducedMotion:'reduce'});
   await page.locator('#reset-projects').click();
-  await expect(page.locator('.project-entry:visible')).toHaveCount(27);
+  await expect(page.locator('.project-entry:visible')).toHaveCount(30);
   await expect.poll(()=>page.locator('#project-collection').evaluate(element=>element.getAnimations().filter(animation=>animation.playState==='running').length)).toBe(0);
 });
 

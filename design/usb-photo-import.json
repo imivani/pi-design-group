@@ -1,0 +1,741 @@
+[
+  {
+    "project": "summit-77-rowhomes",
+    "path": "E:\\New Site Photos 2024\\Ambrose 1 phase (Partners) 2024\\IMG_2283.JPG",
+    "caption": "Rowhomes under construction, photographed in 2024.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\summit-77-rowhomes\\usb-img_2283.webp",
+    "sha256": "38d0eee5fb62b8625a92731509895ce3bd023c2ecce6ce7d87acdd97850dc536",
+    "bytes": 187220
+  },
+  {
+    "project": "summit-77-rowhomes",
+    "path": "E:\\New Site Photos 2024\\Ambrose 1 phase (Partners) 2024\\IMG_2285.JPG",
+    "caption": "The street frontage during construction in 2024.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\summit-77-rowhomes\\usb-img_2285.webp",
+    "sha256": "117fb4df7a96ef23623f2d68ff7360b53d5e3491d9c95c5a97b8cc2e89e30211",
+    "bytes": 236150
+  },
+  {
+    "project": "crestmont-west",
+    "path": "E:\\New Site Photos 2024\\Crestmont (Partners) 2024\\IMG_2305.JPG",
+    "caption": "Timber seating beside the homes and shared courtyard.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\crestmont-west\\usb-img_2305.webp",
+    "sha256": "335c9a897b3377e38fc19296084da3fcc6f5e3f41479760a2a6362092aba5ae7",
+    "bytes": 495588
+  },
+  {
+    "project": "crestmont-west",
+    "path": "E:\\New Site Photos 2024\\Crestmont (Partners) 2024\\IMG_2313.JPG",
+    "caption": "Trees and planting at the corner entrance.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\crestmont-west\\usb-img_2313.webp",
+    "sha256": "ccdf641bab7db4a499857e633b87a2a841de13b9d87f9d726762d632e7531497",
+    "bytes": 616630
+  },
+  {
+    "project": "crestmont-west",
+    "path": "E:\\New Site Photos 2024\\Crestmont (Partners) 2024\\IMG_2318.JPG",
+    "caption": "A green corridor between the residential buildings.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\crestmont-west\\usb-img_2318.webp",
+    "sha256": "0cf68e24d1fcedaa33cea2c229acc4e90cb58530dce2961e7c38370099a67984",
+    "bytes": 629992
+  },
+  {
+    "project": "crestmont-west",
+    "path": "E:\\New Site Photos 2024\\Crestmont (Partners) 2024\\IMG_2321.JPG",
+    "caption": "A curved path through newly planted common ground.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\crestmont-west\\usb-img_2321.webp",
+    "sha256": "52230e47f7b2088c418e8bdeae419db8dbbfda16a57c620c9e7a54aaaf28f124",
+    "bytes": 507990
+  },
+  {
+    "project": "crestmont-west",
+    "path": "E:\\New Site Photos 2024\\Crestmont (Partners) 2024\\IMG_2322.JPG",
+    "caption": "Flowering planting beside a residential entrance.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\crestmont-west\\usb-img_2322.webp",
+    "sha256": "690e50b030f44e276d62febd5a4c33d3a8fac0c6a720d4787c38213bf0900d81",
+    "bytes": 417198
+  },
+  {
+    "project": "crestmont-west",
+    "path": "E:\\New Site Photos 2024\\Crestmont (Partners) 2024\\IMG_2333.JPG",
+    "caption": "Grasses and flowering perennials along the public sidewalk.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\crestmont-west\\usb-img_2333.webp",
+    "sha256": "391148651d25d1dc3b5f417a4e87ef70fb47d45f92896aa44fccd4de7056139b",
+    "bytes": 423672
+  },
+  {
+    "project": "darcy",
+    "path": "E:\\New Site Photos 2024\\D'Arcy (Partners) 2024\\IMG_2482.JPG",
+    "caption": "Flowering frontage planting along the residential street.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\darcy\\usb-img_2482.webp",
+    "sha256": "cffb6c864a5ddb9f07a299186c9caf9206ef1c123079d900ed9574b40931a338",
+    "bytes": 445234
+  },
+  {
+    "project": "darcy",
+    "path": "E:\\New Site Photos 2024\\D'Arcy (Partners) 2024\\IMG_2484.JPG",
+    "caption": "Grasses and perennial beds between the homes and sidewalk.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\darcy\\usb-img_2484.webp",
+    "sha256": "4bbbbaf0df7f73bac96bc6c1175e536e958b765b1ec8ac66defe5de40521b154",
+    "bytes": 569562
+  },
+  {
+    "project": "darcy",
+    "path": "E:\\New Site Photos 2024\\D'Arcy (Partners) 2024\\IMG_2490.JPG",
+    "caption": "A closer view of layered grasses and low planting.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\darcy\\usb-img_2490.webp",
+    "sha256": "b705835d3d717cc36adf0cb9b7e7485149e066133b5739c073843149159ac44d",
+    "bytes": 637906
+  },
+  {
+    "project": "darcy",
+    "path": "E:\\New Site Photos 2024\\D'Arcy (Partners) 2024\\IMG_2497.JPG",
+    "caption": "Planting beside the crossing and neighbourhood pathway.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\darcy\\usb-img_2497.webp",
+    "sha256": "aec8eb788c0d98c5c7d72f8dadddbb5ccc57ae7106dcca3ee05d0fa46cdae578",
+    "bytes": 393102
+  },
+  {
+    "project": "darcy",
+    "path": "E:\\New Site Photos 2024\\D'Arcy (Partners) 2024\\IMG_2499.JPG",
+    "caption": "A shaded walk beside front gardens and mature trees.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\darcy\\usb-img_2499.webp",
+    "sha256": "6c67f09e267e057c80dc4279197436783803f6065e1e03f6f635318d8fb16645",
+    "bytes": 476044
+  },
+  {
+    "project": "darcy",
+    "path": "E:\\New Site Photos 2024\\D'Arcy (Partners) 2024\\IMG_2503.JPG",
+    "caption": "Porches, front gardens and the connecting sidewalk.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\darcy\\usb-img_2503.webp",
+    "sha256": "9af0a29b7df9ac1f75f53358a29c2025404595eabb795d0142cebd6469c2d89e",
+    "bytes": 482632
+  },
+  {
+    "project": "drake-towns",
+    "path": "E:\\New Site Photos 2024\\Drake Landing II (Partners) 2024\\IMG_2505.JPG",
+    "caption": "Front walks and lawn panels along the rowhomes.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\drake-towns\\usb-img_2505.webp",
+    "sha256": "ee31ff4f37b16b471801a74266b319e8e2f33990c81c14d9d29dbd30f42a81d0",
+    "bytes": 254658
+  },
+  {
+    "project": "drake-towns",
+    "path": "E:\\New Site Photos 2024\\Drake Landing II (Partners) 2024\\IMG_2506.JPG",
+    "caption": "Ornamental grasses separate parking from the pedestrian route.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\drake-towns\\usb-img_2506.webp",
+    "sha256": "03f0c3570f37376bf8d72cd3b56cb2ae44076b20b6ec0fc6b204f5c1cbe3efe5",
+    "bytes": 342750
+  },
+  {
+    "project": "drake-towns",
+    "path": "E:\\New Site Photos 2024\\Drake Landing II (Partners) 2024\\IMG_2511.JPG",
+    "caption": "Raised garden beds within the shared courtyard.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\drake-towns\\usb-img_2511.webp",
+    "sha256": "65fccde02ab102ff0c6062abfbbcbb314fa4e78998c2b869411d03c1aedaab53",
+    "bytes": 624386
+  },
+  {
+    "project": "drake-towns",
+    "path": "E:\\New Site Photos 2024\\Drake Landing II (Partners) 2024\\IMG_2513.JPG",
+    "caption": "Planting and seating within the courtyard garden.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\drake-towns\\usb-img_2513.webp",
+    "sha256": "1dd3ec6246ebe3ac3fcb8e6216d23cb5c66388a7fca30f0e64964086f115bb07",
+    "bytes": 760254
+  },
+  {
+    "project": "drake-towns",
+    "path": "E:\\New Site Photos 2024\\Drake Landing II (Partners) 2024\\IMG_2516.JPG",
+    "caption": "Trees and front lawns connect the homes to the street.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\drake-towns\\usb-img_2516.webp",
+    "sha256": "10e4bcfcef1402ac12dc7b447440b19748ef840aa1f8aff5f28145d025401a78",
+    "bytes": 480714
+  },
+  {
+    "project": "evanston",
+    "path": "E:\\New Site Photos 2024\\Evanston (Partners) 2024\\IMG_2350.JPG",
+    "caption": "A garden path leads toward the shared shelter.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\evanston\\usb-img_2350.webp",
+    "sha256": "5729ab46467a7f346c8d9949f0921ff6f9652cf3ce251983f36531eade84168e",
+    "bytes": 506040
+  },
+  {
+    "project": "evanston",
+    "path": "E:\\New Site Photos 2024\\Evanston (Partners) 2024\\IMG_2351.JPG",
+    "caption": "The open-sided shelter at the centre of the courtyard.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\evanston\\usb-img_2351.webp",
+    "sha256": "ed0d70e06d8f23297a68009560d0f35475e887f2455d0b3d0245bb3110649d55",
+    "bytes": 599522
+  },
+  {
+    "project": "evanston",
+    "path": "E:\\New Site Photos 2024\\Evanston (Partners) 2024\\IMG_2352.JPG",
+    "caption": "Seating beside the play area and planted edge.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\evanston\\usb-img_2352.webp",
+    "sha256": "df25e085061627f37611de7865338cedfb31fddf9121e30d2f93b8a02e96ee0d",
+    "bytes": 551106
+  },
+  {
+    "project": "evanston",
+    "path": "E:\\New Site Photos 2024\\Evanston (Partners) 2024\\IMG_2354.JPG",
+    "caption": "Trees frame the courtyard from the neighbourhood sidewalk.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\evanston\\usb-img_2354.webp",
+    "sha256": "58d09c8a84bb296aa8ea5f83259807cb38cc37c1ed32ed648a37e052cc25f203",
+    "bytes": 663308
+  },
+  {
+    "project": "evanston",
+    "path": "E:\\New Site Photos 2024\\Evanston (Partners) 2024\\IMG_2356.JPG",
+    "caption": "Planting around the Arrive community entrance.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\evanston\\usb-img_2356.webp",
+    "sha256": "b6d8b16be0daa609b2c428bb6b5a0c2a9892be2fbf4ca7b0aa0b72a0badacd62",
+    "bytes": 518626
+  },
+  {
+    "project": "homestead-townhomes",
+    "path": "E:\\New Site Photos 2024\\Homestead Townhomes (Partners) 2024\\IMG_2422.JPG",
+    "caption": "Front gardens and individual entrances at Homestead Townhomes.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\homestead-townhomes\\usb-img_2422.webp",
+    "sha256": "00b9f24063aa5339d73fe8dda0ee706dbae07471b68ee8b8781adebae5636ed9",
+    "bytes": 169022
+  },
+  {
+    "project": "homestead-townhomes",
+    "path": "E:\\New Site Photos 2024\\Homestead Townhomes (Partners) 2024\\IMG_2419.JPG",
+    "caption": "The corner home and planted front boundary.",
+    "medium": "photograph",
+    "result": "duplicate omitted",
+    "matches": "public\\media\\gallery\\misc-residential\\7.webp",
+    "distance": 8
+  },
+  {
+    "project": "homestead-townhomes",
+    "path": "E:\\New Site Photos 2024\\Homestead Townhomes (Partners) 2024\\IMG_2421.JPG",
+    "caption": "The row of homes and gardens along the street.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\homestead-townhomes\\usb-img_2421.webp",
+    "sha256": "3256cbe2799e9c118db195f7be46f5bbc7462ee95b3e618f3af30dec29541411",
+    "bytes": 218668
+  },
+  {
+    "project": "journey",
+    "path": "E:\\New Site Photos 2024\\Journey (Partners) 2024\\IMG_2411.JPG",
+    "caption": "Steps connect front entrances through stone-mulched planting beds.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\journey\\usb-img_2411.webp",
+    "sha256": "e5a50d9681d771a23f26e1dc7fb7409f642bb31caaa158a63f4836c9442fc57a",
+    "bytes": 401058
+  },
+  {
+    "project": "journey",
+    "path": "E:\\New Site Photos 2024\\Journey (Partners) 2024\\IMG_2417.JPG",
+    "caption": "Grasses and shrubs layered along the residential sidewalk.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\journey\\usb-img_2417.webp",
+    "sha256": "c48875c4f75a9e2944179478ed6594fd4497936a8d917c19221fde0fddc46161",
+    "bytes": 595788
+  },
+  {
+    "project": "seton-crossing",
+    "path": "E:\\New Site Photos 2024\\Seton (Commercial Plaza) Partners 2024\\20230616_131355.jpg",
+    "caption": "Stone mulch and planting beside the commercial frontage.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\seton-crossing\\usb-20230616_131355.webp",
+    "sha256": "6e37cefca0c160e95165c4e5f641d2e99fa173b12b12a2c564aa94c6ed1cdf28",
+    "bytes": 601164
+  },
+  {
+    "project": "seton-crossing",
+    "path": "E:\\New Site Photos 2024\\Seton (Commercial Plaza) Partners 2024\\20230616_131627.jpg",
+    "caption": "Trees and planted ground connect the plaza edge to the sidewalk.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\seton-crossing\\usb-20230616_131627.webp",
+    "sha256": "ef4740ec507123589e8a1d64fb3c50046af12c01e026fcc46aabe2c5d25e2406",
+    "bytes": 640250
+  },
+  {
+    "project": "seton-crossing",
+    "path": "E:\\New Site Photos 2024\\Seton (Commercial Plaza) Partners 2024\\IMG_2432.JPG",
+    "caption": "Grasses and trees along the edge of the plaza.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\seton-crossing\\usb-img_2432.webp",
+    "sha256": "f65571bfe579fa0c657a5f129b17e3bde43af5a6378fcc81920b07fb94a74ed1",
+    "bytes": 566050
+  },
+  {
+    "project": "seton-crossing",
+    "path": "E:\\New Site Photos 2024\\Seton (Commercial Plaza) Partners 2024\\IMG_2438.JPG",
+    "caption": "A planted buffer beside the pedestrian route.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\seton-crossing\\usb-img_2438.webp",
+    "sha256": "6bfee9a00e1cbc82850e41ebd13f84db7d51b2efcd478a30d918f5633c39e2ea",
+    "bytes": 665396
+  },
+  {
+    "project": "seton-crossing",
+    "path": "E:\\New Site Photos 2024\\Seton (Commercial Plaza) Partners 2024\\IMG_2443.JPG",
+    "caption": "A walk into the plaza framed by trees and grasses.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\seton-crossing\\usb-img_2443.webp",
+    "sha256": "51db0e5ad3713f9f2a55a61d56969825da49b971f89cfaad7ff665ca44632725",
+    "bytes": 549098
+  },
+  {
+    "project": "seton-crossing",
+    "path": "E:\\New Site Photos 2024\\Seton (Commercial Plaza) Partners 2024\\IMG_2446.JPG",
+    "caption": "Planting wraps around the corner of the shared pedestrian space.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\seton-crossing\\usb-img_2446.webp",
+    "sha256": "da07c579336ebffa02dee8787bd419f28237515bc773899b10985507ea9376dd",
+    "bytes": 482318
+  },
+  {
+    "project": "seton-crossing",
+    "path": "E:\\New Site Photos 2024\\Seton (Commercial Plaza) Partners 2024\\IMG_2449.JPG",
+    "caption": "Seating beside an open lawn and commercial buildings.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\seton-crossing\\usb-img_2449.webp",
+    "sha256": "93972f578644b858323b10dce7f4ed6bd6f7ddc902db23cfac867bb34be5de43",
+    "bytes": 375934
+  },
+  {
+    "project": "seton-crossing",
+    "path": "E:\\New Site Photos 2024\\Seton (Commercial Plaza) Partners 2024\\IMG_2456.JPG",
+    "caption": "Seating and planting along the commercial walkway.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\seton-crossing\\usb-img_2456.webp",
+    "sha256": "5fb4ef796041b37f6f784ce0ee603a63e352d7d37c0bf7d290e05b74fbc41e1e",
+    "bytes": 296722
+  },
+  {
+    "project": "symon",
+    "path": "E:\\New Site Photos 2024\\Simon (Partners) 2024\\IMG_2339.JPG",
+    "caption": "A planted pedestrian corridor between the townhomes.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\symon\\usb-img_2339.webp",
+    "sha256": "7333cf2569165b1d92d477cebe1824b2c56fbb607552126f7d7be195ac1910e3",
+    "bytes": 663356
+  },
+  {
+    "project": "symon",
+    "path": "E:\\New Site Photos 2024\\Simon (Partners) 2024\\IMG_2341.JPG",
+    "caption": "Lawn and young trees alongside the front patios.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\symon\\usb-img_2341.webp",
+    "sha256": "bf720bf31dadd8614185f6a50c9ac41ffa2f7968b67b41683b4f1f455942353d",
+    "bytes": 619622
+  },
+  {
+    "project": "symon",
+    "path": "E:\\New Site Photos 2024\\Simon (Partners) 2024\\IMG_2343.JPG",
+    "caption": "A gravel path beside the shared planting beds.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\symon\\usb-img_2343.webp",
+    "sha256": "aa708a9d2c8917031bf178eb2206300d25c9c49fe3f06e8bb64a093c1c675bb6",
+    "bytes": 435402
+  },
+  {
+    "project": "central",
+    "path": "E:\\New Site Photos 2024\\Skyview II (Partners) 2024\\IMG_2360.JPG",
+    "caption": "Individual entrance walks set within the front lawns.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\central\\usb-img_2360.webp",
+    "sha256": "ad7721d33bc23973b3f51ccc84187194a37749da8345b2f339e28e61c8111a86",
+    "bytes": 460836
+  },
+  {
+    "project": "central",
+    "path": "E:\\New Site Photos 2024\\Skyview II (Partners) 2024\\IMG_2365.JPG",
+    "caption": "Stone accents and planting beside the public walk.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\central\\usb-img_2365.webp",
+    "sha256": "14e7849620412ee498161e484595d0c66e1610e4c12a58711c23cf64dec9df4d",
+    "bytes": 386176
+  },
+  {
+    "project": "central",
+    "path": "E:\\New Site Photos 2024\\Skyview II (Partners) 2024\\IMG_2375.JPG",
+    "caption": "A shared boardwalk between the residential buildings.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\central\\usb-img_2375.webp",
+    "sha256": "9591b2fff6b8df241e02fcabfa2b4c284a3a97fb52d725cc083ad7a2703b4b65",
+    "bytes": 405220
+  },
+  {
+    "project": "central",
+    "path": "E:\\New Site Photos 2024\\Skyview II (Partners) 2024\\IMG_2377.JPG",
+    "caption": "Flowering planting at a sheltered entrance.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\central\\usb-img_2377.webp",
+    "sha256": "2c2e8c0c7acaf96b7ed58dba491f6392f393e5aba5b89709662aa2d3747bda8b",
+    "bytes": 580944
+  },
+  {
+    "project": "central",
+    "path": "E:\\New Site Photos 2024\\Skyview II (Partners) 2024\\IMG_2381.JPG",
+    "caption": "A narrow planted passage between the homes.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\central\\usb-img_2381.webp",
+    "sha256": "c38f28c6b62702d6ecf8665da4acc4e9ad7f6acceaf6577eb1cd7e5f670d4995",
+    "bytes": 387656
+  },
+  {
+    "project": "skyview",
+    "path": "E:\\New Site Photos 2024\\Skyview Ranch Arbours (Partners) 2024\\IMG_2382.JPG",
+    "caption": "Stone piers and a white timber pergola mark the shared walk.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\skyview\\usb-img_2382.webp",
+    "sha256": "ef34b351481c5bc31ead37acf7a84f1f277105352894a004ca98ab55e0e1bf6b",
+    "bytes": 317998
+  },
+  {
+    "project": "skyview",
+    "path": "E:\\New Site Photos 2024\\Skyview Ranch Arbours (Partners) 2024\\IMG_2384.JPG",
+    "caption": "A circular planting bed beneath the pergola.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\skyview\\usb-img_2384.webp",
+    "sha256": "f9574c10b8b8f0f864f2a1614a3aa6d533017e302c38ab9cc370f705d113ad7d",
+    "bytes": 395540
+  },
+  {
+    "project": "skyview",
+    "path": "E:\\New Site Photos 2024\\Skyview Ranch Arbours (Partners) 2024\\IMG_2385.JPG",
+    "caption": "The pergola frames a view toward the playground.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\skyview\\usb-img_2385.webp",
+    "sha256": "6901abb104d6176f070f61f3be6241e745ca72f22093dc056da07f3445318867",
+    "bytes": 398596
+  },
+  {
+    "project": "skyview",
+    "path": "E:\\New Site Photos 2024\\Skyview Ranch Arbours (Partners) 2024\\IMG_2388.JPG",
+    "caption": "Trees and low planting around the courtyard seating.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\skyview\\usb-img_2388.webp",
+    "sha256": "4d87c97b3270db8d7845b842ae87eeeae2dc2b2323b7f000c935fb1a8e2e34a9",
+    "bytes": 592932
+  },
+  {
+    "project": "skyview",
+    "path": "E:\\New Site Photos 2024\\Skyview Ranch Arbours (Partners) 2024\\IMG_2389.JPG",
+    "caption": "A straight path connects the shared landscape to the street.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\skyview\\usb-img_2389.webp",
+    "sha256": "e770cda1867e9e476a78e131758de1aa4dbcad96990b5acee9f535fc87c1fc2a",
+    "bytes": 586536
+  },
+  {
+    "project": "skyview",
+    "path": "E:\\New Site Photos 2024\\Skyview Ranch Arbours (Partners) 2024\\IMG_2395.JPG",
+    "caption": "A garden walk between the homes.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\skyview\\usb-img_2395.webp",
+    "sha256": "5fe04ca7b4a0c7f2b735a3925a21ca2b1b7354e60ae785a6dad91239582bca86",
+    "bytes": 529444
+  },
+  {
+    "project": "skyview",
+    "path": "E:\\New Site Photos 2024\\Skyview Ranch Arbours (Partners) 2024\\IMG_2396.JPG",
+    "caption": "The pergola connects the residential entrances.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\skyview\\usb-img_2396.webp",
+    "sha256": "547d645bed0a23ce62d20720ed41be15693a7e62ecf736bbb9f16a88953a2edd",
+    "bytes": 454792
+  },
+  {
+    "project": "skyview",
+    "path": "E:\\New Site Photos 2024\\Skyview Ranch Arbours (Partners) 2024\\IMG_2404.JPG",
+    "caption": "Trees shade a curving pathway between the buildings.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\skyview\\usb-img_2404.webp",
+    "sha256": "0063a7c3696e458f562d3c375fcf652027e9b3f7ccc75146ae6a1738abd49850",
+    "bytes": 402594
+  },
+  {
+    "project": "redstone",
+    "path": "E:\\NEW\\2024 Projects Portfolio\\1. Redstone\\Drawings\\8bb41151466894bba321cf3e9d371b12f304a6cf_redstone-i.avif",
+    "caption": "Planted frontage at a corner home.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\redstone\\usb-8bb41151466894bba321cf3e9d371b12f304a6cf_redstone-i.webp",
+    "sha256": "d34dcf87c8960569ca7cb08a908de70b247dc2af1ca423cfa28f6e520d2806b4",
+    "bytes": 156074
+  },
+  {
+    "project": "redstone",
+    "path": "E:\\NEW\\2024 Projects Portfolio\\1. Redstone\\Peter Imshenetski-07.jpg",
+    "caption": "A shared street framed by homes and front gardens.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\redstone\\usb-peter-imshenetski-07.webp",
+    "sha256": "4349546ca9a2645bf6265d9414d578954aa546501bf17537a9bbbcab11c64632",
+    "bytes": 629108
+  },
+  {
+    "project": "redstone",
+    "path": "E:\\NEW\\2024 Projects Portfolio\\1. Redstone\\Redstone-10.jpg",
+    "caption": "Mature planting around a corner entrance.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\redstone\\usb-redstone-10.webp",
+    "sha256": "12357aa8b1859c1a69e339e8c5e256bd64a11655eb5fe825d5a2723e146930d6",
+    "bytes": 61804
+  },
+  {
+    "project": "redstone",
+    "path": "E:\\NEW\\2024 Projects Portfolio\\1. Redstone\\Redstone-4.jpg",
+    "caption": "Front gardens along the residential street.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\redstone\\usb-redstone-4.webp",
+    "sha256": "6df65164ca27869cd56f8c420a7d6876ce5c63a7cbc099763bfa780a101bf0d6",
+    "bytes": 407140
+  },
+  {
+    "project": "redstone",
+    "path": "E:\\NEW\\2024 Projects Portfolio\\1. Redstone\\Redstone-6.png",
+    "caption": "The community entrance and its surrounding landscape.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\redstone\\usb-redstone-6.webp",
+    "sha256": "535ca110074336ad1f92896e29805fd1ed7175b31ef7acebf07740aff612aa63",
+    "bytes": 535626
+  },
+  {
+    "project": "redstone",
+    "path": "E:\\NEW\\2024 Projects Portfolio\\1. Redstone\\Redstone-7.JPG",
+    "caption": "Timber pergola beams above the pedestrian entrance.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\redstone\\usb-redstone-7.webp",
+    "sha256": "4220aaf833e131c8f591790b4bbf72c51ab3712cddf195d15ede7c1c97ce2c10",
+    "bytes": 253424
+  },
+  {
+    "project": "symon",
+    "path": "E:\\NEW\\2024 Projects Portfolio\\10. Symon Townhomes\\Plans\\18-043+Evanston+II+-+VJ7G0128.jpg",
+    "caption": "A planted edge along the contemporary townhomes.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\symon\\usb-18-043-evanston-ii---vj7g0128.webp",
+    "sha256": "160836f49556a4b8eba801bf8f02bc693320d815a99927194cbead61fb480ade",
+    "bytes": 365376
+  },
+  {
+    "project": "skyview",
+    "path": "E:\\NEW\\2024 Projects Portfolio\\2. Skyview Ranch Arbours\\4.jpg",
+    "caption": "Homes and planting along the shared residential street.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\skyview\\usb-4.webp",
+    "sha256": "7883d8592d42ed215cc6f778b8f7c2a84cc769e7490b4f4c4505c8a0b2dce335",
+    "bytes": 328312
+  },
+  {
+    "project": "skyview",
+    "path": "E:\\NEW\\2024 Projects Portfolio\\2. Skyview Ranch Arbours\\6.jpg",
+    "caption": "The playground within its planted courtyard.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\skyview\\usb-6.webp",
+    "sha256": "62f491b3cdbf61a71d4f6b9bb19e5e690c47d828faa5fda57bee21e237bc337d",
+    "bytes": 722960
+  },
+  {
+    "project": "skyview",
+    "path": "E:\\NEW\\2024 Projects Portfolio\\2. Skyview Ranch Arbours\\7.jpg",
+    "caption": "A view from the play area toward the pergola and homes.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\skyview\\usb-7.webp",
+    "sha256": "60b419e3a37a2c875914f353f4aa21712f4373fc6f7a3ac8da5435e76f107721",
+    "bytes": 632364
+  },
+  {
+    "project": "skyview",
+    "path": "E:\\NEW\\2024 Projects Portfolio\\2. Skyview Ranch Arbours\\8.jpg",
+    "caption": "Trees and lawns frame the main pedestrian walk.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\skyview\\usb-8.webp",
+    "sha256": "9687433b248ad29668e084af27b2ac458b4d39ea6f521f9ee4912e9250e092cf",
+    "bytes": 533056
+  },
+  {
+    "project": "darcy",
+    "path": "E:\\NEW\\2024 Projects Portfolio\\6. Arrive at D'Arcy\\1.1.JPG",
+    "caption": "An elevated view of the front gardens and residential street.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\darcy\\usb-1.1.webp",
+    "sha256": "9c319d129de568ad138fe7926752a370529d10b1c6b81e4e90b2f0819f653b13",
+    "bytes": 177428
+  },
+  {
+    "project": "journey",
+    "path": "E:\\NEW\\2024 Projects Portfolio\\8. Journey by Partners\\Image 1.JPG",
+    "caption": "Architectural rendering of the residential street frontage.",
+    "medium": "rendering",
+    "result": "added",
+    "output": "public\\media\\gallery\\journey\\usb-image-1.webp",
+    "sha256": "14d469b6c16945dba9896e24b7dd581b5f5343e1d4666dac273bd1e3ef178f31",
+    "bytes": 151106
+  },
+  {
+    "project": "seton-crossing",
+    "path": "E:\\NEW\\2024 Projects Portfolio\\9. Seton Crossing\\5.jpg",
+    "caption": "Architectural rendering of the commercial frontage.",
+    "medium": "rendering",
+    "result": "added",
+    "output": "public\\media\\gallery\\seton-crossing\\usb-5.webp",
+    "sha256": "23a8088ea928e0c67382c656805d8c2c92a752146c6156098f56a2ee223f6f96",
+    "bytes": 113426
+  },
+  {
+    "project": "seton-crossing",
+    "path": "E:\\NEW\\2024 Projects Portfolio\\9. Seton Crossing\\6.jpg",
+    "caption": "Architectural rendering of the plaza buildings and pedestrian edge.",
+    "medium": "rendering",
+    "result": "added",
+    "output": "public\\media\\gallery\\seton-crossing\\usb-6.webp",
+    "sha256": "ce9efeed510b7493ec8838907cfecc4170c9b9a27d519d188b8f59eed9eb0cf2",
+    "bytes": 95984
+  },
+  {
+    "project": "pickel-residence",
+    "path": "E:\\PI-WebSite\\Archive\\Landscape - Pickel Residence\\IMG_1111.jpg",
+    "caption": "Large paving slabs framed by a darker stone border.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\pickel-residence\\usb-img_1111.webp",
+    "sha256": "1ac7ad292b687534dd518042ed4e3d4eb8667882a60fd85b41d98b9ac39b89e2",
+    "bytes": 59938
+  },
+  {
+    "project": "pickel-residence",
+    "path": "E:\\PI-WebSite\\Archive\\Landscape - Pickel Residence\\IMG_1112.jpg",
+    "caption": "The completed patio beside the timber privacy fence.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\pickel-residence\\usb-img_1112.webp",
+    "sha256": "c44f51e0ccc367489a729b46690af7fdb8cae35baaaf575f43fc1152ded54336",
+    "bytes": 51836
+  },
+  {
+    "project": "ryan-residence",
+    "path": "E:\\PI-WebSite\\Archive\\Landscape - Ryan residence\\image1.JPG",
+    "caption": "Stepping stones connect the lawn and planted garden edge.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\ryan-residence\\usb-image1.webp",
+    "sha256": "8ba01a8b618b2ed28b577c948a0b9487c236c5bbe74befddb3c1053e007d070b",
+    "bytes": 58028
+  },
+  {
+    "project": "ryan-residence",
+    "path": "E:\\PI-WebSite\\Archive\\Landscape - Ryan residence\\image2.JPG",
+    "caption": "A paved terrace alongside the garden building.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\ryan-residence\\usb-image2.webp",
+    "sha256": "70aba4946d2caced5a2b18a31908b823c458a4727534b3b75d7cd1bc8c5abc21",
+    "bytes": 37008
+  },
+  {
+    "project": "ryan-residence",
+    "path": "E:\\PI-WebSite\\Archive\\Landscape - Ryan residence\\IMG_2363.JPG",
+    "caption": "The terrace meets the lawn and planted perimeter.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\ryan-residence\\usb-img_2363.webp",
+    "sha256": "ef9cf4dbc99a2e0129793bb0d7e48fc11dd3967747f4ccc555ca9b2b9a7492c6",
+    "bytes": 52998
+  },
+  {
+    "project": "ryan-residence",
+    "path": "E:\\PI-WebSite\\Archive\\Landscape - Ryan residence\\IMG_2411.JPG",
+    "caption": "A garden path leads from the lawn to the paved seating area.",
+    "medium": "photograph",
+    "result": "added",
+    "output": "public\\media\\gallery\\ryan-residence\\usb-img_2411.webp",
+    "sha256": "0debd2d8a466fec2088a797890bbbcae9c54f479d9c9077a3bb4f6c9c57b865b",
+    "bytes": 15510
+  }
+]

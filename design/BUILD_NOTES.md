@@ -1,5 +1,9 @@
 # Pi Design Group — September 14 revision
 
+## Latest content update
+
+The [USB photo and attribution update](USB_PHOTO_UPDATE.md) adds 70 photographs, 3 architect renderings and three individual project pages, bringing the live inventory to 30. It preserves the approved design and gallery ordering. The counts below describe earlier design stages.
+
 ## Current design direction
 
 The owner's latest written plan takes priority over earlier generated concepts and older section lists in DESIGN.md.

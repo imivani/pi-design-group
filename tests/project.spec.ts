@@ -8,10 +8,10 @@ test('project opens locally, gallery responds to rapid input, zoom and Escape re
   await expect(page.locator('[data-primary-project]')).toBeVisible();
   await page.locator('[data-gallery-index="0"]').click();
   const dialog=page.getByRole('dialog',{name:'Project image gallery'});
-  await expect(dialog).toBeVisible();await expect(page.locator('#viewer-count')).toHaveText('1 / 7');
-  await page.keyboard.press('ArrowRight');await expect(page.locator('#viewer-count')).toHaveText('2 / 7');
+  await expect(dialog).toBeVisible();await expect(page.locator('#viewer-count')).toHaveText('1 / 13');
+  await page.keyboard.press('ArrowRight');await expect(page.locator('#viewer-count')).toHaveText('2 / 13');
   await page.locator('#viewer-next').dispatchEvent('click');await page.locator('#viewer-next').dispatchEvent('click');await page.locator('#viewer-next').dispatchEvent('click');
-  await expect(page.locator('#viewer-count')).toHaveText('5 / 7');
+  await expect(page.locator('#viewer-count')).toHaveText('5 / 13');
   await expect(page.locator('#viewer-image')).toHaveAttribute('src','/media/gallery/crestmont-west/8.webp');
   await page.getByRole('button',{name:'Zoom in',exact:true}).click();
   await expect(dialog).toHaveAttribute('data-zoomed','');
@@ -29,11 +29,11 @@ test('project opens locally, gallery responds to rapid input, zoom and Escape re
 test('image failure remains recoverable and full-screen viewer traps keyboard focus',async({page})=>{
   await page.route('**/gallery/crestmont-west/2.webp',route=>route.abort());
   await page.goto('/crestmontwest');
-  await page.locator('[data-gallery-index="0"]').click();await expect(page.locator('#viewer-count')).toHaveText('1 / 7');
+  await page.locator('[data-gallery-index="0"]').click();await expect(page.locator('#viewer-count')).toHaveText('1 / 13');
   await page.keyboard.press('ArrowRight');await expect(page.locator('#viewer-status')).toContainText('could not be loaded');
-  await expect(page.locator('#viewer-count')).toHaveText('1 / 7');
+  await expect(page.locator('#viewer-count')).toHaveText('1 / 13');
   for(let i=0;i<9;i++){await page.keyboard.press('Tab');expect(await page.evaluate(()=>document.activeElement?.closest('dialog')?.id)).toBe('image-viewer');}
-  await page.keyboard.press('ArrowLeft');await expect(page.locator('#viewer-count')).toHaveText('7 / 7');
+  await page.keyboard.press('ArrowLeft');await expect(page.locator('#viewer-count')).toHaveText('13 / 13');
   await page.keyboard.press('Escape');await expect(page.locator('html')).not.toHaveCSS('overflow','hidden');
 });
 
@@ -76,7 +76,7 @@ test('direct project entry supports home navigation, next project and static fal
   await page.locator('[data-back-projects]').first().click();await expect(page.locator('#project-collection')).toBeVisible();
   const context=await browser.newContext({javaScriptEnabled:false});const plain=await context.newPage();
   await plain.goto('http://127.0.0.1:4321/crestmontwest');await expect(plain.locator('h1')).toBeVisible();
-  await expect(plain.locator('.gallery-link')).toHaveCount(7);await expect(plain.locator('.gallery-link').first()).toHaveAttribute('href','/media/gallery/crestmont-west/1.webp');
+  await expect(plain.locator('.gallery-link')).toHaveCount(13);await expect(plain.locator('.gallery-link').first()).toHaveAttribute('href','/media/gallery/crestmont-west/1.webp');
   await context.close();
 });
 
@@ -94,7 +94,7 @@ test('project and full-screen gallery pass accessibility checks',async({page})=>
   await page.goto('/crestmontwest');
   await page.locator('#motion-choice').selectOption('off');await page.evaluate(()=>scrollTo(0,0));
   for(let i=0;i<2;i++){
-    if(i) {await page.locator('[data-gallery-index="0"]').click();await expect(page.locator('#viewer-count')).toHaveText('1 / 7');}
+    if(i) {await page.locator('[data-gallery-index="0"]').click();await expect(page.locator('#viewer-count')).toHaveText('1 / 13');}
     const result=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze();
     expect(result.violations.map(v=>({id:v.id,nodes:v.nodes.map(n=>n.target)}))).toEqual([]);
   }

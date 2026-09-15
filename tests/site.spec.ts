@@ -9,8 +9,8 @@ test.beforeEach(async ({ page }) => {
 
 test('complete catalogue and correct project destinations are rendered before filtering', async ({ page, request }) => {
   test.setTimeout(60000);
-  await expect(page.locator('.project-entry')).toHaveCount(27);
-  expect(new Set(projects.map(project => project.url)).size).toBe(27);
+  await expect(page.locator('.project-entry')).toHaveCount(30);
+  expect(new Set(projects.map(project => project.url)).size).toBe(30);
   const links = await page.locator('.project-entry').evaluateAll(entries => entries.map(entry => ({
     id: (entry as HTMLElement).dataset.project,
     href: entry.querySelector('a')?.getAttribute('href'),
@@ -46,9 +46,9 @@ test('filters, search, no results, reset and grid/index preserve the chosen stat
   await expect(page.locator('#project-collection')).toHaveAttribute('data-view', 'index');
   await page.locator('#project-search').fill('does-not-exist');
   await expect(page.locator('#project-empty')).toBeVisible();
-  await expect(page.locator('#project-count')).toHaveText('0 of 27 entries');
+  await expect(page.locator('#project-count')).toHaveText('0 of 30 entries');
   await page.locator('#reset-projects').click();
-  await expect(page.locator('.project-entry:visible')).toHaveCount(27);
+  await expect(page.locator('.project-entry:visible')).toHaveCount(30);
   await expect(page.locator('#project-search')).toBeFocused();
   await expect(page.locator('#project-collection')).toHaveAttribute('data-view', 'index');
 });
@@ -173,7 +173,7 @@ test('without JavaScript, hero content and all project links remain usable', asy
   const page = await context.newPage();
   await page.goto('http://127.0.0.1:4321');
   await expect(page.locator('h1')).toBeVisible();
-  await expect(page.locator('.project-entry')).toHaveCount(27);
+  await expect(page.locator('.project-entry')).toHaveCount(30);
   await expect(page.locator('.project-controls')).toBeHidden();
   await expect(page.locator('#contact a[href^="mailto:"]').first()).toBeVisible();
   await context.close();

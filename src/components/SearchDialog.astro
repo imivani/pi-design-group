@@ -1,4 +1,5 @@
 ---
+import { renderingCredit } from '../data/image-credit';
 import { Search, X, ArrowUpRight } from '@lucide/astro';
 import { projects, projectPath } from '../data/projects';
 import '../styles/search.css';
@@ -26,7 +27,7 @@ const ordered = [...projects].sort((a, b) => {
   <nav id="site-search-results" class="site-search-results" aria-label="Matching projects">
     {ordered.map(project => <a class="site-search-result" id={'search-result-' + project.id} href={projectPath(project, base)} data-search-project={project.id} data-project-card={project.id} data-search-name={project.name} data-search-terms={[project.name, project.type, project.location || '', project.category === 'multifamily' ? 'communities residential' : project.category === 'commercial' ? 'plazas' : 'residential houses'].join(' ')} data-suggested={suggested.includes(project.id)} hidden={!suggested.includes(project.id)}>
       <span class="site-search-thumbnail"><img src={base + project.image.replace(/^\//, '')} alt={project.alt} width="144" height="104" loading="lazy" decoding="async" data-kind={project.imageKind} /><span class="site-search-photo-error" hidden>Image unavailable</span></span>
-      <span class="site-search-result-copy"><span class="site-search-result-name">{project.name}</span><span class="site-search-result-context">{project.type}{project.location && ` · ${project.location}`}{project.imageKind !== 'photograph' && ` · ${project.imageKind === 'drawing' ? 'Drawing' : 'Rendering'}`}</span></span>
+      <span class="site-search-result-copy"><span class="site-search-result-name">{project.name}</span><span class="site-search-result-context">{project.type}{project.location && ` · ${project.location}`}{project.imageKind !== 'photograph' && ` · ${project.imageKind === 'drawing' ? 'Drawing' : renderingCredit(project)}`}</span></span>
       <ArrowUpRight size={19} stroke-width={1.5} aria-hidden="true" />
     </a>)}
   </nav>

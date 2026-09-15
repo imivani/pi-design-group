@@ -193,7 +193,7 @@ if (header && surface && mobile) {
     surface.querySelector('[data-catalogue-preview-name]')!.textContent = name;
     surface.querySelector('[data-catalogue-preview-place]')!.textContent = link.dataset.previewPlace!;
     kind.hidden = link.dataset.previewKind === 'photograph';
-    kind.textContent = link.dataset.previewKind === 'drawing' ? 'Drawing' : 'Rendering';
+    kind.textContent = link.dataset.previewKind === 'drawing' ? 'Drawing' : link.dataset.previewCredit || 'Rendering by project architect';
     catalogue.querySelectorAll<HTMLElement>('[data-catalogue-project]').forEach((item) => { item.dataset.active = String(item === link); });
     if (motionMode() !== 'off') {
       previewAnimation = current.animate([{ opacity: 0 }, { opacity: 1 }], { duration: motionMode() === 'full' ? 240 : 100, easing: 'ease-out' });

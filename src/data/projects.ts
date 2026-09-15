@@ -305,6 +305,36 @@ export const projects: Project[] = [
     "image": "/media/projects/misc-residential.webp",
     "alt": "Landscape and building context at Misc. Residential Single Family",
     "imageKind": "photograph"
+  },
+  {
+    "id": "homestead-townhomes",
+    "name": "Homestead Townhomes",
+    "url": "https://pi-design-group.vercel.app/homestead-townhomes",
+    "category": "multifamily",
+    "type": "Multifamily",
+    "image": "/media/gallery/misc-residential/1.webp",
+    "alt": "Front gardens and individual entrances at Homestead Townhomes.",
+    "imageKind": "photograph"
+  },
+  {
+    "id": "pickel-residence",
+    "name": "Pickel Residence",
+    "url": "https://pi-design-group.vercel.app/pickel-residence",
+    "category": "single-homes",
+    "type": "Residential landscape",
+    "image": "/media/gallery/pickel-residence/usb-img_1111.webp",
+    "alt": "Large paving slabs framed by a darker stone border.",
+    "imageKind": "photograph"
+  },
+  {
+    "id": "ryan-residence",
+    "name": "Ryan Residence",
+    "url": "https://pi-design-group.vercel.app/ryan-residence",
+    "category": "single-homes",
+    "type": "Residential landscape",
+    "image": "/media/gallery/ryan-residence/usb-image1.webp",
+    "alt": "Stepping stones connect the lawn and planted garden edge.",
+    "imageKind": "photograph"
   }
 ];
 

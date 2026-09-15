@@ -6,13 +6,13 @@ test.beforeEach(async ({ page }) => {
   await expect(page.locator('#site-header')).toHaveAttribute('data-ready', 'true');
 });
 
-test('all 27 projects are available on hover, with decoded previews and direct destinations', async ({ page }) => {
+test('all 30 projects are available on hover, with decoded previews and direct destinations', async ({ page }) => {
   await page.locator('[data-menu-trigger="projects"]').hover();
   await page.locator('button[data-catalogue-open]').hover();
   const catalogue = page.locator('#project-menu-catalogue');
   await expect(catalogue).toHaveAttribute('aria-hidden', 'false');
-  await expect(catalogue.locator('[data-catalogue-project]')).toHaveCount(27);
-  expect(await catalogue.locator('[data-catalogue-project]').evaluateAll((links) => new Set(links.map((link) => (link as HTMLAnchorElement).pathname)).size)).toBe(27);
+  await expect(catalogue.locator('[data-catalogue-project]')).toHaveCount(30);
+  expect(await catalogue.locator('[data-catalogue-project]').evaluateAll((links) => new Set(links.map((link) => (link as HTMLAnchorElement).pathname)).size)).toBe(30);
   await catalogue.locator('[data-catalogue-project="arbour-lake"]').hover();
   await catalogue.locator('[data-catalogue-project="rona"]').hover();
   await expect(catalogue.locator('[data-catalogue-preview-name]')).toHaveText('Rona Replacement Warehouse');
@@ -57,7 +57,7 @@ test('mobile visitors can browse and open the same complete catalogue', async ({
   await page.locator('[data-mobile-disclosure="mobile-project-links"]').click();
   await page.locator('[data-mobile-disclosure="mobile-project-catalogue"]').click();
   const links = page.locator('.mobile-catalogue-links>a');
-  await expect(links).toHaveCount(27);
+  await expect(links).toHaveCount(30);
   await expect(page.locator('#mobile-project-catalogue')).not.toHaveAttribute('inert', '');
   expect(await page.locator('#mobile-navigation').evaluate((element) => element.scrollWidth <= element.clientWidth)).toBe(true);
   await links.last().scrollIntoViewIfNeeded();

@@ -39,8 +39,8 @@ test('search matches names with accents and apostrophes, as well as type and pla
   await input.fill('Commercial');
   expect(await results.count()).toBeGreaterThan(1);
   expect(await results.locator('.site-search-result-context').evaluateAll(elements => elements.every(element => element.textContent?.includes('Commercial')))).toBe(true);
-  await page.locator('#site-search-all').click(); await expect(results).toHaveCount(27);
-  expect(await results.evaluateAll(links => new Set(links.map(link => (link as HTMLAnchorElement).href)).size)).toBe(27);
+  await page.locator('#site-search-all').click(); await expect(results).toHaveCount(30);
+  expect(await results.evaluateAll(links => new Set(links.map(link => (link as HTMLAnchorElement).href)).size)).toBe(30);
 });
 
 test('the first Escape closes search while a nonempty search field is focused', async ({ page }) => {
@@ -65,7 +65,7 @@ test('empty search results explain the state and recover to the complete project
   await expect(page.locator('#site-search-announcement')).toContainText('0 projects found');
   expect((await page.locator('#site-search-dialog').boundingBox())!.height).toBeCloseTo(before!.height, 1);
   await page.locator('#site-search-reset').click();
-  await expect(page.locator('[data-search-project]:visible')).toHaveCount(27);
+  await expect(page.locator('[data-search-project]:visible')).toHaveCount(30);
   await page.locator('#site-search-input').fill('Crestmont');
   await page.locator('#site-search-clear').click();
   await expect(page.locator('#site-search-input')).toHaveValue('');
@@ -171,7 +171,7 @@ test('without JavaScript the search link still opens the full homepage archive',
   await page.goto('http://127.0.0.1:4321/crestmontwest');
   await page.locator('.header-search').click();
   await expect(page).toHaveURL(/\/#projects$/);
-  await expect(page.locator('.project-entry')).toHaveCount(27);
+  await expect(page.locator('.project-entry')).toHaveCount(30);
   await expect(page.locator('#site-search-dialog')).not.toBeVisible();
   await context.close();
 });

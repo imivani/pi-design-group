@@ -124,7 +124,7 @@
 .catalogue-preview__image { position: relative; aspect-ratio: 4 / 5; overflow: hidden; border-radius: 5px; background: #354044; }
 .catalogue-preview__image>img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .catalogue-preview__image>img[data-kind='drawing'] { object-fit: contain; background: #f4f5f3; }
-.catalogue-preview__image>span { position: absolute; left: 12px; bottom: 12px; padding: 6px 9px; color: #fff; background: rgb(17 24 27 / 84%); font-size: 12px; }
+.catalogue-preview__image>span { position: absolute; left: 12px; right: 12px; width: fit-content; bottom: 12px; padding: 6px 9px; color: #fff; background: rgb(17 24 27 / 84%); font-size: 12px; }
 .catalogue-preview__caption { display: flex; justify-content: space-between; align-items: start; gap: 14px; min-height: 2.4em; margin-top: 15px; font-size: 20px; line-height: 1.2; letter-spacing: -.02em; }
 .catalogue-preview__caption>svg { flex-shrink: 0; }
 .catalogue-preview>p { margin: 7px 0 0; font-size: 13px; color: #c3ccd0; }

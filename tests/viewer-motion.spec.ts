@@ -4,7 +4,7 @@ test('a photograph expands from its real crop and returns with a shorter transit
   await page.goto('/crestmontwest');
   const origin=page.locator('.primary-figure [data-gallery-index]');
   await origin.click();
-  await expect(page.locator('#viewer-count')).toHaveText('1 / 7');
+  await expect(page.locator('#viewer-count')).toHaveText('1 / 13');
   await expect(page.locator('.viewer-motion-proxy')).toHaveCount(1);
   const opening=await page.locator('.viewer-motion-proxy img').evaluate(el=>{
     const animation=el.getAnimations()[0];
@@ -42,12 +42,12 @@ test('closing during expansion and reopening during dismissal resolve to the lat
   expect(Math.abs(reversal.before.y-reversal.after.y)).toBeLessThan(1);
   expect(Math.abs(reversal.before.width-reversal.after.width)).toBeLessThan(1);
   await origin.dispatchEvent('click');
-  await expect(page.locator('#viewer-count')).toHaveText('1 / 7');
+  await expect(page.locator('#viewer-count')).toHaveText('1 / 13');
   await expect(page.locator('.viewer-motion-proxy')).toHaveCount(0);
   await expect(page.locator('#image-viewer')).toBeVisible();
   await expect(page.locator('#viewer-image')).toBeVisible();
   await page.keyboard.press('ArrowRight');
-  await expect(page.locator('#viewer-count')).toHaveText('2 / 7');
+  await expect(page.locator('#viewer-count')).toHaveText('2 / 13');
   await page.locator('#viewer-close').dispatchEvent('click');
   // A different selected image has no relationship to the opening crop.
   await expect(page.locator('.viewer-motion-proxy')).toHaveCount(0);
@@ -64,13 +64,13 @@ test('live reduced motion settles the expansion and retains usable image control
   await expect(page.locator('.viewer-motion-proxy')).toHaveCount(0);
   await expect(page.locator('#viewer-image')).toBeVisible();
   await page.keyboard.press('ArrowRight');
-  await expect(page.locator('#viewer-count')).toHaveText('2 / 7');
+  await expect(page.locator('#viewer-count')).toHaveText('2 / 13');
   expect(await page.locator('#viewer-image').evaluate(el=>el.getAnimations().every(animation=>(animation.effect as KeyframeEffect).getKeyframes().every(frame=>!frame.transform)))).toBe(true);
   await page.keyboard.press('Escape');
   await expect(page.locator('#image-viewer')).not.toBeVisible();
   await page.locator('#motion-choice').selectOption('off');
   await page.locator('.primary-figure [data-gallery-index]').click();
-  await expect(page.locator('#viewer-count')).toHaveText('1 / 7');
+  await expect(page.locator('#viewer-count')).toHaveText('1 / 13');
   await expect(page.locator('.viewer-motion-proxy')).toHaveCount(0);
   await page.keyboard.press('Escape');
   await expect(page.locator('#image-viewer')).not.toBeVisible();
@@ -82,17 +82,17 @@ test('a late image decode cannot overwrite a reopened gallery',async({page})=>{
   await page.route('**/gallery/crestmont-west/2.webp',async route=>{await held;await route.continue();});
   await page.goto('/crestmontwest',{waitUntil:'domcontentloaded'});
   await page.locator('.primary-figure [data-gallery-index]').click();
-  await expect(page.locator('#viewer-count')).toHaveText('1 / 7');
+  await expect(page.locator('#viewer-count')).toHaveText('1 / 13');
   await page.locator('#viewer-next').dispatchEvent('click');
   await expect(page.locator('#viewer-status')).toContainText('Loading');
   await page.locator('#viewer-close').dispatchEvent('click');
   await expect(page.locator('#image-viewer')).not.toBeVisible();
   await page.locator('.primary-figure [data-gallery-index]').click();
-  await expect(page.locator('#viewer-count')).toHaveText('1 / 7');
+  await expect(page.locator('#viewer-count')).toHaveText('1 / 13');
   release();
   await expect(page.locator('#viewer-image')).toHaveAttribute('src','/media/gallery/crestmont-west/1.webp');
   await expect(page.locator('.viewer-motion-proxy')).toHaveCount(0);
-  await expect(page.locator('#viewer-count')).toHaveText('1 / 7');
+  await expect(page.locator('#viewer-count')).toHaveText('1 / 13');
   await page.keyboard.press('Escape');
   await expect(page.locator('#image-viewer')).not.toBeVisible();
 });
@@ -105,22 +105,24 @@ test('hero controls retain the frame, show drawings in full and open the selecte
   const firstFrame=await link.boundingBox();
   const firstTitle=await page.locator('h1').evaluate(el=>el.getBoundingClientRect().top+scrollY);
   await page.locator('#project-hero-next').click();
-  await expect(page.locator('#project-hero-count')).toHaveText('02 / 07');
+  await expect(page.locator('#project-hero-count')).toHaveText('02 / 13');
   await expect(link).toHaveAttribute('data-gallery-index','1');
   const chosenCaption=await image.getAttribute('alt');
   await expect(page.locator('.primary-figure [data-figure-caption]')).toHaveText(chosenCaption!);
   expect((await link.boundingBox())!.height).toBeCloseTo(firstFrame!.height,0);
   expect(await page.locator('h1').evaluate(el=>el.getBoundingClientRect().top+scrollY)).toBeCloseTo(firstTitle,0);
   await link.click();
-  await expect(page.locator('#viewer-count')).toHaveText('2 / 7');
+  await expect(page.locator('#viewer-count')).toHaveText('2 / 13');
   await expect(page.locator('#viewer-image')).toHaveAttribute('src','/media/gallery/crestmont-west/2.webp');
   await expect(page.locator('#viewer-caption')).toHaveText(chosenCaption!);
   await page.keyboard.press('Escape');
   await expect(page.locator('#image-viewer')).not.toBeVisible();
   await page.locator('#project-hero-previous').click();
-  await expect(page.locator('#project-hero-count')).toHaveText('01 / 07');
-  await page.locator('#project-hero-previous').click();
-  await expect(page.locator('#project-hero-count')).toHaveText('07 / 07');
+  await expect(page.locator('#project-hero-count')).toHaveText('01 / 13');
+  for(let number=13;number>=7;number--){
+    await page.locator('#project-hero-previous').click();
+    await expect(page.locator('#project-hero-count')).toHaveText(`${String(number).padStart(2,'0')} / 13`);
+  }
   await expect(page.locator('.primary-figure .image-medium')).toHaveText('Drawing');
   await expect(image).toHaveCSS('object-fit','contain');
   expect((await link.boundingBox())!.height).toBeCloseTo(firstFrame!.height,0);
@@ -147,7 +149,7 @@ test('opening the current hero cancels a pending carousel replacement',async({pa
   await expect(page.locator('#project-hero-status')).toContainText('Loading');
   await expect(page.locator('.primary-figure .gallery-link')).toHaveAttribute('data-gallery-index','0');
   await page.locator('.primary-figure .gallery-link').click();
-  await expect(page.locator('#viewer-count')).toHaveText('1 / 7');
+  await expect(page.locator('#viewer-count')).toHaveText('1 / 13');
   release();
   await expect(page.locator('.viewer-motion-proxy')).toHaveCount(0);
   await page.keyboard.press('Escape');
@@ -162,8 +164,8 @@ test('mobile hero captions and controls remain still across every photograph and
   await page.locator('#project-hero-next').scrollIntoViewIfNeeded();
   const positions:number[]=[];
   const heights:number[]=[];
-  for(let index=0;index<7;index++){
-    await expect(page.locator('#project-hero-count')).toHaveText(`${String(index+1).padStart(2,'0')} / 07`);
+  for(let index=0;index<13;index++){
+    await expect(page.locator('#project-hero-count')).toHaveText(`${String(index+1).padStart(2,'0')} / 13`);
     positions.push(await page.locator('.project-hero-controls').evaluate(el=>el.getBoundingClientRect().top+scrollY));
     heights.push(await page.locator('.project-hero-gallery').evaluate(el=>el.getBoundingClientRect().height));
     await page.locator('#project-hero-next').click();
@@ -177,14 +179,14 @@ test('viewer media shortcuts return to the last image and preserve drawing zoom 
   await page.goto('/crestmontwest');
   await page.locator('.primary-figure .gallery-link').click();
   await page.locator('#viewer-next').click();
-  await expect(page.locator('#viewer-count')).toHaveText('2 / 7');
+  await expect(page.locator('#viewer-count')).toHaveText('2 / 13');
   await page.getByRole('button',{name:'Drawings',exact:true}).click();
-  await expect(page.locator('#viewer-count')).toHaveText('7 / 7');
+  await expect(page.locator('#viewer-count')).toHaveText('7 / 13');
   await expect(page.getByRole('button',{name:'Drawings',exact:true})).toHaveAttribute('aria-pressed','true');
   await page.getByRole('button',{name:'Zoom in',exact:true}).click();
   await expect(page.locator('#image-viewer')).toHaveAttribute('data-zoomed','');
   await page.getByRole('button',{name:'Images',exact:true}).click();
-  await expect(page.locator('#viewer-count')).toHaveText('2 / 7');
+  await expect(page.locator('#viewer-count')).toHaveText('2 / 13');
   await expect(page.locator('#image-viewer')).not.toHaveAttribute('data-zoomed','');
   await expect(page.locator('#viewer-close')).toBeInViewport();
   await page.keyboard.press('Escape');

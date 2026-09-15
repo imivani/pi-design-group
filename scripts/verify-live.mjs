@@ -58,8 +58,8 @@ try{
   progress('Homepage and video passed');
 
   const links=await page.locator('#project-collection .project-link').evaluateAll(elements=>elements.map(element=>({href:element.href,id:element.dataset.projectCard})));
-  assert.equal(links.length,27);
-  assert.equal(new Set(links.map(link=>link.href)).size,27);
+  assert.equal(links.length,30);
+  assert.equal(new Set(links.map(link=>link.href)).size,30);
   for(let offset=0;offset<links.length;offset+=4){
     await Promise.all(links.slice(offset,offset+4).map(async link=>{
       assert.equal(new URL(link.href).origin,target.origin);
@@ -69,8 +69,8 @@ try{
       assert((await result.text()).includes(`data-project-id="${link.id}"`),`Project route ${link.id} returned the wrong page.`);
     }));
   }
-  report.checks.projectRoutes=27;
-  progress('All 27 direct project routes passed');
+  report.checks.projectRoutes=30;
+  progress('All 30 direct project routes passed');
 
   await page.locator('.featured-media').evaluate(element=>element.scrollIntoView({block:'center',behavior:'instant'}));
   await page.mouse.move(1,1);
@@ -106,7 +106,7 @@ try{
   await page.locator('.next-project [data-back-projects]').click();
   await expect(page).toHaveURL(url=>normalPath(url.pathname)===normalPath(base)&&url.hash==='#projects');
   await homeReady(page);
-  await expect(page.locator('#project-collection .project-link')).toHaveCount(27);
+  await expect(page.locator('#project-collection .project-link')).toHaveCount(30);
   await page.goto(new URL(base+'darcy',target.origin).href,{waitUntil:'domcontentloaded'});
   await page.locator('#site-header .site-wordmark').click();
   await expect(page).toHaveURL(url=>normalPath(url.pathname)===normalPath(base)&&url.hash==='#hero');

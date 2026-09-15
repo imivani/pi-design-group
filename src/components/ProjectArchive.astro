@@ -1,4 +1,5 @@
 ---
+import { renderingCredit } from '../data/image-credit';
 import { ArrowRight, ArrowUpRight, Search } from '@lucide/astro';
 import { projects, projectPath } from '../data/projects';
 import { projectDetails } from '../data/project-details';
@@ -13,7 +14,7 @@ const archive = projects.map(project => {
   const media = kinds.has('photograph')
     ? kinds.has('rendering') ? kinds.has('drawing') ? 'Photos, Renderings & Drawings' : 'Photography & Renderings' : kinds.has('drawing') ? 'Photography & Drawings' : 'Photography'
     : kinds.has('rendering') ? kinds.has('drawing') ? 'Renderings & Drawings' : 'Renderings' : 'Landscape Drawings';
-  return { ...project, brief, media, viewCount: detail.gallery.length };
+  return { ...project, brief, media: kinds.has('rendering') ? `${media} · ${renderingCredit(project, true)}` : media, viewCount: detail.gallery.length };
 });
 ---
 <section id="projects" class="projects frame" aria-labelledby="projects-title" tabindex="-1">
@@ -47,7 +48,7 @@ const archive = projects.map(project => {
           <div class="project-information">
             <h3>{project.name}</h3>
             <div class="project-facts"><span class="project-type">{project.type}</span>{project.location && <span class="project-location">{project.location}</span>}</div>
-            {project.imageKind !== 'photograph' && <span class="project-medium">{project.imageKind === 'drawing' ? 'Drawing' : 'Rendering'}</span>}
+            {project.imageKind !== 'photograph' && <span class="project-medium">{project.imageKind === 'drawing' ? 'Drawing' : renderingCredit(project)}</span>}
             <div class="project-more">
               <p class="project-brief">{project.brief}</p>
               <div class="project-media-details"><span>{project.viewCount} Views</span><span>{project.media}</span></div>

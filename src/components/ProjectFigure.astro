@@ -1,14 +1,15 @@
 ---
 import { ArrowUpRight } from '@lucide/astro';
+import { imageLabel } from '../data/image-credit';
 import type { ProjectImage } from '../data/project-details';
-interface Props { image: ProjectImage; index: number; primary?: string; reveal?: boolean; }
-const { image, index, primary, reveal = false } = Astro.props;
+interface Props { image: ProjectImage; index: number; primary?: string; reveal?: boolean; nativeSize?: boolean; }
+const { image, index, primary, reveal = false, nativeSize = false } = Astro.props;
 const src = import.meta.env.BASE_URL + image.src.replace(/^\//, '');
 ---
-<figure class:list={['project-figure', { 'is-drawing': image.medium === 'drawing', 'primary-figure': !!primary }]} data-reveal={reveal || undefined}>
+<figure class:list={['project-figure', { 'is-drawing': image.medium === 'drawing', 'primary-figure': !!primary, 'native-size-figure': nativeSize }]} style={nativeSize ? `--photo-native-width:${image.width}px` : undefined} data-reveal={reveal || undefined}>
   <a class="gallery-link" href={src} data-gallery-index={index} aria-label={'View image: ' + image.caption}>
     <img id={primary ? 'project-opening-image' : undefined} src={src} alt={image.caption} width={image.width} height={image.height} loading={primary ? 'eager' : 'lazy'} decoding="async" fetchpriority={primary ? 'high' : 'auto'} data-primary-project={primary} />
     <span class="gallery-open" aria-hidden="true"><ArrowUpRight size={22} stroke-width={1.4} /></span>
   </a>
-  <figcaption><span data-figure-caption>{image.caption}</span><span class="image-medium">{image.medium === 'drawing' ? 'Drawing' : image.medium === 'rendering' ? 'Rendering' : ''}</span></figcaption>
+  <figcaption><span data-figure-caption>{image.caption}</span><span class="image-medium">{imageLabel(image)}</span></figcaption>
 </figure>

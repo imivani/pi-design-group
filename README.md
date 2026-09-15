@@ -1,6 +1,6 @@
 # Pi Design Group
 
-A landscape architecture portfolio with a video homepage and 27 individual project pages. Built with Astro, TypeScript, native CSS and Lucide icons.
+A landscape architecture portfolio with a video homepage and 30 individual project pages. Built with Astro, TypeScript, native CSS and Lucide icons.
 
 **Live website:** https://pi-design-group.vercel.app/
 
@@ -19,11 +19,15 @@ Open **http://127.0.0.1:4321/**. The repository is private, so cloning requires 
 
 On Windows, after installing dependencies, **Open PI Design.vbs** starts the preview quietly and opens it in your browser. **Start-Website.ps1 -NoBrowser** starts it without opening a browser window.
 
+## Latest photography update
+
+The owner-supplied USB archive adds 70 photographs, 3 architect renderings and pages for Homestead Townhomes, Pickel Residence and Ryan Residence. Rendered images credit the project architect, with firm names where documented. See [the source review](design/USB_PHOTO_UPDATE.md).
+
 ## Included
 
 - The original Pi video hero, real project photography and continuous page framing, with quieter borders over the video.
 - A Calgary-based practice introduction followed by Our Expertise in Three Areas.
-- Photographic Projects and Services menus with a stable shared frame, all 27 projects and mobile navigation.
+- Photographic Projects and Services menus with a stable shared frame, all 30 projects and mobile navigation.
 - A dedicated photographic search menu with name, project-type and location matching, keyboard navigation and phone layouts.
 - Three expanding service photographs: Multifamily Communities, Commercial Plazas and Public Parks.
 - A deep charcoal Featured Project section: oversized Crestmont West title, dominant photograph, overlapping detail photograph and three paired views that advance smoothly, with pause/resume and manual controls.
@@ -53,7 +57,7 @@ Browser tests use installed Google Chrome. Keep the development server running o
 npm test
 ```
 
-To verify the completed static build, including all 27 project destinations and the interactive menus/viewers:
+To verify the completed static build, including all 30 project destinations and the interactive menus/viewers:
 
 ```sh
 node scripts/verify-build.mjs

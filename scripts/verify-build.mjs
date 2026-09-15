@@ -26,7 +26,7 @@ try{
   await page.addInitScript(()=>localStorage.setItem('pi-motion','off'));
   await page.goto(address+base);await page.waitForSelector('html[data-enhanced]');
   const links=await page.locator('.project-link').evaluateAll(els=>els.map(el=>el.getAttribute('href')));
-  assert.equal(links.length,27);assert(links.every(href=>href.startsWith(base)));
+  assert.equal(links.length,30);assert(links.every(href=>href.startsWith(base)));
   for(const href of links){const response=await page.request.get(address+href);assert.equal(response.status(),200,href);}
   await page.locator('[data-featured-view="planting"]').click();
   await expect(page.locator('[data-featured-image]')).toHaveAttribute('src',base+'media/gallery/crestmont-west/8.webp');
@@ -42,7 +42,7 @@ try{
   await page.locator('[data-menu-trigger="projects"]').click();
   await page.locator('button[data-catalogue-open]').click();
   const catalogueLinks=await page.locator('[data-catalogue-project]').evaluateAll(els=>els.map(el=>el.getAttribute('href')));
-  assert.equal(catalogueLinks.length,27);assert(catalogueLinks.every(href=>href.startsWith(base)));
+  assert.equal(catalogueLinks.length,30);assert(catalogueLinks.every(href=>href.startsWith(base)));
   await page.keyboard.press('Escape');await page.keyboard.press('Escape');
   await page.locator('[data-project="seton-crossing"] a').click();await page.waitForSelector('[data-primary-project]');
   await page.waitForLoadState('domcontentloaded');
@@ -56,10 +56,11 @@ try{
   await expect(page.locator('[data-search-project]:visible')).toHaveCount(2);
   await expect(page.locator('[data-search-project="darcy"]')).toHaveAttribute('href',base+'darcy');
   const searchLinks=await page.locator('[data-search-project]').evaluateAll(els=>els.map(el=>el.getAttribute('href')));
-  assert.equal(searchLinks.length,27);assert(searchLinks.every(href=>href.startsWith(base)));
+  assert.equal(searchLinks.length,30);assert(searchLinks.every(href=>href.startsWith(base)));
   await page.keyboard.press('Escape');
   await expect(page.locator('#site-search-dialog')).not.toBeVisible();
-  await page.locator('[data-gallery-index="0"]').click();await expect(page.locator('#viewer-count')).toHaveText('1 / 6');
+  const imageCount=await page.locator('#project-gallery-data').evaluate(el=>JSON.parse(el.textContent).length);
+  await page.locator('[data-gallery-index="0"]').click();await expect(page.locator('#viewer-count')).toHaveText(`1 / ${imageCount}`);
   await page.keyboard.press('Escape');
   await page.locator('[data-menu-trigger="services"]').click();await page.locator('[data-service-link="commercial"]').click();
   await page.waitForSelector('#tab-commercial[aria-expanded="true"]');
@@ -85,5 +86,5 @@ try{
   await expect(motionPage.locator('.hero-copy')).toHaveCSS('opacity','1');
   await motionContext.close();
   assert.deepEqual(errors,[]);
-  console.log(JSON.stringify({base,pages:28,links:27,pairedFeaturedViews:true,drawingViewer:true,navigationCatalogue:true,projectSearch:true,earlyProjectInformation:true,logoReturn:true,errors,passed:true}));
+  console.log(JSON.stringify({base,pages:31,links:30,pairedFeaturedViews:true,drawingViewer:true,navigationCatalogue:true,projectSearch:true,earlyProjectInformation:true,logoReturn:true,errors,passed:true}));
 }finally{await browser.close();await new Promise(resolve=>server.close(resolve));}

@@ -1,7 +1,9 @@
+import { renderingCredit } from './image-credit';
 import rawGalleries from './galleries.json';
+import additionalGalleries from './additional-galleries.json';
 import type { Project } from './projects';
 
-export type ProjectImage = { src: string; width: number; height: number; source: string; medium: 'photograph' | 'rendering' | 'drawing'; caption: string };
+export type ProjectImage = { src: string; width: number; height: number; source: string; medium: 'photograph' | 'rendering' | 'drawing'; caption: string; attribution?: string };
 export type ProjectEditorial = {
   openingNote?: string;
   introduction?: string;
@@ -75,6 +77,9 @@ const descriptions: Record<string,string> = {
 // below, not the one-based source image numbers used by selections/captions.
 // Keep each image in one page position; the viewer preserves the stable order.
 const editorial: Record<string, ProjectEditorial> = {
+  'homestead-townhomes': { openingNote: 'Front gardens and individual entrances along a residential street.', introduction: 'The landscape at Homestead Townhomes brings lawn, planting beds and entrance paths together along the street.' },
+  'pickel-residence': { openingNote: 'A paved outdoor room with a contrasting stone border.', introduction: 'Large paving slabs and darker border stones define a compact patio enclosed by timber fencing.' },
+  'ryan-residence': { openingNote: 'A garden arranged around lawn, planting and a paved terrace.', introduction: 'Stepping stones connect the lawn to the terrace, with planting along the timber-fenced boundary.' },
   'crestmont-west': {
     openingNote: 'Landscape design linking homes, shared play space and the commercial frontage.',
     introduction: 'The site plan brings individual front entrances, common green space and a small commercial cluster into one connected layout. Within the residential areas, paths bend around planting and open into places to sit and play. Stone edging separates the gravel play surface from planted beds; closer to the shops, grasses and trees form a continuous edge along the sidewalk.',
@@ -134,8 +139,10 @@ export function projectDetails(project: Project) {
   const gallery = (selections[project.id] || []).map(number => {
     const item = source[number - 1];
     const medium = overrides[project.id]?.[number] || (number === 3 || project.id === 'rona' ? 'drawing' : project.imageKind);
-    return { ...item, medium, caption: captions[project.id]?.[number] || (medium === 'drawing' ? `${project.name}. Landscape drawing.` : medium === 'rendering' ? `${project.name}. Architectural rendering.` : `${project.name}. ${project.type === 'Residential collection' ? 'Residential view' : 'Landscape and building context'}.`) } as ProjectImage;
+    return { ...item, medium, attribution: medium === 'rendering' ? renderingCredit(project) : undefined, caption: captions[project.id]?.[number] || (medium === 'drawing' ? `${project.name}. Landscape drawing.` : medium === 'rendering' ? `${project.name}. Architectural rendering.` : `${project.name}. ${project.type === 'Residential collection' ? 'Residential view' : 'Landscape and building context'}.`) } as ProjectImage;
   });
+  const additional = (additionalGalleries as Record<string, ProjectImage[]>)[project.id] || [];
+  gallery.push(...additional.map(image => ({ ...image, attribution: image.medium === 'rendering' ? renderingCredit(project) : undefined })));
   const collection = project.type === 'Residential collection';
   return { gallery, collection, editorial: editorial[project.id], description: descriptions[project.id] || (collection ? 'A collection of residential work, with photographs and drawings from individual home projects.' : undefined) };
 }
