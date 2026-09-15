@@ -156,3 +156,7 @@ Validation: five contact checks cover image preview, inline form, preserved inpu
 - Next-project sections use the destination project's own image as a full-width dark blurred backdrop, matching Featured Projects. Foreground credits and navigation remain intact.
 - Featured projects advance on a three-second rhythm with an 850ms directional slide/settle and 780ms crossfade across all three photographs. The old section-wide hover pause was making the carousel appear static; pointer hover no longer stops rotation, and pointer/touch focus no longer leaves it paused. Keyboard focus, explicit pause, reduced/off motion, offscreen state and hidden tabs still suspend autoplay.
 - Ten focused autoplay/project-layout checks passed, including a complete carousel loop under pointer hover, image failure, interruption and motion preferences. Desktop/mobile visuals, type checking and the 32-page production verifier passed.
+
+## September 15: Five-second featured carousel
+- Changed the automatic interval from three seconds to five seconds at the owner's request. Preserved the slide/crossfade and pointer-hover behavior. All seven focused carousel checks pass.
+

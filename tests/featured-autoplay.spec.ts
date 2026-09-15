@@ -10,7 +10,7 @@ async function showFeatured(page: Page) {
 const selected = (page: Page) => page.locator('[data-featured-view][aria-selected="true"]');
 const autoplay = (page: Page) => page.locator('#featured');
 async function advance(page: Page, view: string) {
-  await page.clock.fastForward(3100);
+  await page.clock.fastForward(5100);
   await expect(selected(page)).toHaveAttribute('data-featured-view', view);
   await expect(page.locator('.featured-outgoing')).toHaveCount(0);
   await expect(autoplay(page)).toHaveAttribute('data-featured-autoplay', 'running');
@@ -22,7 +22,7 @@ test('automatic views dwell, animate real photo pairs, and complete a full loop 
   await expect(autoplay(page)).toHaveAttribute('data-featured-autoplay', 'running');
   await expect(autoplay(page)).toHaveCSS('background-color', 'rgb(27, 28, 29)');
   const before = await page.locator('.featured-controls').boundingBox();
-  await page.clock.fastForward(2000);
+  await page.clock.fastForward(4000);
   await expect(selected(page)).toHaveAttribute('data-featured-view', 'crestmont-west');
   await page.clock.fastForward(1200);
   await expect(selected(page)).toHaveAttribute('data-featured-view', 'darcy');
@@ -115,7 +115,7 @@ test('a delayed automatic image cannot override newer manual input', async ({ pa
   const hold = new Promise<void>(resolve => { release = resolve; });
   await page.route('**/gallery/darcy/usb-img_2490.webp', async route => { await hold; await route.continue(); });
   await showFeatured(page);
-  await page.clock.fastForward(3100);
+  await page.clock.fastForward(5100);
   await expect(page.locator('#featured-perspective')).toHaveAttribute('aria-busy', 'true');
   await page.locator('[data-featured-next]').dispatchEvent('click');
   await expect(selected(page)).toHaveAttribute('data-featured-view', 'seton-crossing');
@@ -132,7 +132,7 @@ test('pausing invalidates a pending automatic pair even when its files finish lo
   const hold = new Promise<void>(resolve => { release = resolve; });
   await page.route('**/gallery/darcy/usb-img_2490.webp', async route => { await hold; await route.continue(); });
   await showFeatured(page);
-  await page.clock.fastForward(3100);
+  await page.clock.fastForward(5100);
   await expect(page.locator('#featured-perspective')).toHaveAttribute('aria-busy', 'true');
   await page.locator('[data-featured-autoplay-toggle]').dispatchEvent('click');
   release();
@@ -149,7 +149,7 @@ test('an unavailable automatic pair preserves the current view and can be retrie
   await page.clock.install();
   await page.route('**/gallery/darcy/usb-img_2490.webp', route => route.abort());
   await showFeatured(page);
-  await page.clock.fastForward(3100);
+  await page.clock.fastForward(5100);
   await expect(page.locator('.featured-status')).toContainText('Automatic projects paused');
   await expect(selected(page)).toHaveAttribute('data-featured-view', 'crestmont-west');
   await expect(page.getByRole('button', { name: 'Resume automatic featured projects' })).toBeVisible();
