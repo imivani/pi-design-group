@@ -25,6 +25,9 @@ try{
   page.on('response',response=>{if(response.status()>=400)errors.push(response.status()+' '+response.url());});
   await page.addInitScript(()=>localStorage.setItem('pi-motion','off'));
   await page.goto(address+base);await page.waitForSelector('html[data-enhanced]');
+  await page.locator('#projects').evaluate(element=>element.scrollIntoView({block:'start'}));
+  await expect(page.locator('.site-header')).toHaveAttribute('data-theme','light');
+  await expect(page.locator('.site-header')).toHaveCSS('backdrop-filter','blur(48px) saturate(1.15)');
   const links=await page.locator('.project-link').evaluateAll(els=>els.map(el=>el.getAttribute('href')));
   assert.equal(links.length,30);assert(links.every(href=>href.startsWith(base)));
   for(const href of links){const response=await page.request.get(address+href);assert.equal(response.status(),200,href);}

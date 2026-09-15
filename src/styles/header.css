@@ -12,7 +12,7 @@
   box-shadow: 0 5px 22px rgb(15 20 23 / 9%);
   transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease;
 }
-.site-header[data-theme='dark'][data-scrolled='true'] { background: rgb(27 35 39 / 96%); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+.site-header[data-theme='dark'][data-scrolled='true'] { background: rgb(27 35 39 / 96%); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
 .site-header[data-theme='light'] {
   --header-ink: #141719;
   --header-line: rgb(105 119 130 / 24%);
@@ -23,8 +23,8 @@
 @supports ((backdrop-filter: blur(24px)) or (-webkit-backdrop-filter: blur(24px))) {
   .site-header[data-theme='light'] {
     background: linear-gradient(180deg, rgb(255 255 255 / 94%) 0%, rgb(248 250 252 / 84%) 42%, rgb(233 239 243 / 90%) 100%);
-    backdrop-filter: blur(48px) saturate(1.15);
     -webkit-backdrop-filter: blur(48px) saturate(1.15);
+    backdrop-filter: blur(48px) saturate(1.15);
   }
 }
 .site-header__inner { height: 100%; display: flex; align-items: center; justify-content: space-between; border-inline: 1px solid var(--header-line); padding-inline: 24px; gap: 32px; }
@@ -65,7 +65,7 @@
   transition: opacity 180ms ease, transform 260ms cubic-bezier(.2,.7,.2,1), visibility 0s 260ms;
 }
 @supports (backdrop-filter: blur(20px)) {
-  .nav-surface { background: rgb(25 33 36 / 87%); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); }
+  .nav-surface { background: rgb(25 33 36 / 87%); -webkit-backdrop-filter: blur(24px); backdrop-filter: blur(24px); }
 }
 .nav-surface[data-menu='services'] { --nav-width: 1024px; }
 .nav-surface[data-catalogue-open='true'][data-menu='projects'] { --nav-width: 1200px; }
@@ -166,7 +166,7 @@
   .site-header__utilities { margin-left: auto; gap: 0; }
 }
 @media (max-width: 359px) { .site-wordmark { font-size: 20px; letter-spacing: -.02em; } .mobile-menu-button>span { display: none; } .mobile-navigation { padding-inline: 16px; } }
-@media (prefers-reduced-transparency: reduce) { .site-header, .site-header[data-theme='dark'][data-scrolled='true'] { background: #26333b; backdrop-filter: none; -webkit-backdrop-filter: none; } .site-header[data-theme='light'] { background: #fff; backdrop-filter: none; -webkit-backdrop-filter: none; } .nav-surface { background: #20282c; backdrop-filter: none; -webkit-backdrop-filter: none; } }
+@media (prefers-reduced-transparency: reduce) { .site-header, .site-header[data-theme='dark'][data-scrolled='true'] { background: #26333b; -webkit-backdrop-filter: none; backdrop-filter: none; } .site-header[data-theme='light'] { background: #fff; -webkit-backdrop-filter: none; backdrop-filter: none; } .nav-surface { background: #20282c; -webkit-backdrop-filter: none; backdrop-filter: none; } }
 html[data-motion='reduced'] .nav-surface { transform: none; transition: opacity 100ms ease, visibility 0s 100ms; }
 html[data-motion='reduced'] .nav-surface[data-open='true'] { transition-delay: 0s; }
 html[data-motion='reduced'] :is(.nav-link::after,.nav-trigger svg,.mobile-direct-link>svg,.mobile-catalogue-toggle>svg,.catalogue-links>a>svg) { transition: none; transform: none; }
@@ -180,5 +180,5 @@ html[data-motion='off'] .nav-surface { transform: none; }
   .service-menu-images img { transition-duration: 100ms; }
   .catalogue-links>a>svg, .mobile-catalogue-toggle>svg { transition: none; transform: none; }
 }
-@media (forced-colors: active) { .site-header,.site-header[data-theme],.nav-surface { background: Canvas; color: CanvasText; border-color: CanvasText; box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none; } .project-menu-category,.project-menu-preview,.service-menu-link,.service-menu-link__copy,.project-menu-preview__place { color: LinkText; } }
+@media (forced-colors: active) { .site-header,.site-header[data-theme],.nav-surface { background: Canvas; color: CanvasText; border-color: CanvasText; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; } .project-menu-category,.project-menu-preview,.service-menu-link,.service-menu-link__copy,.project-menu-preview__place { color: LinkText; } }
 @media print { .site-header,.nav-surface,.mobile-navigation { display: none!important; } }
