@@ -110,3 +110,5 @@ Featured Projects now rotates through Crestmont West, D’Arcy and Seton Crossin
 Archive cards have a #fafafa surface and a faint outline, preserving their rounded shape before hover. Gallery counts stay visible beside an Images icon. Grid/Index controls and contact methods have meaningful Lucide icons. Project names and smaller action labels have stronger weight; editorial headlines remain light. All rendering credits remain present.
 
 Validation: the 17 existing focused browser checks passed (16 initially; the narrow-phone control check passed after a spacing fix). An additional end-to-end check passed for all three project identities, locations and destinations, including opening D’Arcy. Feature accessibility was checked at 320, 390, 1024, 1100 and 1440px. Desktop/mobile visual captures were reviewed. Type checking reported no errors, warnings or hints. Production build verification passed all 30 project destinations, search, navigation, drawings and project transitions across 31 pages.
+
+Owner correction: archive project names retain their original weight; gallery counts use the label “Photos” beside the image icon.

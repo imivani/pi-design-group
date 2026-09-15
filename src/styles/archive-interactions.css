@@ -7,7 +7,7 @@
   #project-collection[data-view='grid'] .project-information{position:relative;display:flex;flex:1;flex-direction:column;padding:18px 18px 21px;color:var(--ink);z-index:2;transition:color 300ms ease}
   .project-image-shade{display:none;pointer-events:none}
   #project-collection[data-view='grid'] .project-image-shade{display:block;position:absolute;inset:0 0 auto;height:calc(100% + var(--project-info-height,210px));border-radius:var(--image-radius,14px);background:linear-gradient(0deg,rgb(25 27 28 / 93%) 0%,rgb(25 27 28 / 87%) 28%,rgb(25 27 28 / 66%) 48%,rgb(25 27 28 / 12%) 76%,transparent 100%);opacity:0;z-index:1;transition:opacity 680ms var(--ease-arrive)}
-  #project-collection[data-view='grid'] .project-information h3{font-size:22px;font-weight:600;line-height:1.2;letter-spacing:-.02em;text-decoration:none}
+  #project-collection[data-view='grid'] .project-information h3{font-size:22px;line-height:1.2;letter-spacing:-.02em;text-decoration:none}
   #project-collection[data-view='grid'] .project-facts{color:var(--muted);min-height:1.5em}
   #project-collection[data-view='grid'] .project-medium{color:var(--muted)}
   #project-collection[data-view='grid'] .project-arrow{display:none}

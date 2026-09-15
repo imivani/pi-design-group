@@ -18,7 +18,7 @@ test('archive photograph fills its rounded card smoothly while text and nearby r
   await card.hover();
   await expect(card.locator('.project-media-details')).toHaveCSS('opacity','1');
   await expect(card.locator('.project-brief')).toHaveText('Front gardens and street planting connect individual homes to the neighbourhood.');
-  await expect(card.locator('.project-media-details')).toHaveText('13 ViewsPhotography & Drawings');
+  await expect(card.locator('.project-media-details')).toHaveText('13 PhotosPhotography & Drawings');
   await expect(card.locator('.project-open')).toHaveCSS('opacity','1');
   await expect(card.locator('.project-information')).toHaveCSS('color','rgb(255, 255, 255)');
   expect(await card.locator('.project-image').boundingBox()).toEqual(picture);
@@ -48,7 +48,7 @@ test('archive drawing facts stay truthful, reduced motion settles, and touch ope
   const card=page.locator('[data-project="rona"] .project-link');
   await card.hover();
   await expect(card.locator('.project-media-details')).toHaveCSS('opacity','1');
-  await expect(card.locator('.project-media-details')).toHaveText('3 ViewsLandscape Drawings');
+  await expect(card.locator('.project-media-details')).toHaveText('3 PhotosLandscape Drawings');
   await expect(card.locator('.project-brief')).toContainText('existing and proposed planted areas');
   await expect(card.locator('.project-information')).toHaveCSS('color','rgb(255, 255, 255)');
   await page.emulateMedia({reducedMotion:'reduce'});
