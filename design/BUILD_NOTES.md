@@ -144,3 +144,10 @@ Validation: five contact checks cover image preview, inline form, preserved inpu
 - Extended the homepage contact photograph to both page edges, removed rounded corners and the gap above the footer, and kept text on the shared content rails.
 - Preserved the moving photograph and contact links. Verified desktop and mobile layouts, contact accessibility, and the production build.
 
+
+## September 15: Mobile glass navigation and photographic featured backdrop
+- Mobile navigation is an inset frosted sheet with 32px blur, a 420ms entrance and a 220ms dismissal. Route selection remains immediate. Reduced motion uses fades; Off settles immediately. Closing during entrance or motion changes preserves focus and scrolling.
+- Three photographic project shortcuts reduce browsing steps; catalogue rows and contact links have larger touch targets. The complete project catalogue remains available.
+- Featured projects now have an edge-to-edge darkened, softly blurred photograph behind the existing composition. The backdrop changes with the same decoded project photographs and respects the existing slideshow pause and motion controls.
+- Motion skill applied using native browser animation. Mobbin ClickUp navigation reference informed grouping and touch targets, not motion timing: https://mobbin.com/screens/a5d4ecb3-e59b-4cf5-a5e4-65215c8a5e8d.
+- Verified phone/desktop screenshots, 24 navigation/slideshow checks, type checking and the 32-page production verification. Corrected the new width check to account for the browser's reserved scrollbar gutter.

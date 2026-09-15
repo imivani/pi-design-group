@@ -184,3 +184,21 @@ html[data-motion='off'] .nav-surface { transform: none; }
 @media print { .site-header,.nav-surface,.mobile-navigation { display: none!important; } }
 
 .nav-link[aria-current="page"]::after{opacity:1;transform:scaleX(1)}
+
+/* A quiet frosted sheet, with comfortable touch targets. */
+.mobile-navigation{inset:8px;width:calc(100% - 16px);height:calc(100dvh - 16px);border:1px solid rgb(255 255 255 / 75%);border-radius:20px;background:linear-gradient(140deg,rgb(255 255 255 / 91%),rgb(239 244 244 / 84%));-webkit-backdrop-filter:blur(32px) saturate(1.2);backdrop-filter:blur(32px) saturate(1.2);box-shadow:0 24px 80px rgb(8 20 24 / 22%),inset 0 1px 0 white;scrollbar-width:thin}
+.mobile-navigation::backdrop{background:rgb(16 26 29 / 24%)}
+.mobile-navigation__header{background:rgb(248 251 251 / 92%);-webkit-backdrop-filter:blur(24px);backdrop-filter:blur(24px);margin-inline:-20px;padding-inline:20px;border-radius:20px 20px 0 0;z-index:2}
+.mobile-navigation__links{margin-top:18px}
+.mobile-navigation__links>.mobile-direct-link,.mobile-disclosure{border-bottom:1px solid rgb(49 64 69 / 12%)}
+.mobile-navigation :is(.mobile-direct-link,.mobile-catalogue-links>a,.mobile-disclosure__content>a){transition:background 180ms ease,color 180ms ease;touch-action:manipulation}
+.mobile-navigation :is(.mobile-direct-link,.mobile-catalogue-links>a,.mobile-disclosure__content>a):is(:active,:focus-visible){background:rgb(255 255 255 / 65%);color:#10191b}
+.mobile-project-shortcuts{display:grid;gap:8px;margin:4px 0 14px}
+.mobile-project-shortcuts>a{display:flex;align-items:center;gap:14px;min-height:76px;padding:8px;background:rgb(255 255 255 / 48%);border:1px solid rgb(255 255 255 / 72%);border-radius:12px;font-size:17px}
+.mobile-project-shortcuts img{width:80px;height:60px;object-fit:cover;border-radius:7px}
+.mobile-project-shortcuts svg{margin-left:auto;flex-shrink:0}
+.mobile-catalogue-links>a{min-height:56px;padding-right:8px;border-bottom:1px solid rgb(49 64 69 / 8%)}
+.mobile-navigation__contact>a{min-height:44px;display:flex;align-items:center}
+@media(max-width:359px){.mobile-navigation__header{margin-inline:-16px;padding-inline:16px}.mobile-project-shortcuts img{width:64px}}
+@media(prefers-reduced-motion:reduce){.mobile-navigation a,.mobile-navigation button{transition:none}}
+html[data-motion='off'] .mobile-navigation :is(a,button){transition:none}

@@ -207,12 +207,24 @@ if (header && surface && mobile) {
     link.addEventListener('focus', () => void selectProjectPreview(link));
   });
 
-  const closeMobile = (returnFocus = true) => {
-    mobileAnimation?.cancel();
+  let mobileClosing = false;
+  const finishMobileClose = (returnFocus: boolean) => {
+    mobileClosing = false;
     mobile.close();
     mobileButton.setAttribute('aria-expanded', 'false');
     document.documentElement.style.removeProperty('overflow');
     if (returnFocus) mobileButton.focus({ preventScroll: true });
+  };
+  const closeMobile = (returnFocus = true) => {
+    if (mobileClosing && returnFocus) return;
+    const opacity = getComputedStyle(mobile).opacity;
+    const transform = getComputedStyle(mobile).transform;
+    mobileAnimation?.cancel();
+    if (!returnFocus || motionMode() === 'off') { finishMobileClose(returnFocus); return; }
+    mobileClosing = true;
+    const closing = mobile.animate(motionMode() === 'full' ? [{ opacity, transform }, { opacity: 0, transform: 'translateY(-16px)' }] : [{ opacity }, { opacity: 0 }], {duration: motionMode() === 'full' ? 220 : 100, easing:'cubic-bezier(.4,0,1,1)',fill:'forwards'});
+    mobileAnimation = closing;
+    void closing.finished.then(() => { if (mobileAnimation === closing) { finishMobileClose(returnFocus); closing.cancel(); } }).catch(() => {});
   };
   mobileButton.addEventListener('click', () => {
     setMenu(null);
@@ -222,8 +234,8 @@ if (header && surface && mobile) {
     document.documentElement.style.overflow = 'hidden';
     mobile.querySelector<HTMLButtonElement>('[data-mobile-close]')?.focus({ preventScroll: true });
     if (motionMode() !== 'off') mobileAnimation = mobile.animate(
-      motionMode() === 'full' ? [{ opacity: 0, transform: 'translateY(-8px)' }, { opacity: 1, transform: 'translateY(0)' }] : [{ opacity: 0 }, { opacity: 1 }],
-      { duration: motionMode() === 'full' ? 260 : 100, easing: 'cubic-bezier(.2,.7,.2,1)' },
+      motionMode() === 'full' ? [{ opacity: 0, transform: 'translateY(-24px)' }, { opacity: 1, transform: 'translateY(0)' }] : [{ opacity: 0 }, { opacity: 1 }],
+      { duration: motionMode() === 'full' ? 420 : 100, easing: 'cubic-bezier(.22,1,.36,1)' },
     );
   });
   mobile.querySelector('[data-mobile-close]')?.addEventListener('click', () => closeMobile());
@@ -245,7 +257,7 @@ if (header && surface && mobile) {
       const end = opening ? body.firstElementChild!.getBoundingClientRect().height : 0;
       body.style.height = opening ? 'auto' : '0px';
       if (motionMode() !== 'full') return;
-      const animation = body.animate([{ height: `${start}px` }, { height: `${end}px` }], { duration: 240, easing: 'cubic-bezier(.2,.7,.2,1)' });
+      const animation = body.animate([{ height: `${start}px`, opacity: opening ? .45 : 1 }, { height: `${end}px`, opacity: opening ? 1 : .45 }], { duration: 340, easing: 'cubic-bezier(.22,1,.36,1)' });
       disclosureAnimations.set(body, animation);
       animation.finished.then(() => { if (disclosureAnimations.get(body) === animation) disclosureAnimations.delete(body); }).catch(() => {});
     });
@@ -296,6 +308,7 @@ if (header && surface && mobile) {
   desktop.addEventListener('change', resize);
   const resolveMotion = () => {
     if (motionMode() === 'full') return;
+    if (mobileClosing) finishMobileClose(true);
     incomingPane?.cancel(); mobileAnimation?.cancel(); catalogueAnimation?.cancel(); previewAnimation?.cancel();
     for (const animation of disclosureAnimations.values()) animation.cancel();
     disclosureAnimations.clear();

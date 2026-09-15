@@ -7,6 +7,7 @@ if (section) {
   const tabs = [...section.querySelectorAll<HTMLButtonElement>('[data-featured-view]')];
   const panel = section.querySelector<HTMLElement>('#featured-perspective')!;
   const main = section.querySelector<HTMLImageElement>('[data-featured-image]')!;
+  const background = section.querySelector<HTMLImageElement>('[data-featured-background]')!;
   const secondary = section.querySelector<HTMLImageElement>('[data-featured-detail]')!;
   const copy = section.querySelector<HTMLElement>('[data-featured-copy]')!;
   const name = section.querySelector<HTMLElement>('.featured-project-name')!;
@@ -67,6 +68,7 @@ if (section) {
     const previous = mode() === 'off' || !image.complete || !image.naturalWidth ? null : image.cloneNode() as HTMLImageElement;
     if (previous) {
       previous.removeAttribute('data-featured-image'); previous.removeAttribute('data-featured-detail');
+      previous.removeAttribute('data-featured-background');
       previous.alt = ''; previous.className = 'featured-outgoing'; previous.setAttribute('aria-hidden', 'true');
       previous.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1';
       image.parentElement!.append(previous);
@@ -99,6 +101,7 @@ if (section) {
       tabs.forEach((tab, i) => { tab.setAttribute('aria-selected', String(i === index)); tab.tabIndex = i === index ? 0 : -1; });
       panel.setAttribute('aria-labelledby', tabs[index].id);
       swap(main, view.image, view.alt, direction);
+      swap(background, view.image, '', direction);
       swap(secondary, view.detail, view.detailAlt, -direction);
       name.textContent = view.label; location.textContent = view.location;
       destination.href = view.href;

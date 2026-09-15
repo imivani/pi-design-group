@@ -124,6 +124,9 @@ const services = [
       <button class="mobile-direct-link" type="button" data-mobile-disclosure="mobile-project-links" aria-controls="mobile-project-links" aria-expanded="false">Projects <ChevronDown size={19} stroke-width={1.5} aria-hidden="true" /></button>
       <div class="mobile-disclosure__body" id="mobile-project-links" inert aria-hidden="true">
         <div class="mobile-disclosure__content">
+          <div class="mobile-project-shortcuts" aria-label="Featured projects">
+            {projectPreviews.map(project => project && <a href={projectPath(project, import.meta.env.BASE_URL)} data-project-card={project.id}><img src={asset(project.image)} alt="" width="160" height="120" loading="lazy" /><span>{project.name}</span><ArrowRight size={18} stroke-width={1.4} aria-hidden="true" /></a>)}
+          </div>
           <button class="mobile-catalogue-toggle" type="button" data-mobile-disclosure="mobile-project-catalogue" aria-controls="mobile-project-catalogue" aria-expanded="false">All Projects <span>{projects.length}</span><ChevronDown size={17} stroke-width={1.5} aria-hidden="true" /></button>
           <div class="mobile-disclosure__body" id="mobile-project-catalogue" inert aria-hidden="true"><nav class="mobile-catalogue-links" aria-label="All projects">{catalogue.map((project) => <a href={projectPath(project, import.meta.env.BASE_URL)} data-project-card={project.id}>{project.name}<ArrowRight size={16} stroke-width={1.25} aria-hidden="true" /></a>)}</nav></div>
           {categories.map((category) => <a href={categoryLink(category.id)} data-project-category={category.id}>{category.label}<ArrowRight size={16} stroke-width={1.25} aria-hidden="true" /></a>)}
