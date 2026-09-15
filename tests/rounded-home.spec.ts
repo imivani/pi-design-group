@@ -13,7 +13,7 @@ test('archive photograph fills its rounded card smoothly while text and nearby r
   const row=page.locator('[data-project="crestmont-west"]');
   const nextRow=await row.boundingBox();
   await expect(card.locator('.project-brief')).toBeVisible();
-  await expect(card.locator('.project-media-details')).toHaveCSS('opacity','0');
+  await expect(card.locator('.project-media-details')).toHaveCSS('opacity','1');
   expect(await card.locator('img').evaluate(element=>parseFloat(getComputedStyle(element).transitionDuration))).toBeGreaterThanOrEqual(.65);
   await card.hover();
   await expect(card.locator('.project-media-details')).toHaveCSS('opacity','1');

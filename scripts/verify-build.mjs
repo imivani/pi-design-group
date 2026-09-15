@@ -28,9 +28,9 @@ try{
   const links=await page.locator('.project-link').evaluateAll(els=>els.map(el=>el.getAttribute('href')));
   assert.equal(links.length,30);assert(links.every(href=>href.startsWith(base)));
   for(const href of links){const response=await page.request.get(address+href);assert.equal(response.status(),200,href);}
-  await page.locator('[data-featured-view="planting"]').click();
-  await expect(page.locator('[data-featured-image]')).toHaveAttribute('src',base+'media/gallery/crestmont-west/8.webp');
-  await expect(page.locator('[data-featured-detail]')).toHaveAttribute('src',base+'media/gallery/crestmont-west/5.webp');
+  await page.locator('[data-featured-view="seton-crossing"]').click();
+  await expect(page.locator('[data-featured-image]')).toHaveAttribute('src',base+'media/gallery/seton-crossing/2.webp');
+  await expect(page.locator('[data-featured-detail]')).toHaveAttribute('src',base+'media/gallery/seton-crossing/usb-img_2443.webp');
   await page.locator('[data-detail-select="paths"]').click();
   await expect(page.locator('#detail-plan-image')).toHaveAttribute('src',base+'media/gallery/evanston/3.webp');
   await expect(page.locator('#detail-project-link')).toHaveAttribute('href',base+'evanston');

@@ -1,6 +1,6 @@
 import { animate, mode } from './motion';
 
-type View = { id: string; label: string; image: string; alt: string; detail: string; detailAlt: string; copy: string };
+type View = { id: string; label: string; location: string; href: string; image: string; alt: string; detail: string; detailAlt: string; copy: string };
 const section = document.querySelector<HTMLElement>('#featured');
 if (section) {
   const views = JSON.parse(section.querySelector('#featured-view-data')!.textContent!) as View[];
@@ -9,6 +9,10 @@ if (section) {
   const main = section.querySelector<HTMLImageElement>('[data-featured-image]')!;
   const secondary = section.querySelector<HTMLImageElement>('[data-featured-detail]')!;
   const copy = section.querySelector<HTMLElement>('[data-featured-copy]')!;
+  const name = section.querySelector<HTMLElement>('.featured-project-name')!;
+  const location = section.querySelector<HTMLElement>('.featured-location')!;
+  const destination = section.querySelector<HTMLAnchorElement>('.featured-project-link')!;
+  const photos = [...section.querySelectorAll<HTMLAnchorElement>('.featured-photo,.featured-detail-photo')];
   const status = section.querySelector<HTMLElement>('.featured-status')!;
   const toggle = section.querySelector<HTMLButtonElement>('[data-featured-autoplay-toggle]')!;
   const cache = new Map<string, Promise<void>>(), animations = new Set<Animation>();
@@ -35,7 +39,7 @@ if (section) {
     const enabled = mode() === 'full';
     toggle.disabled = !enabled;
     toggle.toggleAttribute('data-autoplay-paused', paused || !enabled);
-    toggle.setAttribute('aria-label', !enabled ? 'Automatic featured views are off with this motion setting' : paused ? 'Resume automatic featured views' : 'Pause automatic featured views');
+    toggle.setAttribute('aria-label', !enabled ? 'Automatic featured projects are off with this motion setting' : paused ? 'Resume automatic featured projects' : 'Pause automatic featured projects');
     if (!canRotate()) {
       clearAutoplay();
       // An image still being decoded must not arrive after someone has paused,
@@ -96,14 +100,19 @@ if (section) {
       panel.setAttribute('aria-labelledby', tabs[index].id);
       swap(main, view.image, view.alt, direction);
       swap(secondary, view.detail, view.detailAlt, -direction);
+      name.textContent = view.label; location.textContent = view.location;
+      destination.href = view.href;
+      photos.forEach(link => { link.href = view.href + '#gallery'; link.setAttribute('aria-label', `View the ${view.label} gallery`); });
+      panel.dataset.featuredProject = view.id;
       copy.textContent = view.copy;
+      for (const text of [name, location]) track(animate(text, [{ opacity: .2, transform: 'translateY(6px)' }, { opacity: 1, transform: 'translateY(0)' }], 460));
       track(animate(copy, [{ opacity: .3 }, { opacity: 1 }], 520));
       status.textContent = '';
     } catch {
       if (ticket === request) {
         intended = selected;
         if (automatic) paused = true;
-        status.textContent = automatic ? 'Automatic views paused. These photographs could not be loaded.' : 'These photographs could not be loaded. Choose another view or open the project.';
+        status.textContent = automatic ? 'Automatic projects paused. These photographs could not be loaded.' : 'These photographs could not be loaded. Choose another project or open the project.';
       }
     } finally {
       if (ticket === request) {

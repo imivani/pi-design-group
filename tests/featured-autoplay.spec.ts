@@ -23,11 +23,11 @@ test('automatic views dwell, animate real photo pairs, and complete a full loop 
   await expect(autoplay(page)).toHaveCSS('background-color', 'rgb(27, 28, 29)');
   const before = await page.locator('.featured-controls').boundingBox();
   await page.clock.fastForward(6000);
-  await expect(selected(page)).toHaveAttribute('data-featured-view', 'courtyard');
+  await expect(selected(page)).toHaveAttribute('data-featured-view', 'crestmont-west');
   await page.clock.fastForward(1200);
-  await expect(selected(page)).toHaveAttribute('data-featured-view', 'play');
-  await expect(page.locator('[data-featured-image]')).toHaveAttribute('src', '/media/gallery/crestmont-west/7.webp');
-  await expect(page.locator('[data-featured-detail]')).toHaveAttribute('src', '/media/gallery/crestmont-west/4.webp');
+  await expect(selected(page)).toHaveAttribute('data-featured-view', 'darcy');
+  await expect(page.locator('[data-featured-image]')).toHaveAttribute('src', '/media/gallery/darcy/usb-img_2484.webp');
+  await expect(page.locator('[data-featured-detail]')).toHaveAttribute('src', '/media/gallery/darcy/usb-img_2490.webp');
   const movement = await page.locator('[data-featured-image]').evaluate(image => image.getAnimations().map(animation => ({
     duration: animation.effect?.getTiming().duration,
     frames: (animation.effect as KeyframeEffect).getKeyframes().map(frame => frame.transform),
@@ -35,9 +35,9 @@ test('automatic views dwell, animate real photo pairs, and complete a full loop 
   expect(movement).toEqual([{ duration: 650, frames: ['translateX(6px) scale(1.025)', 'translateX(0px) scale(1)'] }]);
   await expect(page.locator('.featured-outgoing')).toHaveCount(0);
   await expect(autoplay(page)).toHaveAttribute('data-featured-autoplay', 'running');
-  await advance(page, 'planting');
-  await expect(page.locator('[data-featured-detail]')).toHaveAttribute('src', '/media/gallery/crestmont-west/5.webp');
-  await advance(page, 'courtyard');
+  await advance(page, 'seton-crossing');
+  await expect(page.locator('[data-featured-detail]')).toHaveAttribute('src', '/media/gallery/seton-crossing/usb-img_2443.webp');
+  await advance(page, 'crestmont-west');
   expect(await page.locator('.featured-controls').boundingBox()).toEqual(before);
   await expect(page.locator('.featured-status')).toBeEmpty();
 });
@@ -48,40 +48,40 @@ test('hover, keyboard focus, explicit pause, offscreen and page lifecycle each s
   await page.locator('.featured-photo').hover();
   await expect(autoplay(page)).toHaveAttribute('data-featured-autoplay', 'paused');
   await page.clock.fastForward(15000);
-  await expect(selected(page)).toHaveAttribute('data-featured-view', 'courtyard');
+  await expect(selected(page)).toHaveAttribute('data-featured-view', 'crestmont-west');
   await page.mouse.move(0, 0);
   await expect(autoplay(page)).toHaveAttribute('data-featured-autoplay', 'running');
   await page.locator('.featured-project-link').focus();
   await expect(autoplay(page)).toHaveAttribute('data-featured-autoplay', 'paused');
   await page.clock.fastForward(15000);
-  await expect(selected(page)).toHaveAttribute('data-featured-view', 'courtyard');
+  await expect(selected(page)).toHaveAttribute('data-featured-view', 'crestmont-west');
   await page.locator('[data-featured-autoplay-toggle]').click();
   await page.mouse.move(0, 0);
   await page.evaluate(() => (document.activeElement as HTMLElement).blur());
-  await expect(page.getByRole('button', { name: 'Resume automatic featured views' })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Resume automatic featured projects' })).toBeVisible();
   await page.clock.fastForward(15000);
-  await expect(selected(page)).toHaveAttribute('data-featured-view', 'courtyard');
-  await page.getByRole('button', { name: 'Resume automatic featured views' }).click();
+  await expect(selected(page)).toHaveAttribute('data-featured-view', 'crestmont-west');
+  await page.getByRole('button', { name: 'Resume automatic featured projects' }).click();
   await page.mouse.move(0, 0);
   await page.evaluate(() => (document.activeElement as HTMLElement).blur());
   await expect(autoplay(page)).toHaveAttribute('data-featured-autoplay', 'running');
   await page.evaluate(() => scrollTo(0, 0));
   await expect(autoplay(page)).toHaveAttribute('data-featured-autoplay', 'paused');
   await page.clock.fastForward(15000);
-  await expect(selected(page)).toHaveAttribute('data-featured-view', 'courtyard');
+  await expect(selected(page)).toHaveAttribute('data-featured-view', 'crestmont-west');
   await page.locator('.featured-media').evaluate(element => element.scrollIntoView({ block: 'center' }));
   await expect(autoplay(page)).toHaveAttribute('data-featured-autoplay', 'running');
   await page.evaluate(() => { Object.defineProperty(document, 'hidden', { configurable: true, value: true }); document.dispatchEvent(new Event('visibilitychange')); });
   await page.clock.fastForward(15000);
-  await expect(selected(page)).toHaveAttribute('data-featured-view', 'courtyard');
+  await expect(selected(page)).toHaveAttribute('data-featured-view', 'crestmont-west');
   await page.evaluate(() => { Reflect.deleteProperty(document, 'hidden'); document.dispatchEvent(new Event('visibilitychange')); });
   await expect(autoplay(page)).toHaveAttribute('data-featured-autoplay', 'running');
   await page.evaluate(() => window.dispatchEvent(new PageTransitionEvent('pagehide', { persisted: true })));
   await page.clock.fastForward(15000);
-  await expect(selected(page)).toHaveAttribute('data-featured-view', 'courtyard');
+  await expect(selected(page)).toHaveAttribute('data-featured-view', 'crestmont-west');
   await page.evaluate(() => window.dispatchEvent(new PageTransitionEvent('pageshow', { persisted: true })));
   await expect(autoplay(page)).toHaveAttribute('data-featured-autoplay', 'running');
-  await advance(page, 'play');
+  await advance(page, 'darcy');
 });
 
 test('motion preferences disable automatic changes while manual controls remain available', async ({ page }) => {
@@ -91,12 +91,12 @@ test('motion preferences disable automatic changes while manual controls remain 
   await expect(autoplay(page)).toHaveAttribute('data-featured-autoplay', 'off');
   await expect(page.locator('[data-featured-autoplay-toggle]')).toBeDisabled();
   await page.clock.fastForward(15000);
-  await expect(selected(page)).toHaveAttribute('data-featured-view', 'courtyard');
+  await expect(selected(page)).toHaveAttribute('data-featured-view', 'crestmont-west');
   await page.locator('[data-featured-next]').click();
-  await expect(selected(page)).toHaveAttribute('data-featured-view', 'play');
+  await expect(selected(page)).toHaveAttribute('data-featured-view', 'darcy');
   await page.locator('#motion-choice').selectOption('off');
   await page.locator('[data-featured-next]').click();
-  await expect(selected(page)).toHaveAttribute('data-featured-view', 'planting');
+  await expect(selected(page)).toHaveAttribute('data-featured-view', 'seton-crossing');
   await expect(page.locator('.featured-outgoing')).toHaveCount(0);
   expect(await page.locator('#featured').evaluate(section => section.getAnimations({ subtree: true }).length)).toBe(0);
   await page.emulateMedia({ reducedMotion: 'no-preference' });
@@ -105,31 +105,31 @@ test('motion preferences disable automatic changes while manual controls remain 
   await page.evaluate(() => (document.activeElement as HTMLElement).blur());
   await page.locator('.featured-media').evaluate(element => element.scrollIntoView({ block: 'center' }));
   await expect(autoplay(page)).toHaveAttribute('data-featured-autoplay', 'running');
-  await advance(page, 'courtyard');
+  await advance(page, 'crestmont-west');
 });
 
 test('a delayed automatic image cannot override newer manual input', async ({ page }) => {
   await page.clock.install();
   let release!: () => void;
   const hold = new Promise<void>(resolve => { release = resolve; });
-  await page.route('**/gallery/crestmont-west/4.webp', async route => { await hold; await route.continue(); });
+  await page.route('**/gallery/darcy/usb-img_2490.webp', async route => { await hold; await route.continue(); });
   await showFeatured(page);
   await page.clock.fastForward(7100);
   await expect(page.locator('#featured-perspective')).toHaveAttribute('aria-busy', 'true');
   await page.locator('[data-featured-next]').dispatchEvent('click');
-  await expect(selected(page)).toHaveAttribute('data-featured-view', 'planting');
+  await expect(selected(page)).toHaveAttribute('data-featured-view', 'seton-crossing');
   release();
   await expect(page.locator('#featured-perspective')).not.toHaveAttribute('aria-busy');
-  await expect(page.locator('[data-featured-detail]')).toHaveAttribute('src', '/media/gallery/crestmont-west/5.webp');
+  await expect(page.locator('[data-featured-detail]')).toHaveAttribute('src', '/media/gallery/seton-crossing/usb-img_2443.webp');
   await expect(page.locator('.featured-outgoing')).toHaveCount(0);
-  await expect(selected(page)).toHaveAttribute('data-featured-view', 'planting');
+  await expect(selected(page)).toHaveAttribute('data-featured-view', 'seton-crossing');
 });
 
 test('pausing invalidates a pending automatic pair even when its files finish loading later', async ({ page }) => {
   await page.clock.install();
   let release!: () => void;
   const hold = new Promise<void>(resolve => { release = resolve; });
-  await page.route('**/gallery/crestmont-west/4.webp', async route => { await hold; await route.continue(); });
+  await page.route('**/gallery/darcy/usb-img_2490.webp', async route => { await hold; await route.continue(); });
   await showFeatured(page);
   await page.clock.fastForward(7100);
   await expect(page.locator('#featured-perspective')).toHaveAttribute('aria-busy', 'true');
@@ -137,7 +137,7 @@ test('pausing invalidates a pending automatic pair even when its files finish lo
   release();
   await expect(page.locator('#featured-perspective')).not.toHaveAttribute('aria-busy');
   await page.clock.fastForward(15000);
-  await expect(selected(page)).toHaveAttribute('data-featured-view', 'courtyard');
+  await expect(selected(page)).toHaveAttribute('data-featured-view', 'crestmont-west');
   await expect(page.locator('[data-featured-image]')).toHaveAttribute('src', '/media/featured-crestmont.webp');
   await expect(page.locator('[data-featured-detail]')).toHaveAttribute('src', '/media/img_2304.webp');
   await expect(page.locator('.featured-outgoing')).toHaveCount(0);
@@ -146,16 +146,16 @@ test('pausing invalidates a pending automatic pair even when its files finish lo
 
 test('an unavailable automatic pair preserves the current view and can be retried', async ({ page }) => {
   await page.clock.install();
-  await page.route('**/gallery/crestmont-west/4.webp', route => route.abort());
+  await page.route('**/gallery/darcy/usb-img_2490.webp', route => route.abort());
   await showFeatured(page);
   await page.clock.fastForward(7100);
-  await expect(page.locator('.featured-status')).toContainText('Automatic views paused');
-  await expect(selected(page)).toHaveAttribute('data-featured-view', 'courtyard');
-  await expect(page.getByRole('button', { name: 'Resume automatic featured views' })).toBeVisible();
-  await page.unroute('**/gallery/crestmont-west/4.webp');
-  await page.locator('[data-featured-view="play"]').click();
-  await expect(selected(page)).toHaveAttribute('data-featured-view', 'play');
-  await expect(page.locator('[data-featured-detail]')).toHaveAttribute('src', '/media/gallery/crestmont-west/4.webp');
+  await expect(page.locator('.featured-status')).toContainText('Automatic projects paused');
+  await expect(selected(page)).toHaveAttribute('data-featured-view', 'crestmont-west');
+  await expect(page.getByRole('button', { name: 'Resume automatic featured projects' })).toBeVisible();
+  await page.unroute('**/gallery/darcy/usb-img_2490.webp');
+  await page.locator('[data-featured-view="darcy"]').click();
+  await expect(selected(page)).toHaveAttribute('data-featured-view', 'darcy');
+  await expect(page.locator('[data-featured-detail]')).toHaveAttribute('src', '/media/gallery/darcy/usb-img_2490.webp');
   await expect(page.locator('.featured-status')).toBeEmpty();
 });
 

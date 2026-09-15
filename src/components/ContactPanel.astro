@@ -1,5 +1,5 @@
 ---
-import { ArrowUpRight, ArrowRight } from '@lucide/astro';
+import { ArrowUpRight, ArrowRight, Mail, Phone } from '@lucide/astro';
 import { media } from '../data/projects';
 import '../styles/contact-footer.css';
 const asset = (path:string) => import.meta.env.BASE_URL + path.replace(/^\//, '');
@@ -15,8 +15,8 @@ const asset = (path:string) => import.meta.env.BASE_URL + path.replace(/^\//, ''
         <a class="contact-start" href="mailto:peter@pidesigngroup.ca"><span>Get in Touch</span><ArrowUpRight size={25} stroke-width={1.4} aria-hidden="true" /></a>
       </div>
       <div class="contact-direct">
-        <a href="mailto:peter@pidesigngroup.ca"><span><small>Email Us</small><span>peter@pidesigngroup.ca</span></span><ArrowRight size={23} stroke-width={1.4} aria-hidden="true" /></a>
-        <a href="tel:+14035104071"><span><small>Call Us</small><span>403-510-4071</span></span><ArrowRight size={23} stroke-width={1.4} aria-hidden="true" /></a>
+        <a href="mailto:peter@pidesigngroup.ca"><span><small><Mail size={16} stroke-width={1.6} aria-hidden="true" />Email Us</small><span>peter@pidesigngroup.ca</span></span><ArrowRight size={23} stroke-width={1.4} aria-hidden="true" /></a>
+        <a href="tel:+14035104071"><span><small><Phone size={16} stroke-width={1.6} aria-hidden="true" />Call Us</small><span>403-510-4071</span></span><ArrowRight size={23} stroke-width={1.4} aria-hidden="true" /></a>
       </div>
     </div>
   </div>

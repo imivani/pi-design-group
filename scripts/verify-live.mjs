@@ -76,17 +76,17 @@ try{
   await page.mouse.move(1,1);
   await expect(page.locator('#featured')).toHaveCSS('background-color','rgb(27, 28, 29)');
   await expect(page.locator('#featured')).toHaveAttribute('data-featured-autoplay','running');
-  await expect(page.locator('[data-featured-image]')).toHaveAttribute('src',base+'media/gallery/crestmont-west/7.webp',{timeout:16000});
-  await expect(page.locator('[data-featured-detail]')).toHaveAttribute('src',base+'media/gallery/crestmont-west/4.webp');
+  await expect(page.locator('[data-featured-image]')).toHaveAttribute('src',base+'media/gallery/darcy/usb-img_2484.webp',{timeout:16000});
+  await expect(page.locator('[data-featured-detail]')).toHaveAttribute('src',base+'media/gallery/darcy/usb-img_2490.webp');
   await readyImage(page.locator('[data-featured-image]'));
   await readyImage(page.locator('[data-featured-detail]'));
   await expect(page.locator('.featured-outgoing')).toHaveCount(0);
-  await page.locator('[data-featured-view="planting"]').click();
-  await expect(page.locator('[data-featured-image]')).toHaveAttribute('src',base+'media/gallery/crestmont-west/8.webp');
-  await expect(page.locator('[data-featured-detail]')).toHaveAttribute('src',base+'media/gallery/crestmont-west/5.webp');
+  await page.locator('[data-featured-view="seton-crossing"]').click();
+  await expect(page.locator('[data-featured-image]')).toHaveAttribute('src',base+'media/gallery/seton-crossing/2.webp');
+  await expect(page.locator('[data-featured-detail]')).toHaveAttribute('src',base+'media/gallery/seton-crossing/usb-img_2443.webp');
   await readyImage(page.locator('[data-featured-detail]'));
   await page.locator('[data-featured-autoplay-toggle]').click();
-  await expect(page.locator('[data-featured-autoplay-toggle]')).toHaveAttribute('aria-label','Resume automatic featured views');
+  await expect(page.locator('[data-featured-autoplay-toggle]')).toHaveAttribute('aria-label','Resume automatic featured projects');
   await page.locator('#featured').screenshot({path:`${output}/live-desktop-featured.png`});
   report.checks.featured={autoplay:true,manualPairedPhotographs:true,pause:true};
 

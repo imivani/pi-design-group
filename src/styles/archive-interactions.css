@@ -1,13 +1,13 @@
 @layer reset, base, components, responsive;
 
 @layer responsive {
-  #project-collection[data-view='grid'] .project-link{isolation:isolate;overflow:hidden;display:flex;flex-direction:column;height:100%;border-radius:var(--image-radius,14px);background:#fff;color:var(--ink);transition:background 440ms var(--ease-arrive)}
+  #project-collection[data-view='grid'] .project-link{isolation:isolate;overflow:hidden;display:flex;flex-direction:column;height:100%;border-radius:var(--image-radius,14px);background:#fafafa;border:1px solid rgb(23 27 28 / 8%);color:var(--ink);transition:background 440ms var(--ease-arrive)}
   #project-collection[data-view='grid'] .project-image{position:relative;flex-shrink:0;overflow:visible;border-radius:var(--image-radius,14px);background:#e9e9e9}
   #project-collection[data-view='grid'] .project-image img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;filter:none;border-radius:inherit;transform:scale(1);transition:height 860ms cubic-bezier(.22,.65,.28,1),transform 860ms cubic-bezier(.22,.65,.28,1)}
   #project-collection[data-view='grid'] .project-information{position:relative;display:flex;flex:1;flex-direction:column;padding:18px 18px 21px;color:var(--ink);z-index:2;transition:color 300ms ease}
   .project-image-shade{display:none;pointer-events:none}
   #project-collection[data-view='grid'] .project-image-shade{display:block;position:absolute;inset:0 0 auto;height:calc(100% + var(--project-info-height,210px));border-radius:var(--image-radius,14px);background:linear-gradient(0deg,rgb(25 27 28 / 93%) 0%,rgb(25 27 28 / 87%) 28%,rgb(25 27 28 / 66%) 48%,rgb(25 27 28 / 12%) 76%,transparent 100%);opacity:0;z-index:1;transition:opacity 680ms var(--ease-arrive)}
-  #project-collection[data-view='grid'] .project-information h3{font-size:22px;line-height:1.2;letter-spacing:-.02em;text-decoration:none}
+  #project-collection[data-view='grid'] .project-information h3{font-size:22px;font-weight:600;line-height:1.2;letter-spacing:-.02em;text-decoration:none}
   #project-collection[data-view='grid'] .project-facts{color:var(--muted);min-height:1.5em}
   #project-collection[data-view='grid'] .project-medium{color:var(--muted)}
   #project-collection[data-view='grid'] .project-arrow{display:none}
@@ -19,7 +19,7 @@
   .project-media-details>span:first-child{flex-shrink:0;font-variant-numeric:tabular-nums}
   .project-media-details>span:last-child{text-align:right}
   @media(hover:hover) and (pointer:fine){
-    #project-collection[data-archive-ready='true'][data-view='grid'] .project-media-details{opacity:0;transform:translateY(8px);transition:opacity 520ms var(--ease-arrive),transform 680ms var(--ease-arrive)}
+    #project-collection[data-archive-ready='true'][data-view='grid'] .project-media-details{opacity:1;transform:none;transition:opacity 520ms var(--ease-arrive),transform 680ms var(--ease-arrive)}
     #project-collection[data-view='grid'] .project-link:is([data-details-open='true'],:focus-visible){background:#f7f7f7}
     #project-collection[data-view='grid'] .project-link:is([data-details-open='true'],:focus-visible) .project-open{opacity:1;transform:none}
     #project-collection[data-archive-ready='true'][data-view='grid'] .project-link:is([data-details-open='true'],:focus-visible) .project-media-details{opacity:1;transform:none}
@@ -40,4 +40,8 @@
   @media(hover:none),(pointer:coarse){#project-collection[data-view='grid'] .project-open{opacity:1;transform:none}}
   html[data-motion='reduced'] #project-collection :is(.project-image img,.project-image-shade,.project-information,.project-more,.project-media-details,.project-open,.project-link),html[data-motion='off'] #project-collection :is(.project-image img,.project-image-shade,.project-information,.project-more,.project-media-details,.project-open,.project-link){transition:none!important;transform:none!important}
   @media print{#project-collection[data-view='grid'] .project-link{background:#fff}#project-collection[data-view='grid'] :is(.project-more,.project-media-details){opacity:1!important;transform:none!important}.project-open{display:none!important}}
+}
+
+@layer responsive {
+.project-view-count{display:inline-flex;align-items:center;gap:7px}.project-view-count svg{flex-shrink:0}.project-view-count strong{font-weight:600}.project-views button{display:inline-flex;align-items:center;gap:7px}.project-views button[aria-pressed='true'],.project-filters button[aria-pressed='true']{font-weight:600}
 }

@@ -1,6 +1,6 @@
 ---
 import { renderingCredit } from '../data/image-credit';
-import { ArrowRight, ArrowUpRight, Search } from '@lucide/astro';
+import { ArrowRight, ArrowUpRight, Search, Images, Grid2x2, List } from '@lucide/astro';
 import { projects, projectPath } from '../data/projects';
 import { projectDetails } from '../data/project-details';
 import '../styles/archive-interactions.css';
@@ -14,7 +14,7 @@ const archive = projects.map(project => {
   const media = kinds.has('photograph')
     ? kinds.has('rendering') ? kinds.has('drawing') ? 'Photos, Renderings & Drawings' : 'Photography & Renderings' : kinds.has('drawing') ? 'Photography & Drawings' : 'Photography'
     : kinds.has('rendering') ? kinds.has('drawing') ? 'Renderings & Drawings' : 'Renderings' : 'Landscape Drawings';
-  return { ...project, brief, media: kinds.has('rendering') ? `${media} · ${renderingCredit(project, true)}` : media, viewCount: detail.gallery.length };
+  return { ...project, brief, media: kinds.has('rendering') ? media.replace('Renderings', renderingCredit(project, true)) : media, viewCount: detail.gallery.length };
 });
 ---
 <section id="projects" class="projects frame" aria-labelledby="projects-title" tabindex="-1">
@@ -31,7 +31,7 @@ const archive = projects.map(project => {
         <Search size={18} stroke-width={1.6} aria-hidden="true" />
       </div>
       <div class="project-views" role="group" aria-label="Project view">
-        <button type="button" data-view="grid" aria-pressed="true">Grid</button><span aria-hidden="true">/</span><button type="button" data-view="index" aria-pressed="false">Index</button>
+        <button type="button" data-view="grid" aria-pressed="true"><Grid2x2 size={16} stroke-width={1.6} aria-hidden="true" />Grid</button><span aria-hidden="true">/</span><button type="button" data-view="index" aria-pressed="false"><List size={17} stroke-width={1.6} aria-hidden="true" />Index</button>
       </div>
     </div>
   </div>
@@ -51,7 +51,7 @@ const archive = projects.map(project => {
             {project.imageKind !== 'photograph' && <span class="project-medium">{project.imageKind === 'drawing' ? 'Drawing' : renderingCredit(project)}</span>}
             <div class="project-more">
               <p class="project-brief">{project.brief}</p>
-              <div class="project-media-details"><span>{project.viewCount} Views</span><span>{project.media}</span></div>
+              <div class="project-media-details"><span class="project-view-count"><Images size={16} stroke-width={1.6} aria-hidden="true" /><span><strong>{project.viewCount}</strong> Views</span></span><span>{project.media}</span></div>
             </div>
           </div>
           <ArrowRight class="project-arrow" size={22} stroke-width={1.4} aria-hidden="true" />

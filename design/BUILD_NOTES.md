@@ -102,3 +102,11 @@ Desktop/phone screenshots and desktop-motion.webm are in design/review. The reco
 The project-page refinement also has a separate project-motion.webm recording, 25 layout reviews across five representative project types at 320–1920px, and full gallery coverage checks across all 27 pages. These found no horizontal overflow, missing images or repeated gallery placements. Viewer checks include transition reversal, motion preference changes during animation, delayed-image recovery, missing-origin fallback, and changing the opening image while another image is loading.
 
 See [Next pages](NEXT_PAGES.md) for the remaining site plan.
+
+## September 14: Three featured projects and interface polish
+
+Featured Projects now rotates through Crestmont West, D’Arcy and Seton Crossing, with a seven-second pause between changes. Both photographs, the title, location, description and destinations update together after the images load. Numbered choices and playback controls sit above the feature; the old bottom view labels are removed. Hover, keyboard focus, hidden tabs and reduced-motion preferences retain their pause behaviour. The smaller photograph has a soft shadow and no border.
+
+Archive cards have a #fafafa surface and a faint outline, preserving their rounded shape before hover. Gallery counts stay visible beside an Images icon. Grid/Index controls and contact methods have meaningful Lucide icons. Project names and smaller action labels have stronger weight; editorial headlines remain light. All rendering credits remain present.
+
+Validation: the 17 existing focused browser checks passed (16 initially; the narrow-phone control check passed after a spacing fix). An additional end-to-end check passed for all three project identities, locations and destinations, including opening D’Arcy. Feature accessibility was checked at 320, 390, 1024, 1100 and 1440px. Desktop/mobile visual captures were reviewed. Type checking reported no errors, warnings or hints. Production build verification passed all 30 project destinations, search, navigation, drawings and project transitions across 31 pages.
