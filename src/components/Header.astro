@@ -7,6 +7,8 @@ import '../styles/header.css';
 
 const asset = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`;
 const { homepage = false } = Astro.props;
+const contactLink = import.meta.env.BASE_URL + 'contact';
+const isContact = Astro.url.pathname.replace(/\/$/, '') === contactLink;
 const homeLink = (id: string) => `${homepage ? '' : import.meta.env.BASE_URL}#${id}`;
 const categoryLink = (id: string) => homepage ? '#projects' : `${import.meta.env.BASE_URL}${id === 'all' ? '' : '?category=' + id}#projects`;
 const projectPreviews = ['darcy', 'redstone', 'seton-crossing'].map((id) =>
@@ -39,7 +41,7 @@ const services = [
       <button class="nav-link nav-trigger" type="button" data-menu-trigger="services" aria-expanded="false" aria-controls="services-navigation">
         Services <ChevronDown size={13} stroke-width={1.5} aria-hidden="true" />
       </button>
-      <a class="nav-link" href={homeLink('contact')}>Contact</a>
+      <a class="nav-link" href={contactLink} data-contact-link aria-current={isContact ? 'page' : undefined}>Contact</a>
     </nav>
     <div class="site-header__utilities">
       <a class="header-search icon-button" href={homeLink('projects')} data-project-search aria-label="Search projects">
@@ -136,7 +138,7 @@ const services = [
         </div>
       </div>
     </div>
-    <a class="mobile-direct-link" href={homeLink('contact')}>Contact</a>
+    <a class="mobile-direct-link" href={contactLink} aria-current={isContact ? 'page' : undefined}>Contact</a>
     <a class="mobile-direct-link mobile-navigation__search" href={homeLink('projects')} data-project-search>Search Projects <Search size={21} stroke-width={1.5} aria-hidden="true" /></a>
   </nav>
   <div class="mobile-navigation__contact">

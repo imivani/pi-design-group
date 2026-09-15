@@ -30,7 +30,7 @@ test('complete catalogue and correct project destinations are rendered before fi
     }
   }
   await expect(page.locator('.project-link').filter({ hasText: 'Summit 77 Apartments' })).toHaveAttribute('href', '/summit77apartments');
-  await expect(page.locator('a[href="mailto:peter@pidesigngroup.ca"]')).toHaveCount(3);
+  await expect(page.locator('a[href="mailto:peter@pidesigngroup.ca"]')).toHaveCount(2);
 });
 
 test('filters, search, no results, reset and grid/index preserve the chosen state', async ({ page }) => {
@@ -57,7 +57,7 @@ test('project search tolerates apostrophe styles and browser back restores catal
   await page.locator('#project-search').fill("D'Arcy");
   await expect(page.locator('.project-entry:visible')).toHaveCount(2);
   await page.locator('button[data-view="index"]').click();
-  await page.locator('footer a[href="#contact"]').click();
+  await page.locator('footer a[href="/contact"]').click();
   await page.goBack();
   await expect(page.locator('#project-search')).toHaveValue("D'Arcy");
   await expect(page.locator('.project-entry:visible')).toHaveCount(2);
@@ -141,7 +141,7 @@ test('blocked browser storage cannot prevent the page controls from starting', a
   await page.reload();
   await expect(page.locator('html')).toHaveAttribute('data-enhanced', 'true');
   await page.locator('[data-filter="single-homes"]').click();
-  await expect(page.locator('.project-entry:visible')).toHaveCount(2);
+  await expect(page.locator('.project-entry:visible')).toHaveCount(projects.filter(project => project.category === 'single-homes').length);
 });
 
 test('all images render and page has no serious accessibility violations', async ({ page }) => {

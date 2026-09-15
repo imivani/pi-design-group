@@ -141,7 +141,7 @@ if (header && surface && mobile) {
         event.preventDefault(); trigger?.focus();
       } else if (!event.shiftKey && links?.length && document.activeElement === links[links.length - 1]) {
         event.preventDefault();
-        const next = openMenu === 'projects' ? triggers.find((item) => item.dataset.menuTrigger === 'services') : header.querySelector<HTMLAnchorElement>('.desktop-nav a[href$="#contact"]');
+        const next = openMenu === 'projects' ? triggers.find((item) => item.dataset.menuTrigger === 'services') : header.querySelector<HTMLAnchorElement>('.desktop-nav [data-contact-link]');
         setMenu(null); next?.focus();
       }
     }

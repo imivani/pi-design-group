@@ -12,7 +12,7 @@ const asset = (path:string) => import.meta.env.BASE_URL + path.replace(/^\//, ''
       <div class="contact-invitation">
         <h2 id="contact-title">Discuss Your<br />Next Project.</h2>
         <p>Tell us about the place you’re planning.</p>
-        <a class="contact-start" href="mailto:peter@pidesigngroup.ca"><span>Get in Touch</span><ArrowUpRight size={25} stroke-width={1.4} aria-hidden="true" /></a>
+        <a class="contact-start" href={import.meta.env.BASE_URL + 'contact'}><span>Get in Touch</span><ArrowUpRight size={25} stroke-width={1.4} aria-hidden="true" /></a>
       </div>
       <div class="contact-direct">
         <a href="mailto:peter@pidesigngroup.ca"><span><small><Mail size={16} stroke-width={1.6} aria-hidden="true" />Email Us</small><span>peter@pidesigngroup.ca</span></span><ArrowRight size={23} stroke-width={1.4} aria-hidden="true" /></a>

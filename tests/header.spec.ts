@@ -65,9 +65,10 @@ test.describe('Reference navigation', () => {
     await expect(surface(page)).toHaveAttribute('inert', '');
     await expect(surface(page)).toHaveCSS('visibility', 'hidden');
     await openProjects(page).click();
-    await page.locator('.desktop-nav a[href="#contact"]').click();
+    await page.locator('.desktop-nav [data-contact-link]').click();
     await expect(surface(page)).toHaveAttribute('data-open', 'false');
-    await expect(page.locator('#contact')).toBeFocused();
+    await expect(page).toHaveURL(/\/contact$/);
+    await expect(page.locator('#inquiry-title')).toBeVisible();
   });
 
   test('hover intent, pointer corridor and cancelled hover do not leave stale menus', async ({ page }) => {

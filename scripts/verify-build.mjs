@@ -88,6 +88,12 @@ try{
   assert.equal(entrances.length,1);assert(['native','fallback'].includes(entrances[0]));
   await expect(motionPage.locator('.hero-copy')).toHaveCSS('opacity','1');
   await motionContext.close();
+  await page.goto(address+base+'contact');
+  await expect(page.locator('.desktop-nav [data-contact-link]')).toHaveAttribute('aria-current','page');
+  await page.getByRole('radio',{name:'Commercial Plazas',exact:true}).check();
+  await expect(page.locator('#inquiry-fields')).toHaveAttribute('data-open','true');
+  await expect(page.locator('#inquiry-photo-caption')).toContainText('Seton Crossing');
+  await expect(page.locator('#inquiry-photo-link')).toHaveAttribute('href',base+'seton');
   assert.deepEqual(errors,[]);
-  console.log(JSON.stringify({base,pages:31,links:30,pairedFeaturedViews:true,drawingViewer:true,navigationCatalogue:true,projectSearch:true,earlyProjectInformation:true,logoReturn:true,errors,passed:true}));
+  console.log(JSON.stringify({base,pages:32,links:30,contactPage:true,pairedFeaturedViews:true,drawingViewer:true,navigationCatalogue:true,projectSearch:true,earlyProjectInformation:true,logoReturn:true,errors,passed:true}));
 }finally{await browser.close();await new Promise(resolve=>server.close(resolve));}

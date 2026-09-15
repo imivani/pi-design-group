@@ -1,0 +1,93 @@
+---
+import { ArrowRight, Mail, Phone, MapPin, Copy, ArrowUpRight } from '@lucide/astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import MotionSetup from '../components/MotionSetup.astro';
+import { media } from '../data/projects';
+import '../styles/global.css';
+import '../styles/contact-page.css';
+const base = import.meta.env.BASE_URL;
+const asset = (path: string) => base + path.replace(/^\//, '');
+const choices = [
+  { id: 'multifamily', label: 'Multifamily Communities', src: media.featured, alt: 'Planting, seating and shared paths at Crestmont West', caption: 'Shared spaces at Crestmont West', href: base + 'crestmontwest' },
+  { id: 'commercial', label: 'Commercial Plazas', src: media.services.commercial, alt: 'Outdoor seating and a pergola at Seton Crossing', caption: 'A place to pause at Seton Crossing', href: base + 'seton' },
+  { id: 'parks', label: 'Public Parks', src: media.services.parks, alt: 'A play space with planting at Crestmont West', caption: 'Play space detail at Crestmont West', href: base + 'crestmontwest' },
+  { id: 'other', label: 'Something Else', src: '/media/gallery/darcy/usb-img_2484.webp', alt: 'Gardens and planted sidewalks at D’Arcy', caption: 'Neighbourhood planting at D’Arcy', href: base + 'darcy' },
+].map(choice => ({ ...choice, src: asset(choice.src) }));
+---
+<!doctype html>
+<html lang="en" data-motion="full">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Start a conversation with Pi Design Group about your landscape project. Based in Calgary, Alberta." />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="icon" href={asset('/favicon.svg')} type="image/svg+xml" />
+    <link rel="preload" as="image" href={choices[0].src} fetchpriority="high" />
+    <title>Contact | Pi Design Group</title>
+    <MotionSetup />
+  </head>
+  <body class="contact-page">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <Header />
+    <main id="main">
+      <section class="inquiry-hero frame" aria-labelledby="inquiry-title">
+        <div class="inquiry-content" data-contact-arrival>
+          <h1 id="inquiry-title">Start a<br />conversation.</h1>
+          <p class="inquiry-intro">Tell us what you’re working on.</p>
+          <form id="inquiry-form" action="mailto:peter@pidesigngroup.ca" method="post" enctype="text/plain">
+            <fieldset class="inquiry-choices">
+              <legend class="sr-only">Project type</legend>
+              {choices.map(choice => <label class="inquiry-choice">
+                <input type="radio" name="projectType" value={choice.label} data-inquiry-type={choice.id} required />
+                <span class="inquiry-radio" aria-hidden="true"></span><span>{choice.label}</span><ArrowRight size={21} stroke-width={1.4} aria-hidden="true" />
+              </label>)}
+            </fieldset>
+            <div id="inquiry-fields" class="inquiry-fields" data-open="false">
+              <div class="inquiry-fields-inner">
+                <div class="inquiry-fields-content">
+                  <div class="inquiry-inputs">
+                    <label class="inquiry-field">Name<input name="name" autocomplete="name" placeholder="Your name" required maxlength="120" /></label>
+                    <label class="inquiry-field">Organization <span class="field-optional">(optional)</span><input name="organization" autocomplete="organization" placeholder="Your organization" maxlength="160" /></label>
+                    <label class="inquiry-field">Email<input type="email" name="email" autocomplete="email" placeholder="you@organization.ca" required maxlength="254" /></label>
+                    <label class="inquiry-field">Project location<input name="location" placeholder="City, province or region" required maxlength="160" /></label>
+                    <label class="inquiry-field inquiry-field-wide">Tell us about the project<textarea name="message" rows="3" placeholder="A few details about your goals, site or ideas…" required maxlength="4000"></textarea></label>
+                  </div>
+                  <div class="inquiry-submit-row"><button class="inquiry-submit" type="submit"><span>Prepare Email</span><ArrowUpRight size={21} stroke-width={1.4} aria-hidden="true" /></button><p>Opens your email app. <br />Review your inquiry, then send.</p></div>
+                  <div id="inquiry-prepared" class="inquiry-prepared" hidden>
+                    <p id="inquiry-feedback" role="status">Your email draft is ready. If your email app didn’t open, copy the details and email Peter directly.</p>
+                    <div><a id="inquiry-email-link" href="mailto:peter@pidesigngroup.ca">Open Email <ArrowUpRight size={17} aria-hidden="true" /></a><button id="inquiry-copy" type="button">Copy Details <Copy size={16} aria-hidden="true" /></button></div>
+                    <textarea id="inquiry-copy-text" aria-label="Your inquiry details, ready to copy" readonly hidden></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p class="inquiry-prompt" hidden>Choose a project type to get started.</p>
+          </form>
+        </div>
+        <figure class="inquiry-media" data-contact-arrival>
+          <div class="inquiry-photo-frame"><img id="inquiry-photo" src={choices[0].src} alt={choices[0].alt} width="1920" height="1280" fetchpriority="high" decoding="async" /></div>
+          <figcaption><a id="inquiry-photo-link" href={choices[0].href}><span id="inquiry-photo-caption">{choices[0].caption}</span><ArrowUpRight size={20} stroke-width={1.4} aria-hidden="true" /></a></figcaption>
+          <p id="inquiry-image-status" class="sr-only" role="status"></p>
+        </figure>
+      </section>
+      <section class="contact-direct-section" aria-labelledby="direct-title">
+        <div class="frame contact-direct-layout" data-reveal>
+          <div><h2 id="direct-title">Prefer to talk<br />directly?</h2><p>Not sure where to start?<br />Send us a note anyway.</p></div>
+          <a href="mailto:peter@pidesigngroup.ca"><Mail size={27} stroke-width={1.3} aria-hidden="true" /><span>Email Peter<span>peter@pidesigngroup.ca</span></span><ArrowUpRight size={20} stroke-width={1.4} aria-hidden="true" /></a>
+          <a href="tel:+14035104071"><Phone size={26} stroke-width={1.3} aria-hidden="true" /><span>Call Us<span>403-510-4071</span></span><ArrowUpRight size={20} stroke-width={1.4} aria-hidden="true" /></a>
+          <div class="contact-location"><MapPin size={27} stroke-width={1.3} aria-hidden="true" /><p>Based in<span>Calgary, Alberta</span></p></div>
+        </div>
+      </section>
+      <section class="contact-page-closing contact-panel" aria-labelledby="closing-title">
+        <img class="contact-panel-image" src={asset('/media/gallery/darcy/usb-img_2490.webp')} alt="" width="1600" height="1067" loading="lazy" decoding="async" />
+        <div class="contact-closing-scrim" aria-hidden="true"></div>
+        <div class="frame contact-closing-content" data-reveal><h2 id="closing-title">Great places start<br />with a conversation.</h2><a class="outline-button" href={base + '#projects'}>Explore Our Work <ArrowRight size={22} stroke-width={1.4} aria-hidden="true" /></a></div>
+      </section>
+    </main>
+    <Footer />
+    <script type="application/json" id="inquiry-media-data" is:inline set:html={JSON.stringify(choices).replace(/</g, '\u003c')} />
+    <script>import '../scripts/contact-page'; import '../scripts/contact-motion';</script>
+  </body>
+</html>
