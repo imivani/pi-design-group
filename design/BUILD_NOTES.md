@@ -151,3 +151,8 @@ Validation: five contact checks cover image preview, inline form, preserved inpu
 - Featured projects now have an edge-to-edge darkened, softly blurred photograph behind the existing composition. The backdrop changes with the same decoded project photographs and respects the existing slideshow pause and motion controls.
 - Motion skill applied using native browser animation. Mobbin ClickUp navigation reference informed grouping and touch targets, not motion timing: https://mobbin.com/screens/a5d4ecb3-e59b-4cf5-a5e4-65215c8a5e8d.
 - Verified phone/desktop screenshots, 24 navigation/slideshow checks, type checking and the 32-page production verification. Corrected the new width check to account for the browser's reserved scrollbar gutter.
+
+## September 15: Three-second carousel and next-project atmosphere
+- Next-project sections use the destination project's own image as a full-width dark blurred backdrop, matching Featured Projects. Foreground credits and navigation remain intact.
+- Featured projects advance on a three-second rhythm with an 850ms directional slide/settle and 780ms crossfade across all three photographs. The old section-wide hover pause was making the carousel appear static; pointer hover no longer stops rotation, and pointer/touch focus no longer leaves it paused. Keyboard focus, explicit pause, reduced/off motion, offscreen state and hidden tabs still suspend autoplay.
+- Ten focused autoplay/project-layout checks passed, including a complete carousel loop under pointer hover, image failure, interruption and motion preferences. Desktop/mobile visuals, type checking and the 32-page production verifier passed.

@@ -17,10 +17,11 @@ if (section) {
   const status = section.querySelector<HTMLElement>('.featured-status')!;
   const toggle = section.querySelector<HTMLButtonElement>('[data-featured-autoplay-toggle]')!;
   const cache = new Map<string, Promise<void>>(), animations = new Set<Animation>();
-  const dwell = 5000;
+  const dwell = 3000;
   let request = 0, selected = 0, intended = 0;
   let hoverTimer: number | undefined, autoplayTimer: number | undefined, loadingTimer: number | undefined;
-  let visible = false, hovered = false, focused = section.contains(document.activeElement), paused = false, away = false;
+  const keyboardFocused = () => section.contains(document.activeElement) && document.activeElement?.matches(':focus-visible') === true;
+  let visible = false, focused = keyboardFocused(), paused = false, away = false;
   let pending: 'automatic' | 'manual' | null = null;
 
   const load = (src: string) => {
@@ -31,7 +32,7 @@ if (section) {
     return cache.get(src)!;
   };
   const clearAutoplay = () => { clearTimeout(autoplayTimer); autoplayTimer = undefined; };
-  const canRotate = () => mode() === 'full' && visible && !document.hidden && !hovered && !focused && !paused && !away;
+  const canRotate = () => mode() === 'full' && visible && !document.hidden && !focused && !paused && !away;
   const settle = () => {
     animations.forEach(animation => animation.cancel()); animations.clear();
     section.querySelectorAll('.featured-outgoing').forEach(image => image.remove());
@@ -52,7 +53,7 @@ if (section) {
       section.dataset.featuredAutoplay = enabled ? 'paused' : 'off';
       return;
     }
-    if (pending || animations.size) { section.dataset.featuredAutoplay = 'changing'; return; }
+    if (pending) { section.dataset.featuredAutoplay = 'changing'; return; }
     section.dataset.featuredAutoplay = 'running';
     if (autoplayTimer === undefined) autoplayTimer = window.setTimeout(() => {
       autoplayTimer = undefined;
@@ -78,11 +79,11 @@ if (section) {
     // The decoded photograph stays opaque below the outgoing view: no dark
     // midpoint, blank frame, or moving layout. Only a restrained camera settle.
     if (mode() === 'full') track(animate(image, [
-      { transform: `translateX(${direction * 6}px) scale(1.025)` },
+      { transform: `translateX(${direction * 36}px) scale(1.08)` },
       { transform: 'translateX(0px) scale(1)' },
-    ], 650));
+    ], 850));
     if (previous) {
-      const fading = animate(previous, [{ opacity: 1 }, { opacity: 0 }], 620); track(fading);
+      const fading = animate(previous, [{ opacity: 1, transform: 'translateX(0px) scale(1)' }, { opacity: 0, transform: `translateX(${-direction * 24}px) scale(1.04)` }], 780); track(fading);
       if (fading) void fading.finished.finally(() => previous.remove()).catch(() => {});
       else previous.remove();
     }
@@ -142,10 +143,8 @@ if (section) {
   section.querySelector('[data-featured-previous]')!.addEventListener('click', () => void select((intended + views.length - 1) % views.length, false, -1));
   section.querySelector('[data-featured-next]')!.addEventListener('click', () => void select((intended + 1) % views.length, false, 1));
   toggle.addEventListener('click', () => { paused = !paused; sync(); });
-  section.addEventListener('pointerenter', event => { if (event.pointerType === 'mouse') { hovered = true; sync(); } });
-  section.addEventListener('pointerleave', event => { if (event.pointerType === 'mouse') { hovered = false; sync(); } });
-  section.addEventListener('focusin', () => { focused = true; sync(); });
-  section.addEventListener('focusout', () => queueMicrotask(() => { focused = section.contains(document.activeElement); sync(); }));
+  section.addEventListener('focusin', () => { focused = keyboardFocused(); sync(); });
+  section.addEventListener('focusout', () => queueMicrotask(() => { focused = keyboardFocused(); sync(); }));
   const visibility = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting && entry.intersectionRatio >= .35; sync(); }, { threshold: [0, .35] });
   visibility.observe(section.querySelector('.featured-media')!);
   document.addEventListener('visibilitychange', () => { if (document.hidden) settle(); sync(); });
@@ -156,8 +155,7 @@ if (section) {
     panel.removeAttribute('aria-busy'); status.textContent = ''; settle(); sync();
   });
   window.addEventListener('pageshow', () => {
-    away = false; focused = section.contains(document.activeElement);
-    hovered = matchMedia('(hover:hover) and (pointer:fine)').matches && section.matches(':hover');
+    away = false; focused = keyboardFocused();
     sync();
   });
   sync();
