@@ -46,4 +46,4 @@
   @media print{#contact.contact-section{display:none}.footer.site-footer{display:block;padding-block:20px}.footer-return,.footer.site-footer nav,.footer-identity>p{display:none}.site-footer .footer-top{display:block;padding:0}.footer-bottom{border:0;padding-top:10px}}
 }
 
-@layer responsive {.contact-direct small{display:flex;align-items:center;gap:8px;font-size:14px}.contact-direct>a>span>span{font-weight:500}.contact-start{font-weight:600}}
+@layer responsive {.contact-direct small{display:flex;align-items:center;gap:8px;font-size:14px}}

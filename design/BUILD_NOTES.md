@@ -112,3 +112,5 @@ Archive cards have a #fafafa surface and a faint outline, preserving their round
 Validation: the 17 existing focused browser checks passed (16 initially; the narrow-phone control check passed after a spacing fix). An additional end-to-end check passed for all three project identities, locations and destinations, including opening D’Arcy. Feature accessibility was checked at 320, 390, 1024, 1100 and 1440px. Desktop/mobile visual captures were reviewed. Type checking reported no errors, warnings or hints. Production build verification passed all 30 project destinations, search, navigation, drawings and project transitions across 31 pages.
 
 Owner correction: archive project names retain their original weight; gallery counts use the label “Photos” beside the image icon.
+
+Owner correction across the whole interface: reverted every font-weight increase from this polish pass, including expertise titles, design-detail choices, featured labels, search results, contact actions, archive filters and photo counts. Retained the new icons, Photos wording, rounded card surfaces and three-project slideshow.

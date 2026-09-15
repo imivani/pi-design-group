@@ -168,6 +168,3 @@ html[data-motion="off"]::view-transition-group(*),html[data-motion="reduced"]::v
   #services>h2{max-width:850px}
   .service-panel{border-radius:var(--image-radius)}
 }
-
-/* Give navigation-sized labels a clear hierarchy while retaining light editorial headings. */
-@layer responsive {.service-selector,.detail-choice-title,.site-search-result-name{font-weight:600}.project-specification dt,.text-link{font-weight:500}}

@@ -43,5 +43,5 @@
 }
 
 @layer responsive {
-.project-view-count{display:inline-flex;align-items:center;gap:7px}.project-view-count svg{flex-shrink:0}.project-view-count strong{font-weight:600}.project-views button{display:inline-flex;align-items:center;gap:7px}.project-views button[aria-pressed='true'],.project-filters button[aria-pressed='true']{font-weight:600}
+.project-view-count{display:inline-flex;align-items:center;gap:7px}.project-view-count svg{flex-shrink:0}.project-views button{display:inline-flex;align-items:center;gap:7px}
 }

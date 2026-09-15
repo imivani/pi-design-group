@@ -51,7 +51,7 @@ const archive = projects.map(project => {
             {project.imageKind !== 'photograph' && <span class="project-medium">{project.imageKind === 'drawing' ? 'Drawing' : renderingCredit(project)}</span>}
             <div class="project-more">
               <p class="project-brief">{project.brief}</p>
-              <div class="project-media-details"><span class="project-view-count"><Images size={16} stroke-width={1.6} aria-hidden="true" /><span><strong>{project.viewCount}</strong> Photos</span></span><span>{project.media}</span></div>
+              <div class="project-media-details"><span class="project-view-count"><Images size={16} stroke-width={1.6} aria-hidden="true" /><span>{project.viewCount} Photos</span></span><span>{project.media}</span></div>
             </div>
           </div>
           <ArrowRight class="project-arrow" size={22} stroke-width={1.4} aria-hidden="true" />

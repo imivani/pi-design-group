@@ -110,15 +110,14 @@
 @layer responsive {
   #featured{padding-bottom:140px}
   #featured .featured-heading{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:46px}
-  #featured #featured-title{margin:0;font-size:32px;font-weight:500;color:#fff}
+  #featured #featured-title{margin:0;font-size:32px;color:#fff}
   #featured #featured-title::after{display:none}
   #featured .featured-controls{display:flex;flex-wrap:nowrap;gap:24px;margin:0;padding:0;min-height:44px}
   #featured .featured-views{display:flex;flex:none;gap:4px}
-  #featured .featured-views button{width:44px;min-height:44px;padding:0;text-align:center;font-size:13px;font-weight:600;font-variant-numeric:tabular-nums;border-radius:6px}
+  #featured .featured-views button{width:44px;min-height:44px;padding:0;text-align:center;font-size:13px;font-variant-numeric:tabular-nums;border-radius:6px}
   #featured .featured-views button::after{left:12px;right:12px;bottom:4px}
   #featured .featured-project-name{min-height:2.06em}
   #featured .featured-view-copy{min-height:8em}
-  #featured .featured-project-link{font-weight:600}
   #featured .featured-paging button:hover{background:rgb(255 255 255 / 7%);border-radius:50%}
   @media(max-width:999px){#featured{padding-bottom:122px}#featured .featured-controls{gap:12px}#featured .featured-view-copy{min-height:8em}}
   @media(max-width:599px){
