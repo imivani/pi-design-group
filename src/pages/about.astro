@@ -1,0 +1,74 @@
+---
+import { ArrowRight, Plus, ArrowUpRight } from '@lucide/astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import MotionSetup from '../components/MotionSetup.astro';
+import { projects, projectPath, media } from '../data/projects';
+import { renderingCredit } from '../data/image-credit';
+import { leadership, experience, responsibilities } from '../data/practice';
+import '../styles/global.css';
+import '../styles/about.css';
+import '../styles/contact-footer.css';
+const base=import.meta.env.BASE_URL;
+const asset=(path:string)=>base+path.replace(/^\//,'');
+const categories=['All','Residential','Multifamily','Commercial','Institutional','Other'];
+---
+<!doctype html>
+<html lang="en" data-motion="full">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>About | Pi Design Group</title>
+  <meta name="description" content="A personally led landscape architecture and planning practice. Meet Peter Imshenetskyy and Terry Klassen and explore PI Design Group’s experience."/>
+  <meta name="robots" content="noindex, nofollow"/><meta name="theme-color" content="#ffffff"/>
+  <link rel="icon" href={asset('/favicon.svg')} type="image/svg+xml"/><MotionSetup/>
+</head>
+<body class="about-page">
+<a class="skip-link" href="#main">Skip to content</a><Header/>
+<main id="main">
+  <section class="about-hero frame" aria-labelledby="about-title">
+    <p class="about-kicker" data-about-arrival>About Pi Design Group</p>
+    <div class="about-introduction">
+      <h1 id="about-title" data-about-arrival>Landscape architecture grounded in how places are actually built and used.</h1>
+      <div class="about-intro-copy" data-about-arrival><p>Pi Design Group is a boutique landscape architecture and planning practice focused on residential, multifamily and commercial projects.</p><p>We bring together design, technical execution and personal involvement, from the first conversation through project delivery.</p></div>
+    </div>
+    <!-- Temporary studio / project image placeholder. Replace only with an approved asset. -->
+    <div class="about-studio-placeholder" aria-hidden="true" data-about-arrival></div>
+  </section>
+  <section class="about-practice frame about-section" aria-labelledby="practice-title">
+    <div class="about-editorial" data-reveal><div><p class="about-kicker">The practice</p><h2 id="practice-title">Practical design.<br/>Technical depth.<br/>Personal involvement.</h2></div><div class="about-prose"><p>Established over a decade ago, our practice works across landscape architecture and planning, with a particular focus on residential and multifamily development.</p><p>Functionality, constructability and environmental responsibility are considered together. We work closely with clients, architects, engineers and municipalities to create cohesive outdoor environments.</p></div></div>
+    <dl class="practice-facts" data-reveal><div><dt>70+</dt><dd>Completed projects</dd></div><div><dt>Alberta +<br/>British Columbia</dt><dd>Landscape architecture licensing</dd></div><div><dt>Over a decade</dt><dd>Established practice</dd></div></dl>
+  </section>
+  <section class="about-leadership frame about-section" aria-labelledby="leadership-title">
+    <div class="about-section-heading" data-reveal><h2 id="leadership-title">Leadership</h2><p>A personally led practice.<br/>Two complementary perspectives.</p></div>
+    <div class="leadership-list">
+      {leadership.map((person,index)=><article class="principal" data-reveal aria-labelledby={'principal-'+index}>
+        <div class="principal-portrait" aria-label={'Portrait of '+person.name+' coming soon'} role="img"><span>Portrait coming soon</span></div>
+        <div class="principal-copy"><p class="principal-role">{person.role}</p><h3 id={'principal-'+index}>{person.name}</h3><p class="principal-credentials">{person.credentials}</p><div class="principal-rule" aria-hidden="true"></div><p class="principal-bio">{person.bio}</p><p class="principal-focus-label">Focus</p><ul>{person.focus.map(focus=><li>{focus}</li>)}</ul>
+        <details class="practice-disclosure"><summary>Experience + credentials <Plus size={19} stroke-width={1.4} aria-hidden="true"/></summary><div class="disclosure-inner"><p>{person.detail}</p></div></details></div>
+      </article>)}
+    </div>
+  </section>
+  <section class="about-experience about-section" aria-labelledby="experience-title">
+    <div class="frame"><div class="about-section-heading" data-reveal><div><p class="about-kicker">A record of built work</p><h2 id="experience-title">Selected experience</h2></div><a class="text-link" href={base+'#projects'}>Explore the portfolio <ArrowUpRight size={20} stroke-width={1.4}/></a></div>
+    <div class="experience-filters js-only" role="group" aria-label="Filter selected experience">{categories.map((category,index)=><button type="button" data-experience-filter={category} aria-pressed={index===0}>{category}</button>)}</div>
+    <div class="experience-grid" id="experience-list">
+      {experience.map(item=>{const project=projects.find(p=>p.id===item.project);return <article class="experience-entry" data-experience-category={item.categories.join('|')}>
+        <span class="experience-year">{item.year}</span>
+        {project?<a class="experience-link" href={projectPath(project,base)}><span>{item.name}</span><ArrowUpRight size={19} stroke-width={1.3} aria-hidden="true"/><span class="experience-preview"><img src={asset(project.image)} alt="" width="320" height="220" loading="lazy"/>{project.imageKind==='rendering'&&<small>{renderingCredit(project)}</small>}</span></a>:<h3>{item.name}</h3>}
+        <p>{item.categories.join(' / ')}</p>
+      </article>})}
+    </div><p class="sr-only" role="status" data-experience-status></p>
+    </div>
+  </section>
+  <section class="about-scope frame about-section" aria-labelledby="scope-title">
+    <div class="scope-heading" data-reveal><p class="about-kicker">What we do</p><h2 id="scope-title">From concept<br/>to construction.</h2><p>Landscape architecture and planning, with attention to how each project comes together.</p></div>
+    <div class="scope-list" data-reveal>{responsibilities.map(([title,copy],index)=><details class="practice-disclosure scope-item"><summary><span class="scope-number">{String(index+1).padStart(2,'0')}</span><span>{title}</span><Plus size={20} stroke-width={1.3} aria-hidden="true"/></summary><div class="disclosure-inner"><p>{copy}</p></div></details>)}</div>
+  </section>
+  <section class="about-working about-section" aria-labelledby="working-title"><div class="frame"><h2 id="working-title" data-reveal>How we work</h2><div class="working-principles">
+    {[['Personal involvement','Projects stay close to senior design leadership, with direct communication throughout.'],['Built to coordinate','We work with clients, architects, engineers and municipalities to keep the landscape connected to the wider project.'],['Scalable technical production','Technical resources expand with project needs, supporting quality and dependable delivery.'],['Designed to perform','Functionality, constructability and long-term performance are considered together.']].map(([title,copy])=><div data-reveal><h3>{title}</h3><p>{copy}</p></div>)}
+  </div></div></section>
+  <section class="about-credentials frame" aria-labelledby="credentials-title"><h2 id="credentials-title">Practice credentials</h2><div><h3>Landscape architecture</h3><p>Licensed in Alberta and British Columbia</p></div><div><h3>Peter Imshenetskyy</h3><p>M.Arch</p></div><div><h3>Terry Klassen</h3><p>AALA · MBCSLA · RPP · MCIP · CSLA</p></div></section>
+  <section class="about-close contact-panel" aria-labelledby="about-close-title"><img class="contact-panel-image" src={asset(media.contact)} alt="" width="1920" height="1280" loading="lazy"/><div class="about-close-shade" aria-hidden="true"></div><div class="frame about-close-content" data-reveal><div><h2 id="about-close-title">Let’s work together.</h2><p>Discuss your next project.</p><a class="outline-button" href={base+'contact'}>Get in touch <ArrowRight size={23} stroke-width={1.4}/></a></div><div class="about-close-direct"><a href="mailto:peter@pidesigngroup.ca">peter@pidesigngroup.ca</a><a href="tel:+14035104071">403-510-4071</a><span>Calgary, Alberta</span></div></div></section>
+</main><Footer/>
+<script>import '../scripts/about';import '../scripts/contact-motion';</script>
+</body></html>

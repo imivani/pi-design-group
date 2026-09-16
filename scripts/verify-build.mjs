@@ -94,6 +94,13 @@ try{
   await expect(page.locator('#inquiry-fields')).toHaveAttribute('data-open','true');
   await expect(page.locator('#inquiry-photo-caption')).toContainText('Seton Crossing');
   await expect(page.locator('#inquiry-photo-link')).toHaveAttribute('href',base+'seton');
+  await page.goto(address+base+'about');
+  await expect(page.locator('.desktop-nav a[aria-current="page"]')).toHaveText('About');
+  await page.locator('[data-experience-filter="Commercial"]').click();
+  await expect(page.locator('.experience-entry:visible')).toHaveCount(2);
+  await expect(page.locator('.experience-link').filter({hasText:'Seton Crossing'})).toHaveAttribute('href',base+'seton');
+  await page.locator('.principal summary').first().click();
+  await expect(page.locator('.principal details').first()).toHaveAttribute('open','');
   assert.deepEqual(errors,[]);
-  console.log(JSON.stringify({base,pages:32,links:30,contactPage:true,pairedFeaturedViews:true,drawingViewer:true,navigationCatalogue:true,projectSearch:true,earlyProjectInformation:true,logoReturn:true,errors,passed:true}));
+  console.log(JSON.stringify({base,pages:33,links:30,aboutPage:true,contactPage:true,pairedFeaturedViews:true,drawingViewer:true,navigationCatalogue:true,projectSearch:true,earlyProjectInformation:true,logoReturn:true,errors,passed:true}));
 }finally{await browser.close();await new Promise(resolve=>server.close(resolve));}

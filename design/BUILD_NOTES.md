@@ -160,3 +160,12 @@ Validation: five contact checks cover image preview, inline form, preserved inpu
 ## September 15: Five-second featured carousel
 - Changed the automatic interval from three seconds to five seconds at the owner's request. Preserved the slide/crossfade and pointer-hover behavior. All seven focused carousel checks pass.
 
+
+## September 15: Editorial About page
+- Added /about and linked it in desktop/mobile navigation and the footer. Preserved the shared white header, regular Helvetica weights, structural rails and native page transitions.
+- Content is drawn from the owner-supplied PI Design Corporate Profile and PI Design Project Experience (dated May 5, 2026). The documents support 70+ completed projects, licensing in Alberta and British Columbia, an established practice of over a decade, Peter's 20+ Calgary years and 1996 master's degree, and Terry's 40+ years across Western Canada. No founding year, outcomes, clients or additional credentials were invented.
+- Terry has a discipline description rather than an unconfirmed Partner/Principal title. Opening media is an unlabeled neutral placeholder; two large 4:5 warm-gray portrait slots are ready for approved photography, with no generated people.
+- Selected experience contains 18 records with source years and categories. Only clear project matches link to existing routes; ambiguous Summit 77/Mahogany records and unreleased portfolio pages remain plain text. Source location discrepancies are not propagated. Responsibilities describe typical services; construction administration remains conditional on scope.
+- Motion skill applied through native browser animations: staged opening groups, scroll reveals, animated experience filtering, portrait-adjacent rule expansion, interruptible native disclosures and the existing moving photographic close. Reduced/off and no-script content supported. No counters or portrait zoom.
+- Reviewed the supplied visual and the actual Mobbin Pentagram two-column introduction (326ff8e0-1f06-4a08-a915-0e53b4967529). Used the user's written placeholders over the concept's generated photographs.
+- Four About tests plus 11 shared-header tests pass. Filters, keyboard operation, fast changes, no-script disclosure, accessibility, and 320/390/768/1440px reflow checked. Fixed hidden filter enhancement and small-label contrast during QA. Type checks and the 33-page production verifier pass, including About navigation and interactions.
