@@ -183,3 +183,8 @@ Validation: five contact checks cover image preview, inline form, preserved inpu
 - Leadership now shows experience and credentials openly, with clearer name, experience and focus hierarchy.
 - Replaced service disclosures with three illustrated, keyboard-accessible stages. How we work is a horizontal icon-led section without photography. Selected experience follows it immediately before the contact close.
 - About, drawing interactions and project transition checks pass. Desktop/mobile review, accessibility/reflow, type checks, production build and the 33-page verifier passed. Updated drawing assertions and made an existing filter test wait for its entrance animation to finish.
+
+## September 15: Compact experience and charcoal working section
+- How we work now matches the neutral #1b1c1d charcoal used elsewhere, with a softly blurred grayscale Crestmont photograph behind the horizontal principles.
+- Selected experience uses smaller thumbnails and a four/three/two-column desktop/tablet/mobile grid, with tighter spacing and regular-weight headings to reduce scrolling.
+- Five About checks and the 33-page production verifier pass. Desktop and mobile imagery/layout reviewed after images decoded.

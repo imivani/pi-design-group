@@ -203,3 +203,20 @@ html[data-enhanced] .scope-panel[data-active='false']{display:none}
 @media(max-width:767px){.about-practice .about-prose{padding:0;margin:0}.principal ul{font-size:15px;gap:14px}.principal-experience>span{font-size:43px}.scope-tabs button,.scope-tabs button:first-child{padding:19px 10px;gap:12px 5px}.scope-tabs button>span:first-child{font-size:12px}.scope-tabs button>span:nth-child(2){font-size:18px;grid-column:1/-1}.scope-tabs button svg{display:none}.scope-studio{display:flex;flex-direction:column;gap:26px}.scope-photo{width:100%}.scope-panels{width:100%;min-height:480px}.scope-panel h3{font-size:28px}.working-principles{grid-template-columns:1fr;gap:28px}.working-principle,.working-principle:first-child,.working-principle:nth-child(3){border:0;border-top:1px solid #657168;padding:25px 0 0}.principle-mark{margin-bottom:20px}.working-principle h3{font-size:25px}.about-practice{padding-inline:var(--frame-inset)}}
 @media(prefers-reduced-motion:reduce){.practice-atmosphere img,.principle-mark>svg{transform:none!important}.scope-tabs button,.scope-tabs button::after{transition:none}}
 html[data-motion='reduced'] :is(.practice-atmosphere img,.principle-mark>svg){transform:none!important}
+
+/* Charcoal atmosphere and a compact, browsable project record. */
+.about-working{position:relative;isolation:isolate;overflow:hidden;background:#1b1c1d;border-color:#393a3b}
+.working-atmosphere{position:absolute;inset:-24px;z-index:-1;pointer-events:none;filter:blur(18px);opacity:.26}
+.working-atmosphere img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) brightness(.5)}
+.about-working>.frame{position:relative}
+.about-working .about-kicker,.principle-mark,.principle-mark>span,.working-principle p{color:#d0d1d1}
+.working-principle{border-color:#ffffff30}
+.experience-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
+.experience-thumbnail{aspect-ratio:1.9;margin-bottom:12px}
+.experience-entry h3,.experience-link{font-size:18px;line-height:1.35}
+.experience-meta{gap:8px;margin-bottom:7px;flex-wrap:wrap}
+.experience-entry:not(.experience-entry--pictured){padding-top:14px}
+.experience-photo-arrow{width:34px;height:34px;right:10px;bottom:10px}
+@media(max-width:1100px){.experience-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px 20px}}
+@media(max-width:767px){.experience-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 14px}.experience-thumbnail{aspect-ratio:1.5;margin-bottom:10px}.experience-entry h3,.experience-link{font-size:16px}.experience-meta{display:block}.experience-meta p{text-align:left;font-size:12px;margin-top:4px}.experience-photo-arrow{width:28px;height:28px;right:7px;bottom:7px}.experience-photo-arrow svg{width:18px}.experience-thumbnail small{font-size:10px;padding:7px 8px 20px}.working-principle,.working-principle:first-child,.working-principle:nth-child(3){border-color:#ffffff30}}
+@media print{.working-atmosphere{display:none}.about-working{background:white;color:#171b1c}}
