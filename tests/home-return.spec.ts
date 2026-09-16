@@ -187,3 +187,13 @@ test('the logo remains a working visible home link without JavaScript',async({br
   await expect(page.getByRole('heading',{level:1})).toBeVisible();
   await context.close();
 });
+
+for(const source of ['about','contact'])for(const reduced of [false,true])test(`${source} logo uses the shared home entrance with reduced motion ${reduced}`,async({page})=>{
+ await observe(page);
+ if(reduced)await page.emulateMedia({reducedMotion:'reduce'});
+ await page.goto('/'+source);
+ await page.locator('#site-header .site-wordmark').click();
+ await settledHome(page);
+ const entrances=(await events(page)).filter(entry=>['native','fallback'].includes(entry.phase));
+ expect(entrances).toHaveLength(reduced?0:1);
+});

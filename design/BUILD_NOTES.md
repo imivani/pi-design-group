@@ -188,3 +188,7 @@ Validation: five contact checks cover image preview, inline form, preserved inpu
 - How we work now matches the neutral #1b1c1d charcoal used elsewhere, with a softly blurred grayscale Crestmont photograph behind the horizontal principles.
 - Selected experience uses smaller thumbnails and a four/three/two-column desktop/tablet/mobile grid, with tighter spacing and regular-weight headings to reduce scrolling.
 - Five About checks and the 33-page production verifier pass. Desktop and mobile imagery/layout reviewed after images decoded.
+
+## September 15: Consistent logo return
+- Extended the existing homepage hero return animation from project pages to About and Contact. Both click tracking and the storage-unavailable referrer fallback recognize these routes; animation timings remain unchanged.
+- All 17 home-return tests pass, including both added routes with normal and reduced motion, mobile, native/fallback transitions, Back/reload and unavailable storage. Production build and verifier passed.

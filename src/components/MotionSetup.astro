@@ -27,8 +27,9 @@ const isHomepage = Astro.url.pathname.replace(/\/$/,'') === base.replace(/\/$/,'
     window.__piProjectArrival = { fresh, native:null };
     const homePath = normalizedPath(base);
     const home = normalizedPath(location.pathname) === homePath;
+    const isHomeReturnSource = path => transitionProjects.some(project => project.path === path) || ['about','contact'].some(page => normalizedPath(base + page) === path);
     let homeEntry;
-    let projectReferrer = false;
+    let internalReferrer = false;
     if (home) {
       try {
         homeEntry = JSON.parse(sessionStorage.getItem('pi-home-return') || 'null');
@@ -36,13 +37,13 @@ const isHomepage = Astro.url.pathname.replace(/\/$/,'') === base.replace(/\/$/,'
       } catch {}
       try {
         const previous = new URL(document.referrer);
-        projectReferrer = previous.origin === location.origin && transitionProjects.some(project => project.path === normalizedPath(previous.pathname));
+        internalReferrer = previous.origin === location.origin && isHomeReturnSource(normalizedPath(previous.pathname));
       } catch {}
     }
     // The same-origin referrer preserves this enhancement when storage is
     // unavailable. Back, reload and unrelated homepage visits stay immediate.
-    const matchingHomeEntry = homeEntry?.path === homePath && Date.now()-homeEntry.at < 15000 && transitionProjects.some(project => project.path === homeEntry.from);
-    const freshHome = home && root.dataset.motion === 'full' && !returning && navigation?.type !== 'reload' && location.hash === '#hero' && (matchingHomeEntry || projectReferrer);
+    const matchingHomeEntry = homeEntry?.path === homePath && Date.now()-homeEntry.at < 15000 && isHomeReturnSource(homeEntry.from);
+    const freshHome = home && root.dataset.motion === 'full' && !returning && navigation?.type !== 'reload' && location.hash === '#hero' && (matchingHomeEntry || internalReferrer);
     window.__piHomeReturn = { fresh:!!freshHome, native:null };
     let homeRevealHandled = false;
     if (home) {
@@ -93,14 +94,14 @@ const isHomepage = Astro.url.pathname.replace(/\/$/,'') === base.replace(/\/$/,'
         return;
       }
       const logo = event.target.closest?.('a.site-wordmark');
-      if (logo && currentProject && (!logo.target || logo.target === '_self') && !logo.hasAttribute('download')) {
+      if (logo && isHomeReturnSource(normalizedPath(location.pathname)) && (!logo.target || logo.target === '_self') && !logo.hasAttribute('download')) {
         const destination = new URL(logo.href);
         if (destination.origin === location.origin && normalizedPath(destination.pathname) === homePath && destination.hash === '#hero') {
           clearNames();
           try {
             sessionStorage.removeItem('pi-photo-transition');
             sessionStorage.removeItem('pi-home-return');
-            if (root.dataset.motion === 'full') sessionStorage.setItem('pi-home-return',JSON.stringify({path:homePath,from:currentProject.path,at:Date.now()}));
+            if (root.dataset.motion === 'full') sessionStorage.setItem('pi-home-return',JSON.stringify({path:homePath,from:normalizedPath(location.pathname),at:Date.now()}));
           } catch {}
         }
         return;
@@ -172,3 +173,4 @@ const isHomepage = Astro.url.pathname.replace(/\/$/,'') === base.replace(/\/$/,'
     });
   })();
 </script>
+
