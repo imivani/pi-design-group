@@ -28,9 +28,10 @@ test('about content and native disclosures remain available without javascript',
 
 test('photographic layout has no placeholders and service imagery follows selection',async({page})=>{
  await page.goto('/about');await expect(page.locator('.about-studio-placeholder,.about-credentials')).toHaveCount(0);
- await expect(page.locator('.principal-portrait img').first()).toHaveAttribute('src','/media/people/peter-imshenetskyy.webp');await expect(page.locator('.principal-portrait img').last()).toHaveAttribute('src','/media/people/terry-klassen.webp');
+ await expect(page.locator('.principal-portrait img').first()).toHaveAttribute('src','/media/people/peter-imshenetskyy-portrait.webp');await expect(page.locator('.principal-portrait img').last()).toHaveAttribute('src','/media/people/terry-klassen.webp');
  expect(await page.locator('.about-opening-photo').evaluate(e=>Math.abs(e.getBoundingClientRect().width-e.closest('.frame')!.getBoundingClientRect().width)<1)).toBe(true);
  await expect(page.locator('.experience-thumbnail')).toHaveCount(8);
  await page.locator('[data-scope-index="1"]').click();await expect(page.locator('#scope-image')).toHaveAttribute('src','/media/img_2304.webp');await expect(page.locator('#scope-caption')).toContainText('Planting and frontage');
  await page.locator('[data-scope-index="0"]').click();await expect(page.locator('#scope-image')).toHaveAttribute('src','/media/gallery/crestmont-west/landscape-plan-2026.webp');
 });
+

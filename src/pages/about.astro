@@ -52,7 +52,7 @@ const categories=['All','Residential','Multifamily','Commercial','Institutional'
     <div class="about-section-heading" data-reveal><h2 id="leadership-title">Leadership</h2><p>A personally led practice.<br/>Two complementary perspectives.</p></div>
     <div class="leadership-list">
       {leadership.map((person,index)=><article class="principal" data-reveal aria-labelledby={'principal-'+index}>
-        <div class="principal-portrait"><img src={asset(index===0?'/media/people/peter-imshenetskyy.webp':'/media/people/terry-klassen.webp')} alt={person.name} width="900" height="1125" loading="lazy" decoding="async"/></div>
+        <div class="principal-portrait"><img src={asset(index===0?'/media/people/peter-imshenetskyy-portrait.webp':'/media/people/terry-klassen.webp')} alt={person.name} width="900" height="1125" loading="lazy" decoding="async"/></div>
         <div class="principal-copy"><p class="principal-role">{person.role}</p><h3 id={'principal-'+index}>{person.name}</h3><p class="principal-credentials">{person.credentials}</p><div class="principal-rule" aria-hidden="true"></div><p class="principal-bio">{person.bio}</p><div class="principal-experience"><span>{index===0?'20+':'40+'}</span><p>Years of experience<br/>{index===0?'Calgary':'Western Canada'}</p></div><p class="principal-focus-label">Focus</p><ul>{person.focus.map(focus=><li>{focus}</li>)}</ul>
         <div class="principal-detail"><p>{person.detail}</p></div></div>
       </article>)}
@@ -81,4 +81,5 @@ const categories=['All','Residential','Multifamily','Commercial','Institutional'
 </main><Footer/>
 <script>import '../scripts/about';import '../scripts/contact-motion';</script>
 </body></html>
+
 
