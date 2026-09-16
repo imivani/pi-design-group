@@ -1,4 +1,5 @@
 ---
+import atmospheres from "../data/atmospheres.json";
 import { ArrowLeft, ArrowRight, Pause, Play } from '@lucide/astro';
 import { media, projects, projectPath } from '../data/projects';
 import '../styles/featured-project.css';
@@ -10,12 +11,12 @@ const views = [
   { id: 'seton-crossing', image: '/media/gallery/seton-crossing/2.webp', alt: 'The pergola and outdoor seating at Seton Crossing', detail: '/media/gallery/seton-crossing/usb-img_2443.webp', detailAlt: 'A planted pedestrian entrance at Seton Crossing', copy: 'Trees, grasses and places to sit bring a quieter pedestrian setting to the commercial plaza.' },
 ].map(view => {
   const project = projects.find(project => project.id === view.id)!;
-  return { ...view, label: project.name, location: project.location || project.type, href: projectPath(project, base), image: asset(view.image), detail: asset(view.detail) };
+  return { ...view, background: asset(atmospheres[view.image as keyof typeof atmospheres] || view.image), label: project.name, location: project.location || project.type, href: projectPath(project, base), image: asset(view.image), detail: asset(view.detail) };
 });
 const first = views[0];
 ---
 <section id="featured" class="featured" aria-labelledby="featured-title">
-  <div class="featured-atmosphere" aria-hidden="true"><img data-featured-background src={first.image} alt="" width="1920" height="1280" loading="lazy" decoding="async" /></div>
+  <div class="featured-atmosphere" aria-hidden="true"><img data-featured-background src={first.background} alt="" width="1920" height="1280" loading="lazy" decoding="async" /></div>
   <div class="frame featured-inner">
     <div class="featured-heading"><h2 id="featured-title">Featured Projects</h2>
       <div class="featured-controls js-only">

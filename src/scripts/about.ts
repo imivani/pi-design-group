@@ -3,11 +3,7 @@ document.documentElement.dataset.enhanced = 'true';
 setupImageErrors();setupReveals();
 const running=new Set<Animation>();
 const track=(animation:Animation|null)=>{if(!animation)return;running.add(animation);void animation.finished.finally(()=>running.delete(animation)).catch(()=>{});};
-document.querySelectorAll<HTMLElement>('[data-about-arrival]').forEach((element,index)=>{
-  const arrival=animate(element,[{opacity:0,transform:'translateY(20px)'},{opacity:1,transform:'translateY(0)'}],1400, 'cubic-bezier(.4,0,.2,1)');
-  if(arrival&&mode()==='full')arrival.effect?.updateTiming({delay:index*160,fill:'backwards'});
-  track(arrival);
-});
+// Opening motion is CSS-driven before first paint; never restart it after module loading.
 const entries=[...document.querySelectorAll<HTMLElement>('.experience-entry')];
 const filters=[...document.querySelectorAll<HTMLButtonElement>('[data-experience-filter]')];
 const filterAnimations=new Set<Animation>();

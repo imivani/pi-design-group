@@ -1,6 +1,6 @@
 ---
 import { renderingCredit } from '../data/image-credit';
-import { Search, ChevronDown, ArrowLeft, ArrowRight, Menu, X } from '@lucide/astro';
+import { Search, ChevronDown, ArrowLeft, ArrowRight, Menu, X, Building, Store, Trees } from '@lucide/astro';
 import { projects, media, projectPath } from '../data/projects';
 import SearchDialog from './SearchDialog.astro';
 import '../styles/header.css';
@@ -23,9 +23,9 @@ const categories = [
 const catalogue = [...projects].sort((a, b) => a.name.localeCompare(b.name));
 const initialPreview = projects.find((project) => project.id === 'crestmont-west')!;
 const services = [
-  { id: 'multifamily', name: 'Multifamily Communities', copy: 'Shared gardens. Everyday connections.', image: media.services.multifamily, alt: 'Planting and pedestrian spaces in a residential community.' },
-  { id: 'commercial', name: 'Commercial Plazas', copy: 'Welcoming landscapes for work and daily life.', image: media.services.commercial, alt: 'Planting and outdoor seating within a commercial plaza.' },
-  { id: 'parks', name: 'Public Parks', copy: 'Room to gather, explore and play.', image: media.services.parks, alt: 'A play space detail at Crestmont West.' },
+  { id: 'multifamily', icon: Building, name: 'Multifamily Communities', copy: 'Shared gardens. Everyday connections.', image: media.services.multifamily, alt: 'Planting and pedestrian spaces in a residential community.' },
+  { id: 'commercial', icon: Store, name: 'Commercial Plazas', copy: 'Welcoming landscapes for work and daily life.', image: media.services.commercial, alt: 'Planting and outdoor seating within a commercial plaza.' },
+  { id: 'parks', icon: Trees, name: 'Public Parks', copy: 'Room to gather, explore and play.', image: media.services.parks, alt: 'A play space detail at Crestmont West.' },
 ];
 ---
 
@@ -100,7 +100,7 @@ const services = [
     <nav class="service-menu-list" aria-label="Landscape design services">
       {services.map((service, index) => (
         <a class="service-menu-link" href={homepage ? '#services' : `${import.meta.env.BASE_URL}?service=${service.id}#services`} data-service-link={service.id} data-active={index === 0 ? 'true' : 'false'}>
-          <span class="service-menu-link__name">{service.name}</span>
+          <span class="service-menu-link__name"><service.icon size={19} stroke-width={1.4} aria-hidden="true"/>{service.name}</span>
           <span class="service-menu-link__copy">{service.copy}</span>
           <ArrowRight size={17} stroke-width={1.25} aria-hidden="true" />
         </a>

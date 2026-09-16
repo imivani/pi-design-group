@@ -1,4 +1,5 @@
 ---
+import '../styles/page-entrance.css';
 import { projects, projectPath } from '../data/projects';
 import { projectDetails } from '../data/project-details';
 const base = import.meta.env.BASE_URL;
@@ -23,6 +24,16 @@ const isHomepage = Astro.url.pathname.replace(/\/$/,'') === base.replace(/\/$/,'
     let choice = 'system';
     try { choice = localStorage.getItem('pi-motion') || 'system'; } catch {}
     root.dataset.motion = choice === 'off' ? 'off' : choice === 'reduced' || matchMedia('(prefers-reduced-motion: reduce)').matches ? 'reduced' : 'full';
+    if (['about','contact'].some(page => normalizedPath(base + page) === normalizedPath(location.pathname)) && !returning && root.dataset.motion === 'full') {
+      root.dataset.pageEntrance = 'active';
+      const settleEntrance = () => delete root.dataset.pageEntrance;
+      document.addEventListener('animationend', event => { if (event.animationName === 'pi-page-arrive' && event.target.matches('.about-opening-photo,.inquiry-media')) settleEntrance(); });
+      document.addEventListener('pi:motion', settleEntrance, {once:true});
+      window.addEventListener('pagehide', settleEntrance, {once:true});
+      window.addEventListener('beforeprint', settleEntrance, {once:true});
+      document.addEventListener('pointerdown', settleEntrance, {once:true,capture:true});
+      document.addEventListener('focusin', settleEntrance, {once:true});
+    }
     const fresh = !!currentProject && root.dataset.motion === 'full' && !returning && (!location.hash || location.hash === '#main');
     window.__piProjectArrival = { fresh, native:null };
     const homePath = normalizedPath(base);

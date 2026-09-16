@@ -1,6 +1,6 @@
 import { animate, mode } from './motion';
 
-type View = { id: string; label: string; location: string; href: string; image: string; alt: string; detail: string; detailAlt: string; copy: string };
+type View = { id: string; label: string; location: string; href: string; image: string; background: string; alt: string; detail: string; detailAlt: string; copy: string };
 const section = document.querySelector<HTMLElement>('#featured');
 if (section) {
   const views = JSON.parse(section.querySelector('#featured-view-data')!.textContent!) as View[];
@@ -102,7 +102,7 @@ if (section) {
       tabs.forEach((tab, i) => { tab.setAttribute('aria-selected', String(i === index)); tab.tabIndex = i === index ? 0 : -1; });
       panel.setAttribute('aria-labelledby', tabs[index].id);
       swap(main, view.image, view.alt, direction);
-      swap(background, view.image, '', direction);
+      swap(background, view.background, '', direction);
       swap(secondary, view.detail, view.detailAlt, -direction);
       name.textContent = view.label; location.textContent = view.location;
       destination.href = view.href;

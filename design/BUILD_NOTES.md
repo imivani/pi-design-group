@@ -207,3 +207,11 @@ Validation: five contact checks cover image preview, inline form, preserved inpu
 - Restored project-opening title/photo transitions to their original 560/620ms timing and arrival easing, for both native and fallback paths.
 - Made archive hover image expansion more responsive at 620ms (previously 860ms). Retained slower hero and editorial text/image reveals.
 - All 13 project-transition checks and production verification pass.
+
+## September 16: First-paint entrances, rendering cost and Lucide wayfinding
+- Removed delayed-module About/Contact opening animations. Early head setup now enables CSS entrances before first paint, preserving the slow timing without a visible-then-hidden restart. Back, no-JS, reduced/off motion and user interaction settle safely.
+- Replaced live large-image blur in Featured Projects, next-project sections and How we work with 33 small preprocessed decorative WebPs (77,696 bytes vs 5,065,504 bytes of source files). Source photography remains unchanged. Added scripts/build-atmospheres.mjs and centralized map for reproducibility.
+- Reduced white-header blur from 48px to 24px and increased the translucent fill to retain text separation and the glass appearance with a smaller blur surface.
+- Added Lucide service icons in homepage/navigation, category icons in project filters, and an Images icon beside View gallery. Fixed arrow-only rotation so category icons stay upright.
+- Delayed-module entrance tests, narrow-screen/icon checks, About/navigation/mobile checks and all seven featured autoplay tests pass. Type checks and the 33-page production verifier pass. Desktop imagery and mobile layout inspected.
+- A synthetic 390px Chrome scroll with 4x CPU slowdown showed no frame intervals over 33.4ms in the sampled 3-second run. This is not a measurement of the owner's GPU/display or a guarantee of their FPS; the verifiable optimization is reduced image/blur work.

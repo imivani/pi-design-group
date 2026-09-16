@@ -5,7 +5,7 @@ import HomeDetails from '../components/HomeDetails.astro';
 import ContactPanel from '../components/ContactPanel.astro';
 import PracticeIntro from '../components/PracticeIntro.astro';
 import ProjectArchive from '../components/ProjectArchive.astro';
-import { ArrowRight, ArrowDown } from '@lucide/astro';
+import { ArrowRight, ArrowDown, Building, Store, Trees } from '@lucide/astro';
 import { media } from '../data/projects';
 import Footer from '../components/Footer.astro';
 import MotionSetup from '../components/MotionSetup.astro';
@@ -16,9 +16,9 @@ import '../styles/home-return.css';
 const base = import.meta.env.BASE_URL;
 const asset = (path: string) => base + path.replace(/^\//, '');
 const services = [
-  { id: 'multifamily', title: 'Multifamily Communities', copy: 'Landscape design for multifamily communities. Planting, pedestrian routes and shared outdoor spaces, considered together.', image: media.services.multifamily, alt: 'A planted courtyard framed by residences at Crestmont West', caption: 'Courtyard at Crestmont West' },
-  { id: 'commercial', title: 'Commercial Plazas', copy: 'Landscape design for commercial plazas. Planting, seating and pedestrian connections around shops and building entrances.', image: media.services.commercial, alt: 'Outdoor seating and landscaped pedestrian areas at Seton Crossing', caption: 'Seton Crossing, Calgary' },
-  { id: 'parks', title: 'Public Parks', copy: 'Landscape design for public outdoor spaces. Places to walk, play and spend time outside.', image: media.services.parks, alt: 'A play space and planted pedestrian path at Crestmont West', caption: 'Play space detail at Crestmont West' },
+  { id: 'multifamily', icon: Building, title: 'Multifamily Communities', copy: 'Landscape design for multifamily communities. Planting, pedestrian routes and shared outdoor spaces, considered together.', image: media.services.multifamily, alt: 'A planted courtyard framed by residences at Crestmont West', caption: 'Courtyard at Crestmont West' },
+  { id: 'commercial', icon: Store, title: 'Commercial Plazas', copy: 'Landscape design for commercial plazas. Planting, seating and pedestrian connections around shops and building entrances.', image: media.services.commercial, alt: 'Outdoor seating and landscaped pedestrian areas at Seton Crossing', caption: 'Seton Crossing, Calgary' },
+  { id: 'parks', icon: Trees, title: 'Public Parks', copy: 'Landscape design for public outdoor spaces. Places to walk, play and spend time outside.', image: media.services.parks, alt: 'A play space and planted pedestrian path at Crestmont West', caption: 'Play space detail at Crestmont West' },
 ];
 ---
 <!doctype html>
@@ -68,7 +68,7 @@ const services = [
               <div class="service-shade" aria-hidden="true"></div>
               <div class="service-information">
                 <h3><button type="button" id={'tab-' + service.id} class="service-selector" aria-expanded="true" aria-controls={'service-' + service.id} data-service={service.id}>
-                  <span>{service.title}</span><ArrowRight size={24} stroke-width={1.3} aria-hidden="true" />
+                  <span class="service-title"><service.icon size={24} stroke-width={1.3} aria-hidden="true"/>{service.title}</span><ArrowRight size={24} stroke-width={1.3} aria-hidden="true" />
                 </button></h3>
                 <div class="service-description" id={'service-' + service.id} role="region" aria-labelledby={'tab-' + service.id}>
                   <div><p>{service.copy}</p><span class="service-caption">{service.caption}</span><span class="service-error" role="status"></span></div>

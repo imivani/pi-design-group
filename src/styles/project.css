@@ -103,8 +103,8 @@
 
 @layer components {
   .next-project{position:relative;isolation:isolate;overflow:hidden}
-  .next-project-atmosphere{position:absolute;inset:-24px;z-index:-1;pointer-events:none;filter:blur(12px)}
-  .next-project .next-project-atmosphere img{width:100%;height:100%;aspect-ratio:auto;object-fit:cover;filter:brightness(.42) saturate(.65)}
+  .next-project-atmosphere{position:absolute;inset:-24px;z-index:-1;pointer-events:none;contain:paint}
+  .next-project .next-project-atmosphere img{width:100%;height:100%;aspect-ratio:auto;object-fit:cover;filter:none}
   .next-project::before{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgb(12 15 16 / 80%),rgb(12 15 16 / 40%) 65%,rgb(12 15 16 / 50%))}
   .next-project-inner{position:relative}
 }

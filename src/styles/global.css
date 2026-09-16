@@ -69,7 +69,7 @@ html[data-motion="off"]::view-transition-group(*),html[data-motion="reduced"]::v
   .service-selector{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;width:100%;padding:0;text-align:left;line-height:1.1;font-size:clamp(25px,2.2vw,34px);letter-spacing:-.02em;min-height:54px}
   .service-selector::after{content:"";position:absolute;inset:0;z-index:1;cursor:pointer}
   .service-selector span{max-width:260px}.service-selector svg{flex-shrink:0;margin-bottom:4px;transition:transform 420ms var(--ease-arrive),opacity 240ms;opacity:.8}
-  .service-panel[data-active="true"] .service-selector svg{transform:rotate(-45deg);opacity:1}
+  .service-panel[data-active="true"] .service-selector>svg{transform:rotate(-45deg);opacity:1}
   .service-panel:has(:focus-visible){outline:2px solid var(--ink);outline-offset:5px}.service-selector:focus-visible{outline:none}
   .service-description{display:grid;grid-template-rows:1fr;opacity:1;transition:grid-template-rows 420ms var(--ease-arrive),opacity 240ms var(--ease-standard),visibility 240ms}
   .service-description>div{min-height:0;overflow:hidden}.service-description p{padding-top:22px;line-height:1.55;font-size:17px;max-width:430px}
@@ -168,3 +168,8 @@ html[data-motion="off"]::view-transition-group(*),html[data-motion="reduced"]::v
   #services>h2{max-width:850px}
   .service-panel{border-radius:var(--image-radius)}
 }
+
+.service-title{display:flex;align-items:center;gap:12px}.service-title>svg{flex-shrink:0}
+.project-filters button{display:inline-flex;align-items:center;justify-content:center;gap:7px}
+@media(max-width:767px){.project-filters{gap:10px;flex-wrap:wrap}.project-filters button{gap:5px}}
+

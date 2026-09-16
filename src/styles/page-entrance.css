@@ -1,0 +1,9 @@
+/* Prepared in the head: no visible-then-hidden module startup flash. */
+html[data-motion='full'][data-page-entrance='active'] :is([data-about-arrival],[data-contact-arrival]){animation:pi-page-arrive 1400ms cubic-bezier(.4,0,.2,1) both}
+html[data-motion='full'][data-page-entrance='active'] h1[data-about-arrival]{animation-delay:160ms}
+html[data-motion='full'][data-page-entrance='active'] .about-intro-copy{animation-delay:320ms}
+html[data-motion='full'][data-page-entrance='active'] .about-opening-photo{animation-delay:480ms}
+html[data-motion='full'][data-page-entrance='active'] .inquiry-media{animation-delay:160ms}
+@keyframes pi-page-arrive{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){html [data-about-arrival],html [data-contact-arrival]{animation:none!important}}
+@media print{html [data-about-arrival],html [data-contact-arrival]{animation:none!important}}

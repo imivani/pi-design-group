@@ -17,7 +17,7 @@ test('featured background follows the chosen project and settles without duplica
  await page.goto('/');await page.locator('#featured').scrollIntoViewIfNeeded();
  await page.locator('[data-featured-view="darcy"]').click();
  await expect(page.locator('#featured-perspective')).toHaveAttribute('data-featured-project','darcy');
- await expect(page.locator('[data-featured-background]')).toHaveAttribute('src',await page.locator('[data-featured-image]').getAttribute('src')||'');
+ await expect(page.locator('[data-featured-background]')).toHaveAttribute('src',await page.locator('[data-featured-image]').getAttribute('src').then(src=>'/media/atmospheres/'+src!.replace('/media/','').replaceAll('/','-')));
  await expect(page.locator('.featured-outgoing')).toHaveCount(0);
  expect(await page.locator('#featured').evaluate(e=>Math.abs(e.getBoundingClientRect().width-document.body.clientWidth)<1)).toBe(true);
 });

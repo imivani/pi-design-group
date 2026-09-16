@@ -1,6 +1,6 @@
 ---
 import { renderingCredit } from '../data/image-credit';
-import { ArrowRight, ArrowUpRight, Search, Images, Grid2x2, List } from '@lucide/astro';
+import { ArrowRight, ArrowUpRight, Search, Images, Grid2x2, List, Building, Store, House } from '@lucide/astro';
 import { projects, projectPath } from '../data/projects';
 import { projectDetails } from '../data/project-details';
 import '../styles/archive-interactions.css';
@@ -21,7 +21,7 @@ const archive = projects.map(project => {
   <div class="projects-heading" data-reveal><h2 id="projects-title">All Projects</h2><p id="project-count" role="status" aria-live="polite">{projects.length} entries</p></div>
   <div class="project-controls js-only">
     <div class="project-filters" role="group" aria-label="Filter projects">
-      {[['all','All'],['multifamily','Multifamily'],['commercial','Commercial'],['single-homes','Single Homes']].map(([id,label]) => <button type="button" data-filter={id} aria-pressed={id === 'all' ? 'true' : 'false'}>{label}</button>)}
+      {[{id:'all',label:'All',icon:Grid2x2},{id:'multifamily',label:'Multifamily',icon:Building},{id:'commercial',label:'Commercial',icon:Store},{id:'single-homes',label:'Single Homes',icon:House}].map(({id,label,icon:Icon}) => <button type="button" data-filter={id} aria-pressed={id === 'all' ? 'true' : 'false'}><Icon size={16} stroke-width={1.5} aria-hidden="true"/>{label}</button>)}
       <span class="filter-indicator" aria-hidden="true"></span>
     </div>
     <div class="project-tools">
