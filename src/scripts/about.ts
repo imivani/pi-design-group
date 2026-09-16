@@ -27,26 +27,7 @@ filters.forEach(button=>button.addEventListener('click',()=>{
   });
   document.querySelector('[data-experience-status]')!.textContent=`${visible.length} projects shown${selected==='All'?'':': '+selected}.`;
 }));
-// Keep native details semantics and no-script operation, while allowing interrupted height changes.
-const disclosures=new Map<HTMLDetailsElement,Animation>();
-document.querySelectorAll<HTMLDetailsElement>('.practice-disclosure').forEach(details=>{
-  const summary=details.querySelector('summary')!;
-  let desired=details.open;
-  summary.addEventListener('click',event=>{
-    if(mode()!=='full')return;
-    event.preventDefault();desired=!desired;
-    const start=details.getBoundingClientRect().height;
-    disclosures.get(details)?.cancel();
-    details.open=true;details.style.overflow='hidden';
-    const end=desired?details.getBoundingClientRect().height:summary.getBoundingClientRect().height+1;
-    const animation=animate(details,[{height:`${start}px`},{height:`${end}px`}],360);
-    if(!animation){details.open=desired;details.style.removeProperty('overflow');return;}
-    disclosures.set(details,animation);
-    void animation.finished.then(()=>{if(disclosures.get(details)===animation){details.open=desired;details.style.removeProperty('overflow');disclosures.delete(details);}}).catch(()=>{});
-  });
-  details.addEventListener('toggle',()=>{if(!disclosures.has(details))desired=details.open;});
-});
-document.addEventListener('pi:motion',()=>{running.forEach(a=>a.cancel());filterAnimations.forEach(a=>a.cancel());for(const [details,animation] of disclosures){animation.finish();details.style.removeProperty('overflow');}});
+document.addEventListener('pi:motion',()=>{running.forEach(a=>a.cancel());filterAnimations.forEach(a=>a.cancel());});
 
 const scopeImage=document.querySelector<HTMLImageElement>('#scope-image')!;
 const scopeCaption=document.querySelector<HTMLElement>('#scope-caption')!;
@@ -63,8 +44,25 @@ const showScope=async(item:HTMLElement)=>{
  track(animate(scopeImage,[{transform:'scale(1.035)'},{transform:'scale(1)'}],650));const fade=animate(old,[{opacity:1},{opacity:0}],450);track(fade);if(fade)void fade.finished.finally(()=>old.remove()).catch(()=>{});else old.remove();
  }catch{/* Preserve the current photograph when an image is unavailable. */}
 };
-document.querySelectorAll<HTMLElement>('[data-scope-index]').forEach(item=>{
- item.addEventListener('pointerenter',event=>{if(event.pointerType==='mouse')void showScope(item);});
- item.addEventListener('focusin',()=>void showScope(item));
- item.querySelector('summary')!.addEventListener('click',()=>void showScope(item));
+
+const stageButtons=[...document.querySelectorAll<HTMLButtonElement>('[data-scope-index]')];
+const stagePanels=[...document.querySelectorAll<HTMLElement>('.scope-panel')];
+const chooseStage=(index:number)=>{
+ stageButtons.forEach((button,i)=>{button.setAttribute('aria-selected',String(i===index));button.tabIndex=i===index?0:-1;});
+ stagePanels.forEach((panel,i)=>{panel.dataset.active=String(i===index);});
+ track(animate(stagePanels[index],[{opacity:.2,transform:'translateY(12px)'},{opacity:1,transform:'translateY(0)'}],420));
+ void showScope(stageButtons[index]);
+};
+stageButtons.forEach((button,index)=>{
+ button.addEventListener('click',()=>chooseStage(index));
+ button.addEventListener('keydown',event=>{let next:number|undefined;if(event.key==='ArrowRight')next=(index+1)%3;if(event.key==='ArrowLeft')next=(index+2)%3;if(event.key==='Home')next=0;if(event.key==='End')next=2;if(next!==undefined){event.preventDefault();chooseStage(next);stageButtons[next].focus({preventScroll:true});}});
 });
+const atmosphere=document.querySelector<HTMLImageElement>('.practice-atmosphere img')!;
+let ambient:Animation|undefined,visible=false;
+const syncAtmosphere=()=>{
+ if(mode()!=='full'){ambient?.cancel();ambient=undefined;return;}
+ if(!ambient){ambient=atmosphere.animate([{transform:'translateX(-1%) scale(1.08)'},{transform:'translateX(1%) scale(1.08)'}],{duration:16000,iterations:Infinity,direction:'alternate',easing:'ease-in-out'});}
+ if(visible&&!document.hidden)ambient.play();else ambient.pause();
+};
+new IntersectionObserver(([entry])=>{visible=entry.isIntersecting;syncAtmosphere();}).observe(atmosphere.closest('.about-practice')!);
+document.addEventListener('visibilitychange',syncAtmosphere);document.addEventListener('pi:motion',syncAtmosphere);

@@ -176,3 +176,10 @@ Validation: five contact checks cover image preview, inline form, preserved inpu
 - What we do now pairs its service sequence with a changing real drawing/photograph, triggered by hover, keyboard focus or tapping. Images decode before swapping, captions follow selection, and stale requests are discarded. How we work becomes a large courtyard photograph beside expandable editorial statements, replacing the four-column grid.
 - Removed the separate Practice credentials section. Kept credentials in the leadership biographies and factual licensing rail.
 - About accessibility, responsive checks, all eight image loads, desktop/mobile visuals, type checks and the 33-page production verifier passed. No fabricated landscape imagery or unrelated images were assigned to project records.
+
+## September 15: About hierarchy and interactive stages
+- Replaced the active Crestmont drawing across the homepage, About page and project gallery with the owner-supplied September 15 drawing, optimized as landscape-plan-2026.webp. A new filename prevents stale cached imagery.
+- Added a faint moving drawing behind The practice, paused offscreen and when the tab is hidden, with reduced/off motion support.
+- Leadership now shows experience and credentials openly, with clearer name, experience and focus hierarchy.
+- Replaced service disclosures with three illustrated, keyboard-accessible stages. How we work is a horizontal icon-led section without photography. Selected experience follows it immediately before the contact close.
+- About, drawing interactions and project transition checks pass. Desktop/mobile review, accessibility/reflow, type checks, production build and the 33-page verifier passed. Updated drawing assertions and made an existing filter test wait for its entrance animation to finish.

@@ -14,7 +14,7 @@ test('built-detail selection keeps the real plan, copy and destination together'
   await expect(paths).toHaveAttribute('aria-pressed', 'true');
   await materials.focus();
   await expect(page.locator('#why')).toHaveAttribute('data-detail-active', 'materials');
-  await expect(page.locator('#detail-plan-image')).toHaveAttribute('src', /\/crestmont-west\/3.webp$/);
+  await expect(page.locator('#detail-plan-image')).toHaveAttribute('src', /\/crestmont-west\/landscape-plan-2026.webp$/);
   await expect(page.locator('#detail-project-link')).toHaveAttribute('href', '/crestmontwest');
   await expect(page.locator('#detail-plan-copy')).toContainText('natural stone');
 });
@@ -32,7 +32,7 @@ test('returning to the current detail cancels an unfinished drawing selection', 
   release();
   await expect(page.locator('.detail-plan-link')).not.toHaveAttribute('aria-busy', 'true');
   await expect(page.locator('#why')).toHaveAttribute('data-detail-active', 'materials');
-  await expect(page.locator('#detail-plan-image')).toHaveAttribute('src', /\/crestmont-west\/3.webp$/);
+  await expect(page.locator('#detail-plan-image')).toHaveAttribute('src', /\/crestmont-west\/landscape-plan-2026.webp$/);
 });
 
 test('drawing failure preserves the current work and supports a successful retry', async ({ page }) => {
@@ -94,7 +94,7 @@ test('three built details support keyboard selection with truthful drawing conte
   await planting.focus();
   await expect(page.locator('#why')).toHaveAttribute('data-detail-active', 'planting');
   await expect(planting.locator('img')).toHaveAttribute('src', /\/crestmont-west\/8.webp$/);
-  await expect(page.locator('#detail-plan-image')).toHaveAttribute('src', /\/crestmont-west\/3.webp$/);
+  await expect(page.locator('#detail-plan-image')).toHaveAttribute('src', /\/crestmont-west\/landscape-plan-2026.webp$/);
   await expect(page.locator('#detail-plan-title')).toHaveText('Planting Layout');
   await expect(page.locator('#detail-plan-counter')).toHaveAttribute('aria-label', 'Detail 1 of 3');
   await page.keyboard.press('ArrowDown');

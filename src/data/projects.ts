@@ -351,7 +351,7 @@ export const media = {
   "why": "/media/why-evening.webp",
   "featuredDetail": "/media/img_2304.webp",
   "pathDetail": "/media/gallery/evanston/6.webp",
-  "drawing": "/media/gallery/crestmont-west/3.webp",
+  "drawing": "/media/gallery/crestmont-west/landscape-plan-2026.webp",
   "contact": "/media/gallery/darcy/5.webp"
 } as const;
 

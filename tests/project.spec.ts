@@ -110,7 +110,7 @@ test('home sections visibly fade, finish once, and all project results stay usab
   await expect(page.locator('#services-title')).toHaveAttribute('data-reveal-state','done');
   await page.locator('[data-filter="commercial"]').click();await page.locator('button[data-view="index"]').click();
   await expect(page.locator('.project-entry:visible')).toHaveCount(3);
-  expect(await page.locator('.project-entry:visible').evaluateAll(els=>els.every(el=>getComputedStyle(el).opacity==='1'))).toBe(true);
+  await expect.poll(()=>page.locator('.project-entry:visible').evaluateAll(els=>els.every(el=>getComputedStyle(el).opacity==='1'))).toBe(true);
 });
 
 test('mobile service photographs expand on touch and a collapsed choice restores on desktop',async({page})=>{

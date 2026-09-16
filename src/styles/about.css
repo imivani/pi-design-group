@@ -147,3 +147,59 @@ html[data-motion='off'] .about-page *,html[data-motion='reduced'] .about-page .e
 @media(prefers-reduced-motion:reduce){.experience-thumbnail>img,.experience-photo-arrow,.scope-item summary>span:nth-child(2){transition:none;transform:none!important}}
 html[data-motion='reduced'] :is(.experience-thumbnail>img,.experience-photo-arrow,.scope-item summary>span:nth-child(2)){transition:none;transform:none!important}
 @media print{.principal-portrait{display:block}.scope-heading{position:static}.working-photo img{height:300px}.about-working{background:white;color:#171b1c}.working-story :is(p,.about-kicker),.working-item .disclosure-inner p{color:#535b5c}}
+
+/* Open editorial hierarchy and a three-stage studio, without disclosures. */
+.about-practice{position:relative;isolation:isolate;overflow:hidden;background:#f8f9f6}
+.practice-atmosphere{position:absolute;inset:0;z-index:-1;overflow:hidden;pointer-events:none;opacity:.09;mask-image:linear-gradient(90deg,transparent,#000 75%)}
+.practice-atmosphere img{width:100%;height:100%;object-fit:cover;filter:grayscale(1);transform:scale(1.08)}
+.about-practice .about-prose{background:rgb(248 249 246 / 78%);padding:24px;margin:-24px}
+.practice-facts{background:rgb(248 249 246 / 88%)}
+.principal-copy{display:flex;flex-direction:column}
+.principal-role{font-size:14px;margin-bottom:12px;color:#4f5e56}
+.principal h3{font-size:clamp(33px,3.3vw,46px)}
+.principal-credentials{margin-top:12px}
+.principal-experience{display:flex;align-items:center;gap:20px;margin-top:25px;padding-block:22px;border-block:1px solid var(--line)}
+.principal-experience>span{font-size:48px;letter-spacing:-.045em;line-height:1}
+.principal-experience>p{font-size:14px;line-height:1.5;color:#5b6660}
+.principal ul{display:grid;grid-template-columns:1fr 1fr;gap:12px 22px;margin-top:16px;line-height:1.4}
+.principal li{padding-left:14px;position:relative}
+.principal li::before{content:'';position:absolute;left:0;top:8px;width:4px;height:4px;background:#66766b;border-radius:50%}
+.principal-detail{margin-top:5px;padding-top:20px;border-top:1px solid var(--line);font-size:15px;line-height:1.6;color:#5c6660}
+.about-scope{display:block}
+.scope-tabs{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin-bottom:30px;border-block:1px solid var(--line)}
+html:not([data-enhanced]) .scope-tabs{display:none!important}
+html[data-enhanced] .scope-tabs.js-only{display:grid!important}
+.scope-tabs button{display:grid;grid-template-columns:1fr auto;gap:17px 16px;padding:25px 24px;border:0;border-right:1px solid var(--line);background:transparent;color:#647068;text-align:left;cursor:pointer;font:inherit;position:relative;transition:background 300ms,color 300ms}
+.scope-tabs button:first-child{padding-left:0}.scope-tabs button:last-child{border-right:0}
+.scope-tabs button>span:first-child{grid-column:1/-1;font-size:14px}
+.scope-tabs button>span:nth-child(2){font-size:25px;letter-spacing:-.025em;line-height:1.2}
+.scope-tabs button svg{align-self:center;transition:transform 400ms var(--ease-arrive)}
+.scope-tabs button[aria-selected='true']{color:#14221a;background:#f2f5ef}
+.scope-tabs button::after{content:'';position:absolute;left:0;right:0;bottom:-1px;height:2px;background:#4f6755;transform:scaleX(0);transform-origin:left;transition:transform 500ms var(--ease-arrive)}
+.scope-tabs button[aria-selected='true']::after{transform:scaleX(1)}
+.scope-tabs button:hover svg{transform:translate(3px,-3px)}
+.scope-studio{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:6%;align-items:start}
+.scope-photo{margin:0}.scope-photo-stage{aspect-ratio:1.5;background:#f8f8f5}
+.scope-photo img{object-fit:contain}
+.scope-panels{min-height:500px;display:flex;flex-direction:column}
+.scope-panel h3{font-size:32px;line-height:1.15;letter-spacing:-.025em;margin-bottom:28px}
+.scope-responsibility{border-top:1px solid var(--line);padding-top:19px;margin-top:20px}
+.scope-responsibility h4{font-size:18px;line-height:1.4;font-weight:400;margin-bottom:10px}
+.scope-responsibility p{font-size:16px;line-height:1.65;color:#5c6660}
+html[data-enhanced] .scope-panel[data-active='false']{display:none}
+.scope-plan-link{margin-top:auto;padding-top:28px;font-size:15px;min-height:44px}
+.about-working{background:#202824}
+.about-working .about-kicker{color:#c3cec6}
+.working-principles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin:0}
+.working-principle{padding:4px 28px 0;border-left:1px solid #657168;position:relative}
+.working-principle:first-child{padding-left:0;border:0}.working-principle:last-child{padding-right:0}
+.principle-mark{display:flex;justify-content:space-between;align-items:center;margin-bottom:34px;color:#d8e4d9}
+.principle-mark>span{font-size:13px;color:#c0cdc3}
+.principle-mark>svg{transition:transform 550ms var(--ease-arrive)}
+.working-principle:hover .principle-mark>svg{transform:translateY(-5px) rotate(-4deg)}
+.working-principle h3{font-size:24px;margin-bottom:17px;line-height:1.25}
+.working-principle p{font-size:16px;color:#d1dad3;line-height:1.65}
+@media(max-width:1100px){.scope-tabs button>span:nth-child(2){font-size:22px}.scope-studio{grid-template-columns:1.1fr 1fr;gap:35px}.working-principles{grid-template-columns:1fr 1fr;gap:35px 0}.working-principle:nth-child(3){border-left:0;padding-left:0}.scope-panel h3{font-size:28px}}
+@media(max-width:767px){.about-practice .about-prose{padding:0;margin:0}.principal ul{font-size:15px;gap:14px}.principal-experience>span{font-size:43px}.scope-tabs button,.scope-tabs button:first-child{padding:19px 10px;gap:12px 5px}.scope-tabs button>span:first-child{font-size:12px}.scope-tabs button>span:nth-child(2){font-size:18px;grid-column:1/-1}.scope-tabs button svg{display:none}.scope-studio{display:flex;flex-direction:column;gap:26px}.scope-photo{width:100%}.scope-panels{width:100%;min-height:480px}.scope-panel h3{font-size:28px}.working-principles{grid-template-columns:1fr;gap:28px}.working-principle,.working-principle:first-child,.working-principle:nth-child(3){border:0;border-top:1px solid #657168;padding:25px 0 0}.principle-mark{margin-bottom:20px}.working-principle h3{font-size:25px}.about-practice{padding-inline:var(--frame-inset)}}
+@media(prefers-reduced-motion:reduce){.practice-atmosphere img,.principle-mark>svg{transform:none!important}.scope-tabs button,.scope-tabs button::after{transition:none}}
+html[data-motion='reduced'] :is(.practice-atmosphere img,.principle-mark>svg){transform:none!important}
