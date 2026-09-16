@@ -197,3 +197,15 @@ for(const source of ['about','contact'])for(const reduced of [false,true])test(`
  const entrances=(await events(page)).filter(entry=>['native','fallback'].includes(entry.phase));
  expect(entrances).toHaveLength(reduced?0:1);
 });
+
+for(const width of [390,1440])test(`direct hero text has a staggered entrance at ${width}px`,async({page})=>{
+ await page.setViewportSize({width,height:900});
+ await page.goto('/',{waitUntil:'domcontentloaded'});
+ const text=page.locator('#hero-title>span');
+ await expect(text.first()).toHaveCSS('animation-name','pi-hero-text');
+ await expect(text.last()).toHaveCSS('animation-delay','0.16s');
+ await expect(page.locator('html')).not.toHaveAttribute('data-hero-entrance','active');
+ await expect(text.last()).toHaveCSS('opacity','1');
+ await page.emulateMedia({reducedMotion:'reduce'});await page.reload();
+ await expect(text.first()).toHaveCSS('animation-name','none');
+});

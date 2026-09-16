@@ -192,3 +192,8 @@ Validation: five contact checks cover image preview, inline form, preserved inpu
 ## September 15: Consistent logo return
 - Extended the existing homepage hero return animation from project pages to About and Contact. Both click tracking and the storage-unavailable referrer fallback recognize these routes; animation timings remain unchanged.
 - All 17 home-return tests pass, including both added routes with normal and reduced motion, mobile, native/fallback transitions, Back/reload and unavailable storage. Production build and verifier passed.
+
+## September 15: Homepage text entrance
+- Added a staggered opacity/translate entrance for the hero label, two headline lines, description and button on direct desktop/mobile visits. Runs for roughly one second, with smaller travel on phones.
+- Preserves the existing logo-return dissolve without doubling animations; Back, anchored archive visits, reduced/off motion and no-JS content remain immediate. Interaction, pagehide and print settle the entrance.
+- New desktop/mobile entrance checks pass, alongside 17 existing logo-return checks and the production verifier.

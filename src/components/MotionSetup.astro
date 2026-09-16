@@ -45,6 +45,15 @@ const isHomepage = Astro.url.pathname.replace(/\/$/,'') === base.replace(/\/$/,'
     const matchingHomeEntry = homeEntry?.path === homePath && Date.now()-homeEntry.at < 15000 && isHomeReturnSource(homeEntry.from);
     const freshHome = home && root.dataset.motion === 'full' && !returning && navigation?.type !== 'reload' && location.hash === '#hero' && (matchingHomeEntry || internalReferrer);
     window.__piHomeReturn = { fresh:!!freshHome, native:null };
+    if (home && !freshHome && !returning && root.dataset.motion === 'full' && (!location.hash || location.hash === '#hero')) {
+      root.dataset.heroEntrance = 'active';
+      const finishHeroEntrance = () => delete root.dataset.heroEntrance;
+      window.addEventListener('pagehide', finishHeroEntrance, {once:true});
+      window.addEventListener('beforeprint', finishHeroEntrance, {once:true});
+      document.addEventListener('pointerdown', finishHeroEntrance, {once:true, capture:true});
+      document.addEventListener('focusin', finishHeroEntrance, {once:true});
+      document.addEventListener('animationend', event => { if (event.animationName === 'pi-hero-text' && event.target.matches('.hero-copy > a')) finishHeroEntrance(); });
+    }
     let homeRevealHandled = false;
     if (home) {
       root.dataset.homeReturn = freshHome ? 'pending' : 'skipped';
@@ -173,4 +182,5 @@ const isHomepage = Astro.url.pathname.replace(/\/$/,'') === base.replace(/\/$/,'
     });
   })();
 </script>
+
 
