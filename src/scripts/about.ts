@@ -47,3 +47,24 @@ document.querySelectorAll<HTMLDetailsElement>('.practice-disclosure').forEach(de
   details.addEventListener('toggle',()=>{if(!disclosures.has(details))desired=details.open;});
 });
 document.addEventListener('pi:motion',()=>{running.forEach(a=>a.cancel());filterAnimations.forEach(a=>a.cancel());for(const [details,animation] of disclosures){animation.finish();details.style.removeProperty('overflow');}});
+
+const scopeImage=document.querySelector<HTMLImageElement>('#scope-image')!;
+const scopeCaption=document.querySelector<HTMLElement>('#scope-caption')!;
+let scopeRequest=0;
+const scopeCache=new Map<string,Promise<void>>();
+const showScope=async(item:HTMLElement)=>{
+ const ticket=++scopeRequest;
+ const src=item.dataset.scopeSrc!;if(scopeImage.getAttribute('src')===src){scopeCaption.textContent=item.dataset.scopeCaption!;return;}
+ if(!scopeCache.has(src)){const image=new Image();image.src=src;scopeCache.set(src,image.decode().catch(error=>{scopeCache.delete(src);throw error;}));}
+ try{await scopeCache.get(src);if(ticket!==scopeRequest)return;
+ const old=scopeImage.cloneNode() as HTMLImageElement;old.removeAttribute('id');old.alt='';old.setAttribute('aria-hidden','true');old.style.cssText='position:absolute;inset:0;width:100%;height:100%;pointer-events:none';
+ scopeImage.parentElement!.querySelectorAll('[aria-hidden]').forEach(e=>e.remove());scopeImage.parentElement!.append(old);
+ scopeImage.src=src;scopeImage.alt=item.dataset.scopeAlt!;scopeCaption.textContent=item.dataset.scopeCaption!;
+ track(animate(scopeImage,[{transform:'scale(1.035)'},{transform:'scale(1)'}],650));const fade=animate(old,[{opacity:1},{opacity:0}],450);track(fade);if(fade)void fade.finished.finally(()=>old.remove()).catch(()=>{});else old.remove();
+ }catch{/* Preserve the current photograph when an image is unavailable. */}
+};
+document.querySelectorAll<HTMLElement>('[data-scope-index]').forEach(item=>{
+ item.addEventListener('pointerenter',event=>{if(event.pointerType==='mouse')void showScope(item);});
+ item.addEventListener('focusin',()=>void showScope(item));
+ item.querySelector('summary')!.addEventListener('click',()=>void showScope(item));
+});

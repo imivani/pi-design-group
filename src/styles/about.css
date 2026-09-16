@@ -94,3 +94,56 @@
 @media(prefers-reduced-motion:reduce){.about-page :is(.principal-rule,summary svg,.experience-preview,.experience-link>svg,.experience-filters button::after){transition:none;transform:none}}
 html[data-motion='off'] .about-page *,html[data-motion='reduced'] .about-page .experience-preview{transition:none!important}
 @media print{.about-studio-placeholder,.principal-portrait,.experience-preview,.about-close{display:none}.about-hero,.about-section{padding-block:24px}.about-working{background:white;color:#171b1c}.working-principles p{color:#535b5c}}
+
+/* Photography-led revision: retain the editorial frame, replace placeholder surfaces. */
+.about-opening-photo{position:relative;margin:56px calc(-1 * var(--frame-inset)) 0;overflow:hidden}
+.about-opening-photo>img{display:block;width:100%;height:clamp(280px,36vw,540px);object-fit:cover;object-position:center 56%}
+.about-opening-photo figcaption{position:absolute;inset:auto 0 0;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:40px 26px 22px;color:#fff;background:linear-gradient(transparent,#0b171bcc);font-size:15px}
+.about-opening-photo figcaption a{display:flex;align-items:center;gap:15px;min-height:44px}
+.about-opening-photo figcaption svg{transition:transform 300ms var(--ease-arrive)}
+.about-opening-photo figcaption a:hover svg{transform:translate(3px,-3px)}
+.principal-portrait{padding:0;background:transparent;overflow:hidden}
+.principal-portrait img{width:100%;height:100%;aspect-ratio:4/5;object-fit:cover;object-position:center 30%;display:block}
+.principal:nth-child(2) .principal-portrait img{object-position:center top}
+.experience-grid{grid-template-columns:repeat(3,minmax(0,1fr));column-gap:28px;row-gap:30px}
+.experience-entry{min-height:0;padding:20px 0 0;border-top:1px solid #cdd3ce}
+.experience-entry--pictured{border:0;padding:0}
+.experience-thumbnail{position:relative;display:block;aspect-ratio:1.5;overflow:hidden;margin-bottom:19px;background:#18231f}
+.experience-thumbnail>img{width:100%;height:100%;object-fit:cover;transition:transform 850ms var(--ease-arrive),filter 550ms ease}
+.experience-thumbnail:is(:hover,:focus-visible)>img{transform:scale(1.045);filter:brightness(.86)}
+.experience-photo-arrow{position:absolute;right:14px;bottom:14px;width:44px;height:44px;display:grid;place-items:center;background:#fffffff0;color:#17201c;border-radius:50%;transition:transform 450ms var(--ease-arrive)}
+.experience-thumbnail:is(:hover,:focus-visible) .experience-photo-arrow{transform:translate(2px,-3px)}
+.experience-thumbnail small{position:absolute;left:0;right:0;top:0;padding:12px 15px 26px;background:linear-gradient(#111b20de,transparent);color:#fff;font-size:12px;line-height:1.4}
+.experience-meta{display:flex;gap:14px;justify-content:space-between;align-items:baseline;margin-bottom:10px}
+.experience-meta .experience-year{margin:0}
+.experience-meta p{font-size:13px;line-height:1.4;color:#626e68;text-align:right}
+.experience-entry h3,.experience-link{font-size:21px;line-height:1.35}
+.about-scope{grid-template-columns:1fr 1fr;gap:8%;align-items:start}
+.scope-heading{position:sticky;top:112px}
+.scope-heading>p:last-of-type{font-size:17px;line-height:1.5;color:#5b6562;margin-top:24px;max-width:350px}
+.scope-photo{margin-top:30px}
+.scope-photo-stage{position:relative;aspect-ratio:1.2;overflow:hidden;background:#f2f2ee}
+.scope-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.scope-photo figcaption{font-size:13px;color:#606b66;line-height:1.5;padding-top:13px}
+.scope-list{margin-top:100px}
+.scope-item summary{min-height:92px;font-size:23px}
+.scope-item:is(:hover,:focus-within),.scope-item[open]{color:#111c18}
+.scope-item summary>span:nth-child(2){transition:transform 350ms var(--ease-arrive)}
+.scope-item:is(:hover,:focus-within) summary>span:nth-child(2){transform:translateX(4px)}
+.about-working{padding-block:76px;background:#222826}
+.working-layout{display:grid;grid-template-columns:1.05fr 1fr;gap:8%;align-items:center}
+.working-photo{position:relative;min-width:0;overflow:hidden}
+.working-photo img{width:100%;height:690px;object-fit:cover;object-position:56% center;display:block}
+.working-photo figcaption{position:absolute;bottom:0;left:0;right:0;padding:60px 24px 25px;background:linear-gradient(transparent,#0c1916df);font-size:14px;line-height:1.5;color:#fff}
+.working-story .about-kicker{color:#d0d8d2}
+.working-story h2{font-size:clamp(34px,3.4vw,50px)}
+.working-intro{font-size:18px;line-height:1.6;color:#d0d8d2;margin-top:24px}
+.working-principles{display:block;margin-top:32px}
+.working-item{border-bottom:1px solid #59665f}
+.working-item summary{font-size:21px;line-height:1.3;min-height:72px}
+.working-item .disclosure-inner p{color:#d0d8d2;font-size:16px;line-height:1.65}
+@media(max-width:1100px){.experience-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.working-layout{gap:40px}.working-photo img{height:650px}.scope-item summary{font-size:20px}.about-scope{gap:40px}}
+@media(max-width:767px){.about-opening-photo{margin-top:36px}.about-opening-photo>img{height:330px;object-position:56% center}.about-opening-photo figcaption{padding:45px 16px 14px;font-size:13px;gap:12px}.about-opening-photo figcaption a{gap:8px}.experience-grid{grid-template-columns:1fr;row-gap:28px}.experience-entry:not(.experience-entry--pictured){padding-top:18px}.experience-thumbnail{aspect-ratio:1.5;margin-bottom:16px}.experience-link,.experience-entry h3{font-size:21px}.about-scope{display:flex;flex-direction:column;gap:28px}.scope-heading{position:static;width:100%}.scope-photo-stage{aspect-ratio:1.25}.scope-list{margin-top:0;width:100%}.scope-item summary{font-size:19px;min-height:78px}.about-working{padding-block:48px}.working-layout{display:flex;flex-direction:column;gap:32px;align-items:stretch}.working-photo img{height:410px;object-position:center}.working-photo figcaption{padding:45px 18px 20px}.working-story h2{font-size:36px}.working-intro{font-size:17px}.working-item summary{font-size:20px}.working-principles{margin-top:24px}}
+@media(prefers-reduced-motion:reduce){.experience-thumbnail>img,.experience-photo-arrow,.scope-item summary>span:nth-child(2){transition:none;transform:none!important}}
+html[data-motion='reduced'] :is(.experience-thumbnail>img,.experience-photo-arrow,.scope-item summary>span:nth-child(2)){transition:none;transform:none!important}
+@media print{.principal-portrait{display:block}.scope-heading{position:static}.working-photo img{height:300px}.about-working{background:white;color:#171b1c}.working-story :is(p,.about-kicker),.working-item .disclosure-inner p{color:#535b5c}}
