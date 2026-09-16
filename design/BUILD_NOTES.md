@@ -202,3 +202,8 @@ Validation: five contact checks cover image preview, inline form, preserved inpu
 - Doubled text/image scroll reveals and About, Contact, project and homepage-return entrances, using a soft ease-in-out curve. Hero text now uses 1400ms fades with doubled stagger, completing at roughly 2.1 seconds.
 - Interactive controls and the five-second featured interval remain unchanged. Reduced/off preferences and interruption remain supported.
 - Type checks, production verification, 19 homepage tests, five About tests and 13 project-transition tests pass (one About check rerun after a development reload interrupted navigation).
+
+## September 16: Faster project interactions, slower editorial fades
+- Restored project-opening title/photo transitions to their original 560/620ms timing and arrival easing, for both native and fallback paths.
+- Made archive hover image expansion more responsive at 620ms (previously 860ms). Retained slower hero and editorial text/image reveals.
+- All 13 project-transition checks and production verification pass.
