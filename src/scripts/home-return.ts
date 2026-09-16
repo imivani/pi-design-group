@@ -23,8 +23,8 @@ const play=()=>{
   if(finished)return;
   if(!state?.fresh || mode()!=='full' || document.hidden){settle('skipped');return;}
   root.dataset.homeReturn='running';
-  const photoMotion=media&&animate(media,[{opacity:0},{opacity:1}],480);
-  const copyMotion=copy&&animate(copy,[{opacity:0,transform:'translateY(12px)'},{opacity:1,transform:'translateY(0)'}],480);
+  const photoMotion=media&&animate(media,[{opacity:0},{opacity:1}],960,'cubic-bezier(.4,0,.2,1)');
+  const copyMotion=copy&&animate(copy,[{opacity:0,transform:'translateY(12px)'},{opacity:1,transform:'translateY(0)'}],960,'cubic-bezier(.4,0,.2,1)');
   [photoMotion,copyMotion].forEach(animation=>{if(animation)animations.add(animation);});
   announce('fallback');
   void Promise.all([...animations].map(animation=>animation.finished.catch(()=>{}))).then(()=>settle());
@@ -49,3 +49,4 @@ hero?.addEventListener('pointerdown',()=>settle(),{capture:true});
 hero?.addEventListener('focusin',()=>settle());
 window.addEventListener('pagehide',()=>{if(state)state.fresh=false;settle('skipped');});
 window.addEventListener('pageshow',event=>{if(event.persisted)settle('skipped');});
+

@@ -42,9 +42,9 @@ test('the project logo returns to the video hero with one smooth visible entranc
   const entrances=(await events(page)).filter(entry=>['native','fallback'].includes(entry.phase));
   expect(entrances).toHaveLength(1);
   if(entrances[0].phase==='native'){
-    expect(entrances[0].duration).toBe('0.48s');
+    expect(entrances[0].duration).toBe('0.96s');
     expect(entrances[0].name).toBe('home-intro');
-  }else expect(entrances[0].frames.map((frame:any)=>frame.duration)).toEqual([480,480]);
+  }else expect(entrances[0].frames.map((frame:any)=>frame.duration)).toEqual([960,960]);
   await expect.poll(()=>page.locator('#hero-video').evaluate((video:HTMLVideoElement)=>video.readyState>=2&&!video.paused)).toBe(true);
   expect(await page.evaluate(()=>sessionStorage.getItem('pi-home-return'))).toBeNull();
 });
@@ -92,7 +92,7 @@ test('a browser that skips the native return still fades the hero and lifts the 
   await returnThroughLogo(page);
   const review=await events(page);
   expect(review.filter(entry=>['native','fallback'].includes(entry.phase)).map(entry=>entry.phase)).toEqual(['fallback']);
-  expect(review[0].frames.map((frame:any)=>frame.duration)).toEqual([480,480]);
+  expect(review[0].frames.map((frame:any)=>frame.duration)).toEqual([960,960]);
   expect(review[0].frames[1].keyframes).toEqual([{opacity:'0',transform:'translateY(12px)'},{opacity:'1',transform:'translateY(0px)'}]);
   const sample=review.find(entry=>entry.phase==='sample');
   expect(Number(sample.opacity)).toBeGreaterThan(0);
@@ -203,9 +203,10 @@ for(const width of [390,1440])test(`direct hero text has a staggered entrance at
  await page.goto('/',{waitUntil:'domcontentloaded'});
  const text=page.locator('#hero-title>span');
  await expect(text.first()).toHaveCSS('animation-name','pi-hero-text');
- await expect(text.last()).toHaveCSS('animation-delay','0.16s');
+ await expect(text.last()).toHaveCSS('animation-delay','0.32s');
  await expect(page.locator('html')).not.toHaveAttribute('data-hero-entrance','active');
  await expect(text.last()).toHaveCSS('opacity','1');
  await page.emulateMedia({reducedMotion:'reduce'});await page.reload();
  await expect(text.first()).toHaveCSS('animation-name','none');
 });
+

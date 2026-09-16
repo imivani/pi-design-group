@@ -2,10 +2,11 @@
    fresh project visit, then the local motion module releases the entrance. */
 html[data-motion='full'][data-project-arrival='pending'] .project-title-row{opacity:0}
 html[data-motion='full'][data-project-photo-arrival='pending'] .project-hero-gallery{opacity:0}
-::view-transition-group(project-photo){animation-duration:620ms;animation-timing-function:cubic-bezier(.22,1,.36,1)}
+::view-transition-group(project-photo){animation-duration:1240ms;animation-timing-function:cubic-bezier(.4,0,.2,1)}
 ::view-transition-group(project-intro){animation:none}
-::view-transition-new(project-intro){animation:pi-project-intro-arrive 560ms cubic-bezier(.22,1,.36,1) both}
+::view-transition-new(project-intro){animation:pi-project-intro-arrive 1120ms cubic-bezier(.4,0,.2,1) both}
 ::view-transition-old(project-intro){display:none}
 @keyframes pi-project-intro-arrive{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 @media(prefers-reduced-motion:reduce){html .project-title-row,html .project-hero-gallery{opacity:1!important}::view-transition-group(*),::view-transition-new(project-intro){animation:none!important}}
 html[data-motion='off']::view-transition-new(project-intro),html[data-motion='reduced']::view-transition-new(project-intro){animation:none}
+

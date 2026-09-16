@@ -1,11 +1,11 @@
 /* Only an intentional return through the wordmark prepares this entrance.
    The document, header and hero background always remain usable and visible. */
 html[data-motion='full'][data-home-return='pending'] :is(.hero-media,.hero-copy){opacity:0}
-html[data-motion='full'][data-home-return='native']::view-transition-group(root){animation-duration:480ms}
-html[data-motion='full'][data-home-return='native']::view-transition-old(root){animation:pi-home-dissolve 480ms linear both}
-html[data-motion='full'][data-home-return='native']::view-transition-new(root){animation:pi-home-return 480ms linear both}
+html[data-motion='full'][data-home-return='native']::view-transition-group(root){animation-duration:960ms}
+html[data-motion='full'][data-home-return='native']::view-transition-old(root){animation:pi-home-dissolve 960ms cubic-bezier(.4,0,.2,1) both}
+html[data-motion='full'][data-home-return='native']::view-transition-new(root){animation:pi-home-return 960ms cubic-bezier(.4,0,.2,1) both}
 ::view-transition-group(home-intro){animation:none}
-::view-transition-new(home-intro){animation:pi-home-copy 480ms cubic-bezier(.22,1,.36,1) both}
+::view-transition-new(home-intro){animation:pi-home-copy 960ms cubic-bezier(.4,0,.2,1) both}
 ::view-transition-old(home-intro){display:none}
 @keyframes pi-home-dissolve{from{opacity:1}to{opacity:0}}
 @keyframes pi-home-return{from{opacity:0}to{opacity:1}}
@@ -14,13 +14,14 @@ html[data-motion='off']::view-transition-new(home-intro),html[data-motion='reduc
 @media(prefers-reduced-motion:reduce){html :is(.hero-media,.hero-copy){opacity:1!important}::view-transition-new(home-intro){animation:none!important}}
 
 /* An opening cadence for direct visits; logo returns keep their shared dissolve. */
-html[data-motion='full'][data-hero-entrance='active'] .hero-copy :is(.hero-discipline,h1>span,p,.outline-button){animation:pi-hero-text 700ms cubic-bezier(.22,1,.36,1) both}
-html[data-motion='full'][data-hero-entrance='active'] .hero-copy h1>span:first-child{animation-delay:70ms}
-html[data-motion='full'][data-hero-entrance='active'] .hero-copy h1>span:last-child{animation-delay:160ms}
-html[data-motion='full'][data-hero-entrance='active'] .hero-copy>p{animation-delay:250ms}
-html[data-motion='full'][data-hero-entrance='active'] .hero-copy>.outline-button{animation-delay:340ms}
+html[data-motion='full'][data-hero-entrance='active'] .hero-copy :is(.hero-discipline,h1>span,p,.outline-button){animation:pi-hero-text 1400ms cubic-bezier(.4,0,.2,1) both}
+html[data-motion='full'][data-hero-entrance='active'] .hero-copy h1>span:first-child{animation-delay:140ms}
+html[data-motion='full'][data-hero-entrance='active'] .hero-copy h1>span:last-child{animation-delay:320ms}
+html[data-motion='full'][data-hero-entrance='active'] .hero-copy>p{animation-delay:500ms}
+html[data-motion='full'][data-hero-entrance='active'] .hero-copy>.outline-button{animation-delay:680ms}
 @keyframes pi-hero-text{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:767px){@keyframes pi-hero-text{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}}
 @media(prefers-reduced-motion:reduce){html[data-hero-entrance] .hero-copy :is(.hero-discipline,h1>span,p,.outline-button){animation:none!important}}
 @media print{html[data-hero-entrance] .hero-copy :is(.hero-discipline,h1>span,p,.outline-button){animation:none!important}}
+
 

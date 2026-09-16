@@ -174,7 +174,7 @@ test('a direct project visit visibly fades and lifts the title and photograph ov
   const entries = await arrivalEntries(page);
   expect(entries.filter((entry:{phase:string})=>entry.phase==='fallback')).toHaveLength(1);
   const frames = entries.find((entry:{phase:string})=>entry.phase==='frames').animations.flat();
-  expect(frames.map((animation:{duration:number})=>animation.duration)).toEqual([560,620]);
+  expect(frames.map((animation:{duration:number})=>animation.duration)).toEqual([1120,1240]);
   for(const animation of frames) expect(animation.frames).toEqual([{opacity:'0',transform:'translateY(16px)'},{opacity:'1',transform:'translateY(0px)'}]);
   const sample = entries.find((entry:{phase:string})=>entry.phase==='sample');
   expect(sample).toBeDefined();
@@ -257,3 +257,4 @@ test('the complete opening remains visible when JavaScript is disabled',async({b
   await expect(page.locator('.project-hero-gallery')).toHaveCSS('opacity','1');
   await context.close();
 });
+

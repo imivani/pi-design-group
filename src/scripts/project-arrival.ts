@@ -27,8 +27,8 @@ const play = () => {
   if (!state?.fresh || mode() !== 'full' || document.hidden) { settle('skipped'); return; }
   root.dataset.projectArrival = 'running';
   root.dataset.projectPhotoArrival = 'visible';
-  const titleMotion = title && animate(title,[{opacity:0,transform:'translateY(16px)'},{opacity:1,transform:'translateY(0)'}],560);
-  const photoMotion = photograph && animate(photograph,[{opacity:0,transform:'translateY(16px)'},{opacity:1,transform:'translateY(0)'}],620);
+  const titleMotion = title && animate(title,[{opacity:0,transform:'translateY(16px)'},{opacity:1,transform:'translateY(0)'}],1120,'cubic-bezier(.4,0,.2,1)');
+  const photoMotion = photograph && animate(photograph,[{opacity:0,transform:'translateY(16px)'},{opacity:1,transform:'translateY(0)'}],1240,'cubic-bezier(.4,0,.2,1)');
   [titleMotion,photoMotion].forEach(animation=>{if(animation)animations.add(animation);});
   announce('fallback');
   void Promise.all([...animations].map(animation=>animation.finished.catch(()=>{}))).then(()=>settle());
@@ -60,3 +60,4 @@ opening?.addEventListener('pointerdown',()=>settle(),{capture:true});
 opening?.addEventListener('focusin',()=>settle());
 window.addEventListener('pagehide',()=>settle('skipped'));
 window.addEventListener('pageshow',event=>{if(event.persisted)settle('skipped');});
+

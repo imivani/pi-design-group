@@ -197,3 +197,8 @@ Validation: five contact checks cover image preview, inline form, preserved inpu
 - Added a staggered opacity/translate entrance for the hero label, two headline lines, description and button on direct desktop/mobile visits. Runs for roughly one second, with smaller travel on phones.
 - Preserves the existing logo-return dissolve without doubling animations; Back, anchored archive visits, reduced/off motion and no-JS content remain immediate. Interaction, pagehide and print settle the entrance.
 - New desktop/mobile entrance checks pass, alongside 17 existing logo-return checks and the production verifier.
+
+## September 16: Slower editorial entrances
+- Doubled text/image scroll reveals and About, Contact, project and homepage-return entrances, using a soft ease-in-out curve. Hero text now uses 1400ms fades with doubled stagger, completing at roughly 2.1 seconds.
+- Interactive controls and the five-second featured interval remain unchanged. Reduced/off preferences and interruption remain supported.
+- Type checks, production verification, 19 homepage tests, five About tests and 13 project-transition tests pass (one About check rerun after a development reload interrupted navigation).

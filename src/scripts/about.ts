@@ -4,8 +4,8 @@ setupImageErrors();setupReveals();
 const running=new Set<Animation>();
 const track=(animation:Animation|null)=>{if(!animation)return;running.add(animation);void animation.finished.finally(()=>running.delete(animation)).catch(()=>{});};
 document.querySelectorAll<HTMLElement>('[data-about-arrival]').forEach((element,index)=>{
-  const arrival=animate(element,[{opacity:0,transform:'translateY(20px)'},{opacity:1,transform:'translateY(0)'}],700);
-  if(arrival&&mode()==='full')arrival.effect?.updateTiming({delay:index*80,fill:'backwards'});
+  const arrival=animate(element,[{opacity:0,transform:'translateY(20px)'},{opacity:1,transform:'translateY(0)'}],1400, 'cubic-bezier(.4,0,.2,1)');
+  if(arrival&&mode()==='full')arrival.effect?.updateTiming({delay:index*160,fill:'backwards'});
   track(arrival);
 });
 const entries=[...document.querySelectorAll<HTMLElement>('.experience-entry')];
@@ -66,3 +66,4 @@ const syncAtmosphere=()=>{
 };
 new IntersectionObserver(([entry])=>{visible=entry.isIntersecting;syncAtmosphere();}).observe(atmosphere.closest('.about-practice')!);
 document.addEventListener('visibilitychange',syncAtmosphere);document.addEventListener('pi:motion',syncAtmosphere);
+

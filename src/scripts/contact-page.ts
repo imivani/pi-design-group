@@ -86,7 +86,8 @@ document.querySelector('#inquiry-copy')!.addEventListener('click',async()=>{
 form.addEventListener('input',()=>{prepared.hidden=true;});
 setupImageErrors();setupReveals();
 for(const element of document.querySelectorAll<HTMLElement>('[data-contact-arrival]')){
-  track(animate(element,[{opacity:.1,transform:'translateY(18px)'},{opacity:1,transform:'translateY(0)'}],600));
+  track(animate(element,[{opacity:.1,transform:'translateY(18px)'},{opacity:1,transform:'translateY(0)'}],1200,'cubic-bezier(.4,0,.2,1)'));
 }
 document.addEventListener('pi:motion',()=>{settle();});
 window.addEventListener('pagehide',()=>{++request;clearTimeout(hoverTimer);settle();});
+

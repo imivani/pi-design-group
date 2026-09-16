@@ -6,10 +6,10 @@ export const write = (key: string, value: string, kind: 'local' | 'session' = 'l
 const activeAnimations = new Set<Animation>();
 const reducedQuery = matchMedia('(prefers-reduced-motion: reduce)');
 
-export function animate(element: Element, keyframes: Keyframe[], duration = 320) {
+export function animate(element: Element, keyframes: Keyframe[], duration = 320, easing = 'cubic-bezier(.22,1,.36,1)') {
   if (mode() === 'off') return null;
   const frames = mode() === 'reduced' ? keyframes.map(({ opacity }) => ({ opacity })) : keyframes;
-  const animation = element.animate(frames, { duration: mode() === 'reduced' ? 100 : duration, easing: 'cubic-bezier(.22,1,.36,1)' });
+  const animation = element.animate(frames, { duration: mode() === 'reduced' ? 100 : duration, easing });
   activeAnimations.add(animation);
   animation.finished.catch(() => {}).finally(() => activeAnimations.delete(animation));
   return animation;
@@ -47,7 +47,7 @@ export function setupReveals() {
       seen.add(element);
       if (immediate || mode() !== 'full' || document.hidden) { finish(element); continue; }
       element.dataset.revealState = 'running';
-      const animation = animate(element, [{ opacity: 0, transform: 'translateY(16px)' }, { opacity: 1, transform: 'translateY(0)' }], group.duration);
+      const animation = animate(element, [{ opacity: 0, transform: 'translateY(16px)' }, { opacity: 1, transform: 'translateY(0)' }], group.duration * 2, 'cubic-bezier(.4,0,.2,1)');
       if (!animation) { finish(element); continue; }
       running.set(element, animation);
       void animation.finished.then(() => { if (running.get(element) === animation) { running.delete(element); element.dataset.revealState = 'done'; } }).catch(() => {});
@@ -122,3 +122,4 @@ export function setupImageErrors() {
     if (img.complete && img.naturalWidth === 0 && img.currentSrc) handleError();
   });
 }
+
