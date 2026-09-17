@@ -33,7 +33,7 @@ const selections: Record<string, number[]> = {
 const overrides: Record<string, Partial<Record<number, ProjectImage['medium']>>> = {
   'seton-crossing':{1:'rendering'}, 'arbour-lake':{4:'photograph',5:'photograph'},
   'drake-towns':{7:'rendering'}, 'mahogany-townhomes':{2:'photograph',4:'photograph'},
-  'summit-77-rowhomes':{4:'photograph'}, 'symon':{5:'drawing',6:'drawing',7:'photograph',8:'photograph'},
+  'summit-77-apartments':{1:'rendering',4:'rendering'}, 'summit-77-rowhomes':{4:'photograph'}, 'symon':{5:'drawing',6:'drawing',7:'photograph',8:'photograph'},
   'single-homes':{4:'drawing',6:'drawing',7:'drawing',8:'drawing'},
 };
 const captions: Record<string, Record<number,string>> = {
@@ -143,6 +143,11 @@ export function projectDetails(project: Project) {
   });
   const additional = (additionalGalleries as Record<string, ProjectImage[]>)[project.id] || [];
   gallery.push(...additional.map(image => ({ ...image, attribution: image.medium === 'rendering' ? renderingCredit(project) : undefined })));
+  // Lead Summit's updated gallery with its selected built-work aerial; keep renderings credited.
+  if (project.id === 'summit-77-apartments') {
+    const opening = gallery.findIndex(image => image.src === project.image);
+    if (opening > 0) gallery.unshift(...gallery.splice(opening, 1));
+  }
   const collection = project.type === 'Residential collection';
   return { gallery, collection, editorial: editorial[project.id], description: descriptions[project.id] || (collection ? 'A collection of residential work, with photographs and drawings from individual home projects.' : undefined) };
 }

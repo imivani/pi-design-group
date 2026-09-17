@@ -1,0 +1,110 @@
+[
+  {
+    "src": "/media/gallery/summit-77-rowhomes/visit-20251001_155124.webp",
+    "width": 1440,
+    "height": 1920,
+    "source": "Owner-supplied Site Visit photography",
+    "medium": "photograph",
+    "caption": "A planted strip and lawn between the rowhomes.",
+    "project": "summit-77-rowhomes",
+    "original": "E:\\Site Visit\\Ambrose\\Photos-1-001 (1)\\20251001_155124.jpg",
+    "sha256": "8a021e36690f3235f89958d496f22fb2e10f3293c09c07db4164dcb363a36253",
+    "bytes": 1048844
+  },
+  {
+    "src": "/media/gallery/summit-77-rowhomes/visit-20251001_155339.webp",
+    "width": 1440,
+    "height": 1920,
+    "source": "Owner-supplied Site Visit photography",
+    "medium": "photograph",
+    "caption": "Trees and low planting beside the residential street.",
+    "project": "summit-77-rowhomes",
+    "original": "E:\\Site Visit\\Ambrose\\Photos-1-001 (1)\\20251001_155339.jpg",
+    "sha256": "bf7d19049ea112e74e312f8f3abd9a2b291e3a09a3663e78d544a9cf01223467",
+    "bytes": 911336
+  },
+  {
+    "src": "/media/gallery/summit-77-rowhomes/visit-20251001_155441.webp",
+    "width": 1440,
+    "height": 1920,
+    "source": "Owner-supplied Site Visit photography",
+    "medium": "photograph",
+    "caption": "Autumn foliage along the rowhome frontage.",
+    "project": "summit-77-rowhomes",
+    "original": "E:\\Site Visit\\Ambrose\\Photos-1-001 (1)\\20251001_155441.jpg",
+    "sha256": "78be571ed6f63787e2b97d24656c6cac5de7c1d4b20585530b3592e74b1bc206",
+    "bytes": 790964
+  },
+  {
+    "src": "/media/gallery/summit-77-rowhomes/visit-20251001_160114.webp",
+    "width": 1440,
+    "height": 1920,
+    "source": "Owner-supplied Site Visit photography",
+    "medium": "photograph",
+    "caption": "Planting and stone ground cover beside an entrance walk.",
+    "project": "summit-77-rowhomes",
+    "original": "E:\\Site Visit\\Ambrose\\Photos-1-001 (1)\\20251001_160114.jpg",
+    "sha256": "2991db140e047c02008e180b5cbd13547650778b99e73d792fcf87f3d098d4e6",
+    "bytes": 753540
+  },
+  {
+    "src": "/media/gallery/summit-77-rowhomes/visit-20251001_160303.webp",
+    "width": 1440,
+    "height": 1920,
+    "source": "Owner-supplied Site Visit photography",
+    "medium": "photograph",
+    "caption": "A shared lawn with stone seating and a paved path.",
+    "project": "summit-77-rowhomes",
+    "original": "E:\\Site Visit\\Ambrose\\Photos-1-001 (1)\\20251001_160303.jpg",
+    "sha256": "d8a2a6e7c6e50abb1060c2c547cc78ec0931aeda482d1c3e85599c5cb2513fd1",
+    "bytes": 958620
+  },
+  {
+    "src": "/media/gallery/summit-77-rowhomes/visit-20251001_160406.webp",
+    "width": 1440,
+    "height": 1920,
+    "source": "Owner-supplied Site Visit photography",
+    "medium": "photograph",
+    "caption": "Repeated entrance walks and planted edges along the homes.",
+    "project": "summit-77-rowhomes",
+    "original": "E:\\Site Visit\\Ambrose\\Photos-1-001 (1)\\20251001_160406.jpg",
+    "sha256": "52e3408fa9a61cdc0d8fc8bf3211f5407900f6d724e8da00420f14894ab70c09",
+    "bytes": 789572
+  },
+  {
+    "src": "/media/gallery/summit-77-rowhomes/visit-dji_fly_20240911_220928_939_1726024237584_photo.webp",
+    "width": 1920,
+    "height": 1440,
+    "source": "Owner-supplied Site Visit photography",
+    "medium": "photograph",
+    "caption": "An aerial evening view of the illuminated rowhome frontage.",
+    "project": "summit-77-rowhomes",
+    "original": "E:\\Site Visit\\Ambrose\\Photos-1-001 (1)\\dji_fly_20240911_220928_939_1726024237584_photo.JPG",
+    "sha256": "8221182ac30554771239f45917e5dd6bd3e917bfebd8f2e19d6a43d6dca3074d",
+    "bytes": 297804
+  },
+  {
+    "src": "/media/gallery/summit-77-apartments/visit-1000116958.webp",
+    "width": 1920,
+    "height": 1440,
+    "source": "Owner-supplied Site Visit photography",
+    "medium": "photograph",
+    "caption": "An aerial view of the apartments, terraced paths and landscaped frontage.",
+    "project": "summit-77-apartments",
+    "original": "E:\\Site Visit\\Summit77\\1000116958.jpg",
+    "sha256": "d201a68587a7150963b9f3c6e3b5122fbc9ffff43840c6201907b42828016e6f",
+    "bytes": 555268
+  },
+  {
+    "src": "/media/gallery/summit-77-apartments/visit-2.webp",
+    "width": 1920,
+    "height": 1440,
+    "source": "Owner-supplied Site Visit photography",
+    "medium": "photograph",
+    "caption": "Paved entrances, shared outdoor areas and the planted street edge, viewed from above.",
+    "project": "summit-77-apartments",
+    "original": "E:\\Site Visit\\Summit77\\2.jpg",
+    "sha256": "cdd479f7288ed733a0791987752be1ac71128927b04d3228e892f33358ceef05",
+    "bytes": 475462
+  }
+]

@@ -15,6 +15,62 @@
       "source": "Owner-supplied project photography archive",
       "medium": "photograph",
       "caption": "The street frontage during construction in 2024."
+    },
+    {
+      "src": "/media/gallery/summit-77-rowhomes/visit-20251001_155124.webp",
+      "width": 1440,
+      "height": 1920,
+      "source": "Owner-supplied Site Visit photography",
+      "medium": "photograph",
+      "caption": "A planted strip and lawn between the rowhomes."
+    },
+    {
+      "src": "/media/gallery/summit-77-rowhomes/visit-20251001_155339.webp",
+      "width": 1440,
+      "height": 1920,
+      "source": "Owner-supplied Site Visit photography",
+      "medium": "photograph",
+      "caption": "Trees and low planting beside the residential street."
+    },
+    {
+      "src": "/media/gallery/summit-77-rowhomes/visit-20251001_155441.webp",
+      "width": 1440,
+      "height": 1920,
+      "source": "Owner-supplied Site Visit photography",
+      "medium": "photograph",
+      "caption": "Autumn foliage along the rowhome frontage."
+    },
+    {
+      "src": "/media/gallery/summit-77-rowhomes/visit-20251001_160114.webp",
+      "width": 1440,
+      "height": 1920,
+      "source": "Owner-supplied Site Visit photography",
+      "medium": "photograph",
+      "caption": "Planting and stone ground cover beside an entrance walk."
+    },
+    {
+      "src": "/media/gallery/summit-77-rowhomes/visit-20251001_160303.webp",
+      "width": 1440,
+      "height": 1920,
+      "source": "Owner-supplied Site Visit photography",
+      "medium": "photograph",
+      "caption": "A shared lawn with stone seating and a paved path."
+    },
+    {
+      "src": "/media/gallery/summit-77-rowhomes/visit-20251001_160406.webp",
+      "width": 1440,
+      "height": 1920,
+      "source": "Owner-supplied Site Visit photography",
+      "medium": "photograph",
+      "caption": "Repeated entrance walks and planted edges along the homes."
+    },
+    {
+      "src": "/media/gallery/summit-77-rowhomes/visit-dji_fly_20240911_220928_939_1726024237584_photo.webp",
+      "width": 1920,
+      "height": 1440,
+      "source": "Owner-supplied Site Visit photography",
+      "medium": "photograph",
+      "caption": "An aerial evening view of the illuminated rowhome frontage."
     }
   ],
   "crestmont-west": [
@@ -617,6 +673,24 @@
       "source": "Owner-supplied project photography archive",
       "medium": "photograph",
       "caption": "A garden path leads from the lawn to the paved seating area."
+    }
+  ],
+  "summit-77-apartments": [
+    {
+      "src": "/media/gallery/summit-77-apartments/visit-1000116958.webp",
+      "width": 1920,
+      "height": 1440,
+      "source": "Owner-supplied Site Visit photography",
+      "medium": "photograph",
+      "caption": "An aerial view of the apartments, terraced paths and landscaped frontage."
+    },
+    {
+      "src": "/media/gallery/summit-77-apartments/visit-2.webp",
+      "width": 1920,
+      "height": 1440,
+      "source": "Owner-supplied Site Visit photography",
+      "medium": "photograph",
+      "caption": "Paved entrances, shared outdoor areas and the planted street edge, viewed from above."
     }
   ]
 }

@@ -206,9 +206,9 @@ export const projects: Project[] = [
     "url": "https://www.pidesigngroup.ca/summit77apartments",
     "category": "multifamily",
     "type": "Multifamily",
-    "image": "/media/projects/summit-77-apartments.webp",
-    "alt": "Architectural rendering of Summit 77 Apartments",
-    "imageKind": "rendering"
+    "image": "/media/gallery/summit-77-apartments/visit-1000116958.webp",
+    "alt": "Aerial photograph of Summit 77 Apartments and its terraced landscape",
+    "imageKind": "photograph"
   },
   {
     "id": "summit-77-rowhomes",
