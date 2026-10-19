@@ -28,11 +28,11 @@ const asset = (path: string) => base + path.replace(/^\//, '');
       <section class="service-hero frame" aria-labelledby="services-title">
         <Breadcrumbs items={[['Services']]} />
         <div class="service-title-row">
-          <h1 id="services-title" data-service-arrive>Services</h1>
-          <p class="service-intro" data-service-arrive>Landscape architecture in three areas, from the first site visit to construction. Each one connects planting, paths and the places people gather.</p>
+          <h1 id="services-title" data-service-arrive style="--arrive:1">Services</h1>
+          <p class="service-intro" data-service-arrive style="--arrive:2">Landscape architecture in three areas, from the first site visit to construction. Each one connects planting, paths and the places people gather.</p>
         </div>
         <ul class="service-index-grid">
-          {services.map((service, index) => <li data-service-arrive>
+          {services.map((service, index) => <li data-service-arrive style={`--arrive:${index + 3}`} data-arrive-last={index === services.length - 1 ? '' : undefined}>
             <a href={servicePath(service, base)}>
               <span class="service-index-photo"><img src={asset(service.image)} alt={service.alt} width="1600" height="1067" fetchpriority={index === 0 ? 'high' : undefined} decoding="async" /></span>
               <span class="service-index">{String(index + 1).padStart(2, '0')}</span>

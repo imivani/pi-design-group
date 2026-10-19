@@ -1,6 +1,8 @@
 ---
-import { projects } from '../data/projects';
+import { projects, media } from '../data/projects';
 import '../styles/practice-intro.css';
+const base = import.meta.env.BASE_URL;
+const asset = (path: string) => base + path.replace(/^\//, '');
 // Figures repeat the About page; architects come from the credits on project pages.
 const facts = [
   { value: 70, suffix: '+', label: 'Completed projects' },
@@ -9,23 +11,50 @@ const facts = [
   { value: 10, suffix: '+', label: 'Years in practice' },
 ];
 const credits = projects.map(project => project.credit?.replace(/^Architecture by /, '')).filter((name): name is string => !!name);
-const architects = [...new Set(credits)].sort((a, b) => credits.filter(name => name === b).length - credits.filter(name => name === a).length || a.localeCompare(b));
+const slug = (name: string) => name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+// A firm's own logo appears once its file is added at src/assets/logos/<slug>.svg
+// (with the firm's permission); until then the name is set as a plain wordmark.
+const logos = import.meta.glob<string>('../assets/logos/*.svg', { eager: true, query: '?url', import: 'default' });
+const architects = [...new Set(credits)]
+  .sort((a, b) => credits.filter(name => name === b).length - credits.filter(name => name === a).length || a.localeCompare(b))
+  .map(name => {
+    const count = credits.filter(item => item === name).length;
+    return { name, logo: logos[`../assets/logos/${slug(name)}.svg`], count };
+  });
+const statement = 'Pi Design Group designs the outdoor spaces that connect homes, businesses and communities.'.split(' ');
 ---
 <section id="about" class="practice-intro frame" aria-labelledby="practice-title">
-  <div class="practice-opening" data-reveal>
+  <div class="practice-opening">
     <p class="practice-label">About Pi Design Group</p>
-    <h2 id="practice-title">A Calgary-Based<br />Landscape Practice.</h2>
+    <h2 id="practice-title">A Calgary-Based<span class="practice-title-photo" aria-hidden="true"><img src={asset(media.services.multifamily)} alt="" width="1600" height="1067" loading="lazy" decoding="async" /></span><br />Landscape Practice.</h2>
   </div>
-  <div class="practice-copy" data-reveal>
-    <p>Pi Design Group designs the outdoor spaces that connect homes, businesses and communities.</p>
-    <p>Our work brings planting, pedestrian routes and places to gather into one considered landscape. We explore the whole site through its plans, then carry that thinking into the paths, materials and planted edges people experience every day.</p>
+
+  <div class="practice-story">
+    <figure class="practice-photo" data-practice-photo>
+      <img src={asset('/media/gallery/darcy/usb-img_2484.webp')} alt="Gardens and planted sidewalks connect homes at D’Arcy" width="1920" height="1280" loading="lazy" decoding="async" />
+      <figcaption>D’Arcy, Okotoks</figcaption>
+    </figure>
+    <div class="practice-copy">
+      <p class="practice-statement" data-practice-statement>{statement.map(word => <span>{word} </span>)}</p>
+      <p>Our work brings planting, pedestrian routes and places to gather into one considered landscape. We explore the whole site through its plans, then carry that thinking into the paths, materials and planted edges people experience every day.</p>
+    </div>
   </div>
-  <dl class="practice-facts-strip" data-reveal>
-    {facts.map(fact => <div><dt>{fact.value ? <><span data-count={fact.value}>{fact.value}</span>{fact.suffix}</> : fact.text}</dt><dd>{fact.label}</dd></div>)}
+
+  <dl class="practice-facts-strip">
+    {facts.map(fact => <div><dt class:list={{ 'is-text': !fact.value }}>{fact.value ? <><span data-count={fact.value}>{fact.value}</span>{fact.suffix}</> : fact.text}</dt><dd>{fact.label}</dd></div>)}
   </dl>
-  <div class="practice-collaborators" data-reveal>
+
+  <div class="practice-collaborators">
     <p>Project architects we have worked with</p>
-    <ul>{architects.map(name => <li>{name}</li>)}</ul>
+    <div class="practice-logo-band" data-logo-band>
+      {[0, 1].map(copy => <ul class="practice-logo-track" aria-hidden={copy === 1 ? 'true' : undefined}>
+        {architects.map(architect => <li class="practice-logo">
+          {architect.logo
+            ? <img src={architect.logo} alt={architect.name} width="160" height="48" loading="lazy" decoding="async" />
+            : <span class="practice-logo-mark"><span class="practice-logo-name">{architect.name}</span><span class="practice-logo-kind">Architecture</span></span>}
+        </li>)}
+      </ul>)}
+    </div>
   </div>
 </section>
 <script>import '../scripts/practice-intro';</script>

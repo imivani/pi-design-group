@@ -27,9 +27,9 @@
 .approach-hero-foot{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;margin-top:40px}
 .approach-hero-intro{max-width:470px;font-size:18px;line-height:1.55;color:rgb(255 255 255 / 84%)}
 .approach-hero-switch{display:flex;flex-direction:column;align-items:flex-end;gap:14px}
-.approach-toggle--hero{position:relative;top:auto;left:auto;background:rgb(18 22 23 / 42%);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
-.approach-toggle--hero button{color:rgb(255 255 255 / 82%)}.approach-toggle--hero button[aria-pressed="true"]{color:#171b1c}
-.approach-toggle--hero .approach-toggle-pill{background:#fff}
+.approach-toggle.approach-toggle--hero{position:relative;top:auto;left:auto;background:rgb(18 22 23 / 42%);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.approach-toggle.approach-toggle--hero button{color:rgb(255 255 255 / 82%)}.approach-toggle.approach-toggle--hero button[aria-pressed="true"]{color:#171b1c}
+.approach-toggle.approach-toggle--hero .approach-toggle-pill{background:#fff}
 .approach-hero-caption{display:inline-flex;align-items:center;gap:10px;min-height:32px;font-size:13px;color:rgb(255 255 255 / 92%);transition:color 180ms}
 .approach-hero-caption:hover{color:#fff}.approach-hero-caption svg{transition:transform 300ms var(--ease-arrive)}.approach-hero-caption:hover svg{transform:translate(2px,-2px)}
 
@@ -126,7 +126,7 @@ html[data-enhanced] .approach-story-step[data-active="false"] h3{color:#8b9294}
 .approach-plate[data-view="plan"] .approach-sheet--plan{z-index:2;transform:rotate(0deg) scale(1.04)}
 .approach-plate[data-view="plan"] .approach-sheet--built{z-index:1;transform:rotate(4deg) translate(6%,4%);opacity:.55}
 .approach-plate:not([data-view="plan"]):hover .approach-sheet--plan{transform:rotate(-5deg) translate(-3%,-3%)}
-.approach-toggle--plate{top:auto;left:auto;right:0;bottom:-18px}
+.approach-toggle.approach-toggle--plate{top:auto;left:auto;right:0;bottom:-18px}
 .approach-plate-copy{padding-bottom:6px}
 .approach-plate-copy h3{margin-top:10px;font-size:clamp(26px,2.4vw,36px);line-height:1.12;letter-spacing:-.025em}
 .approach-plate-copy>p:not(.approach-label){margin-top:16px;font-size:16px;line-height:1.6;color:rgb(255 255 255 / 76%)}

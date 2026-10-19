@@ -4,6 +4,10 @@ html[data-motion='full'][data-page-entrance='active'] h1[data-about-arrival]{ani
 html[data-motion='full'][data-page-entrance='active'] .about-intro-copy{animation-delay:320ms}
 html[data-motion='full'][data-page-entrance='active'] .about-opening-photo{animation-delay:480ms}
 html[data-motion='full'][data-page-entrance='active'] .inquiry-media{animation-delay:160ms}
+/* Our Approach, Services and Privacy: the same rise and fade, staggered by --arrive. */
+html[data-motion='full'][data-page-entrance='active'] :is([data-page-arrive],[data-service-arrive]){animation:pi-page-arrive 1400ms cubic-bezier(.4,0,.2,1) both;animation-delay:calc(var(--arrive,0) * 150ms)}
+html[data-motion='full'][data-page-entrance='active'] [data-page-arrive="fade"]{animation-name:pi-page-fade;animation-duration:1600ms}
+@keyframes pi-page-fade{from{opacity:0}to{opacity:1}}
 @keyframes pi-page-arrive{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-@media(prefers-reduced-motion:reduce){html [data-about-arrival],html [data-contact-arrival]{animation:none!important}}
-@media print{html [data-about-arrival],html [data-contact-arrival]{animation:none!important}}
+@media(prefers-reduced-motion:reduce){html :is([data-about-arrival],[data-contact-arrival],[data-page-arrive],[data-service-arrive]){animation:none!important}}
+@media print{html :is([data-about-arrival],[data-contact-arrival],[data-page-arrive],[data-service-arrive]){animation:none!important}}

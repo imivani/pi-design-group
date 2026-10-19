@@ -39,10 +39,10 @@ const captionProject = projects.find(project => project.id === service.captionPr
       <section class="service-hero frame" aria-labelledby="service-title">
         <Breadcrumbs items={[['Services', base + 'services'], [service.name]]} />
         <div class="service-title-row">
-          <h1 id="service-title" data-service-arrive>{service.name}</h1>
-          <p class="service-intro" data-service-arrive>{service.intro}</p>
+          <h1 id="service-title" data-service-arrive style="--arrive:1">{service.name}</h1>
+          <p class="service-intro" data-service-arrive style="--arrive:2">{service.intro}</p>
         </div>
-        <figure class="service-hero-figure" data-service-arrive>
+        <figure class="service-hero-figure" data-arrive-last data-service-arrive style="--arrive:3">
           <div class="service-hero-photo"><img src={asset(service.image)} alt={service.alt} width="1600" height="1067" fetchpriority="high" decoding="async" /></div>
           <figcaption><a href={projectPath(captionProject, base)}><span>{service.caption}</span><ArrowUpRight size={18} stroke-width={1.4} aria-hidden="true" /></a></figcaption>
         </figure>

@@ -56,18 +56,18 @@ const faqSchema = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEn
     <Header darkHero />
     <main id="main">
       <section id="hero" class="approach-hero" aria-labelledby="approach-title" data-hero-view="built">
-        <div class="approach-hero-media" aria-hidden="true">
+        <div class="approach-hero-media" aria-hidden="true" data-page-arrive="fade">
           <img class="approach-hero-plan" src={asset(media.drawing)} alt="" width="1536" height="1024" fetchpriority="high" decoding="async" />
           <div class="approach-hero-built"><img src={asset(media.featured)} alt="" width="1920" height="1280" fetchpriority="high" decoding="async" /></div>
           <span class="approach-hero-ground"></span>
           <div class="approach-hero-scrim"></div>
         </div>
         <div class="frame approach-hero-inner">
-          <Breadcrumbs class="approach-hero-trail" items={[['Our Approach']]} />
-          <h1 id="approach-title"><span>From the first</span> <span>site visit to</span> <span>construction.</span></h1>
+          <div data-page-arrive style="--arrive:1"><Breadcrumbs class="approach-hero-trail" items={[['Our Approach']]} /></div>
+          <h1 id="approach-title"><span data-page-arrive style="--arrive:2">From the first</span> <span data-page-arrive style="--arrive:3">site visit to</span> <span data-page-arrive style="--arrive:4">construction.</span></h1>
           <div class="approach-hero-foot">
-            <p class="approach-hero-intro">One landscape, considered at every scale. We read the place, resolve the detail, then bring it together through documentation, approvals and, where the scope includes it, construction.</p>
-            <div class="approach-hero-switch">
+            <p class="approach-hero-intro" data-page-arrive style="--arrive:5">One landscape, considered at every scale. We read the place, resolve the detail, then bring it together through documentation, approvals and, where the scope includes it, construction.</p>
+            <div class="approach-hero-switch" data-page-arrive style="--arrive:6">
               <div class="approach-toggle approach-toggle--hero" role="group" aria-label="Show the Crestmont West plan or the built courtyard">
                 <span class="approach-toggle-pill" aria-hidden="true"></span>
                 <button type="button" data-hero-show="plan" aria-pressed="false">Plan</button>
@@ -83,7 +83,7 @@ const faqSchema = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEn
 
       <nav class="approach-steps frame" aria-label="Project stages">
         <ol>
-          {stageCards.map((card, index) => <li>
+          {stageCards.map((card, index) => <li data-page-arrive data-arrive-last={index === stageCards.length - 1 ? '' : undefined} style={`--arrive:${index + 6}`}>
             <a href={'#stage-' + (index + 1)}>
               <span class:list={['approach-steps-photo', { 'is-drawing': card.drawing }]}><img src={asset(card.src)} alt={card.alt} width="1200" height="1500" loading="eager" decoding="async" /></span>
               <span class="approach-steps-label"><em>{String(index + 1).padStart(2, '0')}</em> {card.label}</span>

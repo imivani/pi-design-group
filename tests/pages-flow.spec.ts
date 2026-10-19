@@ -65,7 +65,10 @@ test('home shows practice figures and the architects credited on projects', asyn
   await page.locator('.practice-facts-strip').scrollIntoViewIfNeeded();
   await expect(page.locator('.practice-facts-strip > div')).toHaveCount(4);
   await expect.poll(() => page.locator('.practice-facts-strip [data-count="70"]').textContent()).toBe('70');
-  await expect(page.locator('.practice-collaborators li').first()).toHaveText('Gravity');
+  // Architects appear as logos once supplied, otherwise as wordmarks; the band repeats for its scroll.
+  await expect(page.locator('.practice-logo-track').first().locator('.practice-logo')).toHaveCount(5);
+  await expect(page.locator('.practice-logo-track').first().locator('.practice-logo').first()).toContainText('Gravity');
+  await expect(page.locator('.practice-logo-track').nth(1)).toHaveAttribute('aria-hidden', 'true');
 });
 
 test('optional contact details are sent with the inquiry', async ({ page }) => {

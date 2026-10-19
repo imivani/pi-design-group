@@ -24,10 +24,14 @@ const isHomepage = Astro.url.pathname.replace(/\/$/,'') === base.replace(/\/$/,'
     let choice = 'system';
     try { choice = localStorage.getItem('pi-motion') || 'system'; } catch {}
     root.dataset.motion = choice === 'off' ? 'off' : choice === 'reduced' || matchMedia('(prefers-reduced-motion: reduce)').matches ? 'reduced' : 'full';
-    if (['about','contact'].some(page => normalizedPath(base + page) === normalizedPath(location.pathname)) && !returning && root.dataset.motion === 'full') {
+    // Inner pages that open with the gradual page entrance and return home with the hero fade.
+    const entrancePages = ['about','contact','approach','services','privacy'];
+    const isEntrancePage = path => entrancePages.some(page => path === normalizedPath(base + page) || path.startsWith(normalizedPath(base + page) + '/'));
+    if (isEntrancePage(normalizedPath(location.pathname)) && !returning && root.dataset.motion === 'full') {
       root.dataset.pageEntrance = 'active';
       const settleEntrance = () => delete root.dataset.pageEntrance;
-      document.addEventListener('animationend', event => { if (event.animationName === 'pi-page-arrive' && event.target.matches('.about-opening-photo,.inquiry-media')) settleEntrance(); });
+      document.addEventListener('animationend', event => { if (event.animationName === 'pi-page-arrive' && event.target.matches('.about-opening-photo,.inquiry-media,[data-arrive-last]')) settleEntrance(); });
+      setTimeout(settleEntrance, 3200);
       document.addEventListener('pi:motion', settleEntrance, {once:true});
       window.addEventListener('pagehide', settleEntrance, {once:true});
       window.addEventListener('beforeprint', settleEntrance, {once:true});
@@ -38,7 +42,7 @@ const isHomepage = Astro.url.pathname.replace(/\/$/,'') === base.replace(/\/$/,'
     window.__piProjectArrival = { fresh, native:null };
     const homePath = normalizedPath(base);
     const home = normalizedPath(location.pathname) === homePath;
-    const isHomeReturnSource = path => transitionProjects.some(project => project.path === path) || ['about','contact'].some(page => normalizedPath(base + page) === path);
+    const isHomeReturnSource = path => transitionProjects.some(project => project.path === path) || isEntrancePage(path);
     let homeEntry;
     let internalReferrer = false;
     if (home) {

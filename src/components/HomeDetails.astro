@@ -16,18 +16,23 @@ const selected = details[2];
 ---
 <section id="why" class="design-details detail-section" aria-labelledby="details-title" tabindex="-1" data-detail-active={selected.id}>
   <div class="frame">
-    <div class="detail-heading" data-reveal>
-      <h2 id="details-title">Our Design Comes in the Details.</h2>
+    <div class="detail-head" data-reveal>
+      <div><p class="detail-eyebrow">From drawing to ground</p><h2 id="details-title">Our Design Comes <span>in the Details.</span></h2></div>
+      <div class="detail-now" aria-live="polite"><span id="detail-plan-counter" aria-label={'Detail ' + (details.indexOf(selected) + 1) + ' of ' + details.length}>03 / 03</span><h3 id="detail-plan-title">{selected.title}</h3></div>
     </div>
     <div class="detail-workspace" data-reveal>
       <div class="detail-desk">
         <div class="detail-desk-heading"><span>Landscape Plan</span><span class="detail-project-name" data-detail-project>{selected.project}</span></div>
-        <a class="detail-plan-link" href={selected.href + '#drawings-title'} data-open-drawing aria-label={'Open ' + selected.project + ' drawing'}>
-          <img id="detail-plan-image" src={selected.drawing} alt={selected.drawingAlt} width="1920" height="1280" loading="lazy" decoding="async" />
-          <span class="detail-plan-action" aria-hidden="true"><Expand size={19} stroke-width={1.4} /></span>
-        </a>
+        <div class="detail-table">
+          <a class="detail-plan-link" href={selected.href + '#drawings-title'} data-open-drawing aria-label={'Open ' + selected.project + ' drawing'}>
+            <img id="detail-plan-image" src={selected.drawing} alt={selected.drawingAlt} width="1920" height="1280" loading="lazy" decoding="async" />
+            <span class="detail-loupe" aria-hidden="true"></span>
+            <span class="detail-plan-action" aria-hidden="true"><Expand size={19} stroke-width={1.4} /></span>
+          </a>
+          <figure class="detail-print" aria-hidden="true"><img data-detail-print src={selected.photo} alt="" width="1920" height="1280" loading="lazy" decoding="async" /><figcaption data-detail-print-caption>Built · {selected.project}</figcaption></figure>
+        </div>
         <div class="detail-desk-caption">
-          <div class="detail-desk-story"><div class="detail-caption-heading sr-only"><h3 id="detail-plan-title">{selected.title}</h3><span id="detail-plan-counter" aria-label="Detail 3 of 3">03 / 03</span></div><p id="detail-plan-copy">{selected.copy}</p></div>
+          <p id="detail-plan-copy">{selected.copy}</p>
           <div class="detail-desk-links">
             <a class="text-link" href={selected.href + '#drawings-title'} data-open-drawing>Open Drawing <Expand size={18} stroke-width={1.4} /></a>
             <a class="text-link" id="detail-project-link" href={selected.href}>View Project <ArrowRight size={18} stroke-width={1.4} /></a>
@@ -39,7 +44,7 @@ const selected = details[2];
         {details.map(detail => (
           <button type="button" class="detail-choice" data-detail-select={detail.id} aria-pressed={detail.id === selected.id} aria-controls="detail-plan-image detail-plan-copy" disabled>
             <span class="detail-choice-image"><img src={detail.photo} alt={detail.alt} width="1920" height="1280" loading="lazy" decoding="async" /></span>
-            <span class="detail-choice-caption"><span class="detail-choice-title">{detail.title}</span><span class="detail-choice-summary">{detail.summary}</span><span class="detail-choice-footer"><span class="detail-choice-project">{detail.project}</span><span class="detail-choice-arrow" aria-hidden="true"><ArrowUpRight size={20} stroke-width={1.4} /></span></span></span>
+            <span class="detail-choice-caption"><span class="detail-choice-title">{detail.title}</span><span class="detail-choice-summary">{detail.summary}</span><span class="detail-choice-footer"><span class="detail-choice-project">{detail.project}</span><span class="detail-choice-arrow" aria-hidden="true"><ArrowUpRight size={18} stroke-width={1.4} /></span></span></span>
           </button>
         ))}
       </div>
@@ -63,4 +68,5 @@ const selected = details[2];
 <script is:inline id="home-details-data" type="application/json" set:html={JSON.stringify(details).replace(/</g, '\\u003c')} />
 <script>
   import '../scripts/home-details';
+  import '../scripts/home-details-motion';
 </script>

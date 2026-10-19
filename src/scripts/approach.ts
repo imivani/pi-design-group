@@ -1,6 +1,6 @@
 import { animate, scroll } from 'motion';
 import { mode, root, setupImageErrors } from './motion';
-import { arrive, revealOnView, spring, structure } from './spring';
+import { revealOnView, spring, structure } from './spring';
 
 root.dataset.enhanced = 'true';
 setupImageErrors();
@@ -41,7 +41,9 @@ if (hero) {
     built.style.clipPath = '';
     hero.dataset.heroView = view;
   };
+  let opening: ReturnType<typeof setTimeout> | undefined;
   buttons.forEach(button => button.addEventListener('click', () => {
+    clearTimeout(opening); // a visitor's choice replaces the opening sequence
     if (button.getAttribute('aria-pressed') === 'true') return;
     void show(button.dataset.heroShow!);
   }));
@@ -54,9 +56,8 @@ if (hero) {
     placePill(pill, buttons[0], false);
     buttons[0].setAttribute('aria-pressed', 'true'); buttons[1].setAttribute('aria-pressed', 'false');
     caption.textContent = captions.plan;
-    arrive([...hero.querySelectorAll('h1 span'), ...hero.querySelectorAll('.approach-hero-foot > *')], 28);
-    spring([...document.querySelectorAll('.approach-steps li')], { opacity: [0, 1], y: [56, 0] }, { ...structure, visualDuration: 0.5, delay: (i: number) => 0.35 + i * 0.08 });
-    setTimeout(() => { if (hero.dataset.heroView === 'plan') void show('built'); }, 900);
+    // The headline, switch and step cards rise in with the page entrance (page-entrance.css).
+    opening = setTimeout(() => { if (hero.dataset.heroView === 'plan') void show('built'); }, 1300);
     // A gentle drift of the pictures as the hero scrolls away.
     scroll(animate(hero.querySelectorAll('.approach-hero-plan, .approach-hero-built img'), { y: [0, 90], scale: [1.04, 1.1] }, { ease: 'linear' }), { target: hero, offset: ['start start', 'end start'] });
   }
