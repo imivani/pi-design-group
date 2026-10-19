@@ -4,6 +4,7 @@ import { ArrowRight, ArrowUpRight, UsersRound, Network, Layers, Sprout } from '@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import MotionSetup from '../components/MotionSetup.astro';
+import SeoMeta from '../components/SeoMeta.astro';
 import { projects, projectPath, media } from '../data/projects';
 import { renderingCredit } from '../data/image-credit';
 import { leadership, experience, responsibilities } from '../data/practice';
@@ -29,9 +30,8 @@ const categories=['All','Residential','Multifamily','Commercial','Institutional'
 <html lang="en" data-motion="full">
 <head>
   <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>About | Pi Design Group</title>
-  <meta name="description" content="A personally led landscape architecture and planning practice. Meet Peter Imshenetskyy and Terry Klassen and explore PI Design Group’s experience."/>
-  <meta name="robots" content="noindex, nofollow"/><meta name="theme-color" content="#ffffff"/>
+  <SeoMeta title="About | Pi Design Group" description="A personally led landscape architecture and planning practice. Meet Peter Imshenetskyy and Terry Klassen and explore PI Design Group’s experience." image="/media/share/about.jpg" imageAlt="Gardens and planted sidewalks connect homes at D’Arcy"/>
+  <meta name="theme-color" content="#ffffff"/>
   <link rel="icon" href={asset('/favicon.svg')} type="image/svg+xml"/><MotionSetup/>
 </head>
 <body class="about-page">

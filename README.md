@@ -72,7 +72,9 @@ node scripts/verify-build.mjs /pi-preview/
 Remove-Item Env:SITE_BASE
 ```
 
-Rebuild without SITE_BASE for a site hosted at the domain root. Publishing this repository does not deploy the website. The pages retain their local-review **noindex** setting; review that before a public website launch.
+Rebuild without SITE_BASE for a site hosted at the domain root. Publishing this repository does not deploy the website.
+
+Pages are open to search engines. `src/components/SeoMeta.astro` writes each page's description, canonical link and link-preview image; `/robots.txt` and `/sitemap.xml` are generated at build time. Set `SITE_URL` (for example `https://pidesigngroup.ca`) when the site moves to its final address, so canonical links, share images and the sitemap point there. After adding or changing project cover images, run `node --experimental-strip-types scripts/build-share-images.mjs` to refresh `public/media/share`.
 
 ## Vercel
 
@@ -85,7 +87,9 @@ vercel link --yes --scope business-1426s-projects --project pi-design-group
 vercel deploy --prod --yes --archive=tgz --scope business-1426s-projects
 ```
 
-The private GitHub repository is not yet connected to Vercel, so a GitHub push alone does not publish an update. `.vercelignore` keeps local review material out of deployment uploads while retaining every file in `src/scripts`. Account settings and environment files remain excluded from Git.
+The GitHub repository is connected to Vercel: a push to `main` publishes the website, and other branches get a private preview.
+
+The contact form sends inquiries through `api/contact.ts`, a Vercel Function that uses [Resend](https://resend.com). Add `RESEND_API_KEY` in the Vercel project's environment variables to turn it on. `CONTACT_TO` (default `peter@pidesigngroup.ca`) and `CONTACT_FROM` (a sender on a domain verified in Resend) are optional. Until the key is set, or wherever the function is unavailable, the form falls back to preparing an email draft. `.vercelignore` keeps local review material out of deployment uploads while retaining every file in `src/scripts`. Account settings and environment files remain excluded from Git.
 
 Verify the public deployment with `node scripts/verify-live.mjs https://pi-design-group.vercel.app/`. This checks real pages, assets, video delivery, featured motion, search and desktop/phone navigation.
 

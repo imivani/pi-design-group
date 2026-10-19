@@ -84,5 +84,5 @@ test('catalogue fits compact desktop and resolves active motion when motion is s
   await expect.poll(() => surface.evaluate((element) => element.getAnimations({ subtree: true }).filter((animation) => animation.playState === 'running').length)).toBe(0);
   await page.keyboard.press('Escape');
   await page.locator('[data-menu-trigger="services"]').click();
-  await expect(page.locator('.service-menu-link__name')).toHaveText(['Multifamily Communities', 'Commercial Plazas', 'Public Parks']);
+  await expect(page.locator('.service-menu-link__name')).toHaveText(['Multifamily Communities', 'Commercial Plazas', 'Play & Open Spaces']);
 });

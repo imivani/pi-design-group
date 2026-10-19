@@ -11,7 +11,7 @@ test('contact choices preview real images and reveal a form without losing typed
  await expect(page.locator('#inquiry-fields')).toHaveAttribute('data-open','true');
  await expect(page.locator('.inquiry-prompt')).toBeHidden();
  await page.getByRole('textbox',{name:'Name',exact:true}).fill('Test Visitor');
- await page.getByRole('radio',{name:'Public Parks',exact:true}).check();
+ await page.getByRole('radio',{name:'Play & Open Spaces',exact:true}).check();
  await expect(page.getByRole('textbox',{name:'Name',exact:true})).toHaveValue('Test Visitor');
  await expect(page.locator('#inquiry-photo-caption')).toHaveText('Play space detail at Crestmont West');
  await page.emulateMedia({reducedMotion:'reduce'});
@@ -20,14 +20,14 @@ test('contact choices preview real images and reveal a form without losing typed
  await expect(page.locator('.inquiry-outgoing')).toHaveCount(0);
 });
 
-test('inquiry validation and email preparation are honest about delivery',async({page})=>{
+test('without a sending service the inquiry falls back to an honest email draft',async({page})=>{
  await page.goto('/contact');await page.getByRole('radio',{name:'Multifamily Communities',exact:true}).check();
- await page.getByRole('button',{name:'Prepare Email'}).click();await expect(page.locator('#inquiry-prepared')).toBeHidden();
+ await page.getByRole('button',{name:'Send Inquiry'}).click();await expect(page.locator('#inquiry-prepared')).toBeHidden();
  await page.getByRole('textbox',{name:'Name',exact:true}).fill('Test Visitor');
  await page.getByRole('textbox',{name:'Email',exact:true}).fill('visitor@example.com');
  await page.getByRole('textbox',{name:'Project location',exact:true}).fill('Calgary');
  await page.getByRole('textbox',{name:'Tell us about the project',exact:true}).fill('A shared courtyard with places to sit.');
- // Preparing a mailto draft does not send an email. No email delivery is invoked by this test.
+ // The local preview has no /api/contact, so the form prepares a mailto draft. Nothing is sent.
  await page.locator('#inquiry-form').dispatchEvent('submit');
  await expect(page.locator('#inquiry-prepared')).toBeVisible();
  const href=await page.locator('#inquiry-email-link').getAttribute('href');
@@ -65,6 +65,46 @@ test('a failed photo preview never blocks the inquiry form and can recover',asyn
  await expect(page.locator('#inquiry-photo-caption')).toContainText('Crestmont West');
  await expect(page.getByRole('textbox',{name:'Name',exact:true})).toBeVisible();
  await page.unroute('**/media/service-commercial.webp');
- await page.getByRole('radio',{name:'Public Parks',exact:true}).check();await page.getByRole('radio',{name:'Commercial Plazas',exact:true}).check();
+ await page.getByRole('radio',{name:'Play & Open Spaces',exact:true}).check();await page.getByRole('radio',{name:'Commercial Plazas',exact:true}).check();
  await expect(page.locator('#inquiry-photo-caption')).toContainText('Seton Crossing');await expect(page.locator('#inquiry-image-status')).toBeEmpty();
+});
+
+const fillInquiry = async (page:import('@playwright/test').Page) => {
+ await page.getByRole('radio',{name:'Commercial Plazas',exact:true}).check();
+ await page.getByRole('textbox',{name:'Name',exact:true}).fill('Test Visitor');
+ await page.getByRole('textbox',{name:'Email',exact:true}).fill('visitor@example.com');
+ await page.getByRole('textbox',{name:'Project location',exact:true}).fill('Calgary');
+ await page.getByRole('textbox',{name:'Tell us about the project',exact:true}).fill('A shared courtyard with places to sit.');
+};
+
+test('a sent inquiry shows a confirmation and can start again',async({page})=>{
+ // The sending service is replaced in the browser. No email is sent by this test.
+ let payload:Record<string,string>={};
+ await page.route('**/api/contact',async route=>{payload=route.request().postDataJSON();await new Promise(r=>setTimeout(r,250));await route.fulfill({json:{ok:true}});});
+ await page.goto('/contact');await fillInquiry(page);
+ await page.getByRole('button',{name:'Send Inquiry'}).click();
+ await expect(page.locator('.inquiry-submit[data-sending="true"]')).toContainText('Sending');
+ await expect(page.locator('#inquiry-sent')).toBeVisible();
+ await expect(page.locator('#inquiry-sent-title')).toHaveText('Thank you, Test.');
+ await expect(page.locator('#inquiry-sent-title')).toBeFocused();
+ await expect(page.locator('#inquiry-sent-email')).toHaveText('visitor@example.com');
+ await expect(page.locator('#inquiry-sent-type')).toHaveText('Commercial Plazas');
+ await expect(page.locator('.inquiry-choices')).toBeHidden();
+ await expect(page.locator('#inquiry-prepared')).toBeHidden();
+ expect(payload).toMatchObject({projectType:'Commercial Plazas',name:'Test Visitor',email:'visitor@example.com',location:'Calgary',website:''});
+ await page.getByRole('button',{name:'Send another message'}).click();
+ await expect(page.locator('#inquiry-sent')).toBeHidden();
+ await expect(page.getByRole('radio',{name:'Commercial Plazas',exact:true})).not.toBeChecked();
+ await expect(page.locator('.inquiry-choices')).toBeVisible();
+});
+
+test('a failed send keeps the details and offers an email draft without leaving the page',async({page})=>{
+ await page.route('**/api/contact',route=>route.fulfill({status:502,json:{error:'delivery_failed'}}));
+ await page.goto('/contact');await fillInquiry(page);
+ await page.getByRole('button',{name:'Send Inquiry'}).click();
+ await expect(page.locator('#inquiry-prepared')).toBeVisible();
+ await expect(page.locator('#inquiry-feedback')).toContainText('couldn’t send');
+ await expect(page).toHaveURL(/\/contact$/);
+ await expect(page.getByRole('textbox',{name:'Name',exact:true})).toHaveValue('Test Visitor');
+ await expect(page.locator('#inquiry-sent')).toBeHidden();
 });

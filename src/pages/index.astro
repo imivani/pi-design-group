@@ -9,6 +9,7 @@ import { ArrowRight, ArrowDown, Building, Store, Trees } from '@lucide/astro';
 import { media } from '../data/projects';
 import Footer from '../components/Footer.astro';
 import MotionSetup from '../components/MotionSetup.astro';
+import SeoMeta from '../components/SeoMeta.astro';
 import '../styles/global.css';
 import '../styles/home-return.css';
 
@@ -18,20 +19,27 @@ const asset = (path: string) => base + path.replace(/^\//, '');
 const services = [
   { id: 'multifamily', icon: Building, title: 'Multifamily Communities', copy: 'Landscape design for multifamily communities. Planting, pedestrian routes and shared outdoor spaces, considered together.', image: media.services.multifamily, alt: 'A planted courtyard framed by residences at Crestmont West', caption: 'Courtyard at Crestmont West' },
   { id: 'commercial', icon: Store, title: 'Commercial Plazas', copy: 'Landscape design for commercial plazas. Planting, seating and pedestrian connections around shops and building entrances.', image: media.services.commercial, alt: 'Outdoor seating and landscaped pedestrian areas at Seton Crossing', caption: 'Seton Crossing, Calgary' },
-  { id: 'parks', icon: Trees, title: 'Public Parks', copy: 'Landscape design for public outdoor spaces. Places to walk, play and spend time outside.', image: media.services.parks, alt: 'A play space and planted pedestrian path at Crestmont West', caption: 'Play space detail at Crestmont West' },
+  { id: 'parks', icon: Trees, title: 'Play & Open Spaces', copy: 'Play areas, pathways and green space within the communities we design. Places to walk, play and spend time outside.', image: media.services.parks, alt: 'A play space and planted pedestrian path at Crestmont West', caption: 'Play space detail at Crestmont West' },
 ];
+// Business details for search results, taken from the contact details shown on the site.
+const organization = {
+  '@context': 'https://schema.org', '@type': 'ProfessionalService', name: 'Pi Design Group',
+  description: 'Landscape architecture and planning practice based in Calgary, Alberta.',
+  url: new URL(base, Astro.site).href, image: new URL(base + 'media/share/home.jpg', Astro.site).href,
+  email: 'peter@pidesigngroup.ca', telephone: '+1-403-510-4071',
+  address: { '@type': 'PostalAddress', addressLocality: 'Calgary', addressRegion: 'AB', addressCountry: 'CA' },
+};
 ---
 <!doctype html>
 <html lang="en" data-motion="full">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Pi Design Group. Landscape design for multifamily communities, commercial plazas and public parks. Explore our complete project collection." />
-    <meta name="robots" content="noindex, nofollow" />
+    <SeoMeta title="Pi Design Group | Landscape architecture" description="Pi Design Group is a Calgary landscape architecture practice designing multifamily communities, commercial plazas and the play and open spaces within them. Explore our complete project collection." />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(organization)} />
     <meta name="theme-color" content="#262b2d" />
     <link rel="icon" href={asset('/favicon.svg')} type="image/svg+xml" />
     <link rel="preload" as="image" href={asset(media.heroPoster)} fetchpriority="high" />
-    <title>Pi Design Group | Landscape architecture</title>
     <MotionSetup />
   </head>
   <body>
@@ -49,7 +57,7 @@ const services = [
           <div class="hero-copy">
             <div class="hero-discipline"><span></span>Landscape Architecture</div>
             <h1 id="hero-title"><span>Shaping Places</span><span>People Belong.</span></h1>
-            <p>Landscape design for multifamily communities,<br class="desktop-break" /> commercial plazas, and public parks.</p>
+            <p>Landscape design for multifamily communities,<br class="desktop-break" /> commercial plazas, and the open spaces that connect them.</p>
             <a class="outline-button" href="#projects">Explore Our Work <ArrowRight size={19} stroke-width={1.4} /></a>
           </div>
           <span id="video-status" class="sr-only" role="status"></span>

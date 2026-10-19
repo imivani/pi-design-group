@@ -7,7 +7,7 @@ The homepage, reusable pages for all 30 portfolio entries, /contact, and /about 
 | 1 | Services, /services | Three photographic entries for multifamily communities, commercial plazas and public parks. A concise explanation of the actual services, relevant work and a contact link. |
 | 2 | Three service pages: /services/multifamily, /services/commercial, /services/public-parks | A large relevant photograph, specific deliverables, plans and built details, related projects and contact. Confirm a named park commission before making a park case study. |
 | 3 | About imagery | /about is built. Portraits and project photographs are supplied and implemented. Confirm the preferred public role title for Terry and add matched photos for the remaining text-only experience records. |
-| 4 | Contact delivery enhancement | /contact is built with a validated email-draft form, copy fallback and verified direct contact links. Server-side email delivery remains optional future work requiring a configured email provider. |
+| 4 | Contact delivery | /contact sends inquiries directly through `api/contact.ts` (Resend) once `RESEND_API_KEY` is set in Vercel, with an email-draft fallback and verified direct contact links. |
 | 5 | Insights, /insights and individual articles | Add when real articles are ready. Possible subjects include documented project details, planting decisions or lessons from completed work. No empty navigation destination. |
 
 Before public launch, confirm the final brand wordmark, approved photography, captions and any additional project facts. Add a privacy page if the eventual contact form or analytics requires it. Check the final hostname, preserved project routes and social previews.

@@ -1,8 +1,9 @@
 ---
-import { ArrowRight, Mail, Phone, MapPin, Copy, ArrowUpRight } from '@lucide/astro';
+import { ArrowRight, Mail, Phone, MapPin, Copy, ArrowUpRight, LoaderCircle } from '@lucide/astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import MotionSetup from '../components/MotionSetup.astro';
+import SeoMeta from '../components/SeoMeta.astro';
 import { media } from '../data/projects';
 import '../styles/global.css';
 import '../styles/contact-page.css';
@@ -11,7 +12,7 @@ const asset = (path: string) => base + path.replace(/^\//, '');
 const choices = [
   { id: 'multifamily', label: 'Multifamily Communities', src: media.featured, alt: 'Planting, seating and shared paths at Crestmont West', caption: 'Shared spaces at Crestmont West', href: base + 'crestmontwest' },
   { id: 'commercial', label: 'Commercial Plazas', src: media.services.commercial, alt: 'Outdoor seating and a pergola at Seton Crossing', caption: 'A place to pause at Seton Crossing', href: base + 'seton' },
-  { id: 'parks', label: 'Public Parks', src: media.services.parks, alt: 'A play space with planting at Crestmont West', caption: 'Play space detail at Crestmont West', href: base + 'crestmontwest' },
+  { id: 'parks', label: 'Play & Open Spaces', src: media.services.parks, alt: 'A play space with planting at Crestmont West', caption: 'Play space detail at Crestmont West', href: base + 'crestmontwest' },
   { id: 'other', label: 'Something Else', src: '/media/gallery/darcy/usb-img_2484.webp', alt: 'Gardens and planted sidewalks at D’Arcy', caption: 'Neighbourhood planting at D’Arcy', href: base + 'darcy' },
 ].map(choice => ({ ...choice, src: asset(choice.src) }));
 ---
@@ -20,12 +21,10 @@ const choices = [
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Start a conversation with Pi Design Group about your landscape project. Based in Calgary, Alberta." />
-    <meta name="robots" content="noindex, nofollow" />
+    <SeoMeta title="Contact | Pi Design Group" description="Start a conversation with Pi Design Group about your landscape project. Based in Calgary, Alberta." image="/media/share/contact.jpg" imageAlt="Planting, seating and shared paths at Crestmont West" />
     <meta name="theme-color" content="#ffffff" />
     <link rel="icon" href={asset('/favicon.svg')} type="image/svg+xml" />
     <link rel="preload" as="image" href={choices[0].src} fetchpriority="high" />
-    <title>Contact | Pi Design Group</title>
     <MotionSetup />
   </head>
   <body class="contact-page">
@@ -54,7 +53,9 @@ const choices = [
                     <label class="inquiry-field">Project location<input name="location" placeholder="City, province or region" required maxlength="160" /></label>
                     <label class="inquiry-field inquiry-field-wide">Tell us about the project<textarea name="message" rows="3" placeholder="A few details about your goals, site or ideas…" required maxlength="4000"></textarea></label>
                   </div>
-                  <div class="inquiry-submit-row"><button class="inquiry-submit" type="submit"><span>Prepare Email</span><ArrowUpRight size={21} stroke-width={1.4} aria-hidden="true" /></button><p>Opens your email app. <br />Review your inquiry, then send.</p></div>
+                  <label class="inquiry-trap" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off" /></label>
+                  <div class="inquiry-submit-row"><button class="inquiry-submit" type="submit"><span id="inquiry-submit-label">Send Inquiry</span><ArrowUpRight class="inquiry-submit-icon" size={21} stroke-width={1.4} aria-hidden="true" /><LoaderCircle class="inquiry-spinner" size={21} stroke-width={1.4} aria-hidden="true" /></button><p>Goes straight to Peter. <br />He’ll reply to the email you give.</p></div>
+                  <p id="inquiry-error" class="inquiry-error" role="alert" hidden></p>
                   <div id="inquiry-prepared" class="inquiry-prepared" hidden>
                     <p id="inquiry-feedback" role="status">Your email draft is ready. If your email app didn’t open, copy the details and email Peter directly.</p>
                     <div><a id="inquiry-email-link" href="mailto:peter@pidesigngroup.ca">Open Email <ArrowUpRight size={17} aria-hidden="true" /></a><button id="inquiry-copy" type="button">Copy Details <Copy size={16} aria-hidden="true" /></button></div>
@@ -64,6 +65,13 @@ const choices = [
               </div>
             </div>
             <p class="inquiry-prompt" hidden>Choose a project type to get started.</p>
+            <div id="inquiry-sent" class="inquiry-sent" hidden>
+              <svg class="inquiry-sent-mark" viewBox="0 0 56 56" width="56" height="56" aria-hidden="true"><circle cx="28" cy="28" r="27" pathLength="1" /><path d="M17 29.5l7.5 7.5L39.5 21" pathLength="1" /></svg>
+              <h2 id="inquiry-sent-title" tabindex="-1">Thank you, <span id="inquiry-sent-name"></span>.</h2>
+              <p class="inquiry-sent-copy">Your message is on its way to Peter. He’ll reply to <span id="inquiry-sent-email"></span>.</p>
+              <dl class="inquiry-sent-summary"><div><dt>Project type</dt><dd id="inquiry-sent-type"></dd></div><div><dt>Location</dt><dd id="inquiry-sent-location"></dd></div></dl>
+              <div class="inquiry-sent-actions"><a class="inquiry-sent-explore" href={base + '#projects'}><span>Explore Our Work</span><ArrowRight size={21} stroke-width={1.4} aria-hidden="true" /></a><button id="inquiry-again" class="text-link" type="button">Send another message</button></div>
+            </div>
           </form>
         </div>
         <figure class="inquiry-media" data-contact-arrival>

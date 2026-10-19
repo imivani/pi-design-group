@@ -4,6 +4,7 @@ import { renderingCredit } from '../data/image-credit';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import MotionSetup from '../components/MotionSetup.astro';
+import SeoMeta from '../components/SeoMeta.astro';
 import ProjectFigure from '../components/ProjectFigure.astro';
 import { ArrowLeft, ArrowRight, X, ZoomIn, ZoomOut, Images } from '@lucide/astro';
 import { projects, projectPath, type Project } from '../data/projects';
@@ -50,13 +51,11 @@ const facts = [
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content={project.name + '. ' + project.type + (project.location ? ' in ' + project.location : '') + '. Photographs and drawings from the Pi Design Group portfolio.'} />
-    <meta name="robots" content="noindex, nofollow" />
+    <SeoMeta title={project.name + ' | Pi Design Group'} description={project.name + '. ' + project.type + (project.location ? ' in ' + project.location : '') + '. Photographs and drawings from the Pi Design Group portfolio.'} image={'/media/share/' + project.id + '.jpg'} imageAlt={project.alt} type="article" />
     <meta name="theme-color" content="#ffffff" />
     <link rel="icon" href={asset('/favicon.svg')} type="image/svg+xml" />
     <!-- Match the opening photograph before the browser captures its arrival. -->
     <link rel="expect" blocking="render" href="#project-opening-image" />
-    <title>{project.name} | Pi Design Group</title>
     <MotionSetup />
   </head>
   <body class="project-page page-framed">
