@@ -9,6 +9,7 @@ import ProjectFigure from '../components/ProjectFigure.astro';
 import { ArrowLeft, ArrowRight, X, ZoomIn, ZoomOut, Images } from '@lucide/astro';
 import { projects, projectPath, type Project } from '../data/projects';
 import { projectDetails } from '../data/project-details';
+import { projectFacts } from '../data/project-facts';
 import '../styles/global.css';
 import '../styles/project.css';
 import '../styles/project-arrival.css';
@@ -44,6 +45,7 @@ const facts = [
   ...(project.location ? [['Location',project.location]] : []),
   ['Landscape design','Pi Design Group'],
   ...(project.credit ? [['Architecture',project.credit.replace(/^Architecture by /,'')]] : []),
+  ...projectFacts(project.id, project.imageKind, gallery),
 ];
 ---
 <!doctype html>

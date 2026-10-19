@@ -8,13 +8,16 @@ import SeoMeta from '../components/SeoMeta.astro';
 import { projects, projectPath, media } from '../data/projects';
 import { renderingCredit } from '../data/image-credit';
 import { leadership, experience, responsibilities } from '../data/practice';
+import { experienceCategories } from '../data/categories';
 import '../styles/global.css';
 import '../styles/about.css';
 import '../styles/contact-footer.css';
 const base=import.meta.env.BASE_URL;
 const asset=(path:string)=>base+path.replace(/^\//,'');
+// The home page shows the Crestmont West plan, so this page uses D’Arcy’s.
+const sitePlan='/media/gallery/darcy/3.webp';
 const stages=[
- {title:'Read the place',label:'Concept',src:media.drawing,alt:'Landscape site plan for Crestmont West',caption:'Landscape site plan · Crestmont West',items:responsibilities.slice(0,2)},
+ {title:'Read the place',label:'Concept',src:sitePlan,alt:'Overall landscape plan for D’Arcy',caption:'Landscape site plan · D’Arcy',items:responsibilities.slice(0,2)},
  {title:'Resolve the detail',label:'Design',src:media.featuredDetail,alt:'Planting and building frontage at Crestmont West',caption:'Planting and frontage · Crestmont West',items:responsibilities.slice(2,4)},
  {title:'Bring it together',label:'Delivery',src:media.featured,alt:'Completed courtyard at Crestmont West',caption:'Built landscape · Crestmont West',items:responsibilities.slice(4)},
 ];
@@ -24,7 +27,7 @@ const principles=[
  {icon:Layers,title:'Technical depth',copy:'Technical resources scale with the project, supporting quality and dependable delivery.'},
  {icon:Sprout,title:'Designed to perform',copy:'Functionality, constructability and long-term performance considered together.'},
 ];
-const categories=['All','Residential','Multifamily','Commercial','Institutional','Other'];
+const categories=['All',...experienceCategories];
 ---
 <!doctype html>
 <html lang="en" data-motion="full">
@@ -63,7 +66,7 @@ const categories=['All','Residential','Multifamily','Commercial','Institutional'
     <div class="about-section-heading" data-reveal><div><p class="about-kicker">What we do</p><h2 id="scope-title">From concept to construction.</h2></div><p>One landscape.<br/>Considered at every scale.</p></div>
     <div class="scope-tabs js-only" role="tablist" aria-label="Project stages">{stages.map((stage,index)=><button role="tab" type="button" id={'scope-tab-'+index} aria-controls={'scope-panel-'+index} aria-selected={index===0} tabindex={index===0?0:-1} data-scope-index={index} data-scope-src={asset(stage.src)} data-scope-alt={stage.alt} data-scope-caption={stage.caption}><span>{String(index+1).padStart(2,'0')} / {stage.label}</span><span>{stage.title}</span><ArrowUpRight size={23} stroke-width={1.3}/></button>)}</div>
     <div class="scope-studio" data-reveal><figure class="scope-photo"><div class="scope-photo-stage"><img id="scope-image" src={asset(stages[0].src)} alt={stages[0].alt} width="1536" height="1024" loading="lazy" decoding="async"/></div><figcaption id="scope-caption">{stages[0].caption}</figcaption></figure>
-    <div class="scope-panels">{stages.map((stage,index)=><div id={'scope-panel-'+index} class="scope-panel" role="tabpanel" aria-labelledby={'scope-tab-'+index} data-active={index===0}><h3>{stage.title}</h3>{stage.items.map(([title,copy])=><div class="scope-responsibility"><h4>{title}</h4><p>{copy}</p></div>)}</div>)}<a class="scope-plan-link text-link" href={asset(media.drawing)} target="_blank" rel="noopener">View landscape plan <ArrowUpRight size={19}/></a></div></div>
+    <div class="scope-panels">{stages.map((stage,index)=><div id={'scope-panel-'+index} class="scope-panel" role="tabpanel" aria-labelledby={'scope-tab-'+index} data-active={index===0}><h3>{stage.title}</h3>{stage.items.map(([title,copy])=><div class="scope-responsibility"><h4>{title}</h4><p>{copy}</p></div>)}</div>)}<a class="scope-plan-link text-link" href={asset(sitePlan)} target="_blank" rel="noopener">View landscape plan <ArrowUpRight size={19}/></a></div></div>
   </section>
   <section class="about-working about-section" aria-labelledby="working-title"><div class="working-atmosphere" aria-hidden="true"><img src={asset(atmospheres[media.featured as keyof typeof atmospheres])} alt="" loading="lazy" decoding="async"/></div><div class="frame"><div class="about-section-heading" data-reveal><div><p class="about-kicker">How we work</p><h2 id="working-title">Personally involved.<br/>Connected by design.</h2></div></div><div class="working-principles">{principles.map(({icon:Icon,title,copy},index)=><article class="working-principle" data-reveal><div class="principle-mark"><Icon size={38} stroke-width={1.2} aria-hidden="true"/><span>{String(index+1).padStart(2,'0')}</span></div><h3>{title}</h3><p>{copy}</p></article>)}</div></div></section>
   <section class="about-experience about-section" aria-labelledby="experience-title">

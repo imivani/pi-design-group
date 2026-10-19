@@ -204,3 +204,6 @@ html[data-motion='off'] .nav-surface { transform: none; }
 html[data-motion='off'] .mobile-navigation :is(a,button){transition:none}
 
 .service-menu-link__name{display:flex;align-items:center;gap:10px}.service-menu-link__name svg{flex-shrink:0}
+/* The search row already ends with a divider; the contact block needs no second one. */
+.mobile-navigation__contact{border-top:0;padding-top:0;margin-top:28px}
+.mobile-navigation__search{border-top:0;margin-top:0}

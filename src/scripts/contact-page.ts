@@ -73,7 +73,10 @@ for(const radio of radios){
 form.querySelector('.inquiry-choices')!.addEventListener('pointerleave',()=>{
   clearTimeout(hoverTimer);void preview(selected||choices[0].id);
 });
-const initial=radios.find(radio=>radio.checked);if(initial)select(initial);
+// Service pages link here with ?type=<service> so the matching project type starts selected.
+const requested=new URL(location.href).searchParams.get('type');
+const initial=radios.find(radio=>radio.checked)||radios.find(radio=>radio.dataset.inquiryType===requested);
+if(initial){initial.checked=true;select(initial);}
 const draftEmail = (automatic:boolean, message:string) => {
   prepared.hidden=false;feedback.textContent=message;
   track(animate(prepared,[{opacity:0,transform:'translateY(8px)'},{opacity:1,transform:'translateY(0)'}],360));

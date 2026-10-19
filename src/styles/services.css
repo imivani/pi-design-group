@@ -1,0 +1,56 @@
+.service-page{background:#fff}
+.service-hero{padding-top:116px}
+.service-back{font-size:14px;gap:12px;min-height:40px;justify-content:flex-start}
+.service-title-row{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:7%;align-items:end;padding:18px 0 40px}
+.service-title-row h1{font-size:clamp(52px,5.6vw,86px);line-height:1.02;letter-spacing:-.045em}
+.service-intro{border-left:1px solid var(--line);padding:6px 0 6px 30px;font-size:19px;line-height:1.5;color:#53595c;max-width:500px}
+.service-hero-photo{height:clamp(320px,calc(100svh - 360px),680px);overflow:hidden;border-radius:5px;background:#e5e8e5}
+.service-hero-photo img{width:100%;height:100%;object-fit:cover}
+.service-hero-figure figcaption a{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:15px 0;min-height:52px;font-size:14px;color:#565d5e}
+.service-hero-figure figcaption svg{flex-shrink:0;transition:transform 300ms var(--ease-arrive)}.service-hero-figure figcaption a:hover svg{transform:translate(3px,-3px)}
+
+.service-scope{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(320px,1fr);gap:7%;padding-block:88px 96px;align-items:start}
+.service-scope h2,.service-related h2,.service-others h2{font-size:clamp(32px,3.2vw,46px);line-height:1.1}
+.service-focus ol{list-style:none;margin:36px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:0 40px}
+.service-focus li{border-top:1px solid var(--line);padding:22px 0 30px}
+.service-index{display:block;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.service-focus h3{margin-top:14px;font-size:22px;line-height:1.2;letter-spacing:-.015em}
+.service-focus p{margin-top:10px;font-size:16px;line-height:1.55;color:#53595c}
+.service-included{position:sticky;top:112px;background:#f5f6f5;border-radius:5px;padding:34px 32px}
+.service-included h2{font-size:24px;letter-spacing:-.015em}
+.service-included ul{list-style:none;margin:22px 0 0;padding:0}
+.service-included li{display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-top:1px solid #dfe3e1;font-size:15px;line-height:1.45}
+.service-included li svg{flex-shrink:0;margin-top:2px}
+.service-included>p{margin-top:16px;font-size:13px;line-height:1.5;color:#5d6466}
+.service-cta{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-top:24px;min-height:56px;padding:16px 21px;color:#fff;background:#242b29;border-radius:3px;font-size:16px;transition:background 240ms ease,scale 150ms ease}
+.service-cta:hover{background:#414946}.service-cta svg{transition:transform 300ms var(--ease-arrive)}.service-cta:hover svg{transform:translateX(3px)}
+
+.service-related{padding-block:0 96px}
+.service-related-head{display:flex;justify-content:space-between;align-items:end;gap:24px;padding-bottom:22px;border-bottom:1px solid var(--line)}
+.service-project-grid{list-style:none;margin:28px 0 0;padding:0;display:grid;grid-template-columns:repeat(var(--related-columns,3),minmax(0,1fr));gap:36px 24px}
+.service-project{display:block;transition:scale 150ms ease}
+.service-project-photo{position:relative;display:block;aspect-ratio:3/2;overflow:hidden;border-radius:5px;background:#e5e8e5}
+.service-project-photo img{width:100%;height:100%;object-fit:cover;transition:transform 700ms var(--ease-arrive)}
+.service-project:hover .service-project-photo img{transform:scale(1.035)}
+.service-project-name{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:14px;font-size:19px;line-height:1.3}
+.service-project-name svg{flex-shrink:0;opacity:.55;transition:transform 300ms var(--ease-arrive),opacity 240ms}
+.service-project:hover .service-project-name svg{opacity:1;transform:translate(3px,-3px)}
+.service-project-meta{display:block;margin-top:4px;font-size:13px;color:#62696b}
+
+.service-others{padding-block:72px 104px;border-top:1px solid var(--line)}
+.service-others ul,.service-index-grid{list-style:none;margin:30px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.service-index-grid{grid-template-columns:repeat(3,minmax(0,1fr));margin:0 0 104px}
+.service-others a,.service-index-grid a{display:block;transition:scale 150ms ease}
+.service-others img,.service-index-photo img{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:5px;background:#e5e8e5;transition:transform 700ms var(--ease-arrive)}
+.service-index-photo{display:block;overflow:hidden;border-radius:5px;margin-bottom:16px}.service-index-photo img{aspect-ratio:4/5}
+.service-others a>img{margin-bottom:16px}
+.service-index-grid a:hover img{transform:scale(1.035)}
+.service-other-name{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-top:6px;font-size:24px;line-height:1.2;letter-spacing:-.015em}
+.service-other-name svg{flex-shrink:0;transition:transform 300ms var(--ease-arrive)}
+:is(.service-others a,.service-index-grid a):hover .service-other-name svg{transform:translateX(4px)}
+.service-other-copy{display:block;margin-top:8px;font-size:15px;line-height:1.5;color:#5d6466;max-width:440px}
+
+:is(.service-cta,.service-back):active,:is(.service-project,.service-others a,.service-index-grid a):active{scale:.985}
+@media(max-width:1099px){.service-scope{grid-template-columns:1fr;gap:56px}.service-included{position:static}.service-project-grid{grid-template-columns:1fr 1fr}.service-index-grid{grid-template-columns:1fr}.service-index-photo img{aspect-ratio:16/10}}
+@media(max-width:767px){.service-hero{padding-top:96px}.service-title-row{grid-template-columns:1fr;gap:20px;padding:12px 0 28px}.service-title-row h1{font-size:clamp(42px,11vw,58px)}.service-intro{border-left:0;padding:0;font-size:17px}.service-hero-photo{height:300px}.service-scope{padding-block:56px 64px}.service-focus ol{grid-template-columns:1fr}.service-included{padding:28px 22px}.service-project-grid{grid-template-columns:1fr;gap:28px}.service-related{padding-bottom:64px}.service-others{padding-block:52px 72px}.service-others ul{grid-template-columns:1fr}.service-other-name{font-size:21px}.service-index-grid{margin-bottom:72px}}
+html:is([data-motion="reduced"],[data-motion="off"]) .service-page :is(a,img,svg){transition:none!important;scale:none!important;transform:none!important}

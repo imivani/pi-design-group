@@ -1,6 +1,17 @@
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import { projects, projectPath } from '../src/data/projects';
+import { experience } from '../src/data/practice';
+
+// Year comes from the project record; photograph-led projects are shown as Built.
+const extraFacts = (project: typeof projects[number]) => {
+  const year = experience.find(item => item.project === project.id)?.year;
+  return [...(year ? [['Year', String(year)]] : []), ...(project.imageKind === 'photograph' ? [['Status', 'Built']] : [])];
+};
+const factCount = (id: string) => {
+  const project = projects.find(item => item.id === id)!;
+  return 2 + Number(!!project.location) + Number(!!project.credit) + extraFacts(project).length;
+};
 
 test('all project routes show their verified facts once, directly after the opening', async ({ page, request }) => {
   const pages = await Promise.all(projects.map(async project => ({
@@ -33,6 +44,7 @@ test('all project routes show their verified facts once, directly after the open
       ...(project.location ? [['Location', project.location]] : []),
       ['Landscape design', 'Pi Design Group'],
       ...(project.credit ? [['Architecture', project.credit.replace(/^Architecture by /, '')]] : []),
+      ...extraFacts(project),
     ]);
     expect(information.heroIdentity).toBe(project.id);
   }
@@ -48,7 +60,7 @@ test('compact facts and the dark next-project section stay aligned and readable 
     await page.goto('/crestmontwest');
     const facts = page.locator('.project-specification');
     const next = page.locator('.next-project');
-    await expect(facts.locator('dl > div')).toHaveCount(4);
+    await expect(facts.locator('dl > div')).toHaveCount(factCount('crestmont-west'));
     const layout = await page.evaluate(() => {
       const bounds = (selector: string) => document.querySelector(selector)!.getBoundingClientRect();
       const facts = bounds('.project-specification');
@@ -66,8 +78,8 @@ test('compact facts and the dark next-project section stay aligned and readable 
         overflow: document.documentElement.scrollWidth > innerWidth,
       };
     });
-    expect(layout).toMatchObject({ factRows: width === 1440 ? 1 : 2, directlyBelow: true, aligned: true, fullWidth: true, background: 'rgb(27, 28, 29)', overflow: false });
-    expect(layout.factsHeight).toBeLessThan(width === 1440 ? 200 : 250);
+    expect(layout).toMatchObject({ factRows: width === 1440 ? 1 : Math.ceil(factCount('crestmont-west') / 2), directlyBelow: true, aligned: true, fullWidth: true, background: 'rgb(27, 28, 29)', overflow: false });
+    expect(layout.factsHeight).toBeLessThan(width === 1440 ? 200 : 340);
     await expect(next.getByRole('heading', { name: 'Arbour Lake' })).toBeAttached();
     await expect(next.locator('figcaption')).toHaveText('Rendering by project architect');
     const audit = await new AxeBuilder({ page }).include('.project-specification').include('.next-project').withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze();
@@ -78,7 +90,7 @@ test('compact facts and the dark next-project section stay aligned and readable 
 
 test('projects with fewer credits, drawings, and residential collections retain their content and navigation', async ({ page }) => {
   await page.addInitScript(() => localStorage.setItem('pi-motion', 'off'));
-  for (const [route, count] of [['/central', 3], ['/arbourlake', 2], ['/rona', 2], ['/homes', 2]] as const) {
+  for (const [route, count] of [['/central', factCount('central')], ['/arbourlake', factCount('arbour-lake')], ['/rona', factCount('rona')], ['/homes', factCount('single-homes')]] as const) {
     await page.setViewportSize({ width: 320, height: 844 });
     await page.goto(route);
     await expect(page.locator('.project-specification dl > div')).toHaveCount(count);

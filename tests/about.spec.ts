@@ -32,6 +32,6 @@ test('photographic layout has no placeholders and service imagery follows select
  expect(await page.locator('.about-opening-photo').evaluate(e=>Math.abs(e.getBoundingClientRect().width-e.closest('.frame')!.getBoundingClientRect().width)<1)).toBe(true);
  await expect(page.locator('.experience-thumbnail')).toHaveCount(8);
  await page.locator('[data-scope-index="1"]').click();await expect(page.locator('#scope-image')).toHaveAttribute('src','/media/img_2304.webp');await expect(page.locator('#scope-caption')).toContainText('Planting and frontage');
- await page.locator('[data-scope-index="0"]').click();await expect(page.locator('#scope-image')).toHaveAttribute('src','/media/gallery/crestmont-west/landscape-plan-2026.webp');
+ await page.locator('[data-scope-index="0"]').click();await expect(page.locator('#scope-image')).toHaveAttribute('src','/media/gallery/darcy/3.webp');
 });
 

@@ -1,6 +1,6 @@
 # Remaining pages
 
-The homepage, reusable pages for all 30 portfolio entries, /contact, and /about are implemented. The homepage remains the complete project archive.
+The homepage, reusable pages for all 30 portfolio entries, /contact, /about, /services and the three service pages are implemented. The homepage remains the complete project archive.
 
 | Priority | Page | What visitors should find |
 |---|---|---|

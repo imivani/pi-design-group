@@ -312,7 +312,7 @@ export const projects: Project[] = [
     "url": "https://pi-design-group.vercel.app/homestead-townhomes",
     "category": "multifamily",
     "type": "Multifamily",
-    "image": "/media/gallery/misc-residential/1.webp",
+    "image": "/media/gallery/homestead-townhomes/usb-img_2422.webp",
     "alt": "Front gardens and individual entrances at Homestead Townhomes.",
     "imageKind": "photograph"
   },
@@ -341,6 +341,7 @@ export const projects: Project[] = [
 export const media = {
   "heroPoster": "/media/hero-poster.webp",
   "heroVideo": "/media/hero.mp4",
+  "heroVideoPhone": "/media/hero-phone.mp4",
   "services": {
     "multifamily": "/media/service-multifamily.webp",
     "commercial": "/media/service-commercial.webp",

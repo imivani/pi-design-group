@@ -1,4 +1,4 @@
-import { animate as motionAnimate, stagger, type DOMKeyframesDefinition } from 'motion';
+import { animate as motionAnimate, inView, stagger, type DOMKeyframesDefinition } from 'motion';
 import { mode } from './motion';
 
 // Motion springs that follow the site's Motion setting (full, reduced or off).
@@ -20,3 +20,15 @@ export function spring(target: Target, keyframes: DOMKeyframesDefinition, option
 // Rows arriving one after another.
 export const arrive = (targets: Element[], from = 6) =>
   spring(targets, { opacity: [0, 1], y: [from, 0], filter: ['blur(2px)', 'blur(0px)'] }, { ...structure, delay: stagger(0.035) });
+
+// Groups marked data-spring-reveal settle in as they scroll into view. Content stays
+// visible until the script runs, and anything already on screen is left alone.
+export function revealOnView(selector = '[data-spring-reveal]') {
+  if (mode() !== 'full') return;
+  for (const group of document.querySelectorAll<HTMLElement>(selector)) {
+    if (group.getBoundingClientRect().top < innerHeight) continue;
+    const items = group.dataset.springReveal === 'children' ? [...group.children] : [group];
+    items.forEach(item => { (item as HTMLElement).style.opacity = '0'; });
+    inView(group, () => { arrive(items, 14); }, { margin: '0px 0px -8% 0px' });
+  }
+}

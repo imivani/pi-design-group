@@ -5,7 +5,7 @@ export const experience = [
   { year:2019, name:'Crestmont', categories:['Multifamily'], project:'crestmont-west' },
   { year:2019, name:'Central – Skyview II', categories:['Multifamily'], project:'central' },
   { year:2021, name:'Seton Crossing', categories:['Commercial'], project:'seton-crossing' },
-  { year:2021, name:'D’Arcy', categories:['Residential'], project:'darcy' },
+  { year:2021, name:'D’Arcy', categories:['Multifamily'], project:'darcy' },
   { year:2021, name:'Mahogany Celebration', categories:['Multifamily'] },
   { year:2022, name:'Sora Sanitary Lift Station', categories:['Other'] },
   { year:2023, name:'Summit 77', categories:['Multifamily'] },

@@ -1,0 +1,88 @@
+---
+import { ArrowLeft, ArrowRight, ArrowUpRight, Check } from '@lucide/astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import MotionSetup from '../../components/MotionSetup.astro';
+import SeoMeta from '../../components/SeoMeta.astro';
+import { projects, projectPath } from '../../data/projects';
+import { responsibilities } from '../../data/practice';
+import { services, servicePath, type Service } from '../../data/services';
+import '../../styles/global.css';
+import '../../styles/services.css';
+
+export function getStaticPaths() {
+  return services.map(service => ({ params: { slug: service.slug }, props: { service } }));
+}
+const { service } = Astro.props as { service: Service };
+const base = import.meta.env.BASE_URL;
+const asset = (path: string) => base + path.replace(/^\//, '');
+const related = service.related.map(id => projects.find(project => project.id === id)!);
+const others = services.filter(item => item.id !== service.id);
+const captionProject = projects.find(project => project.id === service.captionProject)!;
+---
+<!doctype html>
+<html lang="en" data-motion="full">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <SeoMeta title={`${service.name} | Pi Design Group`} description={service.intro} image={'/media/share/service-' + service.slug + '.jpg'} imageAlt={service.alt} />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="icon" href={asset('/favicon.svg')} type="image/svg+xml" />
+    <link rel="preload" as="image" href={asset(service.image)} fetchpriority="high" />
+    <MotionSetup />
+  </head>
+  <body class="service-page">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <Header />
+    <main id="main">
+      <section class="service-hero frame" aria-labelledby="service-title">
+        <a class="service-back text-link" href={base + 'services'} data-service-arrive><ArrowLeft size={16} stroke-width={1.5} aria-hidden="true" />All services</a>
+        <div class="service-title-row">
+          <h1 id="service-title" data-service-arrive>{service.name}</h1>
+          <p class="service-intro" data-service-arrive>{service.intro}</p>
+        </div>
+        <figure class="service-hero-figure" data-service-arrive>
+          <div class="service-hero-photo"><img src={asset(service.image)} alt={service.alt} width="1600" height="1067" fetchpriority="high" decoding="async" /></div>
+          <figcaption><a href={projectPath(captionProject, base)}><span>{service.caption}</span><ArrowUpRight size={18} stroke-width={1.4} aria-hidden="true" /></a></figcaption>
+        </figure>
+      </section>
+
+      <section class="service-scope frame" aria-labelledby="scope-title">
+        <div class="service-focus">
+          <h2 id="scope-title" data-spring-reveal>What we design</h2>
+          <ol data-spring-reveal="children">
+            {service.focus.map(([title, copy], index) => <li><span class="service-index">{String(index + 1).padStart(2, '0')}</span><h3>{title}</h3><p>{copy}</p></li>)}
+          </ol>
+        </div>
+        <aside class="service-included" aria-labelledby="included-title" data-spring-reveal>
+          <h2 id="included-title">What’s included</h2>
+          <ul>{responsibilities.map(([title]) => <li><Check size={17} stroke-width={1.6} aria-hidden="true" />{title}</li>)}</ul>
+          <p>Scope is agreed for each project. Construction administration is included where the project calls for it.</p>
+          <a class="service-cta" href={`${base}contact?type=${service.contactType}`}><span>Discuss a Project</span><ArrowRight size={20} stroke-width={1.4} aria-hidden="true" /></a>
+        </aside>
+      </section>
+
+      <section class="service-related frame" aria-labelledby="related-title">
+        <div class="service-related-head" data-spring-reveal><h2 id="related-title">Related projects</h2><a class="text-link" href={base + '#projects'}>All projects <ArrowRight size={18} stroke-width={1.4} aria-hidden="true" /></a></div>
+        <ul class="service-project-grid" style={`--related-columns:${related.length % 4 === 0 ? 4 : 3}`} data-spring-reveal="children">
+          {related.map(project => <li>
+            <a class="service-project" href={projectPath(project, base)} data-project-card={project.id}>
+              <span class="service-project-photo"><img src={asset(project.image)} alt={project.alt} width="1200" height="800" loading="lazy" decoding="async" />{project.imageKind === 'rendering' && <span class="media-tag">Rendering</span>}{project.imageKind === 'drawing' && <span class="media-tag">Drawing</span>}</span>
+              <span class="service-project-name">{project.name}<ArrowUpRight size={18} stroke-width={1.4} aria-hidden="true" /></span>
+              <span class="service-project-meta">{[project.type, project.location].filter(Boolean).join(' · ')}</span>
+            </a>
+          </li>)}
+        </ul>
+      </section>
+
+      <section class="service-others frame" aria-labelledby="others-title">
+        <h2 id="others-title" data-spring-reveal>Other services</h2>
+        <ul data-spring-reveal="children">
+          {others.map(item => <li><a href={servicePath(item, base)}><img src={asset(item.image)} alt="" width="1600" height="1067" loading="lazy" decoding="async" /><span class="service-other-name">{item.name}<ArrowRight size={20} stroke-width={1.4} aria-hidden="true" /></span><span class="service-other-copy">{item.menuCopy}</span></a></li>)}
+        </ul>
+      </section>
+    </main>
+    <Footer />
+    <script>import '../../scripts/services';</script>
+  </body>
+</html>

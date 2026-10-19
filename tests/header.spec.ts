@@ -142,8 +142,10 @@ test.describe('Reference navigation', () => {
     await page.locator('#projects-navigation [data-project-category="commercial"]').click();
     await expect.poll(() => page.evaluate(() => (window as unknown as { navEvents: unknown[] }).navEvents)).toContainEqual({ name: 'pi:filter', detail: { category: 'commercial' } });
     await openServices(page).click();
+    await expect(page.locator('[data-service-link="parks"]')).toHaveAttribute('href', '/services/play-open-spaces');
     await page.locator('[data-service-link="parks"]').click();
-    await expect.poll(() => page.evaluate(() => (window as unknown as { navEvents: unknown[] }).navEvents)).toContainEqual({ name: 'pi:service', detail: { id: 'parks' } });
+    await expect(page).toHaveURL(/\/services\/play-open-spaces$/);
+    await expect(page.locator('h1')).toHaveText('Play & Open Spaces');
     await page.locator('.header-search').click();
     await expect(page.locator('#site-search-input')).toBeFocused();
     await expect(page.locator('#site-search-dialog')).toBeVisible();

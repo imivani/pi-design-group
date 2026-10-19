@@ -1,13 +1,17 @@
 ---
 import { renderingCredit } from '../data/image-credit';
-import { ArrowRight, ArrowUpRight, Search, Images, Grid2x2, List, Building, Store, House } from '@lucide/astro';
+import { ArrowRight, ArrowUpRight, Search, Images, Grid2x2, List, Building, Store, House, ChevronDown } from '@lucide/astro';
 import { projects, projectPath } from '../data/projects';
+import { archiveCategories } from '../data/categories';
+const categoryIcons = { multifamily: Building, commercial: Store, 'single-homes': House };
 import { projectDetails } from '../data/project-details';
 import '../styles/archive-interactions.css';
 
 const base = import.meta.env.BASE_URL;
 const asset = (path: string) => base + path.replace(/^\//, '');
-const archive = projects.map(project => {
+// Photographed, built work leads; renderings and drawings follow in their original order.
+const ordered = [...projects].sort((a, b) => Number(a.imageKind !== 'photograph') - Number(b.imageKind !== 'photograph'));
+const archive = ordered.map(project => {
   const detail = projectDetails(project);
   const brief = detail.editorial?.openingNote || detail.description?.split(/(?<=\.)\s+/)[0] || detail.gallery[0].caption;
   const kinds = new Set(detail.gallery.map(image => image.medium));
@@ -21,7 +25,7 @@ const archive = projects.map(project => {
   <div class="projects-heading" data-reveal><h2 id="projects-title">All Projects</h2><p id="project-count" role="status" aria-live="polite">{projects.length} entries</p></div>
   <div class="project-controls js-only">
     <div class="project-filters" role="group" aria-label="Filter projects">
-      {[{id:'all',label:'All',icon:Grid2x2},{id:'multifamily',label:'Multifamily',icon:Building},{id:'commercial',label:'Commercial',icon:Store},{id:'single-homes',label:'Single Homes',icon:House}].map(({id,label,icon:Icon}) => <button type="button" data-filter={id} aria-pressed={id === 'all' ? 'true' : 'false'}><Icon size={16} stroke-width={1.5} aria-hidden="true"/>{label}</button>)}
+      {[{id:'all',label:'All',icon:Grid2x2},...archiveCategories.map(category => ({...category, icon: categoryIcons[category.id]}))].map(({id,label,icon:Icon}) => <button type="button" data-filter={id} aria-pressed={id === 'all' ? 'true' : 'false'}><Icon size={16} stroke-width={1.5} aria-hidden="true"/>{label}</button>)}
       <span class="filter-indicator" aria-hidden="true"></span>
     </div>
     <div class="project-tools">
@@ -43,6 +47,7 @@ const archive = projects.map(project => {
           <div class="project-image">
             <img src={asset(project.image)} alt={project.alt} width="1200" height="675" loading="lazy" decoding="async" />
             <span class="project-image-shade" aria-hidden="true"></span>
+            {project.imageKind !== 'photograph' && <span class="media-tag">{project.imageKind === 'drawing' ? 'Drawing' : 'Rendering'}</span>}
             <span class="project-open" aria-hidden="true"><ArrowUpRight size={21} stroke-width={1.4} /></span>
           </div>
           <div class="project-information">
@@ -51,7 +56,7 @@ const archive = projects.map(project => {
             {project.imageKind !== 'photograph' && <span class="project-medium">{project.imageKind === 'drawing' ? 'Drawing' : renderingCredit(project)}</span>}
             <div class="project-more">
               <p class="project-brief">{project.brief}</p>
-              <div class="project-media-details"><span class="project-view-count"><Images size={16} stroke-width={1.6} aria-hidden="true" /><span>{project.viewCount} Photos</span></span><span>{project.media}</span></div>
+              <div class="project-media-details"><span class="project-view-count"><Images size={16} stroke-width={1.6} aria-hidden="true" /><span>{project.viewCount} {project.viewCount === 1 ? 'Image' : 'Images'}</span></span><span>{project.media}</span></div>
             </div>
           </div>
           <ArrowRight class="project-arrow" size={22} stroke-width={1.4} aria-hidden="true" />
@@ -59,6 +64,7 @@ const archive = projects.map(project => {
       </article>
     ))}
   </div>
+  <button id="project-more" class="project-more-button" type="button" hidden><span>Show all <span id="project-more-count">{projects.length}</span> projects</span><ChevronDown size={19} stroke-width={1.5} aria-hidden="true" /></button>
   <div id="project-empty" class="project-empty" hidden>
     <h3>No Projects Found</h3>
     <p>Try another project name or reset the filters.</p>

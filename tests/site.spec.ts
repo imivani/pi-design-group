@@ -15,7 +15,9 @@ test('complete catalogue and correct project destinations are rendered before fi
     id: (entry as HTMLElement).dataset.project,
     href: entry.querySelector('a')?.getAttribute('href'),
   })));
-  expect(links).toEqual(projects.map(project => ({ id: project.id, href: projectPath(project) })));
+  // Photographed work leads the archive; renderings and drawings follow in their original order.
+  const ordered = [...projects].sort((a, b) => Number(a.imageKind !== 'photograph') - Number(b.imageKind !== 'photograph'));
+  expect(links).toEqual(ordered.map(project => ({ id: project.id, href: projectPath(project) })));
   // Verify every page and cover in small independent batches. This catalogue
   // check should not time out merely from 54 sequential development requests.
   for (let offset = 0; offset < projects.length; offset += 3) {

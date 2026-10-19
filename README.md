@@ -99,6 +99,9 @@ The first successful production deployment is `dpl_6W1b3ZuLw5fcUebmtJHJNXaNRzLo`
 
 - **src/data/projects.ts** supplies the project archive and verified credits.
 - **src/data/project-details.ts** supplies reviewed project-page content and image selections.
+- **src/data/project-facts.ts** holds confirmed project facts (year, status, client, size, role). Rows appear only when filled in.
+- **src/data/services.ts** supplies the three service pages (/services/…) and the related projects each one shows.
+- **src/data/categories.ts** is the single list of project types used by the archive, menus and About page.
 - **design/BUILD_NOTES.md** documents the current implementation and motion.
 - **design/SLIDESHOW_REFINEMENT.md** records the featured slideshow and darker project sections; **design/PROJECT_NAVIGATION_REFINEMENT.md**, **design/CINEMATIC_REFINEMENT.md**, **design/CALM_REFINEMENT.md**, **design/ROUNDED_REFINEMENT.md** and **design/PREMIUM_AUDIT.md** preserve earlier refinements and audits.
 - **design/NEXT_PAGES.md** contains the plan for remaining company, service and contact pages.

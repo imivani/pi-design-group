@@ -1,4 +1,5 @@
 import { root, mode, read, write, animate, setupReveals, setupImageErrors } from './motion';
+import { arrive } from './spring';
 type ServiceId = 'multifamily' | 'commercial' | 'parks';
 const gallery = document.querySelector<HTMLElement>('.service-gallery')!;
 const serviceTabs = [...gallery.querySelectorAll<HTMLButtonElement>('[data-service]')];
@@ -71,6 +72,29 @@ function positionFilterIndicator() {
   filterIndicator.style.transform = 'translateX(' + button.offsetLeft + 'px)';
   filterIndicator.style.opacity = '1';
 }
+// Phones show the first few projects, then a button reveals the rest.
+const phone = matchMedia('(max-width: 767px)');
+const showMore = document.querySelector<HTMLButtonElement>('#project-more')!;
+const showMoreCount = document.querySelector<HTMLElement>('#project-more-count')!;
+const phonePreview = 8;
+let expanded = false;
+function collapseForPhones(matches = entries.filter(entry => !entry.hidden).length) {
+  const collapse = phone.matches && !expanded && view === 'grid' && matches > phonePreview + 2;
+  let shown = 0;
+  entries.forEach(entry => {
+    if (!entry.hidden) shown++;
+    entry.toggleAttribute('data-collapsed', collapse && !entry.hidden && shown > phonePreview);
+  });
+  showMore.hidden = !collapse;
+  showMoreCount.textContent = String(matches);
+}
+showMore.addEventListener('click', () => {
+  const arriving = entries.filter(entry => entry.hasAttribute('data-collapsed'));
+  expanded = true; collapseForPhones();
+  arrive(arriving.slice(0, 6), 12);
+  arriving[0]?.querySelector<HTMLAnchorElement>('a')?.focus({ preventScroll: true });
+});
+phone.addEventListener('change', () => collapseForPhones());
 let resultsAnimation: Animation | null = null;
 let cardAnimations: Animation[] = [];
 let filterRevision = 0;
@@ -97,6 +121,7 @@ function updateProjects(save = true, withMotion = false) {
     entry.hidden = !visible;
     if (visible) matches++;
   });
+  collapseForPhones(matches);
   filters.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.filter === category)));
   views.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.view === view)));
   collection.dataset.view = view;
@@ -176,7 +201,9 @@ const videoStatus = document.querySelector<HTMLElement>('#video-status')!;
 let heroVisible = true;
 let playRequest = 0;
 const wantsVideo = () => !document.hidden && heroVisible && mode() === 'full';
-function loadVideo() { if (!video.getAttribute('src')) { video.src = video.dataset.src!; video.load(); } }
+// Phones get a lighter portrait cut of the same footage.
+const videoSource = () => matchMedia('(max-width: 767px)').matches ? video.dataset.srcPhone || video.dataset.src! : video.dataset.src!;
+function loadVideo() { if (!video.getAttribute('src')) { video.src = videoSource(); video.load(); } }
 async function playVideo() {
   const request = ++playRequest;
   if (!wantsVideo()) return;

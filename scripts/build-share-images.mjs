@@ -13,6 +13,9 @@ const pages = [
   { name: 'home', src: media.heroPoster, position: 'centre' },
   { name: 'about', src: '/media/gallery/darcy/usb-img_2484.webp', position: 'centre' },
   { name: 'contact', src: media.featured, position: 'centre' },
+  // Service page slugs, matching src/data/services.ts.
+  ...Object.entries({ multifamily: media.services.multifamily, commercial: media.services.commercial, 'play-open-spaces': media.services.parks })
+    .map(([slug, src]) => ({ name: 'service-' + slug, src, position: 'centre' })),
   ...projects.map(project => ({ name: project.id, src: project.image, position: 'attention' })),
 ];
 

@@ -48,7 +48,7 @@ test('archive drawing facts stay truthful, reduced motion settles, and touch ope
   const card=page.locator('[data-project="rona"] .project-link');
   await card.hover();
   await expect(card.locator('.project-media-details')).toHaveCSS('opacity','1');
-  await expect(card.locator('.project-media-details')).toHaveText('3 PhotosLandscape Drawings');
+  await expect(card.locator('.project-media-details')).toHaveText('3 ImagesLandscape Drawings');
   await expect(card.locator('.project-brief')).toContainText('existing and proposed planted areas');
   await expect(card.locator('.project-information')).toHaveCSS('color','rgb(255, 255, 255)');
   await page.emulateMedia({reducedMotion:'reduce'});
@@ -60,8 +60,9 @@ test('archive drawing facts stay truthful, reduced motion settles, and touch ope
   try{
     const touch=await touchContext.newPage();await touch.goto(new URL('/',page.url()).href);
     const touchCard=touch.locator('[data-project="darcy"] .project-link');await touchCard.scrollIntoViewIfNeeded();
-    await expect(touchCard.locator('.project-media-details')).toHaveCSS('opacity','1');
-    await expect(touchCard.locator('.project-brief')).toBeVisible();
+    // Phone cards stay compact: name, type and location only.
+    await expect(touchCard.locator('h3')).toBeVisible();
+    await expect(touchCard.locator('.project-brief')).toBeHidden();
     await touchCard.tap();await expect(touch).toHaveURL(/\/darcy$/);
     await expect(touch.locator('h1')).toHaveText('D’Arcy');
   }finally{await touchContext.close();}
@@ -82,9 +83,9 @@ test('full-width contact and footer fit small screens and keep the real contact 
       const box=await button.boundingBox();
       expect(box!.x+box!.width).toBeLessThanOrEqual(filterBounds!.x+filterBounds!.width+1);
     }
-    await filters.getByRole('button',{name:'Single Homes'}).click();
+    await filters.getByRole('button',{name:'Residential'}).click();
     expect(await page.locator('.projects-heading').evaluate(element=>element.getBoundingClientRect().height)).toBeCloseTo(headingHeight,1);
-    const selected=await filters.getByRole('button',{name:'Single Homes'}).boundingBox();
+    const selected=await filters.getByRole('button',{name:'Residential'}).boundingBox();
     const indicator=await filters.locator('.filter-indicator').boundingBox();
     expect(indicator!.y).toBeCloseTo(selected!.y+selected!.height-1,0);
     await page.locator('#contact').scrollIntoViewIfNeeded();
