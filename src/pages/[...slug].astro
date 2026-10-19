@@ -6,10 +6,12 @@ import Footer from '../components/Footer.astro';
 import MotionSetup from '../components/MotionSetup.astro';
 import SeoMeta from '../components/SeoMeta.astro';
 import ProjectFigure from '../components/ProjectFigure.astro';
-import { ArrowLeft, ArrowRight, X, ZoomIn, ZoomOut, Images } from '@lucide/astro';
+import { ArrowLeft, ArrowRight, ArrowUpRight, X, ZoomIn, ZoomOut, Images } from '@lucide/astro';
 import { projects, projectPath, type Project } from '../data/projects';
 import { projectDetails } from '../data/project-details';
 import { projectFacts } from '../data/project-facts';
+import { services, servicePath } from '../data/services';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
 import '../styles/global.css';
 import '../styles/project.css';
 import '../styles/project-arrival.css';
@@ -40,6 +42,11 @@ const chosenPair = (editorial?.pairIndices || []).map(imageAt).filter((item):ite
 const remaining = photographs.filter(item=>!chosenPair.some(chosen=>chosen.index===item.index));
 const rows: typeof images[] = chosenPair.length ? [chosenPair] : [];
 for(let i=0;i<remaining.length;i+=2) rows.push(remaining.slice(i,i+2));
+// Services this project shows, then three more projects of the same kind
+// (photographed work first) so the page leads somewhere besides "next".
+const projectServices = services.filter(service => service.related.includes(project.id) || service.id === project.category);
+const similar = projects.filter(item => item.id !== project.id && item.id !== next.id && item.category === project.category)
+  .sort((a, b) => Number(a.imageKind !== 'photograph') - Number(b.imageKind !== 'photograph')).slice(0, 3);
 const facts = [
   ['Project type',project.type],
   ...(project.location ? [['Location',project.location]] : []),
@@ -59,6 +66,7 @@ const facts = [
     <!-- Match the opening photograph before the browser captures its arrival. -->
     <link rel="expect" blocking="render" href="#project-opening-image" />
     <MotionSetup />
+    <Breadcrumbs schemaOnly items={[['Projects', base + '#projects'], [project.name]]} />
   </head>
   <body class="project-page page-framed">
     <a class="skip-link" href="#main">Skip to content</a>
@@ -132,6 +140,19 @@ const facts = [
         {closing && <div class="gallery-closing" data-reveal><ProjectFigure nativeSize={compactPhotography} image={closing.image} index={closing.index}/></div>}
       </section>
 
+      {(similar.length > 0 || projectServices.length > 0) && <section class="project-similar frame" aria-labelledby="similar-title">
+        <div class="project-similar-head" data-reveal>
+          <h2 id="similar-title">More like this</h2>
+          {projectServices.length > 0 && <p>Part of {projectServices.map((service, index) => <>{index > 0 && (index === projectServices.length - 1 ? ' and ' : ', ')}<a href={servicePath(service, base)}>{service.name}</a></>)}</p>}
+        </div>
+        {similar.length > 0 && <ul class="project-similar-grid" data-reveal>
+          {similar.map(item => <li><a href={projectPath(item, base)} data-project-card={item.id}>
+            <span class="project-similar-photo"><img src={asset(item.image)} alt={item.alt} width="1200" height="800" loading="lazy" decoding="async" />{item.imageKind !== 'photograph' && <span class="media-tag">{item.imageKind === 'drawing' ? 'Drawing' : 'Rendering'}</span>}</span>
+            <span class="project-similar-name">{item.name}<ArrowUpRight size={18} stroke-width={1.4} aria-hidden="true" /></span>
+            <span class="project-similar-meta">{[item.type, item.location].filter(Boolean).join(' · ')}</span>
+          </a></li>)}
+        </ul>}
+      </section>}
       <section class="next-project" aria-labelledby="next-title">
         <div class="next-project-atmosphere" aria-hidden="true"><img src={asset(atmospheres[next.image as keyof typeof atmospheres] || next.image)} alt="" width="1200" height="675" loading="lazy" decoding="async" /></div>
         <div class="frame next-project-inner">

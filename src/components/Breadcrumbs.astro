@@ -1,0 +1,16 @@
+---
+// "You are here" trail for inner pages. Home is added automatically; the last
+// item is the current page. Search engines get the same trail as BreadcrumbList.
+type Props = { items: ([string] | [string, string])[]; class?: string; schemaOnly?: boolean };
+const { items, class: className, schemaOnly = false } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const site = Astro.site ?? new URL(Astro.url.origin);
+const trail: [string, string | undefined][] = [['Home', base], ...items.map(([label, href]) => [label, href] as [string, string | undefined])];
+const schema = { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: trail.map(([name, href], index) => ({ '@type': 'ListItem', position: index + 1, name, item: new URL(href ?? Astro.url.pathname.replace(/(.)\/$/, '$1'), site).href })) };
+---
+{!schemaOnly && <nav class:list={['breadcrumbs', className]} aria-label="Breadcrumb">
+  <ol>
+    {trail.map(([label, href], index) => <li>{index < trail.length - 1 ? <a href={href}>{label}</a> : <span aria-current="page">{label}</span>}</li>)}
+  </ol>
+</nav>}
+<script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />

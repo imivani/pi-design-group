@@ -1,5 +1,6 @@
 ---
-import { ArrowRight, Mail, Phone, MapPin, Copy, ArrowUpRight, LoaderCircle } from '@lucide/astro';
+import { ArrowRight, Mail, Phone, MapPin, Copy, ArrowUpRight, LoaderCircle, ChevronDown } from '@lucide/astro';
+import { stages, timelines } from '../data/inquiry';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import MotionSetup from '../components/MotionSetup.astro';
@@ -51,6 +52,8 @@ const choices = [
                     <label class="inquiry-field">Organization <span class="field-optional">(optional)</span><input name="organization" autocomplete="organization" placeholder="Your organization" maxlength="160" /></label>
                     <label class="inquiry-field">Email<input type="email" name="email" autocomplete="email" placeholder="you@organization.ca" required maxlength="254" /></label>
                     <label class="inquiry-field">Project location<input name="location" placeholder="City, province or region" required maxlength="160" /></label>
+                    <label class="inquiry-field inquiry-select">Project stage <span class="field-optional">(optional)</span><select name="stage"><option value="">Choose a stage</option>{stages.map(option => <option>{option}</option>)}</select><ChevronDown size={18} stroke-width={1.4} aria-hidden="true" /></label>
+                    <label class="inquiry-field inquiry-select">Timeline <span class="field-optional">(optional)</span><select name="timeline"><option value="">Choose a timeline</option>{timelines.map(option => <option>{option}</option>)}</select><ChevronDown size={18} stroke-width={1.4} aria-hidden="true" /></label>
                     <label class="inquiry-field inquiry-field-wide">Tell us about the project<textarea name="message" rows="3" placeholder="A few details about your goals, site or ideas…" required maxlength="4000"></textarea></label>
                   </div>
                   <label class="inquiry-trap" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off" /></label>

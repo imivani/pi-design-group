@@ -207,3 +207,5 @@ html[data-motion='off'] .mobile-navigation :is(a,button){transition:none}
 /* The search row already ends with a divider; the contact block needs no second one. */
 .mobile-navigation__contact{border-top:0;padding-top:0;margin-top:28px}
 .mobile-navigation__search{border-top:0;margin-top:0}
+/* With enlarged text the label and chevron must still fit a 320px screen. */
+.mobile-direct-link{gap:12px}.mobile-direct-link>svg{flex-shrink:0}

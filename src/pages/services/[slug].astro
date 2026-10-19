@@ -1,9 +1,10 @@
 ---
-import { ArrowLeft, ArrowRight, ArrowUpRight, Check } from '@lucide/astro';
+import { ArrowRight, ArrowUpRight, Check } from '@lucide/astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import MotionSetup from '../../components/MotionSetup.astro';
 import SeoMeta from '../../components/SeoMeta.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { projects, projectPath } from '../../data/projects';
 import { responsibilities } from '../../data/practice';
 import { services, servicePath, type Service } from '../../data/services';
@@ -36,7 +37,7 @@ const captionProject = projects.find(project => project.id === service.captionPr
     <Header />
     <main id="main">
       <section class="service-hero frame" aria-labelledby="service-title">
-        <a class="service-back text-link" href={base + 'services'} data-service-arrive><ArrowLeft size={16} stroke-width={1.5} aria-hidden="true" />All services</a>
+        <Breadcrumbs items={[['Services', base + 'services'], [service.name]]} />
         <div class="service-title-row">
           <h1 id="service-title" data-service-arrive>{service.name}</h1>
           <p class="service-intro" data-service-arrive>{service.intro}</p>

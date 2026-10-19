@@ -32,7 +32,7 @@ const services = serviceData.map(service => ({ ...service, icon: icons[service.i
     <a class="site-wordmark" href={homeLink('hero')} aria-label="Pi Design Group, home">Pi Design Group</a>
     <nav class="desktop-nav" aria-label="Main navigation">
       <a class="nav-link" href={import.meta.env.BASE_URL + 'about'} aria-current={Astro.url.pathname.replace(/\/$/, '') === import.meta.env.BASE_URL + 'about' ? 'page' : undefined}>About</a>
-      <a class="nav-link" href={homeLink('why')}>Our Approach</a>
+      <a class="nav-link" href={import.meta.env.BASE_URL + 'approach'} aria-current={Astro.url.pathname.replace(/\/$/, '') === import.meta.env.BASE_URL + 'approach' ? 'page' : undefined}>Our Approach</a>
       <button class="nav-link nav-trigger" type="button" data-menu-trigger="projects" aria-expanded="false" aria-controls="projects-navigation">
         Projects <ChevronDown size={13} stroke-width={1.5} aria-hidden="true" />
       </button>
@@ -118,7 +118,7 @@ const services = serviceData.map(service => ({ ...service, icon: icons[service.i
   </div>
   <nav class="mobile-navigation__links" aria-label="Main navigation">
     <a class="mobile-direct-link" href={import.meta.env.BASE_URL + 'about'} aria-current={Astro.url.pathname.replace(/\/$/, '') === import.meta.env.BASE_URL + 'about' ? 'page' : undefined}>About</a>
-    <a class="mobile-direct-link" href={homeLink('why')}>Our Approach</a>
+    <a class="mobile-direct-link" href={import.meta.env.BASE_URL + 'approach'}>Our Approach</a>
     <div class="mobile-disclosure">
       <button class="mobile-direct-link" type="button" data-mobile-disclosure="mobile-project-links" aria-controls="mobile-project-links" aria-expanded="false">Projects <ChevronDown size={19} stroke-width={1.5} aria-hidden="true" /></button>
       <div class="mobile-disclosure__body" id="mobile-project-links" inert aria-hidden="true">

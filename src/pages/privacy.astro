@@ -1,0 +1,51 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import MotionSetup from '../components/MotionSetup.astro';
+import SeoMeta from '../components/SeoMeta.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import '../styles/global.css';
+import '../styles/services.css';
+import '../styles/approach.css';
+const base = import.meta.env.BASE_URL;
+const asset = (path: string) => base + path.replace(/^\//, '');
+// Describes what this site actually does. Update it whenever the contact form,
+// hosting or visitor statistics change.
+const updated = 'October 19, 2026';
+const sections: [string, string[]][] = [
+  ['What the contact form collects', ['When you send an inquiry, the form collects the details you enter: your name, organization (optional), email address, project location, project type, project stage and timeline (optional), and your message.', 'These details are used only to reply to you and discuss your project. They are delivered to Peter by email through Resend, an email delivery service. If the form cannot send directly, it prepares an email in your own email app instead, and nothing is sent until you send it.']],
+  ['Visitor statistics', ['The site may count page visits using Vercel Web Analytics. It records which pages are viewed, the referring site, and general device and country information. It does not use cookies and does not identify individual visitors.']],
+  ['Hosting', ['The site is hosted by Vercel. Like most web hosts, Vercel processes basic technical information, such as IP addresses, to deliver pages and keep the service secure.']],
+  ['Settings stored on your device', ['If you change the Motion setting at the bottom of a page, your choice is saved in your browser so the site remembers it. A few short-lived values also help the project archive return to where you left it. None of this is sent to us.']],
+  ['Your choices', ['You can ask to see, correct or delete the information you sent us, or ask any privacy question, by emailing peter@pidesigngroup.ca.']],
+];
+---
+<!doctype html>
+<html lang="en" data-motion="full">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <SeoMeta title="Privacy | Pi Design Group" description="How the Pi Design Group website handles contact form details, visitor statistics and settings saved in your browser." />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="icon" href={asset('/favicon.svg')} type="image/svg+xml" />
+    <MotionSetup />
+  </head>
+  <body class="service-page privacy-page">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <Header />
+    <main id="main">
+      <section class="service-hero frame" aria-labelledby="privacy-title">
+        <Breadcrumbs items={[['Privacy']]} />
+        <div class="service-title-row">
+          <h1 id="privacy-title" data-service-arrive>Privacy</h1>
+          <p class="service-intro" data-service-arrive>A plain account of the information this website collects and how it is used. Last updated {updated}.</p>
+        </div>
+      </section>
+      <section class="privacy-body frame" aria-label="Privacy details">
+        {sections.map(([title, paragraphs]) => <div class="privacy-section" data-spring-reveal><h2>{title}</h2><div>{paragraphs.map(text => <p>{text}</p>)}</div></div>)}
+      </section>
+    </main>
+    <Footer />
+    <script>import '../scripts/services';</script>
+  </body>
+</html>

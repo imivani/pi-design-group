@@ -1,5 +1,15 @@
 ---
+import { projects } from '../data/projects';
 import '../styles/practice-intro.css';
+// Figures repeat the About page; architects come from the credits on project pages.
+const facts = [
+  { value: 70, suffix: '+', label: 'Completed projects' },
+  { text: 'AB + BC', label: 'Landscape architecture licensing' },
+  { value: 40, suffix: '+', label: 'Years of leadership experience' },
+  { value: 10, suffix: '+', label: 'Years in practice' },
+];
+const credits = projects.map(project => project.credit?.replace(/^Architecture by /, '')).filter((name): name is string => !!name);
+const architects = [...new Set(credits)].sort((a, b) => credits.filter(name => name === b).length - credits.filter(name => name === a).length || a.localeCompare(b));
 ---
 <section id="about" class="practice-intro frame" aria-labelledby="practice-title">
   <div class="practice-opening" data-reveal>
@@ -10,4 +20,12 @@ import '../styles/practice-intro.css';
     <p>Pi Design Group designs the outdoor spaces that connect homes, businesses and communities.</p>
     <p>Our work brings planting, pedestrian routes and places to gather into one considered landscape. We explore the whole site through its plans, then carry that thinking into the paths, materials and planted edges people experience every day.</p>
   </div>
+  <dl class="practice-facts-strip" data-reveal>
+    {facts.map(fact => <div><dt>{fact.value ? <><span data-count={fact.value}>{fact.value}</span>{fact.suffix}</> : fact.text}</dt><dd>{fact.label}</dd></div>)}
+  </dl>
+  <div class="practice-collaborators" data-reveal>
+    <p>Project architects we have worked with</p>
+    <ul>{architects.map(name => <li>{name}</li>)}</ul>
+  </div>
 </section>
+<script>import '../scripts/practice-intro';</script>

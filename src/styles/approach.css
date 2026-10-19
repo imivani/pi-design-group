@@ -1,0 +1,67 @@
+.approach-page .service-title-row h1{font-size:clamp(46px,4.8vw,74px);max-width:13ch}
+.approach-label{font-size:13px;color:var(--muted)}
+
+/* Stages: numbered steps joined by a thin rule. */
+.approach-stages{padding-block:24px 96px}
+.approach-stages>ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 40px}
+.approach-stages>ol>li{position:relative;border-top:1px solid var(--line);padding-top:26px}
+.approach-step{position:absolute;top:-14px;left:0;display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:#fff;border:1px solid #a3aaa8;font-size:12px;font-variant-numeric:tabular-nums}
+.approach-stages h3{margin-top:10px;font-size:28px;letter-spacing:-.02em}
+.approach-stages ul{list-style:none;margin:22px 0 0;padding:0}
+.approach-stages ul li{padding:14px 0;border-top:1px solid #eceeed}
+.approach-stages strong{display:block;font-weight:400;font-size:17px}
+.approach-stages ul span{display:block;margin-top:6px;font-size:15px;line-height:1.55;color:#53595c}
+
+/* Plan / built pairs. */
+.approach-pairs{background:#f5f6f5;padding-block:96px}
+.approach-pairs-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:7%;align-items:end;margin-bottom:56px}
+.approach-pairs-head h2,.approach-principles h2,.approach-faq h2,.approach-close h2{font-size:clamp(34px,3.4vw,50px);line-height:1.08}
+.approach-pairs-head p{font-size:18px;line-height:1.5;color:#53595c;max-width:460px}
+.approach-pair{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:56px;align-items:center}
+.approach-pair+.approach-pair{margin-top:72px}
+.approach-pair:nth-of-type(even){grid-template-columns:minmax(0,1fr) minmax(0,1.35fr)}.approach-pair:nth-of-type(even) .approach-pair-media{order:2}
+.approach-pair-media{position:relative;aspect-ratio:3/2;border-radius:5px;overflow:hidden;background:#e5e8e5}
+.approach-pair-media figure{position:absolute;inset:0;margin:0}
+.approach-pair-media img{width:100%;height:100%;object-fit:cover}
+.approach-plan{background:#fbfbfa}.approach-plan img{object-fit:contain;padding:14px}
+.approach-pair[data-view="built"] [data-layer="plan"],.approach-pair[data-view="plan"] [data-layer="built"]{opacity:0;visibility:hidden}
+.approach-toggle{position:absolute;z-index:2;top:14px;left:14px;display:flex;padding:3px;border-radius:999px;background:rgb(255 255 255 / 94%)}
+.approach-toggle button{position:relative;z-index:1;min-width:72px;min-height:36px;padding:0 16px;border-radius:999px;font-size:14px;color:#53595c;transition:color 160ms ease,scale 150ms ease}
+.approach-toggle button[aria-pressed="true"]{color:#fff}
+.approach-toggle button:active{scale:.96}
+.approach-toggle-pill{position:absolute;top:3px;bottom:3px;left:3px;width:72px;border-radius:999px;background:#242b29}
+.approach-pair-copy h3{margin-top:10px;font-size:clamp(26px,2.3vw,34px);line-height:1.15;letter-spacing:-.02em}
+.approach-pair-copy>p:not(.approach-label){margin-top:16px;font-size:17px;line-height:1.6;color:#53595c}
+.approach-pair-copy .text-link{margin-top:14px;justify-content:flex-start;gap:12px}
+
+/* Working principles. */
+.approach-principles{padding-block:96px 24px}
+.approach-principles ul{list-style:none;margin:36px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
+.approach-principles li{border-top:1px solid var(--line);padding-top:24px}
+.approach-principles h3{margin-top:18px;font-size:21px;letter-spacing:-.015em}
+.approach-principles li p{margin-top:10px;font-size:15px;line-height:1.55;color:#53595c}
+
+/* Questions. */
+.approach-faq{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:7%;padding-block:96px}
+.approach-faq-head p{margin-top:18px;font-size:16px;line-height:1.55;color:#53595c}.approach-faq-head a{color:var(--ink);text-decoration:underline;text-underline-offset:4px}
+.approach-question{border-top:1px solid var(--line)}.approach-question:last-child{border-bottom:1px solid var(--line)}
+.approach-question summary{display:flex;justify-content:space-between;align-items:center;gap:20px;min-height:68px;padding:12px 0;font-size:18px;line-height:1.35;cursor:pointer;list-style:none;transition:padding 300ms var(--ease-arrive),background 180ms}
+.approach-question summary::-webkit-details-marker{display:none}
+.approach-question summary:hover{background:#f5f6f5;padding-inline:10px}
+.approach-question summary svg{flex-shrink:0;transition:transform 300ms var(--ease-arrive)}
+.approach-question[open] summary svg{transform:rotate(45deg)}
+.approach-answer{overflow:hidden}.approach-answer p{padding:0 40px 22px 0;font-size:16px;line-height:1.6;color:#53595c}
+
+.approach-close{display:flex;justify-content:space-between;align-items:center;gap:32px;padding-block:72px 104px;border-top:1px solid var(--line)}
+.approach-close .service-cta{margin-top:0;min-width:260px}
+
+@media(max-width:1099px){.approach-stages>ol{grid-template-columns:1fr;gap:44px}.approach-pair,.approach-pair:nth-of-type(even){grid-template-columns:1fr;gap:26px}.approach-pair:nth-of-type(even) .approach-pair-media{order:0}.approach-principles ul{grid-template-columns:1fr 1fr}.approach-faq{grid-template-columns:1fr;gap:32px}}
+@media(max-width:767px){.approach-stages{padding-bottom:64px}.approach-pairs{padding-block:64px}.approach-pairs-head{grid-template-columns:1fr;gap:16px;margin-bottom:36px}.approach-pairs-head p{font-size:16px}.approach-pair+.approach-pair{margin-top:56px}.approach-principles{padding-block:64px 8px}.approach-principles ul{grid-template-columns:1fr}.approach-faq{padding-block:64px}.approach-question summary{font-size:17px}.approach-close{flex-direction:column;align-items:flex-start;padding-block:56px 72px}.approach-close .service-cta{width:100%}}
+html:is([data-motion="reduced"],[data-motion="off"]) .approach-page :is(summary,summary svg,.approach-toggle button){transition:none!important;scale:none!important}
+
+/* Privacy page. */
+.privacy-body{padding-block:16px 104px;max-width:980px;margin-left:max(var(--gutter),calc((100% - var(--frame-width))/2))}
+.privacy-section{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.4fr);gap:40px;padding-block:30px;border-top:1px solid var(--line)}
+.privacy-section h2{font-size:22px;line-height:1.25;letter-spacing:-.015em}
+.privacy-section p{font-size:16px;line-height:1.65;color:#454c4e}.privacy-section p+p{margin-top:14px}
+@media(max-width:767px){.privacy-section{grid-template-columns:1fr;gap:12px;padding-block:24px}.privacy-body{padding-bottom:72px}}

@@ -6,9 +6,17 @@
   .practice-copy{max-width:440px;padding-bottom:3px}
   .practice-copy>p:first-child{font-size:22px;line-height:1.45;letter-spacing:-.015em;color:var(--ink)}
   .practice-copy>p+p{font-size:16px;line-height:1.65;color:var(--muted);margin-top:22px}
+  .practice-facts-strip{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:0;border-top:1px solid var(--line)}
+  .practice-facts-strip>div{padding:26px 24px 4px;border-left:1px solid var(--line)}.practice-facts-strip>div:first-child{padding-left:0;border-left:0}
+  .practice-facts-strip dt{font-size:clamp(30px,3vw,44px);line-height:1.05;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+  .practice-facts-strip dd{margin:10px 0 0;font-size:14px;line-height:1.45;color:var(--muted)}
+  .practice-collaborators{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:baseline;gap:12px 32px;padding-top:6px}
+  .practice-collaborators p{font-size:14px;color:var(--muted)}
+  .practice-collaborators ul{display:flex;flex-wrap:wrap;gap:8px 28px;list-style:none;margin:0;padding:0}
+  .practice-collaborators li{font-size:19px;letter-spacing:-.01em;color:#2c3234}
 }
 @layer responsive {
   @media(max-width:1199px){#about.practice-intro{gap:40px;padding-block:84px 76px}.practice-copy>p:first-child{font-size:20px}}
-  @media(max-width:767px){#about.practice-intro{grid-template-columns:1fr;gap:32px;padding-block:64px 60px}.practice-label{margin-bottom:22px;font-size:14px}.practice-copy{max-width:510px}.practice-copy>p:first-child{font-size:20px}.practice-copy>p+p{font-size:16px;margin-top:18px}}
+  @media(max-width:767px){.practice-facts-strip{grid-template-columns:1fr 1fr}.practice-facts-strip>div{padding:20px 0 18px 18px}.practice-facts-strip>div:nth-child(odd){padding-left:0;border-left:0}.practice-facts-strip>div:nth-child(n+3){border-top:1px solid var(--line)}.practice-collaborators{display:block}.practice-collaborators ul{margin-top:12px;gap:6px 22px}.practice-collaborators li{font-size:17px}#about.practice-intro{grid-template-columns:1fr;gap:32px;padding-block:64px 60px}.practice-label{margin-bottom:22px;font-size:14px}.practice-copy{max-width:510px}.practice-copy>p:first-child{font-size:20px}.practice-copy>p+p{font-size:16px;margin-top:18px}}
   @media print{#about.practice-intro{padding-block:40px;gap:30px}}
 }

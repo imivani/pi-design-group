@@ -79,3 +79,8 @@ html:is([data-motion="reduced"],[data-motion="off"]) .contact-page :is(.inquiry-
 @media(max-width:999px){.inquiry-sent{order:2;width:100%;padding-top:30px}}
 @media(max-width:359px){.inquiry-sent-summary{grid-template-columns:1fr}.inquiry-sent-summary>div+div{border-left:0;border-top:1px solid var(--line);padding-left:0}}
 html:is([data-motion="reduced"],[data-motion="off"]) .contact-page :is(.inquiry-submit,.inquiry-sent-explore,.inquiry-sent-actions .text-link){scale:none!important}
+/* Optional dropdowns styled like the text fields. */
+.inquiry-select select{display:block;width:100%;min-height:46px;border:0;border-bottom:1px solid #a3aaa8;border-radius:0;background:transparent;font:inherit;font-size:16px;color:#171b1c;padding:12px 28px 12px 0;outline:none;appearance:none;cursor:pointer}
+.inquiry-select select:has(option[value=""]:checked){color:#686f71}
+.inquiry-select>svg{position:absolute;right:2px;bottom:14px;pointer-events:none;color:#53595c}
+@media(max-width:599px){.inquiry-select select{position:absolute;bottom:0}}

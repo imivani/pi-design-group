@@ -7,7 +7,7 @@ import MotionSetup from '../components/MotionSetup.astro';
 import SeoMeta from '../components/SeoMeta.astro';
 import { projects, projectPath, media } from '../data/projects';
 import { renderingCredit } from '../data/image-credit';
-import { leadership, experience, responsibilities } from '../data/practice';
+import { leadership, experience, responsibilities, principles as practicePrinciples } from '../data/practice';
 import { experienceCategories } from '../data/categories';
 import '../styles/global.css';
 import '../styles/about.css';
@@ -21,12 +21,8 @@ const stages=[
  {title:'Resolve the detail',label:'Design',src:media.featuredDetail,alt:'Planting and building frontage at Crestmont West',caption:'Planting and frontage · Crestmont West',items:responsibilities.slice(2,4)},
  {title:'Bring it together',label:'Delivery',src:media.featured,alt:'Completed courtyard at Crestmont West',caption:'Built landscape · Crestmont West',items:responsibilities.slice(4)},
 ];
-const principles=[
- {icon:UsersRound,title:'Personal involvement',copy:'Direct contact with senior design leadership, from the first conversation onwards.'},
- {icon:Network,title:'Built to coordinate',copy:'Clients, architects, engineers and municipalities connected around one landscape.'},
- {icon:Layers,title:'Technical depth',copy:'Technical resources scale with the project, supporting quality and dependable delivery.'},
- {icon:Sprout,title:'Designed to perform',copy:'Functionality, constructability and long-term performance considered together.'},
-];
+const principleIcons=[UsersRound,Network,Layers,Sprout];
+const principles=practicePrinciples.map(([title,copy],index)=>({icon:principleIcons[index],title,copy}));
 const categories=['All',...experienceCategories];
 ---
 <!doctype html>

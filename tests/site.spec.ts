@@ -127,7 +127,8 @@ test('reduced motion stops video live; off settles animations and still permits 
 });
 
 test('blocked media keeps a readable poster without a nonfunctional playback button', async ({ page }) => {
-  await page.route('**/hero.mp4', route => route.abort());
+  // Block both copies of the footage (MP4, and the WebM used where H.264 is unavailable).
+  await page.route('**/hero*.{mp4,webm}', route => route.abort());
   await page.reload();
   await expect(page.locator('.hero-poster')).toBeVisible();
   await expect(page.locator('#video-status')).toContainText('unavailable');

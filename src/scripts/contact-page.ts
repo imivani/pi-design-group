@@ -107,7 +107,7 @@ form.addEventListener('submit',async event=>{
   const data=new FormData(form);
   const value=(key:string)=>String(data.get(key)||'').trim();
   const subject=`Landscape inquiry: ${value('projectType')} in ${value('location')}`;
-  draft=`Hello Peter,\n\n${value('message')}\n\nProject type: ${value('projectType')}\nProject location: ${value('location')}\n\nName: ${value('name')}\nOrganization: ${value('organization')||'Not provided'}\nEmail: ${value('email')}`;
+  draft=`Hello Peter,\n\n${value('message')}\n\nProject type: ${value('projectType')}\nProject location: ${value('location')}${value('stage')?`\nProject stage: ${value('stage')}`:''}${value('timeline')?`\nTimeline: ${value('timeline')}`:''}\n\nName: ${value('name')}\nOrganization: ${value('organization')||'Not provided'}\nEmail: ${value('email')}`;
   emailLink.href=`mailto:peter@pidesigngroup.ca?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(draft)}`;copyText.value=draft;
   error.hidden=true;prepared.hidden=true;sending(true);
   let response:Response|null=null;

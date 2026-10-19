@@ -16,7 +16,8 @@ async function observe(page:Page){
         duration:getComputedStyle(document.documentElement,'::view-transition-new(root)').animationDuration,
         frames,
       });
-      if(phase==='fallback')requestAnimationFrame(()=>requestAnimationFrame(()=>(window as any).__homeReview.push({phase:'sample',opacity:getComputedStyle(copy).opacity,transform:getComputedStyle(copy).transform})));
+      // Sample 150ms into the 960ms fade: two frames can still read the first frame when rendering is slow.
+      if(phase==='fallback')setTimeout(()=>(window as any).__homeReview.push({phase:'sample',opacity:getComputedStyle(copy).opacity,transform:getComputedStyle(copy).transform}),150);
     });
   });
 }

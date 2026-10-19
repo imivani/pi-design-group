@@ -33,3 +33,15 @@ export const responsibilities = [
  ['Consultant coordination','Working alongside architects, engineers and other project consultants.'],
  ['Construction administration','Supporting the construction stage where included in the project scope.'],
 ];
+export const principles = [
+ ['Personal involvement','Direct contact with senior design leadership, from the first conversation onwards.'],
+ ['Built to coordinate','Clients, architects, engineers and municipalities connected around one landscape.'],
+ ['Technical depth','Technical resources scale with the project, supporting quality and dependable delivery.'],
+ ['Designed to perform','Functionality, constructability and long-term performance considered together.'],
+] as const;
+// Project stages shown on About and Our Approach, each with its share of the responsibilities above.
+export const stages = [
+ { title:'Read the place', label:'Concept', items:responsibilities.slice(0,2) },
+ { title:'Resolve the detail', label:'Design', items:responsibilities.slice(2,4) },
+ { title:'Bring it together', label:'Delivery', items:responsibilities.slice(4) },
+];

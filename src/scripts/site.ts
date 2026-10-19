@@ -202,7 +202,12 @@ let heroVisible = true;
 let playRequest = 0;
 const wantsVideo = () => !document.hidden && heroVisible && mode() === 'full';
 // Phones get a lighter portrait cut of the same footage.
-const videoSource = () => matchMedia('(max-width: 767px)').matches ? video.dataset.srcPhone || video.dataset.src! : video.dataset.src!;
+// Browsers without H.264 (some Linux builds) get the WebM copy beside each MP4.
+const playsMp4 = video.canPlayType('video/mp4; codecs="avc1.42E01E"') !== '';
+const videoSource = () => {
+  const mp4 = matchMedia('(max-width: 767px)').matches ? video.dataset.srcPhone || video.dataset.src! : video.dataset.src!;
+  return playsMp4 ? mp4 : mp4.replace(/\.mp4$/, '.webm');
+};
 function loadVideo() { if (!video.getAttribute('src')) { video.src = videoSource(); video.load(); } }
 async function playVideo() {
   const request = ++playRequest;

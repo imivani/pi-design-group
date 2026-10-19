@@ -48,3 +48,4 @@
 }
 
 @layer responsive {.contact-direct small{display:flex;align-items:center;gap:8px;font-size:14px}}
+.footer-privacy{margin-left:14px;text-decoration:underline;text-decoration-color:#b9bfbd;text-underline-offset:4px;transition:text-decoration-color 180ms}.footer-privacy:hover{text-decoration-color:currentColor}

@@ -1,0 +1,108 @@
+---
+import { ArrowRight, ArrowUpRight, Plus, UsersRound, Network, Layers, Sprout } from '@lucide/astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import MotionSetup from '../components/MotionSetup.astro';
+import SeoMeta from '../components/SeoMeta.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { projects, projectPath } from '../data/projects';
+import { projectDetails } from '../data/project-details';
+import { principles, stages } from '../data/practice';
+import { faq } from '../data/faq';
+import '../styles/global.css';
+import '../styles/services.css';
+import '../styles/approach.css';
+const base = import.meta.env.BASE_URL;
+const asset = (path: string) => base + path.replace(/^\//, '');
+const icons = [UsersRound, Network, Layers, Sprout];
+// Each pair is a landscape plan and a photograph of the same project, with the
+// explanation already written for that project's page.
+const pairs = ['crestmont-west', 'darcy', 'evanston', 'seton-crossing'].map(id => {
+  const project = projects.find(item => item.id === id)!;
+  const { gallery, editorial } = projectDetails(project);
+  const detail = editorial!.detail!;
+  return { project, title: detail.title, copy: detail.copy, plan: gallery[detail.drawingIndex], built: gallery[detail.photoIndex!] };
+});
+const faqSchema = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) };
+---
+<!doctype html>
+<html lang="en" data-motion="full">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <SeoMeta title="Our Approach | Pi Design Group" description="How Pi Design Group takes a landscape from the first site visit to construction: reading the place, resolving the detail and bringing it together, with plans and the built work side by side." image="/media/share/contact.jpg" imageAlt="Planting, seating and shared paths at Crestmont West" />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(faqSchema)} />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="icon" href={asset('/favicon.svg')} type="image/svg+xml" />
+    <MotionSetup />
+  </head>
+  <body class="service-page approach-page">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <Header />
+    <main id="main">
+      <section class="service-hero frame" aria-labelledby="approach-title">
+        <Breadcrumbs items={[['Our Approach']]} />
+        <div class="service-title-row">
+          <h1 id="approach-title" data-service-arrive>From the first site visit to construction.</h1>
+          <p class="service-intro" data-service-arrive>One landscape, considered at every scale. We read the place, resolve the detail, then bring it together through documentation, approvals and, where the scope includes it, construction.</p>
+        </div>
+      </section>
+
+      <section class="approach-stages frame" aria-labelledby="stages-title">
+        <h2 id="stages-title" class="sr-only">Project stages</h2>
+        <ol data-spring-reveal="children">
+          {stages.map((stage, index) => <li>
+            <span class="approach-step" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+            <div><p class="approach-label">{stage.label}</p><h3>{stage.title}</h3>
+              <ul>{stage.items.map(([title, copy]) => <li><strong>{title}</strong><span>{copy}</span></li>)}</ul>
+            </div>
+          </li>)}
+        </ol>
+      </section>
+
+      <section class="approach-pairs" aria-labelledby="pairs-title">
+        <div class="frame">
+          <div class="approach-pairs-head" data-spring-reveal><h2 id="pairs-title">From plan to ground</h2><p>Each landscape starts as a drawing. Switch between the plan and the built project to see one become the other.</p></div>
+          {pairs.map((pair, index) => <article class="approach-pair" data-pair data-view="built" data-spring-reveal aria-labelledby={'pair-' + index}>
+            <div class="approach-pair-media">
+              <div class="approach-toggle" role="group" aria-label={'Show the ' + pair.project.name + ' plan or the built project'}>
+                <span class="approach-toggle-pill" aria-hidden="true"></span>
+                <button type="button" data-show="plan" aria-pressed="false">Plan</button>
+                <button type="button" data-show="built" aria-pressed="true">Built</button>
+              </div>
+              <figure data-layer="plan" class="approach-plan"><img src={asset(pair.plan.src)} alt={pair.plan.caption} width={pair.plan.width} height={pair.plan.height} loading="lazy" decoding="async" /></figure>
+              <figure data-layer="built"><img src={asset(pair.built.src)} alt={pair.built.caption} width={pair.built.width} height={pair.built.height} loading="lazy" decoding="async" /></figure>
+            </div>
+            <div class="approach-pair-copy">
+              <p class="approach-label">{pair.project.name}{pair.project.location && ' · ' + pair.project.location}</p>
+              <h3 id={'pair-' + index}>{pair.title}</h3>
+              <p>{pair.copy}</p>
+              <a class="text-link" href={projectPath(pair.project, base)} data-project-card={pair.project.id}>View the project <ArrowUpRight size={18} stroke-width={1.4} aria-hidden="true" /></a>
+            </div>
+          </article>)}
+        </div>
+      </section>
+
+      <section class="approach-principles frame" aria-labelledby="principles-title">
+        <h2 id="principles-title" data-spring-reveal>How we work</h2>
+        <ul data-spring-reveal="children">
+          {principles.map(([title, copy], index) => { const Icon = icons[index]; return <li><Icon size={26} stroke-width={1.3} aria-hidden="true" /><h3>{title}</h3><p>{copy}</p></li>; })}
+        </ul>
+      </section>
+
+      <section class="approach-faq frame" aria-labelledby="faq-title">
+        <div class="approach-faq-head" data-spring-reveal><h2 id="faq-title">Common questions</h2><p>Still unsure? <a href={base + 'contact'}>Send us a note</a> or call <a href="tel:+14035104071">403-510-4071</a>.</p></div>
+        <div class="approach-faq-list" data-spring-reveal="children">
+          {faq.map(([question, answer]) => <details class="approach-question"><summary><span>{question}</span><Plus size={20} stroke-width={1.4} aria-hidden="true" /></summary><div class="approach-answer"><p>{answer}</p></div></details>)}
+        </div>
+      </section>
+
+      <section class="approach-close frame" aria-labelledby="close-title">
+        <h2 id="close-title" data-spring-reveal>Have a site in mind?</h2>
+        <a class="service-cta" href={base + 'contact'} data-spring-reveal><span>Start a Conversation</span><ArrowRight size={20} stroke-width={1.4} aria-hidden="true" /></a>
+      </section>
+    </main>
+    <Footer />
+    <script>import '../scripts/approach';</script>
+  </body>
+</html>
