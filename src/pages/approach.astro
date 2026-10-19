@@ -1,5 +1,5 @@
 ---
-import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight, Plus, UsersRound, Network, Layers, Sprout } from '@lucide/astro';
+import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight, Plus, UsersRound, Network, Layers, Sprout, Check, MapPin, PenTool, Flower2, FileText, Landmark, Users, HardHat } from '@lucide/astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import MotionSetup from '../components/MotionSetup.astro';
@@ -38,6 +38,12 @@ const storyImages = [
   { src: '/media/gallery/darcy/usb-img_2484.webp', caption: 'The built street · D’Arcy', drawing: false },
 ];
 const valueImages = [media.services.multifamily, '/media/gallery/evanston/2.webp', media.services.commercial, '/media/gallery/darcy/usb-img_2490.webp'];
+// One icon per responsibility, matched by its title in practice.ts.
+const taskIcons: Record<string, typeof Check> = {
+  'Site analysis + concept development': MapPin, 'Landscape design + detailing': PenTool,
+  'Planting + material selection': Flower2, 'Construction documentation': FileText,
+  'Municipal approvals + coordination': Landmark, 'Consultant coordination': Users, 'Construction administration': HardHat,
+};
 const faqSchema = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) };
 ---
 <!doctype html>
@@ -111,45 +117,54 @@ const faqSchema = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEn
               <p class="approach-label">{stage.label}</p>
               <h3>{stage.title}</h3>
               <figure class="approach-story-inline" aria-hidden="true"><img src={asset(storyImages[index].src)} alt="" width="1200" height="900" loading="lazy" decoding="async" /></figure>
-              <ul>{stage.items.map(([title, copy]) => <li><strong>{title}</strong><span>{copy}</span></li>)}</ul>
+              <ul class="approach-tasks">{stage.items.map(([title, copy], item) => { const Icon = taskIcons[title] ?? Check; return <li><span class="approach-task-icon" aria-hidden="true"><Icon size={20} stroke-width={1.4} /></span><span class="approach-task-index">{index + 1}.{item + 1}</span><strong>{title}</strong><span class="approach-task-copy">{copy}</span></li>; })}</ul>
             </li>)}
           </ol>
         </div>
       </section>
 
-      <section class="approach-plates" aria-labelledby="pairs-title">
-        <div class="frame approach-plates-head">
-          <div>
-            <p class="approach-eyebrow">Plan to ground</p>
-            <h2 id="pairs-title">Every landscape starts on paper.</h2>
+      <section class="approach-compare" aria-labelledby="pairs-title" data-compare>
+        <div class="frame">
+          <div class="approach-compare-head">
+            <div>
+              <p class="approach-eyebrow">Plan to ground</p>
+              <h2 id="pairs-title">Every landscape starts on paper.</h2>
+            </div>
+            <p>Drag across each image to compare the landscape plan with the built project.</p>
           </div>
-          <div class="approach-plates-controls">
-            <span class="approach-plates-count"><span data-plates-count>01</span> / {String(pairs.length).padStart(2, '0')}</span>
-            <button type="button" data-plates-prev aria-label="Previous project"><ArrowLeft size={20} stroke-width={1.4} aria-hidden="true" /></button>
-            <button type="button" data-plates-next aria-label="Next project"><ArrowRight size={20} stroke-width={1.4} aria-hidden="true" /></button>
+          <div class="approach-compare-body">
+            <div class="approach-compare-stages">
+              {pairs.map((pair, index) => <article class="approach-compare-stage" data-pair data-view="built" data-compare-stage={index} data-active={String(index === 0)} hidden={index !== 0} aria-labelledby={'pair-' + index}>
+                <div class="approach-slider" data-slider style="--split:28%">
+                  <figure data-layer="plan" class="approach-slider-plan"><img src={asset(pair.plan.src)} alt={pair.plan.caption} width={pair.plan.width} height={pair.plan.height} loading="lazy" decoding="async" /></figure>
+                  <figure data-layer="built" class="approach-slider-built"><img src={asset(pair.built.src)} alt={pair.built.caption} width={pair.built.width} height={pair.built.height} loading="lazy" decoding="async" /></figure>
+                  <span class="approach-slider-tag approach-slider-tag--plan" aria-hidden="true">Plan</span>
+                  <span class="approach-slider-tag approach-slider-tag--built" aria-hidden="true">Built</span>
+                  <span class="approach-slider-handle" aria-hidden="true"><span><ArrowLeft size={15} stroke-width={1.6} /><ArrowRight size={15} stroke-width={1.6} /></span></span>
+                  <input class="approach-slider-range" type="range" min="0" max="100" value="28" step="1" aria-label={'Reveal the ' + pair.project.name + ' plan; higher values show more of the plan'} />
+                </div>
+                <div class="approach-compare-copy">
+                  <div class="approach-toggle approach-toggle--compare" role="group" aria-label={'Show the ' + pair.project.name + ' plan or the built project'}>
+                    <span class="approach-toggle-pill" aria-hidden="true"></span>
+                    <button type="button" data-show="plan" aria-pressed="false">Plan</button>
+                    <button type="button" data-show="built" aria-pressed="true">Built</button>
+                  </div>
+                  <h3 id={'pair-' + index}>{pair.title}</h3>
+                  <p>{pair.copy}</p>
+                  <a class="text-link" href={projectPath(pair.project, base)} data-project-card={pair.project.id}>View {pair.project.name} <ArrowUpRight size={18} stroke-width={1.4} aria-hidden="true" /></a>
+                </div>
+              </article>)}
+            </div>
+            <div class="approach-compare-tabs" role="group" aria-label="Choose a project">
+              {pairs.map((pair, index) => <button type="button" data-compare-tab={index} aria-pressed={index === 0 ? "true" : "false"}>
+                <span class="approach-compare-tab-number">{String(index + 1).padStart(2, '0')}</span>
+                <span class="approach-compare-tab-name">{pair.project.name}</span>
+                <span class="approach-compare-tab-place">{pair.project.location || pair.project.type}</span>
+                <span class="approach-compare-tab-bar" aria-hidden="true"><span></span></span>
+              </button>)}
+            </div>
           </div>
         </div>
-        <div class="approach-plates-track" data-plates-track data-spring-reveal="children" tabindex="0" aria-label="Plans and built projects, scroll sideways">
-          {pairs.map((pair, index) => <article class="approach-plate" data-pair data-view="built" aria-labelledby={'pair-' + index}>
-            <span class="approach-plate-numeral" aria-hidden="true">{index + 1}</span>
-            <div class="approach-plate-sheets">
-              <figure data-layer="plan" class="approach-sheet approach-sheet--plan"><img src={asset(pair.plan.src)} alt={pair.plan.caption} width={pair.plan.width} height={pair.plan.height} loading="lazy" decoding="async" /></figure>
-              <figure data-layer="built" class="approach-sheet approach-sheet--built"><img src={asset(pair.built.src)} alt={pair.built.caption} width={pair.built.width} height={pair.built.height} loading="lazy" decoding="async" /></figure>
-              <div class="approach-toggle approach-toggle--plate" role="group" aria-label={'Show the ' + pair.project.name + ' plan or the built project'}>
-                <span class="approach-toggle-pill" aria-hidden="true"></span>
-                <button type="button" data-show="plan" aria-pressed="false">Plan</button>
-                <button type="button" data-show="built" aria-pressed="true">Built</button>
-              </div>
-            </div>
-            <div class="approach-plate-copy">
-              <p class="approach-label">{pair.project.name}{pair.project.location && ' · ' + pair.project.location}</p>
-              <h3 id={'pair-' + index}>{pair.title}</h3>
-              <p>{pair.copy}</p>
-              <a class="text-link" href={projectPath(pair.project, base)} data-project-card={pair.project.id}>View the project <ArrowUpRight size={18} stroke-width={1.4} aria-hidden="true" /></a>
-            </div>
-          </article>)}
-        </div>
-        <div class="frame"><span class="approach-plates-bar"><span data-plates-bar></span></span></div>
       </section>
 
       <section class="approach-values" aria-labelledby="principles-title">

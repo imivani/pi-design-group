@@ -28,10 +28,10 @@ test('returning to the current detail cancels an unfinished drawing selection', 
   await expect.poll(() => page.locator('#detail-plan-image').evaluate((image: HTMLImageElement) => image.complete && image.naturalWidth > 0)).toBe(true);
   await page.locator('[data-detail-select="paths"]').focus();
   await expect(page.locator('.detail-plan-link')).toHaveAttribute('aria-busy', 'true');
-  await page.locator('[data-detail-select="materials"]').focus();
+  await page.locator('[data-detail-select="planting"]').focus();
   release();
   await expect(page.locator('.detail-plan-link')).not.toHaveAttribute('aria-busy', 'true');
-  await expect(page.locator('#why')).toHaveAttribute('data-detail-active', 'materials');
+  await expect(page.locator('#why')).toHaveAttribute('data-detail-active', 'planting');
   await expect(page.locator('#detail-plan-image')).toHaveAttribute('src', /\/crestmont-west\/landscape-plan-2026.webp$/);
 });
 
@@ -40,7 +40,7 @@ test('drawing failure preserves the current work and supports a successful retry
   await page.goto('/');
   await page.locator('[data-detail-select="paths"]').click();
   await expect(page.locator('#detail-plan-status')).toContainText('could not load');
-  await expect(page.locator('#why')).toHaveAttribute('data-detail-active', 'materials');
+  await expect(page.locator('#why')).toHaveAttribute('data-detail-active', 'planting');
   await expect(page.locator('#detail-project-link')).toHaveAttribute('href', '/crestmontwest');
   await page.unroute('**/media/gallery/evanston/3.webp');
   await page.locator('[data-detail-select="paths"]').click();
@@ -140,12 +140,13 @@ test('details remain readable at narrow widths and keep all three choices availa
 
 test('hover opens the photograph aperture while reduced motion keeps it still', async ({ page }) => {
   await page.goto('/');
-  const row = page.locator('[data-detail-select="planting"]');
+  // Paths is not the opening detail, so its photograph starts narrow.
+  const row = page.locator('[data-detail-select="paths"]');
   await row.scrollIntoViewIfNeeded();
   const photo = row.locator('.detail-choice-image');
   const initialWidth = (await photo.boundingBox())!.width;
   await row.hover();
-  await expect(page.locator('#why')).toHaveAttribute('data-detail-active', 'planting');
+  await expect(page.locator('#why')).toHaveAttribute('data-detail-active', 'paths');
   await expect.poll(async () => (await photo.boundingBox())!.width).toBeGreaterThan(initialWidth + 10);
   await page.locator('#motion-choice').selectOption('reduced');
   await row.hover();

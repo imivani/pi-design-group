@@ -63,47 +63,69 @@ if (hero) {
   }
 }
 
-// Plan to ground plates: the switch shuffles the drawing above or below the photograph.
-for (const pair of document.querySelectorAll<HTMLElement>('[data-pair]')) {
-  const pill = pair.querySelector<HTMLElement>('.approach-toggle-pill')!;
-  const buttons = [...pair.querySelectorAll<HTMLButtonElement>('[data-show]')];
-  const show = (view: string) => {
-    if (pair.dataset.view === view) return;
-    pair.dataset.view = view;
-    buttons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.show === view)));
-    placePill(pill, buttons.find(button => button.dataset.show === view)!, true);
-  };
-  buttons.forEach(button => button.addEventListener('click', () => show(button.dataset.show!)));
-  placePill(pill, buttons.find(button => button.getAttribute('aria-pressed') === 'true')!, false);
-  addEventListener('resize', () => placePill(pill, buttons.find(button => button.getAttribute('aria-pressed') === 'true')!, false));
-}
+// Plan to ground: the built photograph covers the plan up to a draggable divider.
+// Plan and Built glide the divider to either end; tabs switch between projects.
+const compare = document.querySelector<HTMLElement>('[data-compare]');
+if (compare) {
+  const stages = [...compare.querySelectorAll<HTMLElement>('[data-compare-stage]')];
+  const tabs = [...compare.querySelectorAll<HTMLButtonElement>('[data-compare-tab]')];
+  for (const stage of stages) {
+    const slider = stage.querySelector<HTMLElement>('[data-slider]')!;
+    const range = slider.querySelector<HTMLInputElement>('input')!;
+    const pill = stage.querySelector<HTMLElement>('.approach-toggle-pill')!;
+    const buttons = [...stage.querySelectorAll<HTMLButtonElement>('[data-show]')];
+    let glide: ReturnType<typeof animate> | null = null;
+    // Divider position in percent from the left; past halfway the plan is the main view.
+    const setSplit = (value: number) => {
+      slider.style.setProperty('--split', value + '%');
+      range.value = String(Math.round(value));
+      const view = value > 50 ? 'plan' : 'built';
+      if (stage.dataset.view === view) return;
+      stage.dataset.view = view;
+      buttons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.show === view)));
+      placePill(pill, buttons.find(button => button.dataset.show === view)!, true);
+    };
+    range.addEventListener('input', () => { glide?.stop(); setSplit(Number(range.value)); });
+    range.addEventListener('pointerdown', () => { slider.dataset.dragging = ''; });
+    addEventListener('pointerup', () => { delete slider.dataset.dragging; });
+    buttons.forEach(button => button.addEventListener('click', () => {
+      const target = button.dataset.show === 'plan' ? 100 : 0;
+      glide?.stop();
+      if (mode() === 'full') glide = animate(Number(range.value), target, { type: 'spring', visualDuration: 0.7, bounce: 0.1, onUpdate: setSplit });
+      else setSplit(target);
+    }));
+    placePill(pill, buttons.find(button => button.getAttribute('aria-pressed') === 'true')!, false);
+    addEventListener('resize', () => placePill(pill, buttons.find(button => button.getAttribute('aria-pressed') === 'true')!, false));
+  }
 
-// The sideways row: arrows step one plate at a time; the counter and bar follow the scroll.
-const track = document.querySelector<HTMLElement>('[data-plates-track]');
-if (track) {
-  const plates = [...track.querySelectorAll<HTMLElement>('.approach-plate')];
-  const count = document.querySelector<HTMLElement>('[data-plates-count]')!;
-  const bar = document.querySelector<HTMLElement>('[data-plates-bar]')!;
-  const prev = document.querySelector<HTMLButtonElement>('[data-plates-prev]')!;
-  const next = document.querySelector<HTMLButtonElement>('[data-plates-next]')!;
-  const step = () => plates[1] ? plates[1].offsetLeft - plates[0].offsetLeft : track.clientWidth;
-  const behavior = () => (mode() === 'full' ? 'smooth' : 'auto') as ScrollBehavior;
-  let shown = 0;
-  const update = () => {
-    const max = track.scrollWidth - track.clientWidth;
-    const progress = max > 0 ? track.scrollLeft / max : 0;
-    const index = Math.min(plates.length - 1, Math.round(track.scrollLeft / step()));
-    bar.style.transform = `scaleX(${(1 + progress * (plates.length - 1)) / plates.length})`;
-    prev.disabled = track.scrollLeft <= 2; next.disabled = track.scrollLeft >= max - 2;
-    if (index === shown) return;
-    shown = index; count.textContent = String(index + 1).padStart(2, '0');
-    spring(count, { opacity: [0, 1], y: [8, 0] });
+  let current = 0, timer: ReturnType<typeof setTimeout> | undefined, auto = true;
+  const bars = tabs.map(tab => tab.querySelector<HTMLElement>('.approach-compare-tab-bar span')!);
+  const select = (index: number) => {
+    if (index === current) return;
+    const previous = stages[current]; current = index;
+    tabs.forEach((tab, i) => tab.setAttribute('aria-pressed', String(i === index)));
+    previous.hidden = true; previous.dataset.active = 'false';
+    const stage = stages[index]; stage.hidden = false; stage.dataset.active = 'true';
+    stage.querySelectorAll<HTMLElement>('.approach-toggle-pill').forEach(pill => placePill(pill, stage.querySelector<HTMLButtonElement>('[data-show][aria-pressed="true"]')!, false));
+    spring(stage.querySelector('.approach-slider')!, { opacity: [0, 1], scale: [0.985, 1] }, { type: 'spring', visualDuration: 0.5, bounce: 0 });
+    spring([...stage.querySelectorAll('.approach-compare-copy > *')], { opacity: [0, 1], y: [10, 0] }, { ...structure, delay: (i: number) => 0.08 + i * 0.04 });
   };
-  prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: behavior() }));
-  next.addEventListener('click', () => track.scrollBy({ left: step(), behavior: behavior() }));
-  track.addEventListener('scroll', update, { passive: true });
-  addEventListener('resize', update);
-  update();
+  // Until a visitor takes over, the tabs advance on their own, each bar filling as it plays.
+  const play = () => {
+    if (!auto || mode() !== 'full') { bars.forEach((bar, i) => { bar.style.transform = `scaleX(${i === current ? 1 : 0})`; }); return; }
+    bars.forEach((bar, i) => { if (i !== current) bar.style.transform = 'scaleX(0)'; });
+    animate(bars[current], { scaleX: [0, 1] }, { duration: 7, ease: 'linear' });
+    timer = setTimeout(() => { select((current + 1) % stages.length); play(); }, 7000);
+  };
+  const stop = () => { auto = false; clearTimeout(timer); bars.forEach((bar, i) => { animate(bar, { scaleX: i === current ? 1 : 0 }, { duration: 0.3 }); }); };
+  tabs.forEach((tab, index) => tab.addEventListener('click', () => { stop(); select(index); bars.forEach((bar, i) => { bar.style.transform = `scaleX(${i === index ? 1 : 0})`; }); }));
+  compare.addEventListener('pointerdown', event => { if ((event.target as Element).closest('[data-slider], [data-show]')) stop(); });
+  compare.addEventListener('focusin', () => { if (auto) stop(); });
+  let started = false;
+  new IntersectionObserver(([entry]) => {
+    if (entry.isIntersecting && !started) { started = true; play(); }
+    else if (!entry.isIntersecting && auto && started) { clearTimeout(timer); started = false; }
+  }, { threshold: 0.4 }).observe(compare);
 }
 
 // Step story: the picture beside the steps rises into place for whichever step is
