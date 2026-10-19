@@ -1,11 +1,11 @@
 ---
-import { ArrowRight, ArrowUpRight, Plus, UsersRound, Network, Layers, Sprout } from '@lucide/astro';
+import { ArrowDown, ArrowRight, ArrowUpRight, Plus, UsersRound, Network, Layers, Sprout } from '@lucide/astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import MotionSetup from '../components/MotionSetup.astro';
 import SeoMeta from '../components/SeoMeta.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
-import { projects, projectPath } from '../data/projects';
+import { projects, projectPath, media } from '../data/projects';
 import { projectDetails } from '../data/project-details';
 import { principles, stages } from '../data/practice';
 import { faq } from '../data/faq';
@@ -23,6 +23,14 @@ const pairs = ['crestmont-west', 'darcy', 'evanston', 'seton-crossing'].map(id =
   const detail = editorial!.detail!;
   return { project, title: detail.title, copy: detail.copy, plan: gallery[detail.drawingIndex], built: gallery[detail.photoIndex!] };
 });
+// Hero: Crestmont West's plan gives way to its built courtyard. The three cards
+// follow one landscape from drawing, to detail, to the finished street.
+const heroProject = projects.find(project => project.id === 'crestmont-west')!;
+const stageCards = [
+  { ...stages[0], src: '/media/gallery/darcy/3.webp', alt: 'Overall landscape plan for D’Arcy', drawing: true, copy: 'Site analysis and a clear landscape direction.' },
+  { ...stages[1], src: media.featuredDetail, alt: 'Planting and building frontage at Crestmont West', drawing: false, copy: 'Planting, materials and the drawings to build them.' },
+  { ...stages[2], src: '/media/gallery/darcy/usb-img_2484.webp', alt: 'Gardens and planted sidewalks connect homes at D’Arcy', drawing: false, copy: 'Approvals, coordination and, where included, construction support.' },
+];
 const faqSchema = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) };
 ---
 <!doctype html>
@@ -38,22 +46,53 @@ const faqSchema = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEn
   </head>
   <body class="service-page approach-page">
     <a class="skip-link" href="#main">Skip to content</a>
-    <Header />
+    <Header darkHero />
     <main id="main">
-      <section class="service-hero frame" aria-labelledby="approach-title">
-        <Breadcrumbs items={[['Our Approach']]} />
-        <div class="service-title-row">
-          <h1 id="approach-title" data-service-arrive>From the first site visit to construction.</h1>
-          <p class="service-intro" data-service-arrive>One landscape, considered at every scale. We read the place, resolve the detail, then bring it together through documentation, approvals and, where the scope includes it, construction.</p>
+      <section id="hero" class="approach-hero" aria-labelledby="approach-title" data-hero-view="built">
+        <div class="approach-hero-media" aria-hidden="true">
+          <img class="approach-hero-plan" src={asset(media.drawing)} alt="" width="1536" height="1024" fetchpriority="high" decoding="async" />
+          <div class="approach-hero-built"><img src={asset(media.featured)} alt="" width="1920" height="1280" fetchpriority="high" decoding="async" /></div>
+          <span class="approach-hero-ground"></span>
+          <div class="approach-hero-scrim"></div>
+        </div>
+        <div class="frame approach-hero-inner">
+          <Breadcrumbs class="approach-hero-trail" items={[['Our Approach']]} />
+          <h1 id="approach-title"><span>From the first</span> <span>site visit to</span> <span>construction.</span></h1>
+          <div class="approach-hero-foot">
+            <p class="approach-hero-intro">One landscape, considered at every scale. We read the place, resolve the detail, then bring it together through documentation, approvals and, where the scope includes it, construction.</p>
+            <div class="approach-hero-switch">
+              <div class="approach-toggle approach-toggle--hero" role="group" aria-label="Show the Crestmont West plan or the built courtyard">
+                <span class="approach-toggle-pill" aria-hidden="true"></span>
+                <button type="button" data-hero-show="plan" aria-pressed="false">Plan</button>
+                <button type="button" data-hero-show="built" aria-pressed="true">Built</button>
+              </div>
+              <a class="approach-hero-caption" href={projectPath(heroProject, base)}><span data-hero-caption>Built courtyard · Crestmont West</span><ArrowUpRight size={16} stroke-width={1.4} aria-hidden="true" /></a>
+            </div>
+          </div>
         </div>
       </section>
+      <!-- With full motion the hero opens on the plan before the first paint; the built courtyard then rises into place. -->
+      <script is:inline>if(document.documentElement.dataset.motion==='full')document.querySelector('#hero').dataset.heroView='plan';</script>
+
+      <nav class="approach-steps frame" aria-label="Project stages">
+        <ol>
+          {stageCards.map((card, index) => <li>
+            <a href={'#stage-' + (index + 1)}>
+              <span class:list={['approach-steps-photo', { 'is-drawing': card.drawing }]}><img src={asset(card.src)} alt={card.alt} width="1200" height="1500" loading="eager" decoding="async" /></span>
+              <span class="approach-steps-label"><em>{String(index + 1).padStart(2, '0')}</em> {card.label}</span>
+              <span class="approach-steps-title">{card.title}<ArrowDown size={18} stroke-width={1.4} aria-hidden="true" /></span>
+              <span class="approach-steps-copy">{card.copy}</span>
+            </a>
+          </li>)}
+        </ol>
+      </nav>
 
       <section class="approach-stages frame" aria-labelledby="stages-title">
-        <h2 id="stages-title" class="sr-only">Project stages</h2>
+        <h2 id="stages-title" data-spring-reveal>What each step includes</h2>
         <ol data-spring-reveal="children">
-          {stages.map((stage, index) => <li>
+          {stages.map((stage, index) => <li id={'stage-' + (index + 1)}>
             <span class="approach-step" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-            <div><p class="approach-label">{stage.label}</p><h3>{stage.title}</h3>
+            <div><h3 class="approach-stage-name">{stage.title} <span>· {stage.label}</span></h3>
               <ul>{stage.items.map(([title, copy]) => <li><strong>{title}</strong><span>{copy}</span></li>)}</ul>
             </div>
           </li>)}

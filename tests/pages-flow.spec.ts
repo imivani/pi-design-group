@@ -4,6 +4,17 @@ import AxeBuilder from '@axe-core/playwright';
 test('our approach switches between plan and built work and opens questions', async ({ page }) => {
   await page.goto('/approach');
   await expect(page.locator('h1')).toHaveText('From the first site visit to construction.');
+  // The hero opens on the plan and settles on the built courtyard; the switch reverses it.
+  const hero = page.locator('#hero');
+  await expect(hero).toHaveAttribute('data-hero-view', 'built');
+  await expect(page.locator('#site-header')).toHaveAttribute('data-theme', 'dark');
+  await hero.getByRole('button', { name: 'Plan' }).click();
+  await expect(hero).toHaveAttribute('data-hero-view', 'plan');
+  await expect(hero.locator('[data-hero-caption]')).toHaveText('Landscape plan · Crestmont West');
+  await hero.getByRole('button', { name: 'Built' }).click();
+  await expect(hero).toHaveAttribute('data-hero-view', 'built');
+  await page.locator('.approach-steps a').first().click();
+  await expect(page).toHaveURL(/#stage-1$/);
   const pair = page.locator('[data-pair]').first();
   await pair.scrollIntoViewIfNeeded();
   await expect(pair).toHaveAttribute('data-view', 'built');

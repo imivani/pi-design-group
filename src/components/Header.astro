@@ -8,7 +8,8 @@ import SearchDialog from './SearchDialog.astro';
 import '../styles/header.css';
 
 const asset = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`;
-const { homepage = false } = Astro.props;
+// darkHero: the page opens on a full-bleed photograph marked #hero, like the home page.
+const { homepage = false, darkHero = false } = Astro.props;
 const contactLink = import.meta.env.BASE_URL + 'contact';
 const isContact = Astro.url.pathname.replace(/\/$/, '') === contactLink;
 const homeLink = (id: string) => `${homepage ? '' : import.meta.env.BASE_URL}#${id}`;
@@ -27,7 +28,7 @@ const services = serviceData.map(service => ({ ...service, icon: icons[service.i
 ---
 
 <span class="header-scroll-sentinel" aria-hidden="true"></span>
-<header class="site-header" id="site-header" data-theme={homepage ? 'dark' : 'light'} data-scrolled="false">
+<header class="site-header" id="site-header" data-theme={homepage || darkHero ? 'dark' : 'light'} data-scrolled="false">
   <div class="frame site-header__inner">
     <a class="site-wordmark" href={homeLink('hero')} aria-label="Pi Design Group, home">Pi Design Group</a>
     <nav class="desktop-nav" aria-label="Main navigation">
