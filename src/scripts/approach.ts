@@ -62,6 +62,7 @@ if (hero) {
   }
 }
 
+// Plan to ground plates: the switch shuffles the drawing above or below the photograph.
 for (const pair of document.querySelectorAll<HTMLElement>('[data-pair]')) {
   const pill = pair.querySelector<HTMLElement>('.approach-toggle-pill')!;
   const buttons = [...pair.querySelectorAll<HTMLButtonElement>('[data-show]')];
@@ -70,12 +71,81 @@ for (const pair of document.querySelectorAll<HTMLElement>('[data-pair]')) {
     pair.dataset.view = view;
     buttons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.show === view)));
     placePill(pill, buttons.find(button => button.dataset.show === view)!, true);
-    const layer = pair.querySelector(`[data-layer="${view}"]`)!;
-    spring(layer, { opacity: [0, 1], scale: [1.03, 1], filter: ['blur(4px)', 'blur(0px)'] }, structure);
   };
   buttons.forEach(button => button.addEventListener('click', () => show(button.dataset.show!)));
   placePill(pill, buttons.find(button => button.getAttribute('aria-pressed') === 'true')!, false);
   addEventListener('resize', () => placePill(pill, buttons.find(button => button.getAttribute('aria-pressed') === 'true')!, false));
+}
+
+// The sideways row: arrows step one plate at a time; the counter and bar follow the scroll.
+const track = document.querySelector<HTMLElement>('[data-plates-track]');
+if (track) {
+  const plates = [...track.querySelectorAll<HTMLElement>('.approach-plate')];
+  const count = document.querySelector<HTMLElement>('[data-plates-count]')!;
+  const bar = document.querySelector<HTMLElement>('[data-plates-bar]')!;
+  const prev = document.querySelector<HTMLButtonElement>('[data-plates-prev]')!;
+  const next = document.querySelector<HTMLButtonElement>('[data-plates-next]')!;
+  const step = () => plates[1] ? plates[1].offsetLeft - plates[0].offsetLeft : track.clientWidth;
+  const behavior = () => (mode() === 'full' ? 'smooth' : 'auto') as ScrollBehavior;
+  let shown = 0;
+  const update = () => {
+    const max = track.scrollWidth - track.clientWidth;
+    const progress = max > 0 ? track.scrollLeft / max : 0;
+    const index = Math.min(plates.length - 1, Math.round(track.scrollLeft / step()));
+    bar.style.transform = `scaleX(${(1 + progress * (plates.length - 1)) / plates.length})`;
+    prev.disabled = track.scrollLeft <= 2; next.disabled = track.scrollLeft >= max - 2;
+    if (index === shown) return;
+    shown = index; count.textContent = String(index + 1).padStart(2, '0');
+    spring(count, { opacity: [0, 1], y: [8, 0] });
+  };
+  prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: behavior() }));
+  next.addEventListener('click', () => track.scrollBy({ left: step(), behavior: behavior() }));
+  track.addEventListener('scroll', update, { passive: true });
+  addEventListener('resize', update);
+  update();
+}
+
+// Step story: the picture beside the steps rises into place for whichever step is
+// in the middle of the screen, and a bar tracks progress through the section.
+const story = document.querySelector<HTMLElement>('[data-story]');
+if (story) {
+  const steps = [...story.querySelectorAll<HTMLElement>('[data-story-step]')];
+  const images = [...story.querySelectorAll<HTMLElement>('[data-story-image]')];
+  const count = story.querySelector<HTMLElement>('[data-story-count]')!;
+  const caption = story.querySelector<HTMLElement>('[data-story-caption]')!;
+  const captions = images.map(image => image.querySelector('img')!.closest('figure')!.dataset.caption || '');
+  let active = 0, layer = 3;
+  const activate = (index: number) => {
+    if (index === active) return;
+    const forward = index > active; active = index;
+    steps.forEach((item, i) => { item.dataset.active = String(i === index); });
+    const image = images[index];
+    image.style.zIndex = String(++layer);
+    image.dataset.active = 'true';
+    const wipe = spring(image, { clipPath: [forward ? 'inset(100% 0 0 0)' : 'inset(0 0 100% 0)', 'inset(0% 0 0% 0)'] }, { duration: 0.9, ease: [0.65, 0, 0.35, 1] });
+    const settle = () => images.forEach((other, i) => { if (i !== index) other.dataset.active = 'false'; });
+    if (wipe) void wipe.finished.then(() => { if (active === index) settle(); }); else settle();
+    count.textContent = String(index + 1).padStart(2, '0');
+    spring(count, { opacity: [0, 1], y: [forward ? 10 : -10, 0] });
+    caption.textContent = captions[index];
+  };
+  const observer = new IntersectionObserver(entries => {
+    for (const entry of entries) if (entry.isIntersecting) activate(steps.indexOf(entry.target as HTMLElement));
+  }, { rootMargin: '-45% 0px -45% 0px' });
+  steps.forEach(item => observer.observe(item));
+  const progress = story.querySelector<HTMLElement>('[data-story-progress]')!;
+  if (mode() !== 'off') scroll(animate(progress, { scaleX: [0, 1] }, { ease: 'linear' }), { target: story, offset: ['start 60%', 'end 80%'] });
+}
+
+// Finale: the round button leans toward the pointer.
+const finale = document.querySelector<HTMLElement>('[data-finale-button]');
+if (finale && matchMedia('(hover: hover)').matches) {
+  finale.addEventListener('pointermove', event => {
+    if (mode() !== 'full') return;
+    const box = finale.getBoundingClientRect();
+    spring(finale, { x: (event.clientX - box.left - box.width / 2) * 0.25, y: (event.clientY - box.top - box.height / 2) * 0.25 }, { type: 'spring', visualDuration: 0.35, bounce: 0.3 });
+  });
+  finale.addEventListener('pointerleave', () => { spring(finale, { x: 0, y: 0 }, { type: 'spring', visualDuration: 0.5, bounce: 0.45 }); });
 }
 
 // Questions open and close with a height spring instead of a jump.

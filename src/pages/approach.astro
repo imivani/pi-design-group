@@ -1,5 +1,5 @@
 ---
-import { ArrowDown, ArrowRight, ArrowUpRight, Plus, UsersRound, Network, Layers, Sprout } from '@lucide/astro';
+import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight, Plus, UsersRound, Network, Layers, Sprout } from '@lucide/astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import MotionSetup from '../components/MotionSetup.astro';
@@ -31,6 +31,13 @@ const stageCards = [
   { ...stages[1], src: media.featuredDetail, alt: 'Planting and building frontage at Crestmont West', drawing: false, copy: 'Planting, materials and the drawings to build them.' },
   { ...stages[2], src: '/media/gallery/darcy/usb-img_2484.webp', alt: 'Gardens and planted sidewalks connect homes at D’Arcy', drawing: false, copy: 'Approvals, coordination and, where included, construction support.' },
 ];
+// Pictures for the step story (drawing, detail, finished street) and the four principles.
+const storyImages = [
+  { src: '/media/gallery/darcy/3.webp', caption: 'Landscape plan · D’Arcy', drawing: true },
+  { src: media.featuredDetail, caption: 'Planting and frontage · Crestmont West', drawing: false },
+  { src: '/media/gallery/darcy/usb-img_2484.webp', caption: 'The built street · D’Arcy', drawing: false },
+];
+const valueImages = [media.services.multifamily, '/media/gallery/evanston/2.webp', media.services.commercial, '/media/gallery/darcy/usb-img_2490.webp'];
 const faqSchema = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) };
 ---
 <!doctype html>
@@ -87,32 +94,54 @@ const faqSchema = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEn
         </ol>
       </nav>
 
-      <section class="approach-stages frame" aria-labelledby="stages-title">
-        <h2 id="stages-title" data-spring-reveal>What each step includes</h2>
-        <ol data-spring-reveal="children">
-          {stages.map((stage, index) => <li id={'stage-' + (index + 1)}>
-            <span class="approach-step" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-            <div><h3 class="approach-stage-name">{stage.title} <span>· {stage.label}</span></h3>
+      <section class="approach-story frame" aria-labelledby="stages-title" data-story>
+        <div class="approach-story-media" aria-hidden="true">
+          <div class="approach-story-frame">
+            {storyImages.map((image, index) => <figure data-story-image={index} data-caption={image.caption} class:list={{ 'is-drawing': image.drawing }} data-active={String(index === 0)}><img src={asset(image.src)} alt="" width="1200" height="1500" loading="lazy" decoding="async" /></figure>)}
+            <span class="approach-story-count"><span data-story-count>01</span><small>/ 03</small></span>
+            <span class="approach-story-progress"><span data-story-progress></span></span>
+          </div>
+          <p class="approach-story-caption" data-story-caption>{storyImages[0].caption}</p>
+        </div>
+        <div class="approach-story-steps">
+          <h2 id="stages-title" class="approach-eyebrow">What each step includes</h2>
+          <ol>
+            {stages.map((stage, index) => <li id={'stage-' + (index + 1)} class="approach-story-step" data-story-step={index} data-active={String(index === 0)}>
+              <span class="approach-story-number">{String(index + 1).padStart(2, '0')}</span>
+              <p class="approach-label">{stage.label}</p>
+              <h3>{stage.title}</h3>
+              <figure class="approach-story-inline" aria-hidden="true"><img src={asset(storyImages[index].src)} alt="" width="1200" height="900" loading="lazy" decoding="async" /></figure>
               <ul>{stage.items.map(([title, copy]) => <li><strong>{title}</strong><span>{copy}</span></li>)}</ul>
-            </div>
-          </li>)}
-        </ol>
+            </li>)}
+          </ol>
+        </div>
       </section>
 
-      <section class="approach-pairs" aria-labelledby="pairs-title">
-        <div class="frame">
-          <div class="approach-pairs-head" data-spring-reveal><h2 id="pairs-title">From plan to ground</h2><p>Each landscape starts as a drawing. Switch between the plan and the built project to see one become the other.</p></div>
-          {pairs.map((pair, index) => <article class="approach-pair" data-pair data-view="built" data-spring-reveal aria-labelledby={'pair-' + index}>
-            <div class="approach-pair-media">
-              <div class="approach-toggle" role="group" aria-label={'Show the ' + pair.project.name + ' plan or the built project'}>
+      <section class="approach-plates" aria-labelledby="pairs-title">
+        <div class="frame approach-plates-head">
+          <div>
+            <p class="approach-eyebrow">Plan to ground</p>
+            <h2 id="pairs-title">Every landscape starts on paper.</h2>
+          </div>
+          <div class="approach-plates-controls">
+            <span class="approach-plates-count"><span data-plates-count>01</span> / {String(pairs.length).padStart(2, '0')}</span>
+            <button type="button" data-plates-prev aria-label="Previous project"><ArrowLeft size={20} stroke-width={1.4} aria-hidden="true" /></button>
+            <button type="button" data-plates-next aria-label="Next project"><ArrowRight size={20} stroke-width={1.4} aria-hidden="true" /></button>
+          </div>
+        </div>
+        <div class="approach-plates-track" data-plates-track data-spring-reveal="children" tabindex="0" aria-label="Plans and built projects, scroll sideways">
+          {pairs.map((pair, index) => <article class="approach-plate" data-pair data-view="built" aria-labelledby={'pair-' + index}>
+            <span class="approach-plate-numeral" aria-hidden="true">{index + 1}</span>
+            <div class="approach-plate-sheets">
+              <figure data-layer="plan" class="approach-sheet approach-sheet--plan"><img src={asset(pair.plan.src)} alt={pair.plan.caption} width={pair.plan.width} height={pair.plan.height} loading="lazy" decoding="async" /></figure>
+              <figure data-layer="built" class="approach-sheet approach-sheet--built"><img src={asset(pair.built.src)} alt={pair.built.caption} width={pair.built.width} height={pair.built.height} loading="lazy" decoding="async" /></figure>
+              <div class="approach-toggle approach-toggle--plate" role="group" aria-label={'Show the ' + pair.project.name + ' plan or the built project'}>
                 <span class="approach-toggle-pill" aria-hidden="true"></span>
                 <button type="button" data-show="plan" aria-pressed="false">Plan</button>
                 <button type="button" data-show="built" aria-pressed="true">Built</button>
               </div>
-              <figure data-layer="plan" class="approach-plan"><img src={asset(pair.plan.src)} alt={pair.plan.caption} width={pair.plan.width} height={pair.plan.height} loading="lazy" decoding="async" /></figure>
-              <figure data-layer="built"><img src={asset(pair.built.src)} alt={pair.built.caption} width={pair.built.width} height={pair.built.height} loading="lazy" decoding="async" /></figure>
             </div>
-            <div class="approach-pair-copy">
+            <div class="approach-plate-copy">
               <p class="approach-label">{pair.project.name}{pair.project.location && ' · ' + pair.project.location}</p>
               <h3 id={'pair-' + index}>{pair.title}</h3>
               <p>{pair.copy}</p>
@@ -120,25 +149,46 @@ const faqSchema = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEn
             </div>
           </article>)}
         </div>
+        <div class="frame"><span class="approach-plates-bar"><span data-plates-bar></span></span></div>
       </section>
 
-      <section class="approach-principles frame" aria-labelledby="principles-title">
-        <h2 id="principles-title" data-spring-reveal>How we work</h2>
-        <ul data-spring-reveal="children">
-          {principles.map(([title, copy], index) => { const Icon = icons[index]; return <li><Icon size={26} stroke-width={1.3} aria-hidden="true" /><h3>{title}</h3><p>{copy}</p></li>; })}
-        </ul>
-      </section>
-
-      <section class="approach-faq frame" aria-labelledby="faq-title">
-        <div class="approach-faq-head" data-spring-reveal><h2 id="faq-title">Common questions</h2><p>Still unsure? <a href={base + 'contact'}>Send us a note</a> or call <a href="tel:+14035104071">403-510-4071</a>.</p></div>
-        <div class="approach-faq-list" data-spring-reveal="children">
-          {faq.map(([question, answer]) => <details class="approach-question"><summary><span>{question}</span><Plus size={20} stroke-width={1.4} aria-hidden="true" /></summary><div class="approach-answer"><p>{answer}</p></div></details>)}
+      <section class="approach-values" aria-labelledby="principles-title">
+        <div class="frame">
+          <p class="approach-eyebrow" id="principles-title">How we work</p>
+          <ul class="approach-values-list" data-spring-reveal="children">
+            {principles.map(([title, copy], index) => { const Icon = icons[index]; return <li class="approach-value" tabindex="0">
+              <span class="approach-value-photo" aria-hidden="true"><img src={asset(valueImages[index])} alt="" width="1600" height="900" loading="lazy" decoding="async" /></span>
+              <span class="approach-value-number">{String(index + 1).padStart(2, '0')}</span>
+              <h3>{title}</h3>
+              <p><Icon size={22} stroke-width={1.3} aria-hidden="true" />{copy}</p>
+            </li>; })}
+          </ul>
         </div>
       </section>
 
-      <section class="approach-close frame" aria-labelledby="close-title">
-        <h2 id="close-title" data-spring-reveal>Have a site in mind?</h2>
-        <a class="service-cta" href={base + 'contact'} data-spring-reveal><span>Start a Conversation</span><ArrowRight size={20} stroke-width={1.4} aria-hidden="true" /></a>
+      <section class="approach-faq frame" aria-labelledby="faq-title">
+        <div class="approach-faq-aside">
+          <p class="approach-eyebrow">Questions</p>
+          <h2 id="faq-title">Before you call.</h2>
+          <a class="approach-faq-person" href={base + 'contact'}>
+            <img src={asset('/media/people/peter-imshenetskyy-portrait.webp')} alt="Peter Imshenetskyy" width="900" height="1125" loading="lazy" decoding="async" />
+            <span><strong>Still unsure? Ask Peter.</strong><span>Principal · 403-510-4071</span></span>
+            <ArrowUpRight size={18} stroke-width={1.4} aria-hidden="true" />
+          </a>
+        </div>
+        <div class="approach-faq-list" data-spring-reveal="children">
+          {faq.map(([question, answer], index) => <details class="approach-question"><summary><span class="approach-question-number">{String(index + 1).padStart(2, '0')}</span><span class="approach-question-text">{question}</span><Plus size={22} stroke-width={1.3} aria-hidden="true" /></summary><div class="approach-answer"><p>{answer}</p></div></details>)}
+        </div>
+      </section>
+
+      <section class="approach-finale" aria-labelledby="close-title">
+        <img class="approach-finale-photo" src={asset('/media/gallery/darcy/usb-img_2490.webp')} alt="" width="1600" height="1067" loading="lazy" decoding="async" />
+        <div class="approach-finale-scrim" aria-hidden="true"></div>
+        <div class="frame approach-finale-inner">
+          <h2 id="close-title" data-spring-reveal="children"><span>Have a site</span> <span>in mind?</span></h2>
+          <a class="approach-finale-button" href={base + 'contact'} data-finale-button><span>Start a conversation</span><ArrowUpRight size={26} stroke-width={1.3} aria-hidden="true" /></a>
+          <p class="approach-finale-direct"><a href="mailto:peter@pidesigngroup.ca">peter@pidesigngroup.ca</a><a href="tel:+14035104071">403-510-4071</a></p>
+        </div>
       </section>
     </main>
     <Footer />
