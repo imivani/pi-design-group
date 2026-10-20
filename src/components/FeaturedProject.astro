@@ -21,7 +21,7 @@ const first = views[0];
     <div class="featured-heading"><h2 id="featured-title">Featured Projects</h2>
       <div class="featured-controls js-only">
         <div class="featured-views" role="tablist" aria-label="Choose a featured project">
-          {views.map((view, index) => <button type="button" role="tab" id={'featured-tab-' + view.id} aria-controls="featured-perspective" aria-selected={index === 0} tabindex={index === 0 ? 0 : -1} data-featured-view={view.id}><span class="featured-step" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span><span class="sr-only">{view.label}</span></button>)}
+          {views.map((view, index) => <button type="button" role="tab" id={'featured-tab-' + view.id} aria-controls="featured-perspective" aria-selected={index === 0} tabindex={index === 0 ? 0 : -1} data-featured-view={view.id}><span class="featured-step" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span><span class="sr-only">{view.label}</span><span class="featured-progress" aria-hidden="true"><span></span></span></button>)}
         </div>
         <div class="featured-paging" role="group" aria-label="Featured project slideshow">
           <button type="button" data-featured-autoplay-toggle aria-label="Pause automatic featured projects" aria-controls="featured-perspective"><Pause class="featured-pause-icon" size={17} stroke-width={1.4} /><Play class="featured-play-icon" size={17} stroke-width={1.4} /></button>

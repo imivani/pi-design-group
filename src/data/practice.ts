@@ -25,13 +25,13 @@ export const leadership = [
  {name:'Terry Klassen', credentials:'AALA · MBCSLA · RPP · MCIP · CSLA', role:'Landscape architecture + planning', bio:'Terry contributes more than 40 years of landscape architectural experience across Western Canada, with deep experience in design, planning and regulatory coordination.', focus:['Landscape architecture','Planning','Regulatory coordination','Design leadership'], detail:'Terry’s experience spans landscape architecture throughout Western Canada. His professional credentials include AALA, MBCSLA, RPP, MCIP and CSLA.'},
 ];
 export const responsibilities = [
- ['Site analysis + concept development','Understanding the site and establishing a clear landscape direction.'],
- ['Landscape design + detailing','Developing the spatial layout and details that connect the design to its construction.'],
- ['Planting + material selection','Bringing planting, hardscape and site materials together as one landscape.'],
- ['Construction documentation','Preparing the drawings and details needed to communicate the landscape design.'],
- ['Municipal approvals + coordination','Coordinating landscape requirements with municipalities and the wider project team.'],
- ['Consultant coordination','Working alongside architects, engineers and other project consultants.'],
- ['Construction administration','Supporting the construction stage where included in the project scope.'],
+ ['Site Analysis + Concept Development','Understanding the site and establishing a clear landscape direction.'],
+ ['Landscape Design + Detailing','Developing the spatial layout and details that connect the design to its construction.'],
+ ['Planting + Material Selection','Bringing planting, hardscape and site materials together as one landscape.'],
+ ['Construction Documentation','Preparing the drawings and details needed to communicate the landscape design.'],
+ ['Municipal Approvals + Coordination','Coordinating landscape requirements with municipalities and the wider project team.'],
+ ['Consultant Coordination','Working alongside architects, engineers and other project consultants.'],
+ ['Construction Administration','Supporting the construction stage where included in the project scope.'],
 ];
 export const principles = [
  ['Personal involvement','Direct contact with senior design leadership, from the first conversation onwards.'],
@@ -40,8 +40,12 @@ export const principles = [
  ['Designed to perform','Functionality, constructability and long-term performance considered together.'],
 ] as const;
 // Project stages shown on About and Our Approach, each with its share of the responsibilities above.
+// Summaries restate those responsibilities; they add no new claims.
 export const stages = [
- { title:'Read the place', label:'Concept', items:responsibilities.slice(0,2) },
- { title:'Resolve the detail', label:'Design', items:responsibilities.slice(2,4) },
- { title:'Bring it together', label:'Delivery', items:responsibilities.slice(4) },
+ { title:'Read the Place', label:'Concept', items:responsibilities.slice(0,2),
+   summary:'Every project starts with understanding the site and how people will move through it. From that reading we establish a clear landscape direction, then develop the spatial layout and the details that connect the design to its construction.' },
+ { title:'Resolve the Detail', label:'Design', items:responsibilities.slice(2,4),
+   summary:'Planting, hardscape and site materials are brought together as one landscape. We prepare the drawings and details needed to communicate the design, so what is drawn on paper can be built as intended.' },
+ { title:'Bring It Together', label:'Delivery', items:responsibilities.slice(4),
+   summary:'We coordinate landscape requirements with municipalities, architects, engineers and the wider project team, and support the construction stage where it is included in the project scope.' },
 ];

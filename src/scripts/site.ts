@@ -20,7 +20,14 @@ function selectService(id: ServiceId | null) {
   });
 }
 serviceTabs.forEach((tab, index) => {
-  tab.addEventListener('click', () => selectService(smallScreen.matches && activeService === tab.dataset.service ? null : tab.dataset.service as ServiceId));
+  tab.addEventListener('click', () => {
+    // On larger screens the open panel is a link to its service page.
+    if (!smallScreen.matches && activeService === tab.dataset.service) {
+      const page = tab.closest('.service-panel')!.querySelector<HTMLAnchorElement>('.service-page-link');
+      if (page) { location.href = page.href; return; }
+    }
+    selectService(smallScreen.matches && activeService === tab.dataset.service ? null : tab.dataset.service as ServiceId);
+  });
   tab.addEventListener('focus', () => { if (tab.matches(':focus-visible')) selectService(tab.dataset.service as ServiceId); });
   tab.addEventListener('keydown', event => {
     let next: number | undefined;

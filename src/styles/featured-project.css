@@ -140,3 +140,13 @@
   #featured::before{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(90deg,rgb(12 15 16 / 80%),rgb(12 15 16 / 40%) 65%,rgb(12 15 16 / 50%))}
   #featured .featured-inner{position:relative;z-index:1}
 }
+/* Autoplay progress: a track under every tab; the selected one fills over the five-second
+   dwell while the slideshow runs, and stays full when paused or controlled by hand. */
+@media(min-width:768px){#featured .featured-views{gap:10px}#featured .featured-views button{min-width:76px}}
+#featured .featured-views button::after{display:none}
+#featured .featured-progress{position:absolute;left:0;right:0;bottom:0;height:3px;border-radius:2px;background:rgb(255 255 255 / 20%);overflow:hidden}
+#featured .featured-progress span{display:block;height:100%;background:#fff;transform:scaleX(0);transform-origin:left}
+#featured .featured-views [aria-selected="true"] .featured-progress span{transform:scaleX(1)}
+#featured[data-featured-autoplay="running"] .featured-views [aria-selected="true"] .featured-progress span{animation:featured-progress 5000ms linear both}
+@keyframes featured-progress{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+html:is([data-motion="reduced"],[data-motion="off"]) #featured .featured-progress span{animation:none!important}
